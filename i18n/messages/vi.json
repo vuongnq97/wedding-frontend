@@ -1,0 +1,22 @@
+{
+  "layout": {
+    "header": {
+      "title": "Cascade Blog",
+      "login": "Đăng nhập",
+      "signedIn": "Đã đăng nhập"
+    },
+    "footer": {
+      "copyright": "© {year} Cascade Blog. Đã đăng ký bản quyền."
+    },
+    "sidebar": {
+      "home": "Trang chủ",
+      "articles": "Bài viết",
+      "about": "Giới thiệu",
+      "contact": "Liên hệ"
+    }
+  },
+  "home": {
+    "welcome": "Chào mừng đến với Cascade Blog",
+    "description": "Xây dựng trải nghiệm đa ngôn ngữ với Tailwind CSS, ShadCN UI và Zustand."
+  }
+}
