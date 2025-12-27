@@ -1,0 +1,32 @@
+{
+  "header": {
+    "brand": "WeddingInvites",
+    "templates": "Templates",
+    "pricing": "Pricing",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "signedIn": "Signed in"
+  },
+  "footer": {
+    "brand": "WeddingInvites",
+    "description": "Making wedding planning simpler, one beautiful invitation at a time. Designed with love for your special moment.",
+    "product": "Product",
+    "templates": "Templates",
+    "pricing": "Pricing",
+    "features": "Features",
+    "company": "Company",
+    "about": "About Us",
+    "contact": "Contact",
+    "blog": "Blog",
+    "legal": "Legal",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "copyright": "© {year} WeddingInvites Inc. All rights reserved."
+  },
+  "sidebar": {
+    "home": "Home",
+    "articles": "Articles",
+    "about": "About",
+    "contact": "Contact"
+  }
+}

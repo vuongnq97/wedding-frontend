@@ -1,12 +1,12 @@
 'use client';
 
-import {useState} from "react";
-import {z} from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useForm} from "react-hook-form";
+import { useState } from 'react';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
-import {BaseButton} from "@/components/ui/base-button";
-import {BaseInput} from "@/components/ui/base-input";
+import { BaseButton } from '@/components/ui/base-button';
+import { BaseInput } from '@/components/ui/base-input';
 import {
   Form,
   FormControl,
@@ -14,11 +14,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
 const loginSchema = z.object({
-  username: z.string().min(1, "Username is required"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  username: z.string().min(1, 'Username is required'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 export type LoginFormValues = z.infer<typeof loginSchema>;
@@ -30,13 +30,18 @@ type LoginFormProps = {
   errorMessage?: string | null;
 };
 
-export function LoginForm({onSubmit, onSuccess, isSubmitting = false, errorMessage}: LoginFormProps) {
+export function LoginForm({
+  onSubmit,
+  onSuccess,
+  isSubmitting = false,
+  errorMessage,
+}: LoginFormProps) {
   const [formError, setFormError] = useState<string | null>(null);
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     },
   });
 
@@ -48,22 +53,28 @@ export function LoginForm({onSubmit, onSuccess, isSubmitting = false, errorMessa
       form.reset();
       onSuccess?.();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Unable to sign in";
+      const message =
+        error instanceof Error ? error.message : 'Unable to sign in';
       setFormError(message);
-      form.setError("root", {message});
+      form.setError('root', { message });
     }
   };
 
-  const displayedError = form.formState.errors.root?.message ?? formError ?? errorMessage ?? null;
+  const displayedError =
+    form.formState.errors.root?.message ?? formError ?? errorMessage ?? null;
   const submitting = isSubmitting || form.formState.isSubmitting;
 
   return (
     <Form {...form}>
-      <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
+      <form
+        className="space-y-4"
+        onSubmit={form.handleSubmit(handleSubmit)}
+        noValidate
+      >
         <FormField
           control={form.control}
           name="username"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
@@ -82,7 +93,7 @@ export function LoginForm({onSubmit, onSuccess, isSubmitting = false, errorMessa
         <FormField
           control={form.control}
           name="password"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
@@ -99,10 +110,12 @@ export function LoginForm({onSubmit, onSuccess, isSubmitting = false, errorMessa
           )}
         />
 
-        {displayedError ? <p className="text-sm text-red-500">{displayedError}</p> : null}
+        {displayedError ? (
+          <p className="text-sm text-red-500">{displayedError}</p>
+        ) : null}
 
         <BaseButton type="submit" className="w-full" disabled={submitting}>
-          {submitting ? "Signing in…" : "Sign in"}
+          {submitting ? 'Signing in…' : 'Sign in'}
         </BaseButton>
       </form>
     </Form>

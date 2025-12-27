@@ -1,8 +1,8 @@
 'use client';
 
-import {BaseButton} from "@/components/ui/base-button";
-import {BaseModal} from "@/components/ui/base-modal";
-import {LoginForm, type LoginFormValues} from "@/components/auth/login-form";
+import { BaseButton } from '@/components/ui/base-button';
+import { BaseModal } from '@/components/ui/base-modal';
+import { LoginForm, type LoginFormValues } from '@/components/auth/login-form';
 
 type LoginDialogProps = {
   open: boolean;
@@ -12,7 +12,13 @@ type LoginDialogProps = {
   errorMessage?: string | null;
 };
 
-export function LoginDialog({open, onOpenChange, onSubmit, isSubmitting, errorMessage}: LoginDialogProps) {
+export function LoginDialog({
+  open,
+  onOpenChange,
+  onSubmit,
+  isSubmitting,
+  errorMessage,
+}: LoginDialogProps) {
   return (
     <BaseModal
       open={open}

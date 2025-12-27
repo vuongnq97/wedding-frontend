@@ -1,89 +1,78 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+@import 'tailwindcss';
+@config '../tailwind.config.ts';
+@plugin '@tailwindcss/typography';
 
 :root {
-  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-geist-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  --background: 0 0% 100%;
-  --foreground: 224 71% 4%;
-
-  --muted: 220 14% 96%;
-  --muted-foreground: 220 9% 46%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 224 71% 4%;
-
-  --card: 0 0% 100%;
-  --card-foreground: 224 71% 4%;
-
-  --border: 220 13% 91%;
-  --input: 220 13% 91%;
-  --ring: 217 91% 60%;
-
-  --primary: 217 91% 60%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 220 14% 96%;
-  --secondary-foreground: 224 71% 4%;
-
-  --accent: 220 14% 96%;
-  --accent-foreground: 224 71% 4%;
-
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 0 0% 98%;
-
+  --font-geist-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-geist-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
   --radius: 0.75rem;
 }
 
-.dark {
-  --background: 224 71% 4%;
-  --foreground: 213 31% 91%;
+.theme-light {
+  --background: 252 248 249;
+  --foreground: 44 24 16;
+  --muted: 245 242 240;
+  --muted-foreground: 107 114 128;
+  --border: 243 231 234;
+  --ring: 232 48 94;
 
-  --muted: 215 14% 20%;
-  --muted-foreground: 217 15% 65%;
+  --primary: 232 48 94;
+  --primary-soft: 252 231 236;
+  --surface: 255 255 255;
+  --text-main: 44 24 16;
 
-  --popover: 224 71% 4%;
-  --popover-foreground: 215 20% 65%;
+  --background-light: 252 248 249;
+  --background-beige: 245 242 240;
+  --background-dark: 33 17 21;
+  --surface-light: 255 255 255;
+  --surface-dark: 45 27 32;
+  --border-light: 243 231 234;
+  --border-dark: 58 34 40;
+}
 
-  --card: 224 71% 4%;
-  --card-foreground: 213 31% 91%;
+.theme-dark {
+  --background: 33 17 21;
+  --foreground: 252 248 249;
+  --muted: 45 27 32;
+  --muted-foreground: 156 163 175;
+  --border: 58 34 40;
+  --ring: 232 48 94;
 
-  --border: 215 27% 20%;
-  --input: 215 27% 20%;
-  --ring: 212 100% 45%;
+  --primary: 232 48 94;
+  --primary-soft: 252 231 236;
+  --surface: 45 27 32;
+  --text-main: 252 248 249;
 
-  --primary: 212 100% 45%;
-  --primary-foreground: 222 47% 11%;
-
-  --secondary: 215 27% 20%;
-  --secondary-foreground: 213 31% 91%;
-
-  --accent: 215 27% 20%;
-  --accent-foreground: 213 31% 91%;
-
-  --destructive: 0 63% 31%;
-  --destructive-foreground: 210 40% 98%;
+  --background-light: 33 17 21;
+  --background-beige: 45 27 32;
+  --background-dark: 33 17 21;
+  --surface-light: 45 27 32;
+  --surface-dark: 45 27 32;
+  --border-light: 58 34 40;
+  --border-dark: 58 34 40;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-jakarta);
   --font-mono: var(--font-geist-mono);
-  /* Custom palette from mockups for use as Tailwind color tokens */
-  --color-background-dark: #111a22;
-  --color-surface-dark: #192633;
-  --color-border-dark: #324d67;
-  --color-accent-dark: #233648;
-  --color-text-secondary: #92adc9;
-  --color-muted-dark: #16212b;
-  --color-primary: #3e82f7;
+  --font-serif: var(--font-playfair);
 }
 
 @layer base {
   body {
-    @apply font-sans text-white;
+    @apply font-sans;
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
   }
 }
 
 /* Utilities */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,32 @@
+{
+  "header": {
+    "brand": "WeddingInvites",
+    "templates": "Mẫu thiết kế",
+    "pricing": "Bảng giá",
+    "login": "Đăng nhập",
+    "signup": "Đăng ký",
+    "signedIn": "Đã đăng nhập"
+  },
+  "footer": {
+    "brand": "WeddingInvites",
+    "description": "Biến việc lập kế hoạch đám cưới trở nên đơn giản hơn, với từng tấm thiệp mời tuyệt đẹp. Được thiết kế với tình yêu cho khoảnh khắc đặc biệt của bạn.",
+    "product": "Sản phẩm",
+    "templates": "Mẫu thiết kế",
+    "pricing": "Bảng giá",
+    "features": "Tính năng",
+    "company": "Công ty",
+    "about": "Về chúng tôi",
+    "contact": "Liên hệ",
+    "blog": "Blog",
+    "legal": "Pháp lý",
+    "terms": "Điều khoản",
+    "privacy": "Quyền riêng tư",
+    "copyright": "© {year} WeddingInvites Inc. Đã đăng ký bản quyền."
+  },
+  "sidebar": {
+    "home": "Trang chủ",
+    "articles": "Bài viết",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
+  }
+}

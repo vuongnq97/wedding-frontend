@@ -1,124 +1,106 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-
-type SignUpValues = {
-  name: string;
-  email: string;
-  password: string;
-};
+import {
+  SignUpForm,
+  SignUpIllustration,
+  SocialLogin,
+} from '@/components/auth';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export default function SignUpPage() {
-  const form = useForm<SignUpValues>({
-    defaultValues: { name: "", email: "", password: "" },
-    mode: "onTouched",
-  });
-
-  function onSubmit(values: SignUpValues) {
-    // TODO: integrate API
-    console.log("sign-up submit", values);
-  }
+  const t = useTranslations('signUp');
 
   return (
-      <div className="mx-auto w-full max-w-md px-4 py-10">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div
-                  className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px]"></div>
-              <div
-                  className="absolute bottom-[10%] right-[10%] w-[30%] h-[30%] rounded-full bg-purple-500/10 blur-[100px]"></div>
+    <div className="bg-background relative flex min-h-screen flex-col font-sans text-foreground transition-colors duration-300">
+      {/* Navbar (Minimal) */}
+      <header className="absolute top-0 left-0 z-10 flex w-full items-center justify-between bg-transparent px-6 py-4 md:px-10 lg:px-40">
+        <div className="flex items-center gap-3">
+          <div className="text-primary size-8">
+            <svg
+              fill="none"
+              viewBox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
+                fill="currentColor"
+              />
+            </svg>
           </div>
-          <Card className="shadow-lg">
-              <CardHeader>
-                  <CardTitle className="text-2xl">Create your account</CardTitle>
-                  <CardDescription>Join thousands of writers building their audience.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 gap-3">
-                      <Button variant="outline" className="w-full">
-                          Continue with Google
-                      </Button>
-                      <Button variant="outline" className="w-full">
-                          Continue with GitHub
-                      </Button>
-                  </div>
+          <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] text-foreground">
+            {t('title')}
+          </h2>
+        </div>
+        <div className="hidden sm:block">
+          <p className="text-sm font-medium text-muted-foreground">
+            {t('header.already_member')}{' '}
+            <Link className="text-primary font-bold hover:underline" href="/login">
+              {t('header.sign_in')}
+            </Link>
+          </p>
+        </div>
+      </header>
 
-                  <div className="relative py-2">
-                      <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                          <span className="w-full border-t border-gray-200 dark:border-border-dark"/>
-                      </div>
-                      <div className="relative flex justify-center text-xs">
-                          <span
-                              className="bg-white dark:bg-surface-dark px-2 text-gray-500">Or continue with email</span>
-                      </div>
-                  </div>
+      {/* Main Layout */}
+      <div className="flex flex-1 items-center justify-center p-4 pt-24 md:pt-4">
+        <div className="flex min-h-[640px] w-full max-w-[1024px] flex-col overflow-hidden rounded-2xl bg-surface shadow-xl md:flex-row">
+          {/* Left Side: Illustration */}
+          <SignUpIllustration />
 
-                  <Form {...form}>
-                      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-                          <FormField
-                              control={form.control}
-                              name="name"
-                              render={({field}) => (
-                                  <FormItem>
-                                      <FormLabel>Full name</FormLabel>
-                                      <FormControl>
-                                          <Input placeholder="Jane Doe" autoComplete="name" {...field} />
-                                      </FormControl>
-                                      <FormMessage/>
-                                  </FormItem>
-                              )}
-                          />
+          {/* Right Side: Form */}
+          <div className="flex w-full flex-col justify-center bg-surface p-8 md:w-7/12 md:p-12 lg:p-16">
+            <div className="mx-auto w-full max-w-[480px]">
+              <div className="mb-8 text-center md:text-left">
+                <h1 className="mb-3 text-3xl font-bold leading-tight tracking-tight text-foreground">
+                  {t('form_title')}
+                </h1>
+                <p className="text-base font-normal text-muted-foreground">
+                  {t('form_subtitle')}
+                </p>
+              </div>
 
-                          <FormField
-                              control={form.control}
-                              name="email"
-                              render={({field}) => (
-                                  <FormItem>
-                                      <FormLabel>Email</FormLabel>
-                                      <FormControl>
-                                          <Input type="email" placeholder="you@example.com"
-                                                 autoComplete="email" {...field} />
-                                      </FormControl>
-                                      <FormMessage/>
-                                  </FormItem>
-                              )}
-                          />
+              {/* Social Auth */}
+              <div className="mb-6">
+                {/* Reusing SocialLogin from auth components */}
+                <SocialLogin />
+              </div>
 
-                          <FormField
-                              control={form.control}
-                              name="password"
-                              render={({field}) => (
-                                  <FormItem>
-                                      <FormLabel>Password</FormLabel>
-                                      <FormControl>
-                                          <Input type="password" placeholder="••••••••"
-                                                 autoComplete="new-password" {...field} />
-                                      </FormControl>
-                                      <FormMessage/>
-                                  </FormItem>
-                              )}
-                          />
+              {/* Divider */}
+              <div className="relative mb-6 flex items-center py-2">
+                <div className="flex-grow border-t border-border" />
+                <span className="mx-4 flex-shrink-0 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                  {t('or_register')}
+                </span>
+                <div className="flex-grow border-t border-border" />
+              </div>
 
-                          <Button type="submit" className="w-full">Create account</Button>
-                      </form>
-                  </Form>
+              {/* Input Fields */}
+              <SignUpForm />
 
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                      By continuing, you agree to our <Link href="#" className="text-primary hover:underline">Terms of
-                      Service</Link> and <Link href="#" className="text-primary hover:underline">Privacy Policy</Link>.
-                  </p>
-              </CardContent>
-              <CardFooter className="flex items-center justify-center">
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Already have an account? {" "}
-                      <Link href="#" className="text-primary hover:underline">Log in</Link>
-                  </p>
-              </CardFooter>
-          </Card>
+              {/* Mobile Footer Link */}
+              <div className="mt-8 text-center sm:hidden">
+                <p className="text-sm font-medium text-muted-foreground">
+                  {t('header.already_member')}{' '}
+                  <Link className="text-primary font-bold hover:underline" href="/login">
+                    {t('header.sign_in')}
+                  </Link>
+                </p>
+              </div>
+
+              {/* Terms Links */}
+              <div className="mt-8 flex justify-center gap-6 text-xs text-muted-foreground">
+                <Link className="hover:text-primary transition-colors" href="#">
+                  Privacy Policy
+                </Link>
+                <Link className="hover:text-primary transition-colors" href="#">
+                  Terms of Service
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
   );
 }

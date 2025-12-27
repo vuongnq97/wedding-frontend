@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "names": "Sarah & Michael",
+    "title": "Tạo Thiệp Cưới <br /> Của Bạn",
+    "subtitle": "Thiết kế thiệp mời kỹ thuật số đẹp mắt cho ngày trọng đại của bạn chỉ trong vài phút. Thanh lịch và đơn giản.",
+    "cta": "Tạo Thiệp Mời"
+  },
+  "collections": {
+    "label": "Bộ Sưu Tập",
+    "title": "Khám phá Thiết kế",
+    "description": "Tìm phong cách hoàn hảo cho chủ đề đám cưới của bạn từ bộ sưu tập được tuyển chọn của chúng tôi.",
+    "view_all": "Xem Tất Cả",
+    "preview": "Xem trước",
+    "items": {
+      "floral": {
+        "title": "Hoa Tối Giản",
+        "subtitle": "Cánh hoa mềm mại & thanh lịch"
+      },
+      "modern": {
+        "title": "Hiện Đại Cổ Điển",
+        "subtitle": "Sự tinh tế vượt thời gian"
+      },
+      "boho": {
+        "title": "Boho Phóng Khoáng",
+        "subtitle": "Tự do & gần gũi thiên nhiên"
+      },
+      "midnight": {
+        "title": "Vàng Giao Thừa",
+        "subtitle": "Kịch tính & sang trọng"
+      }
+    }
+  },
+  "process": {
+    "label": "Quy Trình",
+    "title": "Cách hoạt động",
+    "description": "Tạo thiệp mời mơ ước của bạn trong 3 bước đơn giản. Không cần kỹ năng thiết kế, chỉ cần câu chuyện tình yêu của bạn.",
+    "steps": {
+      "choose": {
+        "title": "Chọn mẫu",
+        "desc": "Chọn từ hàng loạt mẫu thiết kế chuyên nghiệp phù hợp với phong cách của bạn."
+      },
+      "fill": {
+        "title": "Điền chi tiết",
+        "desc": "Thêm tên, ngày, địa điểm và câu chuyện tình yêu của bạn để biến nó thành của riêng bạn."
+      },
+      "share": {
+        "title": "Chia sẻ thiệp",
+        "desc": "Gửi cho khách mời qua email, mạng xã hội hoặc tin nhắn tức thì và theo dõi phản hồi."
+      }
+    }
+  },
+  "benefits": {
+    "label": "Lợi Ích",
+    "title": "Tại sao chọn chúng tôi",
+    "description": "Chúng tôi hiểu rằng thiệp cưới là ấn tượng đầu tiên của khách mời về ngày vui của bạn. Chúng tôi làm cho nó đáng nhớ và không căng thẳng.",
+    "items": {
+      "responsive": {
+        "title": "Tương Thích Mọi Thiết Bị",
+        "desc": "Hiển thị hoàn hảo trên điện thoại, máy tính bảng và máy tính."
+      },
+      "rsvp": {
+        "title": "Phản Hồi Tức Thì",
+        "desc": "Theo dõi phản hồi của khách trong thời gian thực trên bảng điều khiển."
+      },
+      "customizable": {
+        "title": "Tùy Chỉnh Dễ Dàng",
+        "desc": "Thay đổi phông chữ, màu sắc và bố cục để phù hợp với chủ đề của bạn."
+      },
+      "eco": {
+        "title": "Thân Thiện Môi Trường",
+        "desc": "Tiết kiệm giấy và bảo vệ hành tinh với những tấm thiệp kỹ thuật số tuyệt đẹp."
+      }
+    },
+    "dashboard": {
+      "preview": "Xem Trước Bảng Điều Khiển",
+      "confirmed": "128 Khách Đã Xác Nhận",
+      "days_to_go": "Ngày còn lại",
+      "pending_rsvp": "Chờ phản hồi"
+    }
+  },
+  "cta": {
+    "title": "Sẵn sàng công bố ngày vui?",
+    "subtitle": "Tham gia cùng hàng ngàn cặp đôi hạnh phúc đã tạo nên thiệp cưới hoàn hảo với chúng tôi. Bắt đầu hành trình của bạn ngay hôm nay.",
+    "button": "Bắt Đầu Ngay",
+    "note": "Không cần thẻ tín dụng cho các mẫu miễn phí"
+  },
+  "feedback": {
+    "title": "Phản Hồi",
+    "subtitle": "Lắng nghe từ các cặp đôi đã kết đôi cùng chúng tôi.",
+    "items": {
+      "emily": {
+        "quote": "Chúng tôi không muốn tốn cả gia tài cho thiệp giấy rồi bị vứt đi. WeddingInvites là giải pháp hoàn hảo. Thanh lịch, dễ dàng và thân thiện môi trường!",
+        "name": "Emily & James",
+        "date": "Kết hôn tháng 6/2023"
+      },
+      "sophia": {
+        "quote": "Tính năng theo dõi RSVP đã giúp chúng tôi đỡ bao nhiêu đau đầu. Chúng tôi có thể xem ai sẽ đến ngay lập tức. Cộng thêm các thiết kế tuyệt đẹp nữa.",
+        "name": "Sophia & Daniel",
+        "date": "Kết hôn tháng 8/2023"
+      }
+    }
+  }
+}

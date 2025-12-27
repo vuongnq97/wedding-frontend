@@ -1,17 +1,28 @@
 'use client';
 
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import {AUTH_STORAGE_KEY, REFRESH_OFFSET_MS, USER_COOKIE_MAX_AGE, USER_COOKIE_NAME} from "@/constants/auth";
-import {createAuthService} from "@/services/auth-service";
-import {AuthTokens, LoginPayload, TokenResponse, UseLoginReturn, UserInfo} from "@/types/auth";
-import {useAuthStore} from "@/stores/auth-store";
+import {
+  AUTH_STORAGE_KEY,
+  REFRESH_OFFSET_MS,
+  USER_COOKIE_MAX_AGE,
+  USER_COOKIE_NAME,
+} from '@/constants/auth';
+import { createAuthService } from '@/services/auth-service';
+import {
+  AuthTokens,
+  LoginPayload,
+  TokenResponse,
+  UseLoginReturn,
+  UserInfo,
+} from '@/types/auth';
+import { useAuthStore } from '@/stores/auth-store';
 
 export function useLogin(): UseLoginReturn {
   const [tokens, setTokens] = useState<AuthTokens | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const {setUser, clearUser, user} = useAuthStore();
+  const { setUser, clearUser, user } = useAuthStore();
   const refreshTimeout = useRef<number | null>(null);
   const pendingRefresh = useRef<Promise<AuthTokens> | null>(null);
   const refreshInternalRef = useRef<(() => Promise<AuthTokens>) | null>(null);
@@ -29,7 +40,7 @@ export function useLogin(): UseLoginReturn {
   const persistTokens = useCallback(
     (nextTokens: AuthTokens | null) => {
       setTokens(nextTokens);
-      if (typeof window === "undefined") {
+      if (typeof window === 'undefined') {
         return;
       }
 
@@ -39,7 +50,7 @@ export function useLogin(): UseLoginReturn {
         window.localStorage.removeItem(storageKey);
       }
     },
-    [storageKey],
+    [storageKey]
   );
 
   const scheduleRefresh = useCallback(
@@ -69,7 +80,7 @@ export function useLogin(): UseLoginReturn {
         void refreshFn();
       }, refreshDelay);
     },
-    [clearRefreshTimeout, refreshOffsetMs],
+    [clearRefreshTimeout, refreshOffsetMs]
   );
 
   const parseTokens = useCallback((data: TokenResponse): AuthTokens => {
@@ -77,14 +88,20 @@ export function useLogin(): UseLoginReturn {
     const refreshToken = data.refreshToken;
 
     if (!accessToken || !refreshToken) {
-      throw new Error("Login response must include accessToken and refreshToken");
+      throw new Error(
+        'Login response must include accessToken and refreshToken'
+      );
     }
 
     const expiresInSeconds = data.expiresIn ?? data.expires_in;
-    const expiresAt = data.expiresAt ?? (expiresInSeconds ? Date.now() + expiresInSeconds * 1000 : 0);
+    const expiresAt =
+      data.expiresAt ??
+      (expiresInSeconds ? Date.now() + expiresInSeconds * 1000 : 0);
 
     if (!expiresAt || Number.isNaN(expiresAt)) {
-      throw new Error("Login response must include expiresIn (seconds) or expiresAt (ms)");
+      throw new Error(
+        'Login response must include expiresIn (seconds) or expiresAt (ms)'
+      );
     }
 
     return {
@@ -95,11 +112,14 @@ export function useLogin(): UseLoginReturn {
   }, []);
 
   const setUserCookie = useCallback((nextUser: UserInfo | null) => {
-    if (typeof document === "undefined") {
+    if (typeof document === 'undefined') {
       return;
     }
 
-    const secureSuffix = typeof window !== "undefined" && window.location.protocol === "https:" ? "; Secure" : "";
+    const secureSuffix =
+      typeof window !== 'undefined' && window.location.protocol === 'https:'
+        ? '; Secure'
+        : '';
     if (nextUser) {
       const serialized = encodeURIComponent(JSON.stringify(nextUser));
       document.cookie = `${USER_COOKIE_NAME}=${serialized}; path=/; max-age=${USER_COOKIE_MAX_AGE}; sameSite=Lax${secureSuffix}`;
@@ -108,19 +128,19 @@ export function useLogin(): UseLoginReturn {
     }
   }, []);
 
-  const login = useCallback<UseLoginReturn["login"]>(
+  const login = useCallback<UseLoginReturn['login']>(
     async (credentials: LoginPayload) => {
       setIsLoading(true);
       setError(null);
 
       try {
         const mockedResponse: TokenResponse = {
-          accessToken: "mock-access-token",
-          refreshToken: "mock-refresh-token",
+          accessToken: 'mock-access-token',
+          refreshToken: 'mock-refresh-token',
           expiresAt: Date.now() + 60 * 60 * 1000,
           user: {
             username: credentials.username,
-            role: "demo",
+            role: 'demo',
           },
         };
         const nextTokens = parseTokens(mockedResponse);
@@ -131,7 +151,7 @@ export function useLogin(): UseLoginReturn {
         setUserCookie(nextUser);
         return nextTokens;
       } catch (err) {
-        const normalizedError = normalizeError(err, "Login failed");
+        const normalizedError = normalizeError(err, 'Login failed');
         setError(normalizedError);
         persistTokens(null);
         clearRefreshTimeout();
@@ -142,7 +162,14 @@ export function useLogin(): UseLoginReturn {
         setIsLoading(false);
       }
     },
-    [authService, clearRefreshTimeout, parseTokens, persistTokens, scheduleRefresh, setUserCookie],
+    [
+      authService,
+      clearRefreshTimeout,
+      parseTokens,
+      persistTokens,
+      scheduleRefresh,
+      setUserCookie,
+    ]
   );
 
   const logout = useCallback(() => {
@@ -155,7 +182,7 @@ export function useLogin(): UseLoginReturn {
 
   const refreshInternal = useCallback(async () => {
     if (!tokens) {
-      throw new Error("Cannot refresh without tokens");
+      throw new Error('Cannot refresh without tokens');
     }
 
     if (pendingRefresh.current) {
@@ -166,13 +193,16 @@ export function useLogin(): UseLoginReturn {
       .refresh(tokens.refreshToken)
       .then((response) => {
         const nextTokens = parseTokens(response);
-        const mergedTokens = {...nextTokens, refreshToken: nextTokens.refreshToken ?? tokens.refreshToken};
+        const mergedTokens = {
+          ...nextTokens,
+          refreshToken: nextTokens.refreshToken ?? tokens.refreshToken,
+        };
         persistTokens(mergedTokens);
         scheduleRefresh(mergedTokens);
         return mergedTokens;
       })
       .catch((err) => {
-        const normalizedError = normalizeError(err, "Refresh token failed");
+        const normalizedError = normalizeError(err, 'Refresh token failed');
         persistTokens(null);
         clearRefreshTimeout();
         setUserCookie(null);
@@ -184,14 +214,22 @@ export function useLogin(): UseLoginReturn {
 
     pendingRefresh.current = refreshPromise;
     return refreshPromise;
-  }, [authService, clearRefreshTimeout, parseTokens, persistTokens, scheduleRefresh, setUserCookie, tokens]);
+  }, [
+    authService,
+    clearRefreshTimeout,
+    parseTokens,
+    persistTokens,
+    scheduleRefresh,
+    setUserCookie,
+    tokens,
+  ]);
 
   const refresh = useCallback(() => refreshInternal(), [refreshInternal]);
 
   refreshInternalRef.current = refreshInternal;
 
   useEffect(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return;
     }
 
@@ -217,14 +255,21 @@ export function useLogin(): UseLoginReturn {
       // setTokens(parsed);
       // scheduleRefresh(parsed);
     } catch (err) {
-      console.error("Failed to restore auth tokens", err);
+      console.error('Failed to restore auth tokens', err);
       window.localStorage.removeItem(storageKey);
     }
 
     return () => {
       clearRefreshTimeout();
     };
-  }, [clearRefreshTimeout, logout, parseTokens, refreshInternal, scheduleRefresh, storageKey]);
+  }, [
+    clearRefreshTimeout,
+    logout,
+    parseTokens,
+    refreshInternal,
+    scheduleRefresh,
+    storageKey,
+  ]);
 
   const accessToken = useMemo(() => tokens?.accessToken ?? null, [tokens]);
   const isAuthenticated = useMemo(() => Boolean(tokens?.accessToken), [tokens]);
@@ -247,11 +292,16 @@ function normalizeError(error: unknown, fallbackMessage: string): Error {
     return error;
   }
 
-  if (error && typeof error === "object" && "message" in error && typeof error.message === "string") {
+  if (
+    error &&
+    typeof error === 'object' &&
+    'message' in error &&
+    typeof error.message === 'string'
+  ) {
     return new Error(error.message);
   }
 
-  if (typeof error === "string" && error.trim().length > 0) {
+  if (typeof error === 'string' && error.trim().length > 0) {
     return new Error(error);
   }
 

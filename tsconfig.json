@@ -21,7 +21,9 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "next-intl/navigation/dist/*": ["./node_modules/next-intl/navigation/dist/*"]
+      "next-intl/navigation/dist/*": [
+        "./node_modules/next-intl/navigation/dist/*"
+      ]
     }
   },
   "include": [

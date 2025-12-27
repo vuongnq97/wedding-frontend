@@ -1,4 +1,4 @@
-import {BaseServiceOptions} from "@/types/api";
+import { BaseServiceOptions } from '@/types/api';
 
 export type UserInfo = Record<string, unknown>;
 

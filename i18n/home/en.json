@@ -1,0 +1,103 @@
+{
+  "hero": {
+    "names": "Sarah & Michael",
+    "title": "Create Your Wedding <br /> Invitation",
+    "subtitle": "Design beautiful, digital invitations for your special day in minutes. Elegance meets simplicity.",
+    "cta": "Create Invitation"
+  },
+  "collections": {
+    "label": "Collections",
+    "title": "Explore our Designs",
+    "description": "Find the perfect match for your wedding theme from our curated selection.",
+    "view_all": "View All Collection",
+    "preview": "Preview",
+    "items": {
+      "floral": {
+        "title": "Floral Minimalist",
+        "subtitle": "Soft petals & elegance"
+      },
+      "modern": {
+        "title": "Modern Classic",
+        "subtitle": "Timeless sophistication"
+      },
+      "boho": {
+        "title": "Boho Chic",
+        "subtitle": "Free-spirited & natural"
+      },
+      "midnight": {
+        "title": "Midnight Gold",
+        "subtitle": "Dramatic & luxurious"
+      }
+    }
+  },
+  "process": {
+    "label": "Process",
+    "title": "How it works",
+    "description": "Create your dream invitation in three simple steps. No design skills required, just your love story.",
+    "steps": {
+      "choose": {
+        "title": "Choose template",
+        "desc": "Select from our wide range of professionally designed templates that match your style."
+      },
+      "fill": {
+        "title": "Fill wedding details",
+        "desc": "Add your names, date, venue, and your personal love story to make it yours."
+      },
+      "share": {
+        "title": "Share invitation",
+        "desc": "Send to guests via email, social media, or text message instantly and track RSVPs."
+      }
+    }
+  },
+  "benefits": {
+    "label": "Benefits",
+    "title": "Why choose our platform",
+    "description": "We understand that your wedding invitation is the first glimpse your guests will have of your special day. We make it memorable and stress-free.",
+    "items": {
+      "responsive": {
+        "title": "Fully Responsive",
+        "desc": "Looks perfect on mobile, tablet, and desktop screens."
+      },
+      "rsvp": {
+        "title": "Instant RSVP",
+        "desc": "Track guest responses in real-time on your dashboard."
+      },
+      "customizable": {
+        "title": "Customizable",
+        "desc": "Change fonts, colors, and layouts to match your theme."
+      },
+      "eco": {
+        "title": "Eco-Friendly",
+        "desc": "Save paper and the planet with beautiful digital invites."
+      }
+    },
+    "dashboard": {
+      "preview": "Dashboard Preview",
+      "confirmed": "128 Guests Confirmed",
+      "days_to_go": "Days to go",
+      "pending_rsvp": "Pending RSVP"
+    }
+  },
+  "cta": {
+    "title": "Ready to announce your big day?",
+    "subtitle": "Join thousands of happy couples who created their perfect wedding invitations with us. Start your journey today.",
+    "button": "Start Now",
+    "note": "No credit card required for free templates"
+  },
+  "feedback": {
+    "title": "Feedback",
+    "subtitle": "Hear from couples who tied the knot with us.",
+    "items": {
+      "emily": {
+        "quote": "We didn't want to spend a fortune on paper invites that just get thrown away. WeddingInvites was the perfect solution. Elegant, easy, and eco-friendly!",
+        "name": "Emily & James",
+        "date": "Married June 2023"
+      },
+      "sophia": {
+        "quote": "The RSVP tracking feature saved us so much headache. We could see who was coming in real-time. Plus the designs are absolutely stunning.",
+        "name": "Sophia & Daniel",
+        "date": "Married August 2023"
+      }
+    }
+  }
+}

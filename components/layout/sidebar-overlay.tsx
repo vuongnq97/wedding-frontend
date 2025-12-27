@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import {useLayoutStore} from "@/stores/layout-store";
+import { useLayoutStore } from '@/stores/layout-store';
 
 export function SidebarOverlay() {
-  const {sidebarOpen, closeSidebar} = useLayoutStore();
+  const { sidebarOpen, closeSidebar } = useLayoutStore();
 
   if (!sidebarOpen) return null;
 

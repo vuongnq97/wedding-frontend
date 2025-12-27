@@ -15,7 +15,7 @@ export type ApiRequestOptions = {
 
 export type ApiClient = <T = unknown>(
   path: string,
-  options?: ApiRequestOptions,
+  options?: ApiRequestOptions
 ) => Promise<T>;
 
 export type BaseServiceOptions = ApiClientOptions & {
