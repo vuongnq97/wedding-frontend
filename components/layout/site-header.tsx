@@ -6,6 +6,7 @@ import { MenuIcon, Heart, Moon, Sun } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { LoginDialog } from '@/components/auth/login-dialog';
+import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { Button } from '@/components/ui/button';
 import { useLogin } from '@/hooks/use-login';
 import { useLayoutStore } from '@/stores/layout-store';
@@ -119,6 +120,13 @@ export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
             </Link>
           )}
           <Button
+            className="shadow-primary/20 h-10 rounded-full px-5 shadow-md"
+            asChild
+          >
+            <Link href="/sign-up">{t('signup')}</Link>
+          </Button>
+          <LanguageSwitcher />
+          <Button
             variant="ghost"
             size="icon"
             aria-label="Toggle theme"
@@ -131,12 +139,6 @@ export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
             ) : (
               <Moon className="h-5 w-5" />
             )}
-          </Button>
-          <Button
-            className="shadow-primary/20 h-10 rounded-full px-5 shadow-md"
-            asChild
-          >
-            <Link href="/sign-up">{t('signup')}</Link>
           </Button>
         </div>
       </div>
