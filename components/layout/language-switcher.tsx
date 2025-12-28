@@ -2,7 +2,7 @@
 
 import FlagEN from '@/components/svg/flag-en.svg';
 import FlagVN from '@/components/svg/flag-vn.svg';
-import { Button } from '@/components/ui/button';
+import { BaseButton } from '@/components/ui/base-button';
 import { Link, usePathname } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
 import Image from 'next/image';
@@ -14,7 +14,7 @@ export function LanguageSwitcher() {
     const nextLocale = locale === 'en' ? 'vi' : 'en';
 
     return (
-        <Button
+        <BaseButton
             asChild
             variant="ghost"
             size="sm"
@@ -37,6 +37,6 @@ export function LanguageSwitcher() {
                     />
                 )}
             </Link>
-        </Button>
+        </BaseButton>
     );
 }

@@ -163,11 +163,13 @@ export function useLogin(): UseLoginReturn {
       }
     },
     [
-      authService,
+
       clearRefreshTimeout,
+      clearUser,
       parseTokens,
       persistTokens,
       scheduleRefresh,
+      setUser,
       setUserCookie,
     ]
   );
@@ -178,7 +180,7 @@ export function useLogin(): UseLoginReturn {
     persistTokens(null);
     clearUser();
     setUserCookie(null);
-  }, [clearRefreshTimeout, persistTokens, setUserCookie]);
+  }, [clearRefreshTimeout, clearUser, persistTokens, setUserCookie]);
 
   const refreshInternal = useCallback(async () => {
     if (!tokens) {

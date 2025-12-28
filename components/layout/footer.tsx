@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 
-type SiteFooterProps = {
+type FooterProps = {
   className?: string;
   year: number;
 };
 
-export function SiteFooter({ className, year }: SiteFooterProps) {
+export function Footer({ className, year }: FooterProps) {
   const t = useTranslations('layout.footer');
 
   return (

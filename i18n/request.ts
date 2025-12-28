@@ -13,8 +13,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const homeMessages = (await import(`./home/${currentLocale}.json`)).default;
   const loginMessages = (await import(`./login/${currentLocale}.json`)).default;
   const signUpMessages = (await import(`./sign-up/${currentLocale}.json`)).default;
-  const layoutMessages = (await import(`./layout/${currentLocale}.json`))
-    .default;
+  const layoutMessages = (await import(`./layout/${currentLocale}.json`)).default;
+  const invitationMessages = (await import(`./invitation/${currentLocale}.json`)).default;
 
   return {
     locale: currentLocale,
@@ -23,6 +23,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       login: loginMessages,
       signUp: signUpMessages,
       layout: layoutMessages,
+      invitation: invitationMessages,
     },
   };
 });

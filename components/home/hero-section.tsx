@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { BaseButton } from '@/components/ui/base-button';
 import { useTranslations } from 'next-intl';
 
 export function HeroSection() {
@@ -27,9 +27,9 @@ export function HeroSection() {
             <p className="mx-auto mb-10 max-w-lg text-lg leading-relaxed font-light text-white/95 drop-shadow-md md:text-xl">
               {t('subtitle')}
             </p>
-            <Button className="shadow-primary/40 h-14 px-10 text-lg transition-all hover:-translate-y-1 hover:scale-[1.02]">
+            <BaseButton className="shadow-primary/40 h-14 px-10 text-lg transition-all hover:-translate-y-1 hover:scale-[1.02]">
               {t('cta')}
-            </Button>
+            </BaseButton>
           </div>
         </div>
       </div>

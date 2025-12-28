@@ -1,5 +1,6 @@
 'use client';
 
+import { BaseButton } from '@/components/ui/base-button';
 import { Facebook } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -8,8 +9,9 @@ export function SocialLogin() {
 
   return (
     <div className="flex gap-4">
-      <button
+      <BaseButton
         type="button"
+        variant="ghost"
         className="border-border bg-surface hover:bg-muted flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border transition-colors"
       >
         <svg
@@ -38,16 +40,17 @@ export function SocialLogin() {
         <span className="text-foreground text-sm font-medium">
           {t('google')}
         </span>
-      </button>
-      <button
+      </BaseButton>
+      <BaseButton
         type="button"
+        variant="ghost"
         className="border-border bg-surface hover:bg-muted flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border transition-colors"
       >
         <Facebook className="h-5 w-5 text-[#1877F2]" />
         <span className="text-foreground text-sm font-medium">
           {t('facebook')}
         </span>
-      </button>
+      </BaseButton>
     </div>
   );
 }

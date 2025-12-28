@@ -59,43 +59,7 @@ export function createBaseService(
     }
   };
 
-  const withMethod = <T>(
-    method: ApiRequestOptions['method'],
-    path: string,
-    bodyOrOptions?: unknown,
-    maybeOptions?: ApiRequestOptions
-  ) => {
-    if (
-      bodyOrOptions !== null &&
-      typeof bodyOrOptions === 'object' &&
-      !Array.isArray(bodyOrOptions) &&
-      !(bodyOrOptions instanceof Blob) &&
-      !(bodyOrOptions instanceof ArrayBuffer)
-    ) {
-      if (method === 'GET' || method === 'DELETE') {
-        return request<T>(path, {
-          ...(bodyOrOptions as ApiRequestOptions),
-          method,
-        });
-      }
 
-      return request<T>(path, {
-        ...(maybeOptions ?? {}),
-        method,
-        body: bodyOrOptions,
-      });
-    }
-
-    if (method === 'GET' || method === 'DELETE') {
-      return request<T>(path, { ...(maybeOptions ?? {}), method });
-    }
-
-    return request<T>(path, {
-      ...(maybeOptions ?? {}),
-      method,
-      body: bodyOrOptions,
-    });
-  };
 
   return {
     request,

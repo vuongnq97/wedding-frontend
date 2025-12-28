@@ -3,10 +3,10 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
-import { SiteFooter } from '@/components/layout/site-footer';
-import { SiteHeader } from '@/components/layout/site-header';
-import { SiteSidebar } from '@/components/layout/site-sidebar';
-import { SidebarOverlay } from '@/components/layout/sidebar-overlay';
+import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
+import { Sidebar } from '@/components/layout/sidebar';
+
 import { locales } from '@/i18n/routing';
 import { UserInfo } from '@/types/auth';
 
@@ -44,15 +44,15 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
       <div className="bg-background text-foreground relative flex min-h-screen flex-col">
-        <SiteHeader initialUser={initialUser} />
+        <Header initialUser={initialUser} />
         <div className="flex flex-1 overflow-hidden">
-          {/*<SiteSidebar locale={locale} />*/}
+          <Sidebar />
           <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 md:px-8">
             {children}
           </main>
         </div>
         {/*<SidebarOverlay />*/}
-        <SiteFooter year={year} />
+        <Footer year={year} />
       </div>
     </NextIntlClientProvider>
   );

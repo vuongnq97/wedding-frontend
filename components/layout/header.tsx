@@ -7,17 +7,19 @@ import { useTranslations } from 'next-intl';
 
 import { LoginDialog } from '@/components/auth/login-dialog';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
-import { Button } from '@/components/ui/button';
+import { BaseButton } from '@/components/ui/base-button';
+
 import { useLogin } from '@/hooks/use-login';
 import { useLayoutStore } from '@/stores/layout-store';
 import { useAuthStore } from '@/stores/auth-store';
+import { ROUTES } from '@/constants/routes';
 import { UserInfo } from '@/types/auth';
 
-type SiteHeaderProps = {
+type HeaderProps = {
   initialUser?: UserInfo | null;
 };
 
-export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
+export function Header({ initialUser = null }: HeaderProps) {
   const t = useTranslations('layout.header');
   const toggleSidebar = useLayoutStore((state) => state.toggleSidebar);
   const theme = useLayoutStore((state) => state.theme);
@@ -71,7 +73,7 @@ export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
     <header className="border-border bg-background/95 sticky top-0 z-30 w-full border-b backdrop-blur-sm">
       <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-4 md:h-20 md:px-10">
         <div className="text-primary group flex items-center gap-2">
-          <Button
+          <BaseButton
             variant="ghost"
             size="icon"
             className="md:hidden"
@@ -79,8 +81,8 @@ export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
             aria-label="Toggle navigation"
           >
             <MenuIcon className="h-5 w-5" aria-hidden="true" />
-          </Button>
-          <Link href="/" className="flex items-center gap-2">
+          </BaseButton>
+          <Link href={ROUTES.HOME} className="flex items-center gap-2">
             <Heart className="h-6 w-6" />
             <span className="text-foreground font-serif text-xl font-bold tracking-tight md:text-2xl">
               {t('brand')}
@@ -91,13 +93,13 @@ export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
         <div className="hidden items-center gap-6 md:flex lg:gap-8">
           <Link
             className="text-foreground hover:text-primary text-sm font-medium tracking-wider uppercase transition-colors"
-            href="#templates"
+            href={ROUTES.TEMPLATES}
           >
             {t('templates')}
           </Link>
           <Link
             className="text-foreground hover:text-primary text-sm font-medium tracking-wider uppercase transition-colors"
-            href="#pricing"
+            href={ROUTES.PRICING}
           >
             {t('pricing')}
           </Link>
@@ -108,25 +110,26 @@ export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
                 'name' in user &&
                 typeof user.name === 'string'
                 ? user.name
-                : t('signedIn')}
+                : <Link href={ROUTES.INVITATION}>{t('my_invitation')}</Link>}
             </span>
           ) : (
-            <Link href="/login">
-              <button
+            <Link href={ROUTES.LOGIN}>
+              <BaseButton
+                variant="ghost"
                 className="cursor-pointer text-foreground hover:text-primary text-sm font-bold tracking-wider uppercase transition-colors"
               >
                 {t('login')}
-              </button>
+              </BaseButton>
             </Link>
           )}
-          <Button
+          <BaseButton
             className="shadow-primary/20 h-10 rounded-full px-5 shadow-md"
             asChild
           >
-            <Link href="/sign-up">{t('signup')}</Link>
-          </Button>
+            <Link href={ROUTES.SIGN_UP}>{t('signup')}</Link>
+          </BaseButton>
           <LanguageSwitcher />
-          <Button
+          <BaseButton
             variant="ghost"
             size="icon"
             aria-label="Toggle theme"
@@ -139,7 +142,7 @@ export function SiteHeader({ initialUser = null }: SiteHeaderProps) {
             ) : (
               <Moon className="h-5 w-5" />
             )}
-          </Button>
+          </BaseButton>
         </div>
       </div>
       <LoginDialog

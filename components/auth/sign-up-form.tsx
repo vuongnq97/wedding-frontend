@@ -47,17 +47,19 @@ export function SignUpForm() {
                         placeholder={t('password_placeholder')}
                         className="border-border bg-background focus:border-primary focus:ring-primary h-12 pl-11 pr-12 text-foreground placeholder:text-muted-foreground focus:ring-1"
                     />
-                    <button
+                    <BaseButton
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         className="text-muted-foreground hover:text-primary absolute top-1/2 right-3 -translate-y-1/2 transition-colors"
+                        variant="ghost"
+                        size="icon"
                     >
                         {showPassword ? (
                             <EyeOff className="h-5 w-5" />
                         ) : (
                             <Eye className="h-5 w-5" />
                         )}
-                    </button>
+                    </BaseButton>
                 </div>
                 <p className="text-xs text-muted-foreground">{t('password_hint')}</p>
             </div>

@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { BaseButton } from '@/components/ui/base-button';
 import { useTranslations } from 'next-intl';
 
 export function CtaSection() {
@@ -13,9 +13,9 @@ export function CtaSection() {
         <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-lg font-light md:text-xl">
           {t('subtitle')}
         </p>
-        <Button className="shadow-primary/20 h-14 px-12 text-lg transition-transform hover:scale-105">
+        <BaseButton className="shadow-primary/20 h-14 px-12 text-lg transition-transform hover:scale-105">
           {t('button')}
-        </Button>
+        </BaseButton>
         <p className="text-muted-foreground mt-6 text-sm">{t('note')}</p>
       </div>
     </section>

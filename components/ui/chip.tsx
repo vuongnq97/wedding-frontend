@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BaseButton } from '@/components/ui/base-button';
 import { cn } from '@/lib/utils';
 
 export interface ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -7,12 +8,13 @@ export interface ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 
 export function Chip({ className, selected = false, ...props }: ChipProps) {
   return (
-    <button
+    <BaseButton
+      variant="ghost"
       className={cn(
-        'inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
+        'h-auto w-auto gap-1 px-3 py-1.5 font-medium hover:bg-muted/80',
         selected
-          ? 'bg-primary/15 text-primary'
-          : 'bg-muted text-foreground hover:bg-muted/80',
+          ? 'bg-primary/15 text-primary hover:bg-primary/25'
+          : 'bg-muted text-foreground',
         className
       )}
       {...props}

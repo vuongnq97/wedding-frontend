@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { BaseButton } from '@/components/ui/base-button';
 import { useTranslations } from 'next-intl';
 
 export function CollectionsSection() {
@@ -69,12 +69,12 @@ export function CollectionsSection() {
           ))}
         </div>
         <div className="mt-16 flex justify-center">
-          <Button
+          <BaseButton
             variant="outline"
             className="rounded-full px-8 py-3 font-bold tracking-wider uppercase"
           >
             {t('view_all')}
-          </Button>
+          </BaseButton>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 'use client';
 
+import { BaseButton } from '@/components/ui/base-button';
 import { useLayoutStore } from '@/stores/layout-store';
 
 export function SidebarOverlay() {
@@ -8,9 +9,10 @@ export function SidebarOverlay() {
   if (!sidebarOpen) return null;
 
   return (
-    <button
+    <BaseButton
       type="button"
-      className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity md:hidden"
+      variant="ghost"
+      className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity md:hidden rounded-none h-auto w-auto hover:bg-black/40"
       aria-label="Close navigation"
       onClick={closeSidebar}
     />
