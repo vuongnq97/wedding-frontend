@@ -1,74 +1,131 @@
 {
+    "header": {
+        "logo": "J & J",
+        "nav": {
+            "couple": "Couple",
+            "story": "Our Story",
+            "details": "Details",
+            "gallery": "Gallery"
+        },
+        "rsvp": "RSVP"
+    },
     "hero": {
-        "subtitle": "The Wedding Of",
-        "title": "Sophie & Alexander",
-        "date": "August 1st, 2024",
-        "location": "Napa Valley, CA"
+        "tagline": "We are getting married",
+        "title": "Jane & John",
+        "date": "October 24, 2024",
+        "location": "San Francisco, CA",
+        "cta": "RSVP Now"
+    },
+    "countdown": {
+        "subtitle": "The Countdown",
+        "title": "Waiting for the Big Day",
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
+    },
+    "couple": {
+        "subtitle": "The Happy Couple",
+        "title": "Groom & Bride",
+        "groom": {
+            "name": "John Doe",
+            "role": "The Groom",
+            "bio": "\"A lover of nature, coffee, and finding beauty in the everyday moments.\""
+        },
+        "bride": {
+            "name": "Jane Smith",
+            "role": "The Bride",
+            "bio": "\"An artist at heart with a passion for collecting beautiful little memories.\""
+        }
+    },
+    "family": {
+        "subtitle": "With the blessings of our parents",
+        "title": "Beloved Family",
+        "groomFamily": "Groom's Family",
+        "brideFamily": "Bride's Family",
+        "sonOf": "Son of",
+        "daughterOf": "Daughter of",
+        "parents": {
+            "groomDad": "Mr. Robert Doe",
+            "groomMom": "Mrs. Mary Doe",
+            "brideDad": "Mr. James Smith",
+            "brideMom": "Mrs. Linda Smith"
+        }
     },
     "story": {
-        "identifier": "Our Story",
-        "title": "How We Met",
-        "paragraph1": "It all started at a coffee shop in downtown Seattle. Sophie was reading \"Pride and Prejudice\" for the tenth time, and Alexander accidentally spilled his latte on her table.",
-        "paragraph2": "Five years, three apartments, and countless cups of coffee later, we are ready to start our biggest adventure yet. We cannot wait to celebrate our love with our favorite people in the world.",
-        "quote": "\"Whatever our souls are made of, his and mine are the same.\""
-    },
-    "events": {
-        "title": "The Timeline",
-        "date": "August 1st, 2024",
-        "ceremony": {
-            "time": "4:00 PM",
-            "title": "Ceremony",
-            "description": "The Garden Gazebo. Please arrive by 3:45 PM."
+        "subtitle": "Our Love Story",
+        "title": "How it all began",
+        "met": {
+            "date": "June 2018",
+            "title": "First Meeting",
+            "desc": "We met at a coffee shop in downtown. It started with a shared table and ended with a conversation that lasted for hours."
         },
-        "cocktail": {
-            "time": "5:30 PM",
-            "title": "Cocktail Hour",
-            "description": "Sunset Terrace. Enjoy hors d'oeuvres and signature cocktails."
+        "firstDate": {
+            "date": "August 2018",
+            "title": "First Date",
+            "desc": "A walk by the pier followed by dinner. We knew then that this was something special."
+        },
+        "proposal": {
+            "date": "December 2023",
+            "title": "The Proposal",
+            "desc": "Under the winter lights, John got down on one knee. It was the easiest \"Yes\" Jane ever said."
+        }
+    },
+    "details": {
+        "subtitle": "The When & Where",
+        "title": "Wedding Details",
+        "desc": "We can't wait to celebrate with you. Here is everything you need to know about the big day.",
+        "time": {
+            "date": "Thursday, October 24, 2024",
+            "time": "Ceremony starts at 4:00 PM"
+        },
+        "location": {
+            "name": "St. Mary’s Chapel",
+            "address": "123 Wedding Lane, San Francisco, CA 94110",
+            "getDirections": "Get Directions"
         },
         "reception": {
-            "time": "7:00 PM",
-            "title": "Reception Dinner & Dancing",
-            "description": "Grand Ballroom. Dinner followed by dancing until midnight."
-        }
+            "name": "Reception Dinner",
+            "time": "The Grand Hall, 6:00 PM"
+        },
+        "venueLocation": "Venue Location"
     },
-    "map": {
-        "identifier": "The Venue",
-        "title": "Rosewood Estate",
-        "address_line1": "1234 Vineyard Lane",
-        "address_line2": "Napa Valley, CA 94558",
-        "accommodations": {
-            "title": "Accommodations",
-            "description": "We have reserved a block of rooms at The Vineyard Hotel."
-        },
-        "parking": {
-            "title": "Parking",
-            "description": "Valet parking is available at the main entrance."
-        },
-        "getDirections": "Get Directions"
-    },
-    "registry": {
-        "title": "Gift Registry",
-        "description": "Your presence is enough of a present to us! But for those who wish to contribute, we are registered at the following places.",
-        "crateAndBarrel": {
-            "title": "Crate & Barrel",
-            "description": "Home essentials & kitchenware"
-        },
-        "honeymoon": {
-            "title": "Honeymoon Fund",
-            "description": "Help us explore Japan"
-        },
-        "theKnot": {
-            "title": "The Knot",
-            "description": "Various curated items"
-        }
+    "gallery": {
+        "title": "Captured Moments",
+        "subtitle": "A glimpse into our life together."
     },
     "rsvp": {
-        "title": "Are you attending?",
-        "description": "Please let us know if you can make it by August 1st, 2024.",
-        "button": "RSVP Online"
+        "title": "RSVP",
+        "subtitle": "Please respond by October 1st, 2024",
+        "attendance": {
+            "label": "Will you be joining us?",
+            "accept": "Joyfully Accept",
+            "decline": "Regretfully Decline"
+        },
+        "guests": "Number of Guests",
+        "message": {
+            "label": "Message (Optional)",
+            "placeholder": "Write a note to the couple..."
+        },
+        "submit": "Send RSVP"
+    },
+    "gift": {
+        "title": "Wedding Gift",
+        "desc": "Your presence is our greatest gift. However, if you wish to honor us with a gift, a monetary contribution is much appreciated.",
+        "groom": "Groom",
+        "bride": "Bride",
+        "copy": "Copy Number"
+    },
+    "guestbook": {
+        "title": "Guestbook",
+        "subtitle": "Warm wishes from our friends and family."
     },
     "footer": {
-        "title": "Sophie & Alexander",
-        "credit": "Designed with Wedfully"
+        "copyright": "© 2024 Jane & John's Wedding. With love.",
+        "links": {
+            "instagram": "Instagram",
+            "registry": "Registry",
+            "contact": "Contact"
+        }
     }
 }

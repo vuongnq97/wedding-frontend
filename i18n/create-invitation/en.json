@@ -1,0 +1,114 @@
+{
+    "title": "Create Your Invitation",
+    "subtitle": "Customize your wedding website details, photos, and settings.",
+    "actions": {
+        "discard": "Discard Changes",
+        "save": "Save & Preview Invitation",
+        "saving": "Saving...",
+        "publish": "Publish Invitation",
+        "createInvitation": "Create Invitation"
+    },
+    "sections": {
+        "hero": {
+            "title": "Hero Section",
+            "upload": "Upload Banner",
+            "change": "Change Banner"
+        },
+        "couple": {
+            "title": "The Happy Couple",
+            "groom": "The Groom",
+            "bride": "The Bride",
+            "fullName": "Full Name",
+            "informalName": "Short Name / Nickname",
+            "fatherName": "Father's Name",
+            "motherName": "Mother's Name",
+            "address": "Address",
+            "groomPlaceholder": "e.g. Nguyen Van A",
+            "bridePlaceholder": "e.g. Tran Thi B",
+            "groomNickPlaceholder": "e.g. Van A",
+            "brideNickPlaceholder": "e.g. Thi B"
+        },
+        "family": {
+            "title": "Family Information",
+            "groomFamily": "GROOM'S FAMILY",
+            "brideFamily": "BRIDE'S FAMILY",
+            "fatherName": "Father's Name",
+            "motherName": "Mother's Name",
+            "address": "Family Address"
+        },
+        "notification": {
+            "title": "Notification Title",
+            "line1": "Line 1 (Intro)",
+            "line2": "Line 2 (Action)",
+            "line1Placeholder": "e.g. RESPECTFULLY ANNOUNCE",
+            "line2Placeholder": "e.g. THE WEDDING OF OUR CHILDREN"
+        },
+        "story": {
+            "title": "Our Love Story",
+            "subtitle": "Create a timeline of your relationship. Add key milestones like when you met, your first date, or the proposal.",
+            "addEvent": "Add Another Milestone",
+            "dateYear": "Date / Year",
+            "milestoneTitle": "Milestone Title",
+            "milestonePlaceholder": "e.g. She Said Yes!",
+            "storyDescription": "Story Description",
+            "descriptionPlaceholder": "Tell us what happened...",
+            "addPhoto": "Add Photo"
+        },
+        "events": {
+            "title": "Event Details",
+            "ceremony": "Ceremony",
+            "reception": "Reception",
+            "showSection": "Show Section",
+            "date": "Date",
+            "time": "Time",
+            "address": "Address"
+        },
+        "map": {
+            "title": "Map Configuration",
+            "showSection": "Show Section",
+            "pasteLink": "Enter location...",
+            "instruction": "Search for your venue to autocomplete address.",
+            "preview": "Preview",
+            "locationName": "Location Name",
+            "address": "Address",
+            "invalidLink": "Invalid link. Please use the 'Embed a map' HTML code."
+        },
+        "gallery": {
+            "title": "Photo Album",
+            "upload": "Upload"
+        },
+        "gift": {
+            "title": "Gift Registry",
+            "groomFamily": "Groom's Family",
+            "brideFamily": "Bride's Family",
+            "addBank": "Add Bank",
+            "addBankAccount": "Add Bank Account",
+            "bankName": "Bank Name",
+            "accountNumber": "Account Number",
+            "accountHolder": "Account Holder",
+            "noAccounts": "No bank accounts added yet"
+        },
+        "thankYou": {
+            "title": "Thank You Message"
+        },
+        "guestbook": {
+            "title": "Guestbook",
+            "showSection": "Show Section",
+            "description": "Guests will be able to post public wishes on your invitation page."
+        },
+        "music": {
+            "title": "Background Music",
+            "noMusic": "No music selected",
+            "browse": "Browse",
+            "remove": "Remove"
+        },
+        "ads": {
+            "title": "Advertisement",
+            "active": "Active",
+            "disabled": "Disabled",
+            "description": "A small \"Made with WeddingBuilder\" badge will appear in the footer.",
+            "removeAds": "Remove Ads",
+            "enableAds": "Enable Ads"
+        }
+    }
+}

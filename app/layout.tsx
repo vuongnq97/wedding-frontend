@@ -25,7 +25,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Blog App',
+  title: 'Wedding Invitation',
   description: 'Multi-language blog experience',
 };
 

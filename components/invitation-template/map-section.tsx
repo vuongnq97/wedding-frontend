@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { BaseButton } from '@/components/ui/base-button';
 
 export function MapSection() {
-    const t = useTranslations('invitation.map');
+    const t = useTranslations('invitation-template.map');
 
     return (
         <section className="bg-background w-full px-6 py-20">

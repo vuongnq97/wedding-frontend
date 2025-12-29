@@ -1,0 +1,75 @@
+{
+    "hero": {
+        "subtitle": "The Wedding Of",
+        "title": "Sophie & Alexander",
+        "date": "August 1st, 2024",
+        "location": "Napa Valley, CA"
+    },
+    "story": {
+        "identifier": "Our Story",
+        "title": "How We Met",
+        "paragraph1": "It all started at a coffee shop in downtown Seattle. Sophie was reading \"Pride and Prejudice\" for the tenth time, and Alexander accidentally spilled his latte on her table.",
+        "paragraph2": "Five years, three apartments, and countless cups of coffee later, we are ready to start our biggest adventure yet. We cannot wait to celebrate our love with our favorite people in the world.",
+        "quote": "\"Whatever our souls are made of, his and mine are the same.\""
+    },
+    "events": {
+        "title": "The Timeline",
+        "date": "August 1st, 2024",
+        "ceremony": {
+            "time": "4:00 PM",
+            "title": "Ceremony",
+            "description": "The Garden Gazebo. Please arrive by 3:45 PM."
+        },
+        "cocktail": {
+            "time": "5:30 PM",
+            "title": "Cocktail Hour",
+            "description": "Sunset Terrace. Enjoy hors d'oeuvres and signature cocktails."
+        },
+        "reception": {
+            "time": "7:00 PM",
+            "title": "Reception Dinner & Dancing",
+            "description": "Grand Ballroom. Dinner followed by dancing until midnight."
+        }
+    },
+    "map": {
+        "identifier": "The Venue",
+        "title": "Rosewood Estate",
+        "address_line1": "1234 Vineyard Lane",
+        "address_line2": "Napa Valley, CA 94558",
+        "accommodations": {
+            "title": "Accommodations",
+            "description": "We have reserved a block of rooms at The Vineyard Hotel."
+        },
+        "parking": {
+            "title": "Parking",
+            "description": "Valet parking is available at the main entrance."
+        },
+        "getDirections": "Get Directions"
+    },
+    "registry": {
+        "title": "Gift Registry",
+        "description": "Your presence is enough of a present to us! But for those who wish to contribute, we are registered at the following places.",
+        "crateAndBarrel": {
+            "title": "Crate & Barrel",
+            "description": "Home essentials & kitchenware"
+        },
+        "honeymoon": {
+            "title": "Honeymoon Fund",
+            "description": "Help us explore Japan"
+        },
+        "theKnot": {
+            "title": "The Knot",
+            "description": "Various curated items"
+        }
+    },
+    "rsvp": {
+        "title": "Are you attending?",
+        "description": "Please let us know if you can make it by August 1st, 2024.",
+        "button": "RSVP Online"
+    },
+    "footer": {
+        "title": "Sophie & Alexander",
+        "credit": "Designed with Wedfully"
+    },
+    "createInvitation": "Create Invitation"
+}

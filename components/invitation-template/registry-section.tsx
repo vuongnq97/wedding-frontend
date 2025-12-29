@@ -2,7 +2,7 @@ import { Flower, Plane, ShoppingBag } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export function RegistrySection() {
-    const t = useTranslations('invitation.registry');
+    const t = useTranslations('invitation-template.registry');
 
     return (
         <section className="bg-surface w-full px-6 py-20">

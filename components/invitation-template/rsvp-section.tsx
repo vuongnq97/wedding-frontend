@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { BaseButton } from '@/components/ui/base-button';
 
 export function RSVPSection() {
-    const t = useTranslations('invitation.rsvp');
+    const t = useTranslations('invitation-template.rsvp');
 
     return (
         <section className="bg-primary relative flex w-full items-center justify-center px-6 py-24">

@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { HeartIcon } from '@/components/svg/heart-icon';
 
 export function EventsSection() {
-    const t = useTranslations('invitation.events');
+    const t = useTranslations('invitation-template.events');
 
     return (
         <section className="bg-muted w-full px-6 py-20">

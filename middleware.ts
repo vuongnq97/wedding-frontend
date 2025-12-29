@@ -11,6 +11,7 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const response = intlMiddleware(request);
+  response.headers.set('x-pathname', request.nextUrl.pathname);
 
   const userCookie = request.cookies.get('auth-user');
   if (userCookie?.value) {

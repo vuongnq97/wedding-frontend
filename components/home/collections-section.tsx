@@ -1,5 +1,7 @@
 import { BaseButton } from '@/components/ui/base-button';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { ROUTES } from '@/constants/routes';
 
 export function CollectionsSection() {
   const t = useTranslations('home.collections');
@@ -42,30 +44,32 @@ export function CollectionsSection() {
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((c) => (
-            <div
-              key={c.key}
-              className="group flex cursor-pointer flex-col gap-5"
-            >
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-sm">
-                <div
-                  className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${c.image}')` }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="bg-surface text-primary rounded-full px-6 py-3 text-sm font-bold tracking-wide uppercase shadow-xl">
-                    {t('preview')}
-                  </span>
+            <Link href={ROUTES.INVITATION_TEMPLATE} key={c.key}>
+              <div
+                key={c.key}
+                className="group flex cursor-pointer flex-col gap-5"
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-sm">
+                  <div
+                    className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url('${c.image}')` }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
+                    <span className="bg-surface text-primary rounded-full px-6 py-3 text-sm font-bold tracking-wide uppercase shadow-xl">
+                      {t('preview')}
+                    </span>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h3 className="text-text-main mb-1 font-serif text-xl font-bold">
+                    {t(`items.${c.key}.title`)}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {t(`items.${c.key}.subtitle`)}
+                  </p>
                 </div>
               </div>
-              <div className="text-center">
-                <h3 className="text-text-main mb-1 font-serif text-xl font-bold">
-                  {t(`items.${c.key}.title`)}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {t(`items.${c.key}.subtitle`)}
-                </p>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="mt-16 flex justify-center">

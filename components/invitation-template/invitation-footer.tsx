@@ -2,7 +2,7 @@ import { Camera, Share2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export function InvitationFooter() {
-    const t = useTranslations('invitation.footer');
+    const t = useTranslations('invitation-template.footer');
 
     return (
         <footer className="bg-background-light dark:bg-background-dark col-span-full w-full py-12 pb-32 text-center">
