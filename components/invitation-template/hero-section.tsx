@@ -3,10 +3,10 @@ import { ChevronDown, Heart } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export function HeroSection() {
-    const t = useTranslations('invitation.hero');
+    const t = useTranslations('invitation-template.hero');
 
     return (
-        <section className="relative h-screen min-h-[600px] w-full overflow-hidden">
+        <section className="relative mt-[60px] h-screen min-h-[600px] w-full overflow-hidden">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0">
                 <Image

@@ -1,0 +1,117 @@
+{
+    "title": "Tạo Thiệp Của Bạn",
+    "subtitle": "Tùy chỉnh thông tin website đám cưới, hình ảnh và cài đặt.",
+    "actions": {
+        "discard": "Hủy Thay Đổi",
+        "save": "Lưu & Xem Trước",
+        "saving": "Đang Lưu...",
+        "publish": "Xuất Bản",
+        "create-template": "Tạo thiệp cưới"
+    },
+    "sections": {
+        "hero": {
+            "title": "Ảnh Bìa",
+            "upload": "Tải Ảnh Lên",
+            "change": "Thay Đổi Ảnh"
+        },
+        "couple": {
+            "title": "Cặp Đôi Hạnh Phúc",
+            "groom": "Chú Rể",
+            "bride": "Cô Dâu",
+            "fullName": "Họ và Tên",
+            "informalName": "Biệt Danh / Tên Thường Gọi",
+            "birthOrder": "Vị trí con trong gia đình",
+            "fatherName": "Tên Bố",
+            "motherName": "Tên Mẹ",
+            "address": "Địa Chỉ",
+            "groomPlaceholder": "VD: Nguyễn Văn A",
+            "bridePlaceholder": "VD: Trần Thị B",
+            "groomNickPlaceholder": "VD: Văn A",
+            "brideNickPlaceholder": "VD: Thị B",
+            "groomBirthOrderPlaceholder": "VD: Trưởng Nam",
+            "brideBirthOrderPlaceholder": "VD: Thứ Nữ"
+        },
+        "family": {
+            "title": "Thông Tin Gia Đình",
+            "groomFamily": "NHÀ TRAI",
+            "brideFamily": "NHÀ GÁI",
+            "fatherName": "Tên Bố",
+            "motherName": "Tên Mẹ",
+            "address": "Địa Chỉ Nhà"
+        },
+        "notification": {
+            "title": "Tiêu Đề Thông Báo",
+            "line1": "Dòng 1 (Mở đầu)",
+            "line2": "Dòng 2 (Hành động)",
+            "line1Placeholder": "VD: TRÂN TRỌNG BÁO TIN",
+            "line2Placeholder": "VD: LỄ THÀNH HÔN CỦA CÁC CON CHÚNG TÔI"
+        },
+        "story": {
+            "title": "Chuyện Tình Yêu",
+            "subtitle": "Tạo dòng thời gian cho mối quan hệ của bạn. Thêm các cột mốc quan trọng như khi gặp nhau, buổi hẹn đầu tiên, hoặc lời cầu hôn.",
+            "addEvent": "Thêm Cột Mốc Khác",
+            "dateYear": "Ngày / Năm",
+            "milestoneTitle": "Tiêu Đề Cột Mốc",
+            "milestonePlaceholder": "VD: Cô ấy đã đồng ý!",
+            "storyDescription": "Mô Tả Câu Chuyện",
+            "descriptionPlaceholder": "Kể cho chúng tôi nghe chuyện gì đã xảy ra...",
+            "addPhoto": "Thêm Ảnh"
+        },
+        "events": {
+            "title": "Chi Tiết Sự Kiện",
+            "ceremony": "Lễ Thành Hôn",
+            "reception": "Tiệc Cưới",
+            "showSection": "Hiển Thị",
+            "date": "Ngày",
+            "time": "Giờ",
+            "address": "Địa Chỉ"
+        },
+        "map": {
+            "title": "Cấu Hình Bản Đồ",
+            "showSection": "Hiển Thị",
+            "pasteLink": "Nhập địa điểm...",
+            "instruction": "Tìm kiếm địa điểm tổ chức để tự động điền địa chỉ.",
+            "preview": "Xem Trước",
+            "locationName": "Tên địa điểm",
+            "address": "Địa chỉ",
+            "invalidLink": "Liên kết không hợp lệ. Vui lòng sử dụng mã 'Nhúng bản đồ'."
+        },
+        "gallery": {
+            "title": "Album Ảnh",
+            "upload": "Tải Lên"
+        },
+        "gift": {
+            "title": "Hộp Mừng Cưới",
+            "groomFamily": "Nhà Trai",
+            "brideFamily": "Nhà Gái",
+            "addBank": "Thêm Ngân Hàng",
+            "addBankAccount": "Thêm Tài Khoản Ngân Hàng",
+            "bankName": "Tên Ngân Hàng",
+            "accountNumber": "Số Tài Khoản",
+            "accountHolder": "Chủ Tài Khoản",
+            "noAccounts": "Chưa có tài khoản nào"
+        },
+        "thankYou": {
+            "title": "Lời Cảm Ơn"
+        },
+        "guestbook": {
+            "title": "Sổ Lưu Bút",
+            "showSection": "Hiển Thị",
+            "description": "Khách mời sẽ có thể gửi lời chúc công khai trên trang thiệp của bạn."
+        },
+        "music": {
+            "title": "Nhạc Nền",
+            "noMusic": "Chưa chọn nhạc",
+            "browse": "Duyệt",
+            "remove": "Xóa"
+        },
+        "ads": {
+            "title": "Quảng Cáo",
+            "active": "Đang Bật",
+            "disabled": "Đã Tắt",
+            "description": "Một huy hiệu nhỏ \"Made with WeddingBuilder\" sẽ xuất hiện ở chân trang.",
+            "removeAds": "Xóa Quảng Cáo",
+            "enableAds": "Bật Quảng Cáo"
+        }
+    }
+}

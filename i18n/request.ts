@@ -1,6 +1,8 @@
 import { getRequestConfig } from 'next-intl/server';
 import { defaultLocale, locales } from './routing';
 
+// Force rebuild for i18n
+
 export default getRequestConfig(async ({ requestLocale }) => {
   let currentLocale = await requestLocale;
   if (
@@ -14,7 +16,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const loginMessages = (await import(`./login/${currentLocale}.json`)).default;
   const signUpMessages = (await import(`./sign-up/${currentLocale}.json`)).default;
   const layoutMessages = (await import(`./layout/${currentLocale}.json`)).default;
+  const invitationTemplateMessages = (await import(`./invitation-template/${currentLocale}.json`)).default;
   const invitationMessages = (await import(`./invitation/${currentLocale}.json`)).default;
+  const createInvitationMessages = (await import(`./create-invitation/${currentLocale}.json`)).default;
 
   return {
     locale: currentLocale,
@@ -23,7 +27,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
       login: loginMessages,
       signUp: signUpMessages,
       layout: layoutMessages,
+      'invitation-template': invitationTemplateMessages,
       invitation: invitationMessages,
+      'create-invitation': createInvitationMessages
     },
   };
 });

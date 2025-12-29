@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 export function StorySection() {
-    const t = useTranslations('invitation.story');
+    const t = useTranslations('invitation-template.story');
 
     return (
         <section className="bg-background w-full px-6 py-20">
