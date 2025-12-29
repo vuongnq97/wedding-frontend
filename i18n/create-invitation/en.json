@@ -20,13 +20,16 @@
             "bride": "The Bride",
             "fullName": "Full Name",
             "informalName": "Short Name / Nickname",
+            "birthOrder": "Birth Order",
             "fatherName": "Father's Name",
             "motherName": "Mother's Name",
             "address": "Address",
             "groomPlaceholder": "e.g. Nguyen Van A",
             "bridePlaceholder": "e.g. Tran Thi B",
             "groomNickPlaceholder": "e.g. Van A",
-            "brideNickPlaceholder": "e.g. Thi B"
+            "brideNickPlaceholder": "e.g. Thi B",
+            "groomBirthOrderPlaceholder": "e.g. Eldest son",
+            "brideBirthOrderPlaceholder": "e.g. Eldest daughter"
         },
         "family": {
             "title": "Family Information",
