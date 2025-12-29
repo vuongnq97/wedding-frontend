@@ -70,9 +70,9 @@ export const useInvitation = () => {
         }
 
         // Map (Optional)
-        if (data.map.show) {
-            if (!data.map.locationName || !data.map.locationAddress) return false;
-        }
+        // if (data.map.show) {
+        //     if (!data.map.locationName || !data.map.locationAddress) return false;
+        // }
 
         // Milestones
         if (!data.milestones || data.milestones.length === 0) return false;
