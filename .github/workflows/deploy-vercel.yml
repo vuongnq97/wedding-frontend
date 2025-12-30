@@ -1,0 +1,28 @@
+name: CI/CD Wedding Web App
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - users: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: vercel/vercel-action@v2
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
