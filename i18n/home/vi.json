@@ -11,6 +11,7 @@
     "description": "Tìm phong cách hoàn hảo cho chủ đề đám cưới của bạn từ bộ sưu tập được tuyển chọn của chúng tôi.",
     "view_all": "Xem Tất Cả",
     "preview": "Xem trước",
+    "coming_soon": "Sắp Ra Mắt",
     "items": {
       "floral": {
         "title": "Hoa Tối Giản",
@@ -27,6 +28,26 @@
       "midnight": {
         "title": "Vàng Giao Thừa",
         "subtitle": "Kịch tính & sang trọng"
+      },
+      "minimalist": {
+        "title": "Tối Giản",
+        "subtitle": "Đơn giản & Tinh tế"
+      },
+      "vintage": {
+        "title": "Cổ Điển",
+        "subtitle": "Vẻ đẹp vượt thời gian"
+      },
+      "luxury": {
+        "title": "Sang Trọng",
+        "subtitle": "Quý phái & Đẳng cấp"
+      },
+      "artistic": {
+        "title": "Nghệ Thuật",
+        "subtitle": "Sáng tạo & Độc đáo"
+      },
+      "rustic": {
+        "title": "Mộc Mạc",
+        "subtitle": "Ấm áp & Tự nhiên"
       }
     }
   },

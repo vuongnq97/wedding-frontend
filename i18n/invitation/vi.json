@@ -1,144 +1,166 @@
 {
-    "header": {
-        "logo": "J & J",
-        "nav": {
-            "couple": "Cặp đôi",
-            "story": "Chuyện tình",
-            "details": "Chi tiết",
-            "gallery": "Thư viện ảnh"
-        },
-        "rsvp": "RSVP",
-        "createInvitation": "Tạo Thiệp Mời"
+  "header": {
+    "logo": "J & J",
+    "nav": {
+      "couple": "Cặp đôi",
+      "story": "Chuyện tình",
+      "details": "Chi tiết",
+      "gallery": "Thư viện ảnh"
     },
-    "hero": {
-        "tagline": "Chúng tôi sắp kết hôn",
-        "title": "Jane & John",
-        "date": "24 Tháng 10, 2024",
-        "location": "San Francisco, CA",
-        "cta": "Xác nhận tham dự"
+    "rsvp": "RSVP",
+    "createInvitation": "Tạo Thiệp Mời",
+    "editInvitation": "Chỉnh sửa thiệp",
+    "publish": "Xuất bản"
+  },
+  "hero": {
+    "tagline": "Chúng tôi sắp kết hôn",
+    "title": "Jane & John",
+    "date": "24 Tháng 10, 2024",
+    "location": "San Francisco, CA",
+    "cta": "Xác nhận tham dự"
+  },
+  "countdown": {
+    "subtitle": "Đếm ngược",
+    "title": "Chờ đón ngày trọng đại",
+    "days": "Ngày",
+    "hours": "Giờ",
+    "minutes": "Phút",
+    "seconds": "Giây"
+  },
+  "couple": {
+    "subtitle": "Cặp đôi hạnh phúc",
+    "title": "Chú rể & Cô dâu",
+    "groom": {
+      "name": "John Doe",
+      "role": "Chú rể",
+      "bio": "\"Một người yêu thiên nhiên, cà phê và tìm thấy vẻ đẹp trong những khoảnh khắc đời thường.\""
     },
-    "countdown": {
-        "subtitle": "Đếm ngược",
-        "title": "Chờ đón ngày trọng đại",
-        "days": "Ngày",
-        "hours": "Giờ",
-        "minutes": "Phút",
-        "seconds": "Giây"
-    },
-    "couple": {
-        "subtitle": "Cặp đôi hạnh phúc",
-        "title": "Chú rể & Cô dâu",
-        "groom": {
-            "name": "John Doe",
-            "role": "Chú rể",
-            "bio": "\"Một người yêu thiên nhiên, cà phê và tìm thấy vẻ đẹp trong những khoảnh khắc đời thường.\""
-        },
-        "bride": {
-            "name": "Jane Smith",
-            "role": "Cô dâu",
-            "bio": "\"Một nghệ sĩ với niềm đam mê sưu tầm những ký ức đẹp đẽ nhỏ bé.\""
-        }
-    },
-    "family": {
-        "subtitle": "Với sự chúc phúc của cha mẹ",
-        "title": "Gia đình yêu thương",
-        "groomFamily": "Nhà Trai",
-        "brideFamily": "Nhà Gái",
-        "sonOf": "Trưởng nam của",
-        "daughterOf": "Trưởng nữ của",
-        "parents": {
-            "groomDad": "Ông Robert Doe",
-            "groomMom": "Bà Mary Doe",
-            "brideDad": "Ông James Smith",
-            "brideMom": "Bà Linda Smith"
-        }
-    },
-    "story": {
-        "subtitle": "Câu chuyện tình yêu",
-        "title": "Hành trình bắt đầu",
-        "met": {
-            "date": "Tháng 6, 2018",
-            "title": "Lần đầu gặp gỡ",
-            "desc": "Chúng tôi gặp nhau tại một quán cà phê ở trung tâm thành phố. Bắt đầu bằng việc ngồi chung bàn và kết thúc bằng một cuộc trò chuyện kéo dài hàng giờ."
-        },
-        "firstDate": {
-            "date": "Tháng 8, 2018",
-            "title": "Buổi hẹn đầu tiên",
-            "desc": "Đi dạo bên bến tàu sau bữa tối. Lúc đó chúng tôi đã biết đây là một điều gì đó thật đặc biệt."
-        },
-        "proposal": {
-            "date": "Tháng 12, 2023",
-            "title": "Lời cầu hôn",
-            "desc": "Dưới ánh đèn mùa đông, John đã quỳ xuống. Đó là lời \"Đồng ý\" dễ dàng nhất mà Jane từng nói."
-        }
-    },
-    "details": {
-        "subtitle": "Thời gian & Địa điểm",
-        "title": "Chi tiết đám cưới",
-        "desc": "Chúng tôi rất mong được chung vui cùng bạn. Dưới đây là mọi thứ bạn cần biết về ngày trọng đại này.",
-        "time": {
-            "date": "Thứ Năm, 24 Tháng 10, 2024",
-            "time": "Lễ cưới bắt đầu lúc 4:00 PM"
-        },
-        "location": {
-            "name": "Nhà nguyện St. Mary",
-            "address": "123 Wedding Lane, San Francisco, CA 94110",
-            "getDirections": "Chỉ đường"
-        },
-        "reception": {
-            "name": "Tiệc chiêu đãi",
-            "time": "Sảnh lớn, 6:00 PM"
-        },
-        "venueLocation": "Địa điểm tổ chức"
-    },
-    "gallery": {
-        "title": "Khoảnh khắc đáng nhớ",
-        "subtitle": "Một cái nhìn thoáng qua về cuộc sống của chúng tôi."
-    },
-    "rsvp": {
-        "title": "RSVP",
-        "subtitle": "Vui lòng phản hồi trước ngày 1 tháng 10 năm 2024",
-        "firstName": {
-            "label": "Tên",
-            "placeholder": "Nhập tên của bạn"
-        },
-        "lastName": {
-            "label": "Họ",
-            "placeholder": "Nhập họ của bạn"
-        },
-        "email": {
-            "label": "Địa chỉ Email",
-            "placeholder": "ten@example.com"
-        },
-        "attendance": {
-            "label": "Bạn sẽ tham dự chứ?",
-            "accept": "Sẽ tham dự",
-            "decline": "Rất tiếc không thể tham dự"
-        },
-        "guests": "Số lượng khách",
-        "message": {
-            "label": "Lời nhắn (Tùy chọn)",
-            "placeholder": "Viết lời nhắn gửi đến cặp đôi..."
-        },
-        "submit": "Gửi xác nhận"
-    },
-    "gift": {
-        "title": "Hộp mừng cưới",
-        "desc": "Sự hiện diện của bạn là món quà lớn nhất đối với chúng tôi. Tuy nhiên, nếu bạn muốn mừng cưới, chúng tôi xin trân trọng đón nhận.",
-        "groom": "Chú rể",
-        "bride": "Cô dâu",
-        "copy": "Sao chép số"
-    },
-    "guestbook": {
-        "title": "Sổ lưu bút",
-        "subtitle": "Những lời chúc ấm áp từ bạn bè và gia đình."
-    },
-    "footer": {
-        "copyright": "© 2024 Jane & John's Wedding. With love.",
-        "links": {
-            "instagram": "Instagram",
-            "registry": "Quà cưới",
-            "contact": "Liên hệ"
-        }
+    "bride": {
+      "name": "Jane Smith",
+      "role": "Cô dâu",
+      "bio": "\"Một nghệ sĩ với niềm đam mê sưu tầm những ký ức đẹp đẽ nhỏ bé.\""
     }
+  },
+  "family": {
+    "subtitle": "Với sự chúc phúc của cha mẹ",
+    "title": "Gia đình yêu thương",
+    "groomFamily": "Nhà Trai",
+    "brideFamily": "Nhà Gái",
+    "sonOf": "Trưởng nam của",
+    "daughterOf": "Trưởng nữ của",
+    "parents": {
+      "groomDad": "Ông Robert Doe",
+      "groomMom": "Bà Mary Doe",
+      "brideDad": "Ông James Smith",
+      "brideMom": "Bà Linda Smith"
+    }
+  },
+  "story": {
+    "subtitle": "Câu chuyện tình yêu",
+    "title": "Hành trình bắt đầu",
+    "met": {
+      "date": "Tháng 6, 2018",
+      "title": "Lần đầu gặp gỡ",
+      "desc": "Chúng tôi gặp nhau tại một quán cà phê ở trung tâm thành phố. Bắt đầu bằng việc ngồi chung bàn và kết thúc bằng một cuộc trò chuyện kéo dài hàng giờ."
+    },
+    "firstDate": {
+      "date": "Tháng 8, 2018",
+      "title": "Buổi hẹn đầu tiên",
+      "desc": "Đi dạo bên bến tàu sau bữa tối. Lúc đó chúng tôi đã biết đây là một điều gì đó thật đặc biệt."
+    },
+    "proposal": {
+      "date": "Tháng 12, 2023",
+      "title": "Lời cầu hôn",
+      "desc": "Dưới ánh đèn mùa đông, John đã quỳ xuống. Đó là lời \"Đồng ý\" dễ dàng nhất mà Jane từng nói."
+    }
+  },
+  "details": {
+    "subtitle": "Thời gian & Địa điểm",
+    "title": "Chi tiết đám cưới",
+    "desc": "Chúng tôi rất mong được chung vui cùng bạn. Dưới đây là mọi thứ bạn cần biết về ngày trọng đại này.",
+    "time": {
+      "date": "Thứ Năm, 24 Tháng 10, 2024",
+      "time": "Lễ cưới bắt đầu lúc 4:00 PM"
+    },
+    "location": {
+      "name": "Nhà nguyện St. Mary",
+      "address": "123 Wedding Lane, San Francisco, CA 94110",
+      "getDirections": "Chỉ đường"
+    },
+    "reception": {
+      "name": "Tiệc chiêu đãi",
+      "time": "Sảnh lớn, 6:00 PM"
+    },
+    "venueLocation": "Địa điểm tổ chức"
+  },
+  "gallery": {
+    "title": "Khoảnh khắc đáng nhớ",
+    "subtitle": "Một cái nhìn thoáng qua về cuộc sống của chúng tôi."
+  },
+  "rsvp": {
+    "title": "RSVP",
+    "subtitle": "Vui lòng phản hồi trước ngày {date}",
+    "firstName": {
+      "label": "Tên",
+      "placeholder": "Nhập tên của bạn"
+    },
+    "lastName": {
+      "label": "Họ",
+      "placeholder": "Nhập họ của bạn"
+    },
+    "email": {
+      "label": "Địa chỉ Email",
+      "placeholder": "ten@example.com"
+    },
+    "attendance": {
+      "label": "Bạn sẽ tham dự chứ?",
+      "accept": "Sẽ tham dự",
+      "decline": "Rất tiếc không thể tham dự"
+    },
+    "guests": "Số lượng khách",
+    "message": {
+      "label": "Lời nhắn (Tùy chọn)",
+      "placeholder": "Viết lời nhắn gửi đến cặp đôi..."
+    },
+    "submit": "Gửi xác nhận"
+  },
+  "gift": {
+    "title": "Hộp mừng cưới",
+    "desc": "Sự hiện diện của bạn là món quà lớn nhất đối với chúng tôi. Tuy nhiên, nếu bạn muốn mừng cưới, chúng tôi xin trân trọng đón nhận.",
+    "groom": "Chú rể",
+    "bride": "Cô dâu",
+    "copy": "Sao chép số"
+  },
+  "guestbook": {
+    "title": "Sổ lưu bút",
+    "subtitle": "Những lời chúc ấm áp từ bạn bè và gia đình.",
+    "wishes": {
+      "wish1": {
+        "text": "\"Chúc hai bạn trọn đời yêu thương và hạnh phúc. Tôi rất vinh dự được là một phần trong ngày đặc biệt của hai bạn!\"",
+        "initials": "EM",
+        "name": "Hồng Ngọc",
+        "rel": "Bạn của Cô dâu"
+      },
+      "wish2": {
+        "text": "\"Chúc mừng cặp đôi đẹp nhất! Mong rằng hành trình của hai bạn sẽ tràn ngập niềm vui.\"",
+        "initials": "DJ",
+        "name": "Trung Nguyễn",
+        "rel": "Anh họ"
+      },
+      "wish3": {
+        "text": "\"Rất háo hức được chung vui cùng hai bạn! Hai bạn thật sự dành cho nhau.\"",
+        "initials": "SK",
+        "name": "Thu Thùy",
+        "rel": "Đồng nghiệp"
+      }
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Jane & John's Wedding. With love.",
+    "links": {
+      "instagram": "Instagram",
+      "registry": "Quà cưới",
+      "contact": "Liên hệ"
+    }
+  }
 }

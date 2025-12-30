@@ -1,9 +1,13 @@
 import type { ReactNode } from 'react';
 
-export default function StandaloneLayout({ children }: { children: ReactNode }) {
-    return (
-        <main className="min-h-screen bg-background text-foreground">
-            {children}
-        </main>
-    );
+export default function StandaloneLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return (
+    <main className="bg-background text-foreground min-h-screen">
+      {children}
+    </main>
+  );
 }

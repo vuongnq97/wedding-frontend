@@ -1,36 +1,166 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wedding Invitation Web Platform
 
-## Getting Started
+Design a modern wedding invitation web platform.
 
-First, run the development server:
+## Global Style
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Vibe**: Romantic, elegant, minimal
+- **Colors**: Soft pastel colors (beige, blush pink, ivory, light gray)
+- **Layout**: Clean layout, lots of white space
+- **Typography**: Serif font for titles, sans-serif for body
+- **Responsive design**: Desktop, Tablet, Mobile
+- **Interactions**: Smooth scrolling and gentle animations
+- **Imagery**: Emotional, wedding-focused imagery
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Target Users
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Young couples creating wedding invitations
+- Wedding guests viewing invitations on any device
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features & Sections
 
-## Learn More
+### Wedding Invitation Landing Page
 
-To learn more about Next.js, take a look at the following resources:
+**Sections:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Hero section**:
+  - Large romantic wedding image
+  - Couple names overlay
+  - Headline: "Create Your Wedding Invitation"
+  - Primary CTA button: "Create Invitation"
+  - Responsive layout: image scales, text adjusts on desktop, tablet, mobile
+- **Template showcase**:
+  - Grid of invitation templates
+  - Each card shows thumbnail and template name
+  - Hover preview effect
+  - Grid adapts to screen size
+- **How it works**:
+  - Step 1: Choose template
+  - Step 2: Fill wedding details
+  - Step 3: Share invitation
+  - Display: Horizontal on desktop, vertical on mobile
+- **Call to action**:
+  - Button: "Start Now"
+  - Centered and accessible on all devices
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Style**:
 
-## Deploy on Vercel
+- Elegant typography
+- Soft gradients
+- Fully responsive layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Full-page Wedding Invitation Preview
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Content**:
+
+- Full scrollable invitation preview
+- Realistic wedding content placeholders
+- Sticky bottom action bar with buttons: "Use This Template", "Back to Gallery"
+
+**Style**:
+
+- No distractions
+- Full-width content
+- Mobile-first scrolling experience
+
+### Login and Register Pages
+
+**UI**:
+
+- Simple form with email and password
+- Optional couple illustration
+- Soft romantic background
+- Buttons: Login, Register
+- Responsive: form centered
+
+**Style**:
+
+- Minimal, elegant
+- Wedding-themed colors
+
+### Wedding Invitation Dashboard
+
+**Components**:
+
+- **Invitation card**: template thumbnail, couple names, public invitation link
+- **Stats**: total views, RSVP responses
+- **Actions**: edit invitation, share invitation, view statistics
+- Responsive: cards adjust width, stacked on mobile/tablet
+
+**Style**:
+
+- Card-based layout
+- Clean admin feel with wedding theme
+
+### Wedding Invitation Editor Page
+
+**Layout**:
+
+- Split-screen: Left = Form input, Right = Live preview
+- Responsive: side-by-side on desktop, stacked vertically on tablet/mobile
+
+**Form Fields**:
+
+- Bride name, Groom name
+- Wedding date, Wedding time
+- Location name, Google map link
+- Love story (textarea)
+- Image gallery upload (drag & drop)
+
+**Preview**:
+
+- Updates in real time
+- Scrollable invitation preview
+
+**Style**:
+
+- Professional editor feel
+- Simple and intuitive
+
+### Public Wedding Invitation Webpage
+
+**Sections**:
+
+- **Hero**: couple names, wedding date, elegant typography
+- **Countdown timer**: days until wedding
+- **Event details**: time, location, address
+- **Map section**: embedded map preview
+- **Photo gallery**: grid or carousel
+- **Love story**: elegant text layout
+- **RSVP section**: form (Name, Attend, Message)
+- **Guest messages**: list or card-style
+
+**Responsive**:
+
+- Desktop: multi-column sections
+- Tablet: simplified layout
+- Mobile: single column, large readable text, sticky RSVP button
+
+**Style**:
+
+- Romantic, emotional
+- Smooth scrolling
+
+### Sharing Page, RSVP Form, and Statistics
+
+**Sharing Page Components**:
+
+- Public invitation URL
+- QR code display
+- Button: Copy link
+- Social share buttons (Facebook, Zalo)
+
+**RSVP Confirmation Form**:
+
+- Guest name
+- Attendance option (Yes / No)
+- Message to couple
+
+**Statistics Page**:
+
+- Metrics: total views, RSVP attending/not attending
+- Charts: pie or bar chart
+
+**Style**:
+
+- Clean, friendly, easy to read on all platforms

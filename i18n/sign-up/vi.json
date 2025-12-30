@@ -1,22 +1,22 @@
 {
-    "title": "Forever & Always",
-    "header": {
-        "already_member": "Đã là thành viên?",
-        "sign_in": "Đăng nhập"
-    },
-    "form_title": "Bắt đầu hành trình mãi mãi",
-    "form_subtitle": "Tham gia cùng hàng ngàn cặp đôi để đơn giản hóa ngày trọng đại.",
-    "google": "Google",
-    "apple": "Apple",
-    "or_register": "Hoặc đăng ký bằng email",
-    "email_label": "Địa chỉ Email",
-    "email_placeholder": "name@example.com",
-    "password_label": "Mật khẩu",
-    "password_placeholder": "Tạo mật khẩu",
-    "password_hint": "Phải có ít nhất 8 ký tự.",
-    "submit": "Tạo tài khoản",
-    "illustration": {
-        "title": "Lên kế hoạch cho ngày hoàn hảo",
-        "subtitle": "Mọi thứ bạn cần để quản lý thiệp mời, RSVP và chi tiết khách mời tại một nơi."
-    }
+  "title": "Forever & Always",
+  "header": {
+    "already_member": "Đã là thành viên?",
+    "sign_in": "Đăng nhập"
+  },
+  "form_title": "Bắt đầu hành trình mãi mãi",
+  "form_subtitle": "Tham gia cùng hàng ngàn cặp đôi để đơn giản hóa ngày trọng đại.",
+  "google": "Google",
+  "apple": "Apple",
+  "or_register": "Hoặc đăng ký bằng email",
+  "email_label": "Địa chỉ Email",
+  "email_placeholder": "name@example.com",
+  "password_label": "Mật khẩu",
+  "password_placeholder": "Tạo mật khẩu",
+  "password_hint": "Phải có ít nhất 8 ký tự.",
+  "submit": "Tạo tài khoản",
+  "illustration": {
+    "title": "Lên kế hoạch cho ngày hoàn hảo",
+    "subtitle": "Mọi thứ bạn cần để quản lý thiệp mời, RSVP và chi tiết khách mời tại một nơi."
+  }
 }
