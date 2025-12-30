@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, LayoutDashboard, Users } from 'lucide-react';
+import { LayoutDashboard, Users } from 'lucide-react';
 import { BaseButton } from '@/components/ui/base-button';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';

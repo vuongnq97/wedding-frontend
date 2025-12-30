@@ -12,7 +12,7 @@ export const useDashboard = () => {
 
   useEffect(() => {
     fetchData(locale);
-  }, [locale]);
+  }, [locale, fetchData]);
 
   const stats: DashboardStat[] = useMemo(() => {
     const approvedWishes = wishes.filter(

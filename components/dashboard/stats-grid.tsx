@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { Eye, CheckCircle2, XCircle, Calendar, Users } from 'lucide-react';
+import { Eye, CheckCircle2, XCircle, Users, LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { DashboardStat } from '@/types/dashboard';
 
-const ICON_MAP: Record<string, any> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   visibility: Eye,
   check_circle: CheckCircle2,
   cancel: XCircle,

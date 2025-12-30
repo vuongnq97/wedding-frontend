@@ -2,7 +2,7 @@
 
 import { WeddingData } from '@/types/invitation';
 import { BaseButton } from '@/components/ui/base-button';
-import { Music, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import { Pause, Play } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 interface MusicPlayerProps {
@@ -12,7 +12,6 @@ interface MusicPlayerProps {
 export const MusicPlayer = ({ data }: MusicPlayerProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
   const { music } = data;
@@ -60,13 +59,6 @@ export const MusicPlayer = ({ data }: MusicPlayerProps) => {
         audioRef.current.play();
       }
       setIsPlaying(!isPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
     }
   };
 

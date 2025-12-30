@@ -20,17 +20,20 @@ export function useTemplates(): UseTemplatesResult {
   const [searchQuery, setSearchQuery] = useState('');
   const locale = useLocale();
 
-  const defaultTemplates = [
-    {
-      id: '1',
-      title: 'Modern Elegance',
-      category: 'modern',
-      imageUrl: `/images/templates/template-1-${locale === 'vi' ? 'vi' : 'en'}.png`,
-      isNew: true,
-      mainColor: 'white',
-    },
-    ...TEMPLATES,
-  ];
+  const defaultTemplates = useMemo(
+    () => [
+      {
+        id: '1',
+        title: 'Modern Elegance',
+        category: 'modern',
+        imageUrl: `/images/templates/template-1-${locale === 'vi' ? 'vi' : 'en'}.png`,
+        isNew: true,
+        mainColor: 'white',
+      },
+      ...TEMPLATES,
+    ],
+    [locale]
+  );
 
   const templates = useMemo(() => {
     let filtered = defaultTemplates;

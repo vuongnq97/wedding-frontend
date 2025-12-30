@@ -13,7 +13,6 @@ import {
   ThankYouSection,
   GuestbookSection,
   AdsSection,
-  MusicSection,
   CreateInvitationHeader,
 } from '@/components/create-invitation';
 import { useInvitation } from '@/hooks/use-invitation';

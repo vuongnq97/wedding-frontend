@@ -39,7 +39,7 @@ export const getVietQrUrl = (
   if (!bank) return null;
 
   // Use compact 2 template
-  let url = `https://img.vietqr.io/image/${bank.code}-${accountNumber}-compact2.jpg`;
+  const url = `https://img.vietqr.io/image/${bank.code}-${accountNumber}-compact2.jpg`;
 
   // Add params
   const params = new URLSearchParams();

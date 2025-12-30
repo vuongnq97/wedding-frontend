@@ -13,7 +13,6 @@ import {
   GiftSection,
   GuestbookSection,
   Footer,
-  MusicPlayer,
 } from '@/components/invitation';
 import { useInvitation } from '@/hooks/use-invitation';
 import {

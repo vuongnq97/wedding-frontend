@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Heart, Moon, Sun, X } from 'lucide-react';
@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils';
 import { useLayoutStore } from '@/stores/layout-store';
 import { Link } from '@/i18n/routing';
 import { BaseButton } from '@/components/ui/base-button';
-import { useLogin } from '@/hooks/use-login';
 import { useAuthStore } from '@/stores/auth-store';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { ROUTES } from '@/constants/routes';

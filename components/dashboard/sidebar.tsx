@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 import { LayoutDashboard, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Avatar } from '@/components/ui/avatar';
 import { Link, usePathname } from '@/i18n/routing';
 import { ROUTES } from '@/constants/routes';
 

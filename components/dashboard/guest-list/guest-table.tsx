@@ -3,20 +3,15 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import {
-  Edit,
-  Trash2,
-  Send,
   CheckCircle2,
   XCircle,
   Clock,
   User,
   Users as UsersIcon,
-  MoreHorizontal,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { RsvpData, AttendingStatus } from '@/types/rsvp';
 import { Avatar } from '@/components/ui/avatar';
-import { BaseButton } from '@/components/ui/base-button';
 
 interface GuestTableProps {
   guests: RsvpData[];

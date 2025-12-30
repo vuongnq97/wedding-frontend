@@ -1,4 +1,3 @@
-import { BaseButton } from '@/components/ui/base-button';
 import { ButtonCopy } from '@/components/ui/button-copy';
 import { getVietQrUrl } from '@/utils/vietqr';
 import Image from 'next/image';

@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { UserPlus, Download } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { BaseButton } from '@/components/ui/base-button';
-import { GuestStats } from '@/components/dashboard/guest-list/guest-stats';
 import { GuestFilters } from '@/components/dashboard/guest-list/guest-filters';
 import { GuestTable } from '@/components/dashboard/guest-list/guest-table';
 import { useDashboard } from '@/hooks/use-dashboard';

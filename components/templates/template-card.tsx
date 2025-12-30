@@ -19,7 +19,7 @@ interface TemplateCardProps {
 
 export function TemplateCard({
   id,
-  title,
+  title: _title,
   category,
   imageUrl,
   isNew,
