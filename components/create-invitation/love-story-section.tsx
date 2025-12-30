@@ -4,7 +4,7 @@ import React from 'react';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import { BaseButton } from '@/components/ui/base-button';
 import { BaseInput } from '@/components/ui/base-input';
-import { History, Plus, Trash2, Camera } from 'lucide-react';
+import { Plus, Trash2, Camera, History, Calendar } from 'lucide-react';
 import { WeddingData, Milestone } from '@/types/invitation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -59,7 +59,6 @@ function MilestoneItem({
 
   return (
     <div className="relative">
-      {/* Timeline Dot */}
       <div className="bg-surface border-primary/20 absolute top-6 -left-[35px] flex size-7 items-center justify-center rounded-full border-4">
         <div className="size-2.5 rounded-full bg-pink-500"></div>
       </div>
@@ -74,11 +73,10 @@ function MilestoneItem({
           <Trash2 className="text-muted-foreground hover:text-destructive h-4 w-4" />
         </BaseButton>
 
-        {/* Photo Upload */}
         <div className="shrink-0">
           <div
             onClick={handleUploadClick}
-            className="bg-surface border-border text-muted-foreground relative flex size-32 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed transition-colors hover:border-pink-500 hover:text-pink-500"
+            className="bg-surface border-border text-muted-foreground relative flex size-16 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed transition-colors hover:border-pink-500 hover:text-pink-500 md:size-32"
           >
             <input
               type="file"
@@ -103,7 +101,6 @@ function MilestoneItem({
           </div>
         </div>
 
-        {/* Form Fields */}
         <div className="flex-1 space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <BaseInput
@@ -112,6 +109,7 @@ function MilestoneItem({
               className="bg-surface focus:border-primary focus:bg-background border-transparent px-3 py-2.5 focus:ring-0"
               value={milestone.date}
               onChange={(e) => updateMilestone(index, 'date', e.target.value)}
+              rightIcon={<Calendar className="h-4 w-4" />}
             />
             <BaseInput
               label={t('milestoneTitle')}

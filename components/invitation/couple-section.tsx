@@ -12,7 +12,7 @@ export function CoupleSection({ data }: CoupleSectionProps) {
   const t = useTranslations('invitation.couple');
 
   return (
-    <section className="bg-background py-16 md:py-24" id="couple">
+    <section className="bg-background py-10 md:py-24" id="couple">
       <div className="layout-container mx-auto max-w-[960px] px-4 sm:px-10">
         <div className="mb-16 text-center">
           <p className="text-primary mb-2 text-xs font-bold tracking-widest uppercase">
@@ -23,9 +23,7 @@ export function CoupleSection({ data }: CoupleSectionProps) {
           </h2>
         </div>
 
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          {/* Groom */}
-          {/* Groom */}
+        <div className="grid grid-cols-2 items-center gap-4 md:gap-12">
           <CoupleProfileCard
             photoUrl={data.groom.photoUrl}
             fullName={data.groom.fullName}
@@ -35,7 +33,6 @@ export function CoupleSection({ data }: CoupleSectionProps) {
             fallbackName={t('groom.name')}
           />
 
-          {/* Bride */}
           <CoupleProfileCard
             photoUrl={data.bride.photoUrl}
             fullName={data.bride.fullName}

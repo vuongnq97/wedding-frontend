@@ -29,7 +29,6 @@ export function HeroSection({ data }: HeroSectionProps) {
 
   return (
     <header className="relative mt-[60px] flex h-screen min-h-[700px] w-full items-center justify-center overflow-hidden">
-      {/* Background with Parallax effect */}
       <div className="absolute inset-0 z-0">
         {data.heroBannerUrl ? (
           <Image
@@ -68,7 +67,7 @@ export function HeroSection({ data }: HeroSectionProps) {
 
         <BaseButton
           asChild
-          className="bg-primary hover:bg-primary/90 shadow-primary/30 mt-8 h-auto transform gap-2 rounded-xl px-8 py-6 shadow-xl hover:-translate-y-1"
+          className="bg-primary hover:bg-primary/90 shadow-primary/30 mt-8 h-auto transform gap-2 rounded-xl px-6 py-4 shadow-xl hover:-translate-y-1 md:px-8 md:py-6"
         >
           <Link href="#rsvp">
             <span className="text-base font-bold">{t('cta')}</span>

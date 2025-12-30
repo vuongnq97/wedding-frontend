@@ -96,3 +96,27 @@
 .group:hover .pause-on-hover {
   animation-play-state: paused;
 }
+
+/* Date/Time Input Utilities */
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type='date'],
+input[type='time'] {
+  position: relative;
+}
+
+/* Fix for Firefox */
+input[type='date'] {
+  -moz-appearance: textfield;
+}

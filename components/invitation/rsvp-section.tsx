@@ -37,7 +37,7 @@ export function RsvpSection({ data }: RsvpSectionProps) {
 
   if (isSuccess) {
     return (
-      <section className="bg-background py-16 md:py-24" id="rsvp">
+      <section className="bg-background py-10 md:py-24" id="rsvp">
         <div className="layout-container flex justify-center">
           <div className="bg-surface border-border mx-4 w-full max-w-2xl rounded-2xl border p-8 text-center shadow-xl md:p-12">
             <div className="mb-6 flex justify-center">
@@ -69,7 +69,7 @@ export function RsvpSection({ data }: RsvpSectionProps) {
   }
 
   return (
-    <section className="bg-background py-16 md:py-24" id="rsvp">
+    <section className="bg-background py-10 md:py-24" id="rsvp">
       <div className="layout-container flex justify-center">
         <div className="bg-surface border-border mx-4 w-full max-w-2xl rounded-2xl border p-8 shadow-xl md:p-12">
           <div className="mb-10 text-center">
@@ -88,7 +88,6 @@ export function RsvpSection({ data }: RsvpSectionProps) {
               )}
               className="space-y-6"
             >
-              {/* Name */}
               <FormField
                 control={form.control}
                 name="fullName"
@@ -105,8 +104,6 @@ export function RsvpSection({ data }: RsvpSectionProps) {
                   </FormItem>
                 )}
               />
-
-              {/* Attendance */}
               <FormField
                 control={form.control}
                 name="attending"
@@ -117,7 +114,7 @@ export function RsvpSection({ data }: RsvpSectionProps) {
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex gap-4"
+                        className="gap-4 md:flex"
                       >
                         <FormItem className="flex-1">
                           <FormControl>
@@ -146,7 +143,6 @@ export function RsvpSection({ data }: RsvpSectionProps) {
                 )}
               />
 
-              {/* Guests */}
               <FormField
                 control={form.control}
                 name="guests"

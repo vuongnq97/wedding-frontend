@@ -65,7 +65,7 @@ function PersonInput({
       <div className="flex gap-4">
         <div
           onClick={handleUploadClick}
-          className="bg-muted border-border hover:border-primary hover:text-primary group relative flex size-24 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 border-dashed transition-colors"
+          className="bg-muted border-border hover:border-primary hover:text-primary group relative flex size-16 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 border-dashed transition-colors md:size-24"
         >
           <input
             type="file"

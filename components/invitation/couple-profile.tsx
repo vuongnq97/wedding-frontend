@@ -18,8 +18,8 @@ export function CoupleProfileCard({
   fallbackName,
 }: CoupleProfileCardProps) {
   return (
-    <div className="group flex flex-col items-center text-center">
-      <div className="border-background ring-border relative mb-6 h-64 w-64 overflow-hidden rounded-full border-[6px] shadow-xl ring-1">
+    <div className="group flex h-full flex-col items-center text-center">
+      <div className="border-background ring-border relative mb-6 size-20 overflow-hidden rounded-full border-[6px] shadow-xl ring-1 md:size-64">
         <div className="relative h-full w-full transition-transform duration-700 group-hover:scale-110">
           {photoUrl ? (
             <Image
@@ -35,16 +35,16 @@ export function CoupleProfileCard({
           )}
         </div>
       </div>
-      <h3 className="text-foreground mb-1 text-2xl font-bold">
+      <h3 className="text-foreground mb-1 text-xl font-bold md:text-2xl">
         {fullName || fallbackName}
       </h3>
-      <p className="text-muted-foreground text-sm text-[10px] font-semibold tracking-widest uppercase">
+      <p className="text-muted-foreground text-xs font-semibold tracking-widest uppercase md:text-sm">
         {birthOrder}
       </p>
-      <p className="text-primary text-xs font-medium tracking-wide uppercase">
+      <p className="text-primary text-xs font-medium tracking-wide uppercase md:text-sm">
         {role}
       </p>
-      <p className="text-muted-foreground mt-4 max-w-xs text-sm leading-relaxed italic">
+      <p className="text-muted-foreground mt-4 max-w-xs text-xs leading-relaxed italic md:text-sm">
         {bio}
       </p>
     </div>

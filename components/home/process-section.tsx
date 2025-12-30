@@ -9,7 +9,7 @@ export function ProcessSection() {
     { icon: Send, key: 'share' },
   ];
   return (
-    <section className="bg-surface relative w-full overflow-hidden py-20 md:py-32">
+    <section className="bg-surface relative w-full overflow-hidden py-10 md:py-24">
       <div className="bg-primary-soft pointer-events-none absolute top-0 left-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-3xl" />
       <div className="bg-muted pointer-events-none absolute right-0 bottom-0 h-96 w-96 translate-x-1/3 translate-y-1/3 rounded-full opacity-50 blur-3xl" />
       <div className="relative z-10 mx-auto max-w-[1200px] px-4 md:px-10">
@@ -25,20 +25,20 @@ export function ProcessSection() {
               {t('description')}
             </p>
           </div>
-          <div className="relative grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
+          <div className="relative grid grid-cols-3 gap-2 lg:gap-12">
             <div className="via-primary/20 absolute top-12 right-[16%] left-[16%] hidden h-[2px] bg-gradient-to-r from-transparent to-transparent md:block" />
             {steps.map((s) => (
               <div
                 key={s.key}
                 className="relative flex flex-col items-center text-center"
               >
-                <div className="bg-background-light border-primary/20 text-primary z-10 mb-6 flex h-24 w-24 items-center justify-center rounded-full border shadow-sm">
-                  <s.icon className="h-10 w-10" />
+                <div className="bg-background-light border-primary/20 text-primary z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-full border shadow-sm md:h-24 md:w-24">
+                  <s.icon className="h-5 w-5 md:h-10 md:w-10" />
                 </div>
-                <h3 className="text-text-main mb-3 font-serif text-2xl font-bold">
+                <h3 className="text-text-main mb-3 font-serif text-lg font-bold md:text-2xl">
                   {t(`steps.${s.key}.title`)}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground text-base leading-relaxed md:text-lg">
                   {t(`steps.${s.key}.desc`)}
                 </p>
               </div>

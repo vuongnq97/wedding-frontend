@@ -23,11 +23,9 @@ export function FamilySection({ data }: FamilySectionProps) {
         </h2>
         <p className="text-muted-foreground mb-12 text-sm">{t('subtitle')}</p>
 
-        <div className="relative grid items-start gap-8 md:grid-cols-2 md:gap-16">
+        <div className="relative grid grid-cols-2 items-start gap-4 gap-8 md:gap-16">
           <div className="via-border absolute top-4 bottom-4 left-1/2 hidden w-[1px] -translate-x-1/2 bg-gradient-to-b from-transparent to-transparent md:block"></div>
 
-          {/* Groom's Family */}
-          {/* Groom's Family */}
           <FamilyGroupCard
             title={t('groomFamily')}
             subLabel={t('sonOf')}
@@ -35,7 +33,6 @@ export function FamilySection({ data }: FamilySectionProps) {
             motherName={data.groom.motherName || t('parents.groomMom')}
           />
 
-          {/* Bride's Family */}
           <FamilyGroupCard
             title={t('brideFamily')}
             subLabel={t('daughterOf')}

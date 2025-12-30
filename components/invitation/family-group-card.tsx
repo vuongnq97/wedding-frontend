@@ -12,7 +12,7 @@ export function FamilyGroupCard({
   motherName,
 }: FamilyGroupProps) {
   return (
-    <div className="hover:bg-muted flex flex-col gap-4 rounded-2xl p-6 transition-colors duration-300">
+    <div className="hover:bg-muted flex flex-col gap-4 rounded-2xl transition-colors duration-300 md:p-6">
       <h3 className="text-foreground font-display text-primary text-xl text-xs font-bold tracking-widest uppercase">
         {title}
       </h3>
@@ -23,11 +23,11 @@ export function FamilyGroupCard({
           </p>
         )}
         <div className="font-display">
-          <p className="text-foreground text-2xl font-light md:text-3xl">
+          <p className="text-foreground text-lg font-light md:text-2xl md:text-3xl">
             {fatherName}
           </p>
           <p className="text-primary/70 py-1 text-lg">&</p>
-          <p className="text-foreground text-2xl font-light md:text-3xl">
+          <p className="text-foreground text-lg font-light md:text-2xl md:text-3xl">
             {motherName}
           </p>
         </div>

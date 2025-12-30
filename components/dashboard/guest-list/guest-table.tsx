@@ -74,7 +74,6 @@ export function GuestTable({ guests }: GuestTableProps) {
           <tbody className="divide-border/40 divide-y">
             {guests.map((guest) => {
               const StatusIcon = getStatusIcon(guest.attending);
-              // Mapping status to translation key: YES -> statusAttending, NO -> statusDeclined, PENDING -> statusPending
               const statusKey =
                 guest.attending === AttendingStatus.YES
                   ? 'statusAttending'
@@ -94,7 +93,7 @@ export function GuestTable({ guests }: GuestTableProps) {
                       <Avatar
                         fallback={guest.fullName.charAt(0)}
                         className={cn(
-                          'h-10 w-10',
+                          'size-5 md:size-10',
                           guest.attending === AttendingStatus.NO &&
                             'opacity-70 grayscale'
                         )}
@@ -109,14 +108,10 @@ export function GuestTable({ guests }: GuestTableProps) {
                         >
                           {guest.fullName}
                         </p>
-                        <p className="text-muted-foreground truncate text-xs">
-                          {guest.fullName.toLowerCase().replace(' ', '.') +
-                            '@example.com'}
-                        </p>
                       </div>
                     </div>
                   </td>
-                  <td className="p-4">
+                  <td className="md:p-4">
                     <span
                       className={cn(
                         'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold',

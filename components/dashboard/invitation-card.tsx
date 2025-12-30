@@ -58,15 +58,18 @@ export function InvitationCard() {
           </div>
         </div>
 
-        <div className="flex gap-3 pt-2">
+        <div className="flex flex-col gap-2 pt-2 md:flex-row md:gap-3">
           <Link href={ROUTES.INVITATION}>
-            <BaseButton className="flex-1 gap-2">
+            <BaseButton className="w-full flex-1 gap-2 md:w-auto">
               <ExternalLink className="h-4 w-4" />
               {t('preview')}
             </BaseButton>
           </Link>
           <Link href={ROUTES.INVITATION}>
-            <BaseButton variant="outline" className="flex-1 gap-2">
+            <BaseButton
+              variant="outline"
+              className="w-full flex-1 gap-2 md:w-auto"
+            >
               <Edit className="h-4 w-4" />
               {t('editDetails')}
             </BaseButton>

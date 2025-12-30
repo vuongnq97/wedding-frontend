@@ -5,7 +5,7 @@ import { BenefitItem } from './benefit-item';
 export function BenefitsSection() {
   const t = useTranslations('home.benefits');
   return (
-    <section className="bg-background-beige w-full py-20 md:py-28">
+    <section className="bg-background-beige w-full py-10 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 md:px-10">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div>

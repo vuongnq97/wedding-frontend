@@ -18,12 +18,10 @@ export function CountdownSection({ data }: CountdownSectionProps) {
   ]);
 
   useEffect(() => {
-    console.log(data.ceremony.date, data.ceremony.time);
     const targetDate = data.ceremony.date
       ? new Date(data.ceremony.date + ' ' + (data.ceremony.time || '00:00'))
       : new Date();
 
-    console.log(targetDate);
     const interval = setInterval(() => {
       const now = new Date();
       const difference = targetDate.getTime() - now.getTime();
@@ -54,7 +52,7 @@ export function CountdownSection({ data }: CountdownSectionProps) {
   }, [data.ceremony.date, data.ceremony.time, t]);
 
   return (
-    <section className="bg-background relative py-16 md:py-24">
+    <section className="bg-background relative py-10 md:py-24">
       <div className="layout-container mx-auto max-w-[960px] px-4 sm:px-10">
         <div className="mb-12 text-center">
           <p className="text-primary mb-2 text-xs font-bold tracking-widest uppercase">
@@ -65,11 +63,11 @@ export function CountdownSection({ data }: CountdownSectionProps) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 justify-center gap-4 md:grid-cols-4 md:gap-8">
+        <div className="grid grid-cols-4 justify-center gap-2 md:gap-8">
           {counts.map((item, index) => (
             <div key={index} className="group flex flex-col items-center gap-2">
-              <div className="border-primary/20 bg-surface group-hover:border-primary group-hover:shadow-primary/20 flex h-24 w-24 items-center justify-center rounded-full border-2 shadow-sm transition-all duration-300 md:h-32 md:w-32">
-                <span className="text-primary text-3xl font-bold md:text-4xl">
+              <div className="border-primary/20 bg-surface group-hover:border-primary group-hover:shadow-primary/20 flex size-10 items-center justify-center rounded-full border-2 shadow-sm transition-all duration-300 md:h-32 md:w-32">
+                <span className="text-primary text-xl font-bold md:text-4xl">
                   {item.value}
                 </span>
               </div>

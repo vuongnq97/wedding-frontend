@@ -59,7 +59,7 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
           {wishes.map((wish, index) => (
             <SwiperSlide key={index} className="h-auto">
               <div className="bg-surface border-border relative h-full rounded-xl border p-6 shadow-sm">
-                <Quote className="text-primary/20 absolute top-6 right-6 h-8 w-8 fill-current" />
+                <Quote className="text-primary/20 absolute top-6 right-6 size-4 fill-current md:size-8" />
                 <p className="text-foreground mb-6 leading-relaxed italic">
                   {wish.message}
                 </p>

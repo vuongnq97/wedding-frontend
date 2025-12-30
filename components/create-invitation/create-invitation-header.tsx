@@ -20,7 +20,7 @@ export function CreateInvitationHeader({
   isSaving,
   isValid,
 }: CreateInvitationHeaderProps) {
-  const t = useTranslations('create-invitation.actions');
+  const t = useTranslations('create-invitation');
 
   return (
     <header className="bg-background border-border fixed top-0 right-0 left-0 z-50 flex h-[60px] items-center justify-between border-b px-4 md:px-8">
@@ -28,8 +28,8 @@ export function CreateInvitationHeader({
         <div className="bg-muted flex size-8 items-center justify-center rounded-full">
           <Heart className="text-primary fill-primary h-5 w-5" />
         </div>
-        <span className="text-foreground hover:text-primary font-serif text-xl font-bold tracking-tight md:text-2xl">
-          WeddingInvites
+        <span className="text-foreground hover:text-primary hidden font-serif text-xl font-bold tracking-tight md:block md:text-2xl">
+          {t('brand')}
         </span>
       </Link>
 
@@ -40,7 +40,7 @@ export function CreateInvitationHeader({
           variant="outline"
           size="sm"
         >
-          {isSaving ? t('saving') : t('save')}
+          {isSaving ? t('actions.saving') : t('actions.save')}
         </BaseButton>
         <BaseButton
           onClick={onPublish}
@@ -48,7 +48,7 @@ export function CreateInvitationHeader({
           variant="default"
           size="sm"
         >
-          {t('publish')}
+          {t('actions.publish')}
         </BaseButton>
       </div>
     </header>

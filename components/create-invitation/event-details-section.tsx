@@ -4,7 +4,7 @@ import React from 'react';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import Toggle from '@/components/ui/toggle';
 import { BaseInput } from '@/components/ui/base-input';
-import { Calendar, PartyPopper, Lightbulb } from 'lucide-react';
+import { Calendar, PartyPopper, Lightbulb, Clock } from 'lucide-react';
 import { WeddingData } from '@/types/invitation';
 
 interface EventDetailsSectionProps {
@@ -44,6 +44,7 @@ export function EventDetailsSection({
             type="date"
             value={data.ceremony.date}
             onChange={(e) => updateField(['ceremony', 'date'], e.target.value)}
+            rightIcon={<Calendar className="h-4 w-4" />}
           />
           <BaseInput
             containerClassName="w-full md:w-1/2"
@@ -52,6 +53,7 @@ export function EventDetailsSection({
             type="time"
             value={data.ceremony.time}
             onChange={(e) => updateField(['ceremony', 'time'], e.target.value)}
+            rightIcon={<Clock className="h-4 w-4" />}
           />
         </div>
         <div className="bg-primary/5 flex items-start gap-2 rounded-lg p-3">
@@ -77,6 +79,7 @@ export function EventDetailsSection({
             type="date"
             value={data.reception.date}
             onChange={(e) => updateField(['reception', 'date'], e.target.value)}
+            rightIcon={<Calendar className="h-4 w-4" />}
           />
           <BaseInput
             containerClassName="w-full md:w-1/2"
@@ -85,6 +88,7 @@ export function EventDetailsSection({
             type="time"
             value={data.reception.time}
             onChange={(e) => updateField(['reception', 'time'], e.target.value)}
+            rightIcon={<Clock className="h-4 w-4" />}
           />
         </div>
         <label className="flex w-full flex-col">

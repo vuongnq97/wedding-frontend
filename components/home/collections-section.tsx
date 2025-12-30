@@ -21,7 +21,7 @@ export function CollectionsSection() {
   ];
   console.log({ defaultTemplates });
   return (
-    <section className="bg-background w-full py-16 md:py-24">
+    <section className="bg-background w-full py-10 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 md:px-10">
         <div className="mb-16 text-center">
           <span className="text-primary mb-2 block text-xs font-bold tracking-widest uppercase">
@@ -34,7 +34,7 @@ export function CollectionsSection() {
             {t('description')}
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-10">
           {defaultTemplates.slice(0, 4).map((c) => (
             <TemplateCard
               key={c.id}

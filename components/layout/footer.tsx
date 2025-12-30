@@ -97,17 +97,6 @@ export function Footer({ className, year }: FooterProps) {
           <p className="text-muted-foreground text-center text-xs md:text-left">
             {t('copyright', { year })}
           </p>
-          <div className="text-muted-foreground flex gap-6">
-            <a className="hover:text-primary transition-colors" href="#">
-              <span className="sr-only">Facebook</span>FB
-            </a>
-            <a className="hover:text-primary transition-colors" href="#">
-              <span className="sr-only">Instagram</span>IG
-            </a>
-            <a className="hover:text-primary transition-colors" href="#">
-              <span className="sr-only">Twitter</span>TW
-            </a>
-          </div>
         </div>
       </div>
     </footer>

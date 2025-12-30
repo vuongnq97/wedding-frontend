@@ -48,7 +48,7 @@ export function Header({ data, isCreator, onPublish }: HeaderProps) {
                 onClick={() => setActiveHash('')}
               >
                 <Heart className="text-primary h-6 w-6 animate-ping fill-current" />
-                <h2 className="text-primary text-xl font-bold tracking-tight">
+                <h2 className="text-primary hidden text-xl font-bold tracking-tight md:block">
                   {data.groom.informalName && data.bride.informalName
                     ? `${data.groom.informalName} & ${data.bride.informalName}`
                     : t('logo')}

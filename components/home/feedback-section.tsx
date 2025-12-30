@@ -1,5 +1,13 @@
+'use client';
+
 import { Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/autoplay';
 
 export function FeedbackSection() {
   const t = useTranslations('home.feedback');
@@ -16,7 +24,7 @@ export function FeedbackSection() {
     },
   ];
   return (
-    <section className="bg-surface border-border w-full border-t py-16">
+    <section className="bg-surface border-border w-full border-t py-10 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 md:px-10">
         <div className="mb-12 text-center">
           <h2 className="text-text-main font-serif text-3xl font-bold tracking-tight">
@@ -24,42 +32,56 @@ export function FeedbackSection() {
           </h2>
           <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={32}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            768: {
+              slidesPerView: 2,
+            },
+          }}
+          className="pb-8"
+        >
           {items.map((item) => (
-            <div
-              key={item.key}
-              className="bg-background border-border flex flex-col gap-4 rounded-2xl border p-8"
-            >
-              <div className="flex gap-1 text-yellow-400">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-4 w-4 fill-yellow-400 stroke-yellow-400"
-                  />
-                ))}
-              </div>
-              <p className="text-muted-foreground text-lg leading-relaxed italic">
-                “{t(`items.${item.key}.quote`)}”
-              </p>
-              <div className="mt-2 flex items-center gap-4">
-                <div className="h-12 w-12 overflow-hidden rounded-full bg-gray-200">
-                  <div
-                    className="h-full w-full bg-cover bg-center"
-                    style={{ backgroundImage: `url('${item.avatar}')` }}
-                  />
+            <SwiperSlide key={item.key}>
+              <div className="bg-background border-border flex h-full flex-col gap-4 rounded-2xl border p-8">
+                <div className="flex gap-1 text-yellow-400">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-yellow-400 stroke-yellow-400"
+                    />
+                  ))}
                 </div>
-                <div>
-                  <h4 className="text-foreground font-serif font-bold">
-                    {t(`items.${item.key}.name`)}
-                  </h4>
-                  <p className="text-muted-foreground text-xs tracking-wide uppercase">
-                    {t(`items.${item.key}.date`)}
-                  </p>
+                <p className="text-muted-foreground text-lg leading-relaxed italic">
+                  “{t(`items.${item.key}.quote`)}”
+                </p>
+                <div className="mt-2 flex items-center gap-4">
+                  <div className="h-12 w-12 overflow-hidden rounded-full bg-gray-200">
+                    <div
+                      className="h-full w-full bg-cover bg-center"
+                      style={{ backgroundImage: `url('${item.avatar}')` }}
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-foreground font-serif font-bold">
+                      {t(`items.${item.key}.name`)}
+                    </h4>
+                    <p className="text-muted-foreground text-xs tracking-wide uppercase">
+                      {t(`items.${item.key}.date`)}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );

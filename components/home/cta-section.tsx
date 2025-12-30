@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 export function CtaSection() {
   const t = useTranslations('home.cta');
   return (
-    <section className="bg-background w-full px-4 py-20">
+    <section className="bg-background w-full px-4 py-10 md:py-24">
       <div className="bg-surface border-border relative mx-auto max-w-4xl overflow-hidden rounded-3xl border p-10 text-center shadow-xl md:p-20">
         <div className="via-primary absolute top-0 left-0 h-2 w-full bg-gradient-to-r from-transparent to-transparent" />
         <h2 className="text-text-main mb-6 font-serif text-3xl font-bold tracking-tight md:text-5xl">

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Heart, Moon, Sun } from 'lucide-react';
+import { Heart, Moon, Sun, X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { useLayoutStore } from '@/stores/layout-store';
@@ -11,7 +11,6 @@ import { Link } from '@/i18n/routing';
 import { BaseButton } from '@/components/ui/base-button';
 import { useLogin } from '@/hooks/use-login';
 import { useAuthStore } from '@/stores/auth-store';
-import { LoginDialog } from '@/components/auth/login-dialog';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { ROUTES } from '@/constants/routes';
 
@@ -19,22 +18,11 @@ export function Sidebar() {
   const pathname = usePathname();
   const t = useTranslations('layout.header');
   const { sidebarOpen, closeSidebar, toggleTheme, theme } = useLayoutStore();
-  const { login, isLoading, error } = useLogin();
   const user = useAuthStore((state) => state.user);
-  const [loginOpen, setLoginOpen] = useState(false);
-
-  const handleLoginSubmit = useCallback(
-    async (values: { username: string; password: string }) => {
-      await login(values);
-    },
-    [login]
-  );
 
   useEffect(() => {
     closeSidebar();
   }, [pathname, closeSidebar]);
-
-  const effectiveOpen = loginOpen && !user;
 
   return (
     <>
@@ -45,6 +33,16 @@ export function Sidebar() {
         )}
         aria-label="Primary"
       >
+        <BaseButton
+          type="button"
+          variant="ghost"
+          size="icon"
+          aria-label="Close navigation"
+          className="absolute top-4 right-4"
+          onClick={closeSidebar}
+        >
+          <X className="h-6 w-6" />
+        </BaseButton>
         <div className="flex h-full flex-col gap-6">
           <Link
             href={ROUTES.HOME}
@@ -73,26 +71,25 @@ export function Sidebar() {
               {t('pricing')}
             </Link>
           </nav>
+          <div className="flex items-center gap-2 px-2">
+            <LanguageSwitcher />
+            <BaseButton
+              variant="ghost"
+              size="icon"
+              aria-label="Toggle theme"
+              onClick={toggleTheme}
+              className="rounded-full"
+              title={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </BaseButton>
+          </div>
 
           <div className="mt-auto flex flex-col gap-4">
-            <div className="flex items-center gap-2 px-2">
-              <LanguageSwitcher />
-              <BaseButton
-                variant="ghost"
-                size="icon"
-                aria-label="Toggle theme"
-                onClick={toggleTheme}
-                className="rounded-full"
-                title={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
-              >
-                {theme === 'dark' ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </BaseButton>
-            </div>
-
             {user ? (
               <div className="flex flex-col gap-2 px-2">
                 <span className="text-muted-foreground text-sm font-medium">
@@ -107,32 +104,21 @@ export function Sidebar() {
               </div>
             ) : (
               <div className="flex flex-col gap-2">
-                <BaseButton
-                  variant="ghost"
-                  className="justify-start"
-                  onClick={() => setLoginOpen(true)}
-                >
-                  {t('login')}
-                </BaseButton>
-                <BaseButton
-                  className="shadow-primary/20 w-full shadow-md"
-                  asChild
-                  onClick={closeSidebar}
-                >
-                  <Link href={ROUTES.SIGN_UP}>{t('signup')}</Link>
-                </BaseButton>
+                <Link href={ROUTES.LOGIN}>
+                  <BaseButton variant="outline" className="w-full">
+                    {t('login')}
+                  </BaseButton>
+                </Link>
+                <Link href={ROUTES.SIGN_UP}>
+                  <BaseButton variant="default" className="w-full">
+                    {t('signup')}
+                  </BaseButton>
+                </Link>
               </div>
             )}
           </div>
         </div>
       </aside>
-      <LoginDialog
-        open={effectiveOpen}
-        onOpenChange={setLoginOpen}
-        onSubmit={handleLoginSubmit}
-        isSubmitting={isLoading}
-        errorMessage={error?.message ?? null}
-      />
     </>
   );
 }

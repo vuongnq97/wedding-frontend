@@ -18,7 +18,7 @@ export function DetailsSection({ data }: DetailsSectionProps) {
   }
 
   return (
-    <section className="bg-background py-16 md:py-24" id="details">
+    <section className="bg-background py-10 md:py-24" id="details">
       <div className="layout-container mx-auto max-w-[1100px] px-4 sm:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="flex flex-col gap-8">

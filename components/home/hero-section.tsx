@@ -11,7 +11,7 @@ export function HeroSection() {
   const router = useRouter();
   const { user } = useAuthStore();
   return (
-    <section className="relative w-full overflow-hidden py-8 md:py-12">
+    <section className="relative w-full overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-4 md:px-8">
         <div className="relative flex min-h-[600px] w-full items-center justify-center overflow-hidden rounded-3xl bg-gray-200 shadow-2xl">
           <div
