@@ -1,5 +1,5 @@
-import { Copy } from 'lucide-react';
 import { BaseButton } from '@/components/ui/base-button';
+import { ButtonCopy } from '@/components/ui/button-copy';
 import { getVietQrUrl } from '@/utils/vietqr';
 import Image from 'next/image';
 import { BankAccount } from '@/types/invitation';
@@ -18,10 +18,6 @@ export function BankAccountCard({
   icon,
   copyLabel,
 }: BankAccountCardProps) {
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
-
   const qrUrl = getVietQrUrl(
     account.bankName,
     account.accountNumber,
@@ -49,14 +45,13 @@ export function BankAccountCard({
         <p className="text-muted-foreground text-sm">{account.accountHolder}</p>
       </div>
 
-      <BaseButton
+      <ButtonCopy
+        value={account.accountNumber}
         variant="ghost"
         className="text-primary hover:text-primary/80 mt-2 flex h-auto items-center gap-1 px-2 py-1 text-xs font-bold"
-        onClick={() => copyToClipboard(account.accountNumber)}
       >
-        <Copy className="h-4 w-4" />
         {copyLabel}
-      </BaseButton>
+      </ButtonCopy>
 
       {/* Direct QR display */}
       {qrUrl && (

@@ -18,6 +18,7 @@ interface HeaderProps {
 
 export function Header({ data, isCreator, onPublish }: HeaderProps) {
   const t = useTranslations('invitation.header');
+  const tLayout = useTranslations('layout.header');
   const [activeHash, setActiveHash] = useState('');
   const router = useRouter();
   const links = [
@@ -39,7 +40,7 @@ export function Header({ data, isCreator, onPublish }: HeaderProps) {
             <div className="flex items-center gap-4">
               <Link href={ROUTES.HOME} className="flex items-center gap-2">
                 <span className="text-foreground hover:text-primary font-serif text-xl font-bold tracking-tight md:text-2xl">
-                  WeddingInvites
+                  {tLayout('brand')}
                 </span>
               </Link>
               <div

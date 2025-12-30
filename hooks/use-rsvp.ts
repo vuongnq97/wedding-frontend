@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { rsvpSchema, RsvpFormValues, RsvpData } from '@/types/rsvp';
+import {
+  rsvpSchema,
+  RsvpFormValues,
+  RsvpData,
+  AttendingStatus,
+} from '@/types/rsvp';
 
 export const useRsvp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -12,7 +17,7 @@ export const useRsvp = () => {
     mode: 'onChange',
     defaultValues: {
       fullName: '',
-      attending: 'yes',
+      attending: AttendingStatus.YES,
       guests: 1,
       message: '',
     },
@@ -35,75 +40,97 @@ export const useRsvp = () => {
 
   const [wishes, setWishes] = useState<RsvpData[]>([]);
 
-  const fetchData = async () => {
+  const fetchData = async (locale: string) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      const mockData: RsvpData[] = [
-        {
-          id: '1',
-          invitationId: 'demo',
-          createdAt: new Date().toISOString(),
-          fullName: 'Nguyễn Văn A',
-          attending: 'yes',
-          guests: 2,
-          message: 'Chúc mừng hạnh phúc hai bạn! Trăm năm hạnh phúc nhé.',
-        },
-        {
-          id: '2',
-          invitationId: 'demo',
-          createdAt: new Date().toISOString(),
-          fullName: 'Trần Thị B',
-          attending: 'yes',
-          guests: 1,
-          message: 'Happy Wedding! Chúc hai bạn sớm có tin vui.',
-        },
-        {
-          id: '3',
-          invitationId: 'demo',
-          createdAt: new Date().toISOString(),
-          fullName: 'Lê Văn C',
-          attending: 'no',
-          guests: 0,
-          message: 'Tiếc quá không tham dự được, chúc hai bạn hạnh phúc!',
-        },
-        {
-          id: '4',
-          invitationId: 'demo',
-          createdAt: new Date().toISOString(),
-          fullName: 'Nguyễn Văn D',
-          attending: 'yes',
-          guests: 2,
-          message: 'Chúc mừng hạnh phúc hai bạn! Trăm năm hạnh phúc nhé.',
-        },
-        {
-          id: '5',
-          invitationId: 'demo',
-          createdAt: new Date().toISOString(),
-          fullName: 'Trần Thị E',
-          attending: 'yes',
-          guests: 1,
-          message: 'Happy Wedding! Chúc hai bạn sớm có tin vui.',
-        },
-        {
-          id: '6',
-          invitationId: 'demo',
-          createdAt: new Date().toISOString(),
-          fullName: 'Lê Văn F',
-          attending: 'no',
-          guests: 0,
-          message: 'Tiếc quá không tham dự được, chúc hai bạn hạnh phúc!',
-        },
-        {
-          id: '7',
-          invitationId: 'demo',
-          createdAt: new Date().toISOString(),
-          fullName: 'Nguyễn Văn G',
-          attending: 'yes',
-          guests: 2,
-          message: 'Chúc mừng hạnh phúc hai bạn! Trăm năm hạnh phúc nhé.',
-        },
-      ];
-      setWishes(mockData);
+
+      const generateMockData = (count: number, isVi: boolean): RsvpData[] => {
+        const items: RsvpData[] = [];
+        const statuses = [
+          AttendingStatus.YES,
+          AttendingStatus.NO,
+          AttendingStatus.PENDING,
+        ];
+        const firstNames = isVi
+          ? [
+              'Nguyễn',
+              'Trần',
+              'Lê',
+              'Phạm',
+              'Hoàng',
+              'Phan',
+              'Vũ',
+              'Đặng',
+              'Bùi',
+              'Đỗ',
+            ]
+          : [
+              'Michael',
+              'Sarah',
+              'Emma',
+              'David',
+              'Amanda',
+              'James',
+              'Maria',
+              'Robert',
+              'Linda',
+              'William',
+            ];
+        const lastNames = isVi
+          ? [
+              'Văn A',
+              'Thị B',
+              'Văn C',
+              'Thị D',
+              'Văn E',
+              'Thị F',
+              'Văn G',
+              'Thị H',
+              'Văn I',
+              'Thị K',
+            ]
+          : [
+              'Chen',
+              'Wilson',
+              'Roberts',
+              'Kim',
+              'Lewis',
+              'Smith',
+              'Garcia',
+              'Johnson',
+              'Williams',
+              'Brown',
+            ];
+
+        for (let i = 1; i <= count; i++) {
+          const statusIndex = i % 3;
+          const status = statuses[statusIndex];
+          let guests = 0;
+          if (status === AttendingStatus.YES) {
+            guests = (i % 4) + 1;
+          }
+
+          items.push({
+            id: i.toString(),
+            invitationId: 'demo',
+            createdAt: new Date(Date.now() - i * 3600000).toISOString(),
+            fullName: isVi
+              ? `${firstNames[i % 10]} ${lastNames[i % 10]}`
+              : `${firstNames[i % 10]} ${lastNames[(i + 5) % 10]}`,
+            attending: status,
+            guests,
+            message:
+              i % 7 === 0
+                ? isVi
+                  ? 'Chúc mừng hạnh phúc hai bạn!'
+                  : 'Wishing you both a lifetime of love and happiness!'
+                : undefined,
+          });
+        }
+        return items;
+      };
+
+      setWishes(generateMockData(100, locale === 'vi'));
     } catch (error) {
       console.error('Error fetching wishes:', error);
     }

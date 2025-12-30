@@ -18,5 +18,9 @@
   "illustration": {
     "title": "Plan the perfect day",
     "subtitle": "Everything you need to manage your invitations, RSVPs, and guest details in one place."
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   }
 }

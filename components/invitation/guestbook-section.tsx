@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Quote } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -17,9 +17,11 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
   const t = useTranslations('invitation.guestbook');
   const { wishes, fetchData } = useRsvp();
 
+  const locale = useLocale();
+
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(locale);
+  }, [fetchData, locale]);
 
   if (!data.guestbookEnabled) {
     return null;

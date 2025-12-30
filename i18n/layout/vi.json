@@ -1,15 +1,17 @@
 {
   "header": {
-    "brand": "WeddingInvites",
+    "brand": "Trăm Năm",
     "templates": "Mẫu thiết kế",
     "pricing": "Bảng giá",
     "login": "Đăng nhập",
     "signup": "Đăng ký",
     "signedIn": "Đã đăng nhập",
-    "my_invitation": "Thiệp mời"
+    "my_invitation": "Thiệp mời",
+    "switch_language": "Chuyển sang tiếng {language}",
+    "dashboard": "Tổng quan"
   },
   "footer": {
-    "brand": "WeddingInvites",
+    "brand": "Trăm Năm",
     "description": "Biến việc lập kế hoạch đám cưới trở nên đơn giản hơn, với từng tấm thiệp mời tuyệt đẹp. Được thiết kế với tình yêu cho khoảnh khắc đặc biệt của bạn.",
     "product": "Sản phẩm",
     "templates": "Mẫu thiết kế",
@@ -29,5 +31,9 @@
     "articles": "Bài viết",
     "about": "Giới thiệu",
     "contact": "Liên hệ"
+  },
+  "common": {
+    "copy": "Sao chép",
+    "copied": "Đã sao chép!"
   }
 }

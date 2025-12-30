@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { WeddingData } from '@/types/invitation';
 import { useRsvp } from '@/hooks/use-rsvp';
+import { AttendingStatus } from '@/types/rsvp';
 import { BaseButton } from '@/components/ui/base-button';
 import { BaseInput } from '@/components/ui/base-input';
 
@@ -121,7 +122,7 @@ export function RsvpSection({ data }: RsvpSectionProps) {
                         <FormItem className="flex-1">
                           <FormControl>
                             <label className="border-border has-[:checked]:border-primary has-[:checked]:bg-primary/5 hover:bg-muted flex cursor-pointer items-center gap-2 rounded-lg border p-3 transition-all">
-                              <RadioGroupItem value="yes" />
+                              <RadioGroupItem value={AttendingStatus.YES} />
                               <span className="text-foreground text-sm font-medium">
                                 {t('attendance.accept')}
                               </span>
@@ -131,7 +132,7 @@ export function RsvpSection({ data }: RsvpSectionProps) {
                         <FormItem className="flex-1">
                           <FormControl>
                             <label className="border-border has-[:checked]:border-primary has-[:checked]:bg-primary/5 hover:bg-muted flex cursor-pointer items-center gap-2 rounded-lg border p-3 transition-all">
-                              <RadioGroupItem value="no" />
+                              <RadioGroupItem value={AttendingStatus.NO} />
                               <span className="text-foreground text-sm font-medium">
                                 {t('attendance.decline')}
                               </span>

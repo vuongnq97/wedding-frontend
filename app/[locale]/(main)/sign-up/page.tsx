@@ -93,10 +93,10 @@ export default function SignUpPage() {
               {/* Terms Links */}
               <div className="text-muted-foreground mt-8 flex justify-center gap-6 text-xs">
                 <Link className="hover:text-primary transition-colors" href="#">
-                  Privacy Policy
+                  {t('footer.privacy')}
                 </Link>
                 <Link className="hover:text-primary transition-colors" href="#">
-                  Terms of Service
+                  {t('footer.terms')}
                 </Link>
               </div>
             </div>

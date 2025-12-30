@@ -75,13 +75,13 @@ export default function LoginPage() {
 
         {/* Footer */}
         <div className="text-muted-foreground mt-8 text-center text-xs">
-          <p>© 2023 Forever & Always. All rights reserved.</p>
+          <p>{t('footer.copyright', { year: 2023 })}</p>
           <div className="mt-2 flex justify-center gap-4">
             <Link href="#" className="hover:text-primary">
-              Privacy Policy
+              {t('footer.privacy')}
             </Link>
             <Link href="#" className="hover:text-primary">
-              Terms of Service
+              {t('footer.terms')}
             </Link>
           </div>
         </div>

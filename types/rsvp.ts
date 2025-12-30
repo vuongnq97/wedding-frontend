@@ -1,9 +1,15 @@
 import { z } from 'zod';
 
+export enum AttendingStatus {
+  YES = 'yes',
+  NO = 'no',
+  PENDING = 'pending',
+}
+
 export const rsvpSchema = z.object({
   fullName: z.string().min(1, 'Name is required'),
-  attending: z.enum(['yes', 'no']),
-  guests: z.number().min(1).max(10).default(1),
+  attending: z.nativeEnum(AttendingStatus),
+  guests: z.number().min(0).max(10).default(1),
   message: z.string().optional(),
 });
 

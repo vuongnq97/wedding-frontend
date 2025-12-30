@@ -1,0 +1,67 @@
+{
+  "sidebar": {
+    "brand": "Trăm Năm",
+    "adminConsole": "Bảng điều khiển",
+    "dashboard": "Tổng quan",
+    "guestList": "Danh sách khách",
+    "brideToBe": "Cô dâu tương lai",
+    "groomToBe": "Chú rể tương lai"
+  },
+  "header": {
+    "welcome": "Chào mừng, {names}",
+    "subtitle": "Đây là tiến độ chuẩn bị đám cưới của bạn."
+  },
+  "stats": {
+    "totalGuests": "Tổng số lượng khách",
+    "totalViews": "Lượt xem",
+    "rsvpAgreed": "Đã xác nhận",
+    "rsvpDeclined": "Đã từ chối",
+    "daysToGo": "Ngày còn lại",
+    "trendingUp": "{value} tuần này",
+    "confirmedGuests": "Khách xác nhận",
+    "confirmedGuestsCount": "{count} khách đã xác nhận",
+    "cannotAttend": "Không thể tham dự",
+    "october15": "15 Tháng 10, 2024"
+  },
+  "invitation": {
+    "title": "Đám cưới của {names}",
+    "live": "Đang hoạt động",
+    "draft": "Bản nháp",
+    "archived": "Đã lưu trữ",
+    "template": "Giao diện: {name}",
+    "floralElegance": "Floral Elegance",
+    "lastEdited": "Chỉnh sửa lần cuối: {time}",
+    "lastEdited2HoursAgo": "2 giờ trước",
+    "publicLink": "Liên kết lời mời",
+    "copyLink": "Sao chép liên kết",
+    "preview": "Xem trước",
+    "editDetails": "Chỉnh sửa chi tiết",
+    "sarahMichaelWedding": "Đám cưới của Sarah & Michael"
+  },
+  "guestList": {
+    "title": "Danh sách khách",
+    "subtitle": "Quản lý danh sách khách mời và trạng thái tham dự đám cưới của bạn.",
+    "searchPlaceholder": "Tìm kiếm khách bằng tên hoặc email...",
+    "statusAll": "Tất cả trạng thái",
+    "statusAttending": "Sẽ tham dự",
+    "statusPending": "Chờ xác nhận",
+    "statusDeclined": "Đã từ chối",
+    "tableGuest": "Khách mời",
+    "tableStatus": "Trạng thái",
+    "tableGroup": "Nhóm",
+    "tableNote": "Ghi chú",
+    "tableActions": "Hành động",
+    "noNote": "Không có yêu cầu đặc biệt",
+    "groupAdults": "{count} Người lớn",
+    "groupChildren": "{count} Trẻ em",
+    "groupPlaceholder": "Chưa rõ",
+    "resendInvite": "Gửi lại lời mời",
+    "editGuest": "Chỉnh sửa",
+    "deleteGuest": "Xóa",
+    "paginationShowing": "Đang hiển thị",
+    "paginationOf": "trên",
+    "paginationGuests": "khách",
+    "paginationPrevious": "Trước",
+    "paginationNext": "Sau"
+  }
+}

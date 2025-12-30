@@ -17,5 +17,10 @@
   "illustration": {
     "title": "Plan your perfect day",
     "subtitle": "Join thousands of couples creating unforgettable memories with us."
+  },
+  "footer": {
+    "copyright": "© {year} Forever & Always. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   }
 }

@@ -17,7 +17,8 @@ const buttonVariants = cva(
         danger: 'bg-destructive/10 text-destructive hover:bg-destructive/20',
         dashed:
           'border border-dashed border-border bg-transparent hover:bg-muted text-muted-foreground hover:text-foreground',
-        outline: 'border border bg-transparent hover:bg-primary-soft/40',
+        outline:
+          'border border bg-transparent focus:ring-0 hover:bg-primary-soft/40',
         ghost: 'hover:bg-primary-soft/40',
       },
       size: {

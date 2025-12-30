@@ -17,5 +17,10 @@
   "illustration": {
     "title": "Lên kế hoạch cho ngày hoàn hảo",
     "subtitle": "Tham gia cùng hàng ngàn cặp đôi tạo nên những kỷ niệm khó quên với chúng tôi."
+  },
+  "footer": {
+    "copyright": "© {year} Forever & Always. Đã đăng ký bản quyền.",
+    "privacy": "Chính sách bảo mật",
+    "terms": "Điều khoản dịch vụ"
   }
 }

@@ -1,9 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { MenuIcon, Heart, Moon, Sun } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { cn } from '@/lib/utils';
 
 import { LoginDialog } from '@/components/auth/login-dialog';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
@@ -13,6 +14,7 @@ import { useLogin } from '@/hooks/use-login';
 import { useLayoutStore } from '@/stores/layout-store';
 import { useAuthStore } from '@/stores/auth-store';
 import { ROUTES } from '@/constants/routes';
+import { HEADER_NAV_LINKS } from '@/constants/navigation';
 import { UserInfo } from '@/types/auth';
 
 type HeaderProps = {
@@ -38,7 +40,6 @@ export function Header({ initialUser = null }: HeaderProps) {
 
   const effectiveOpen = loginOpen && !user;
 
-  // Sync HTML class with store theme and initialize from DOM on mount
   useEffect(() => {
     if (typeof document !== 'undefined') {
       const root = document.documentElement;
@@ -69,6 +70,8 @@ export function Header({ initialUser = null }: HeaderProps) {
     }
   }, [theme]);
 
+  const pathname = usePathname();
+
   return (
     <header className="border-border bg-background/95 sticky top-0 z-30 w-full border-b backdrop-blur-sm">
       <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-4 md:h-20 md:px-10">
@@ -91,45 +94,57 @@ export function Header({ initialUser = null }: HeaderProps) {
         </div>
 
         <div className="hidden items-center gap-6 md:flex lg:gap-8">
-          <Link
-            className="text-foreground hover:text-primary text-sm font-medium tracking-wider uppercase transition-colors"
-            href={ROUTES.TEMPLATES}
-          >
-            {t('templates')}
-          </Link>
-          <Link
-            className="text-foreground hover:text-primary text-sm font-medium tracking-wider uppercase transition-colors"
-            href={ROUTES.PRICING}
-          >
-            {t('pricing')}
-          </Link>
+          {HEADER_NAV_LINKS.filter((item) =>
+            item.authRequired ? !!(initialUser ?? user) : true
+          ).map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                className={cn(
+                  'hover:text-primary text-sm font-medium tracking-wider uppercase transition-colors',
+                  isActive ? 'text-primary' : 'text-foreground/70'
+                )}
+                href={item.href}
+              >
+                {t(item.key)}
+              </Link>
+            );
+          })}
           {(initialUser ?? user) ? (
-            <span className="text-muted-foreground text-sm font-medium">
-              {user &&
-              typeof user === 'object' &&
-              'name' in user &&
-              typeof user.name === 'string' ? (
-                user.name
-              ) : (
-                <Link href={ROUTES.INVITATION}>{t('my_invitation')}</Link>
-              )}
+            <span className="text-muted-foreground text-sm font-bold uppercase">
+              <Link href={ROUTES.INVITATION}>
+                <BaseButton>
+                  {t('my_invitation', {
+                    name:
+                      user &&
+                      typeof user === 'object' &&
+                      'name' in user &&
+                      typeof user.name === 'string'
+                        ? user.name
+                        : t('signedIn'),
+                  })}
+                </BaseButton>
+              </Link>
             </span>
           ) : (
-            <Link href={ROUTES.LOGIN}>
-              <BaseButton
-                variant="outline"
-                className="text-foreground hover:text-primary cursor-pointer font-bold tracking-wider uppercase transition-colors"
-              >
-                {t('login')}
-              </BaseButton>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link href={ROUTES.LOGIN}>
+                <BaseButton
+                  variant="outline"
+                  className="text-foreground hover:text-primary cursor-pointer font-bold tracking-wider uppercase transition-colors"
+                >
+                  {t('login')}
+                </BaseButton>
+              </Link>
+              <Link href={ROUTES.SIGN_UP}>
+                <BaseButton className="shadow-primary/20 h-10 rounded-full px-5 uppercase shadow-md">
+                  {t('signup')}
+                </BaseButton>
+              </Link>
+            </div>
           )}
-          <BaseButton
-            className="shadow-primary/20 -ml-4 h-10 rounded-full px-5 uppercase shadow-md"
-            asChild
-          >
-            <Link href={ROUTES.SIGN_UP}>{t('signup')}</Link>
-          </BaseButton>
+
           <LanguageSwitcher />
           <BaseButton
             variant="ghost"

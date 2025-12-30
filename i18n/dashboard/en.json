@@ -1,0 +1,67 @@
+{
+  "sidebar": {
+    "brand": "WeddingInvites",
+    "adminConsole": "Admin Console",
+    "dashboard": "Dashboard",
+    "guestList": "Guest List",
+    "brideToBe": "Bride-to-be",
+    "groomToBe": "Groom-to-be"
+  },
+  "header": {
+    "welcome": "Welcome, {names}",
+    "subtitle": "Here is how your wedding planning is going."
+  },
+  "stats": {
+    "totalGuests": "Total Guests",
+    "totalViews": "Total Views",
+    "rsvpAgreed": "RSVP Agreed",
+    "rsvpDeclined": "RSVP Declined",
+    "daysToGo": "Days to Go",
+    "trendingUp": "{value} this week",
+    "confirmedGuests": "Confirmed Guests",
+    "confirmedGuestsCount": "{count} confirmed guests",
+    "cannotAttend": "Cannot Attend",
+    "october15": "October 15, 2024"
+  },
+  "invitation": {
+    "title": "{names}'s Wedding",
+    "live": "Live",
+    "draft": "Draft",
+    "archived": "Archived",
+    "template": "Template: {name}",
+    "floralElegance": "Floral Elegance",
+    "lastEdited": "Last edited: {time}",
+    "lastEdited2HoursAgo": "2 hours ago",
+    "publicLink": "Public Invitation Link",
+    "copyLink": "Copy Link",
+    "preview": "Preview Invitation",
+    "editDetails": "Edit Details",
+    "sarahMichaelWedding": "Sarah & Michael's Wedding"
+  },
+  "guestList": {
+    "title": "Guest List",
+    "subtitle": "Manage your wedding guests and RSVP status.",
+    "searchPlaceholder": "Search guests by name or email...",
+    "statusAll": "All Statuses",
+    "statusAttending": "Attending",
+    "statusPending": "Pending",
+    "statusDeclined": "Declined",
+    "tableGuest": "Guest",
+    "tableStatus": "Status",
+    "tableGroup": "Group",
+    "tableNote": "Note",
+    "tableActions": "Actions",
+    "noNote": "No special requests",
+    "groupAdults": "{count} Adults",
+    "groupChildren": "{count} Children",
+    "groupPlaceholder": "Unknown",
+    "resendInvite": "Resend Invitation",
+    "editGuest": "Edit Guest",
+    "deleteGuest": "Delete Guest",
+    "paginationShowing": "Showing",
+    "paginationOf": "of",
+    "paginationGuests": "guests",
+    "paginationPrevious": "Previous",
+    "paginationNext": "Next"
+  }
+}

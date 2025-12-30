@@ -1,7 +1,7 @@
 import { getRequestConfig } from 'next-intl/server';
 import { defaultLocale, locales } from './routing';
 
-// Force rebuild for i18n
+// Force rebuild for i18n - triggering now
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let currentLocale = await requestLocale;
@@ -30,6 +30,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const templatesMessages = (await import(`./templates/${currentLocale}.json`))
     .default;
 
+  const dashboardMessages = (await import(`./dashboard/${currentLocale}.json`))
+    .default;
+
   return {
     locale: currentLocale,
     messages: {
@@ -41,6 +44,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       invitation: invitationMessages,
       'create-invitation': createInvitationMessages,
       templates: templatesMessages,
+      dashboard: dashboardMessages,
     },
   };
 });

@@ -6,7 +6,9 @@
     "login": "Log In",
     "signup": "Sign Up",
     "signedIn": "Signed in",
-    "my_invitation": "My Invitation"
+    "my_invitation": "My Invitation",
+    "switch_language": "Switch to {language}",
+    "dashboard": "Dashboard"
   },
   "footer": {
     "brand": "WeddingInvites",
@@ -29,5 +31,9 @@
     "articles": "Articles",
     "about": "About",
     "contact": "Contact"
+  },
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied!"
   }
 }

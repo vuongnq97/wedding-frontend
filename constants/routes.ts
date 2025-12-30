@@ -6,5 +6,6 @@ export const ROUTES = {
   CREATE_INVITATION: '/create-invitation',
   INVITATION_TEMPLATE: '/invitation-template',
   TEMPLATES: '/templates',
+  DASHBOARD: '/dashboard',
   PRICING: '#pricing',
 } as const;
