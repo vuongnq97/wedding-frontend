@@ -1,5 +1,6 @@
 import { MonitorSmartphone, Users, Palette, Leaf } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { BenefitItem } from './benefit-item';
 
 export function BenefitsSection() {
   const t = useTranslations('home.benefits');
@@ -18,58 +19,26 @@ export function BenefitsSection() {
               {t('description')}
             </p>
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
-              <div className="flex gap-4">
-                <div className="bg-primary/10 text-primary flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
-                  <MonitorSmartphone className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="mb-1 font-serif text-lg font-bold">
-                    {t('items.responsive.title')}
-                  </h4>
-                  <p className="text-muted-foreground text-sm">
-                    {t('items.responsive.desc')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="bg-primary/10 text-primary flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
-                  <Users className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="mb-1 font-serif text-lg font-bold">
-                    {t('items.rsvp.title')}
-                  </h4>
-                  <p className="text-muted-foreground text-sm">
-                    {t('items.rsvp.desc')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="bg-primary/10 text-primary flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
-                  <Palette className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="mb-1 font-serif text-lg font-bold">
-                    {t('items.customizable.title')}
-                  </h4>
-                  <p className="text-muted-foreground text-sm">
-                    {t('items.customizable.desc')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="bg-primary/10 text-primary flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
-                  <Leaf className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="mb-1 font-serif text-lg font-bold">
-                    {t('items.eco.title')}
-                  </h4>
-                  <p className="text-muted-foreground text-sm">
-                    {t('items.eco.desc')}
-                  </p>
-                </div>
-              </div>
+              <BenefitItem
+                icon={<MonitorSmartphone className="h-6 w-6" />}
+                title={t('items.responsive.title')}
+                description={t('items.responsive.desc')}
+              />
+              <BenefitItem
+                icon={<Users className="h-6 w-6" />}
+                title={t('items.rsvp.title')}
+                description={t('items.rsvp.desc')}
+              />
+              <BenefitItem
+                icon={<Palette className="h-6 w-6" />}
+                title={t('items.customizable.title')}
+                description={t('items.customizable.desc')}
+              />
+              <BenefitItem
+                icon={<Leaf className="h-6 w-6" />}
+                title={t('items.eco.title')}
+                description={t('items.eco.desc')}
+              />
             </div>
           </div>
           <div className="relative h-full min-h-[400px]">

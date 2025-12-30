@@ -76,3 +76,23 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Animation Utilities */
+@keyframes scroll-y {
+  0% {
+    background-position: center top;
+  }
+
+  100% {
+    background-position: center bottom;
+  }
+}
+
+.animate-scroll-y {
+  animation: scroll-y 15s linear infinite;
+  animation-direction: alternate;
+}
+
+.group:hover .pause-on-hover {
+  animation-play-state: paused;
+}

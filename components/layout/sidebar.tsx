@@ -46,8 +46,12 @@ export function Sidebar() {
         aria-label="Primary"
       >
         <div className="flex h-full flex-col gap-6">
-          <Link href={ROUTES.HOME} className="flex items-center gap-2 px-2" onClick={closeSidebar}>
-            <Heart className="h-6 w-6 text-primary" />
+          <Link
+            href={ROUTES.HOME}
+            className="flex items-center gap-2 px-2"
+            onClick={closeSidebar}
+          >
+            <Heart className="text-primary h-6 w-6" />
             <span className="text-foreground font-serif text-xl font-bold tracking-tight">
               {t('brand')}
             </span>
@@ -92,17 +96,29 @@ export function Sidebar() {
             {user ? (
               <div className="flex flex-col gap-2 px-2">
                 <span className="text-muted-foreground text-sm font-medium">
-                  {typeof user === 'object' && 'name' in user && typeof user.name === 'string'
-                    ? user.name
-                    : <Link href={ROUTES.INVITATION}>{t('my_invitation')}</Link>}
+                  {typeof user === 'object' &&
+                  'name' in user &&
+                  typeof user.name === 'string' ? (
+                    user.name
+                  ) : (
+                    <Link href={ROUTES.INVITATION}>{t('my_invitation')}</Link>
+                  )}
                 </span>
               </div>
             ) : (
               <div className="flex flex-col gap-2">
-                <BaseButton variant="ghost" className="justify-start" onClick={() => setLoginOpen(true)}>
+                <BaseButton
+                  variant="ghost"
+                  className="justify-start"
+                  onClick={() => setLoginOpen(true)}
+                >
                   {t('login')}
                 </BaseButton>
-                <BaseButton className="shadow-primary/20 shadow-md w-full" asChild onClick={closeSidebar}>
+                <BaseButton
+                  className="shadow-primary/20 w-full shadow-md"
+                  asChild
+                  onClick={closeSidebar}
+                >
                   <Link href={ROUTES.SIGN_UP}>{t('signup')}</Link>
                 </BaseButton>
               </div>

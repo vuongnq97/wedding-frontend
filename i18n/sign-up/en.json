@@ -1,22 +1,22 @@
 {
-    "title": "Forever & Always",
-    "header": {
-        "already_member": "Already a member?",
-        "sign_in": "Sign In"
-    },
-    "form_title": "Begin Your Forever Journey",
-    "form_subtitle": "Join thousands of couples simplifying their big day.",
-    "google": "Google",
-    "apple": "Apple",
-    "or_register": "Or register with email",
-    "email_label": "Email Address",
-    "email_placeholder": "name@example.com",
-    "password_label": "Password",
-    "password_placeholder": "Create a password",
-    "password_hint": "Must be at least 8 characters.",
-    "submit": "Create Account",
-    "illustration": {
-        "title": "Plan the perfect day",
-        "subtitle": "Everything you need to manage your invitations, RSVPs, and guest details in one place."
-    }
+  "title": "Forever & Always",
+  "header": {
+    "already_member": "Already a member?",
+    "sign_in": "Sign In"
+  },
+  "form_title": "Begin Your Forever Journey",
+  "form_subtitle": "Join thousands of couples simplifying their big day.",
+  "google": "Google",
+  "apple": "Apple",
+  "or_register": "Or register with email",
+  "email_label": "Email Address",
+  "email_placeholder": "name@example.com",
+  "password_label": "Password",
+  "password_placeholder": "Create a password",
+  "password_hint": "Must be at least 8 characters.",
+  "submit": "Create Account",
+  "illustration": {
+    "title": "Plan the perfect day",
+    "subtitle": "Everything you need to manage your invitations, RSVPs, and guest details in one place."
+  }
 }

@@ -13,9 +13,7 @@ export function Footer({ className, year }: FooterProps) {
   const t = useTranslations('layout.footer');
 
   return (
-    <footer
-      className={cn('bg-background w-full border-t py-16', className)}
-    >
+    <footer className={cn('bg-background w-full border-t py-16', className)}>
       <div className="mx-auto max-w-[1200px] px-4 md:px-10">
         <div className="flex flex-col items-center justify-between gap-12 md:flex-row md:items-start">
           <div className="flex max-w-sm flex-col items-center gap-6 md:items-start">

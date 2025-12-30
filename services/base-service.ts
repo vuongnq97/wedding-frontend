@@ -59,8 +59,6 @@ export function createBaseService(
     }
   };
 
-
-
   return {
     request,
     get: (path, options) =>

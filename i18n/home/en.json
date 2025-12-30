@@ -11,6 +11,7 @@
     "description": "Find the perfect match for your wedding theme from our curated selection.",
     "view_all": "View All Collection",
     "preview": "Preview",
+    "coming_soon": "Coming Soon",
     "items": {
       "floral": {
         "title": "Floral Minimalist",
@@ -27,6 +28,26 @@
       "midnight": {
         "title": "Midnight Gold",
         "subtitle": "Dramatic & luxurious"
+      },
+      "minimalist": {
+        "title": "Minimalist",
+        "subtitle": "Simple & Refined"
+      },
+      "vintage": {
+        "title": "Vintage",
+        "subtitle": "Timeless Beauty"
+      },
+      "luxury": {
+        "title": "Luxury",
+        "subtitle": "Elegant & Premium"
+      },
+      "artistic": {
+        "title": "Artistic",
+        "subtitle": "Creative & Unique"
+      },
+      "rustic": {
+        "title": "Rustic",
+        "subtitle": "Warm & Natural"
       }
     }
   },

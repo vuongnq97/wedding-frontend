@@ -12,7 +12,7 @@ export function SidebarOverlay() {
     <BaseButton
       type="button"
       variant="ghost"
-      className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity md:hidden rounded-none h-auto w-auto hover:bg-black/40"
+      className="fixed inset-0 z-30 h-auto w-auto rounded-none bg-black/40 backdrop-blur-sm transition-opacity hover:bg-black/40 md:hidden"
       aria-label="Close navigation"
       onClick={closeSidebar}
     />

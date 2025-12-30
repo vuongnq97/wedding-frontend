@@ -1,75 +1,75 @@
 {
-    "hero": {
-        "subtitle": "Đám cưới của",
-        "title": "Sophie & Alexander",
-        "date": "Ngày 1 tháng 8 năm 2024",
-        "location": "Thung lũng Napa, CA"
+  "hero": {
+    "subtitle": "Đám cưới của",
+    "title": "Sophie & Alexander",
+    "date": "Ngày 1 tháng 8 năm 2024",
+    "location": "Thung lũng Napa, CA"
+  },
+  "story": {
+    "identifier": "Câu chuyện của chúng tôi",
+    "title": "Chúng tôi đã gặp nhau như thế nào",
+    "paragraph1": "Mọi chuyện bắt đầu tại một quán cà phê ở trung tâm Seattle. Sophie đang đọc \"Kiêu hãnh và Định kiến\" lần thứ mười, và Alexander vô tình làm đổ cốc latte của mình lên bàn của cô ấy.",
+    "paragraph2": "Năm năm, ba căn hộ, và vô số tách cà phê sau đó, chúng tôi đã sẵn sàng bắt đầu cuộc phiêu lưu lớn nhất của mình. Chúng tôi rất mong chờ được ăn mừng tình yêu của mình cùng với những người yêu thương nhất.",
+    "quote": "\"Bất cứ điều gì tâm hồn chúng ta được tạo nên, của anh ấy và của tôi là giống nhau.\""
+  },
+  "events": {
+    "title": "Lịch trình",
+    "date": "Ngày 1 tháng 8 năm 2024",
+    "ceremony": {
+      "time": "4:00 Chiều",
+      "title": "Lễ cưới",
+      "description": "The Garden Gazebo. Vui lòng có mặt lúc 3:45 Chiều."
     },
-    "story": {
-        "identifier": "Câu chuyện của chúng tôi",
-        "title": "Chúng tôi đã gặp nhau như thế nào",
-        "paragraph1": "Mọi chuyện bắt đầu tại một quán cà phê ở trung tâm Seattle. Sophie đang đọc \"Kiêu hãnh và Định kiến\" lần thứ mười, và Alexander vô tình làm đổ cốc latte của mình lên bàn của cô ấy.",
-        "paragraph2": "Năm năm, ba căn hộ, và vô số tách cà phê sau đó, chúng tôi đã sẵn sàng bắt đầu cuộc phiêu lưu lớn nhất của mình. Chúng tôi rất mong chờ được ăn mừng tình yêu của mình cùng với những người yêu thương nhất.",
-        "quote": "\"Bất cứ điều gì tâm hồn chúng ta được tạo nên, của anh ấy và của tôi là giống nhau.\""
+    "cocktail": {
+      "time": "5:30 Chiều",
+      "title": "Tiệc Cocktail",
+      "description": "Sunset Terrace. Thưởng thức món khai vị và cocktail đặc biệt."
     },
-    "events": {
-        "title": "Lịch trình",
-        "date": "Ngày 1 tháng 8 năm 2024",
-        "ceremony": {
-            "time": "4:00 Chiều",
-            "title": "Lễ cưới",
-            "description": "The Garden Gazebo. Vui lòng có mặt lúc 3:45 Chiều."
-        },
-        "cocktail": {
-            "time": "5:30 Chiều",
-            "title": "Tiệc Cocktail",
-            "description": "Sunset Terrace. Thưởng thức món khai vị và cocktail đặc biệt."
-        },
-        "reception": {
-            "time": "7:00 Tối",
-            "title": "Tiệc tối & Khiêu vũ",
-            "description": "Grand Ballroom. Ăn tối sau đó là khiêu vũ đến nửa đêm."
-        }
+    "reception": {
+      "time": "7:00 Tối",
+      "title": "Tiệc tối & Khiêu vũ",
+      "description": "Grand Ballroom. Ăn tối sau đó là khiêu vũ đến nửa đêm."
+    }
+  },
+  "map": {
+    "identifier": "Địa điểm",
+    "title": "Rosewood Estate",
+    "address_line1": "1234 Vineyard Lane",
+    "address_line2": "Thung lũng Napa, CA 94558",
+    "accommodations": {
+      "title": "Chỗ ở",
+      "description": "Chúng tôi đã đặt trước một khu phòng tại Khách sạn The Vineyard."
     },
-    "map": {
-        "identifier": "Địa điểm",
-        "title": "Rosewood Estate",
-        "address_line1": "1234 Vineyard Lane",
-        "address_line2": "Thung lũng Napa, CA 94558",
-        "accommodations": {
-            "title": "Chỗ ở",
-            "description": "Chúng tôi đã đặt trước một khu phòng tại Khách sạn The Vineyard."
-        },
-        "parking": {
-            "title": "Đỗ xe",
-            "description": "Có dịch vụ đỗ xe tại cổng chính."
-        },
-        "getDirections": "Chỉ đường"
+    "parking": {
+      "title": "Đỗ xe",
+      "description": "Có dịch vụ đỗ xe tại cổng chính."
     },
-    "registry": {
-        "title": "Quà tặng",
-        "description": "Sự hiện diện của bạn là món quà lớn nhất đối với chúng tôi! Nhưng nếu bạn muốn đóng góp, chúng tôi đã đăng ký tại những nơi sau.",
-        "crateAndBarrel": {
-            "title": "Crate & Barrel",
-            "description": "Đồ dùng gia đình & đồ bếp"
-        },
-        "honeymoon": {
-            "title": "Quỹ trăng mật",
-            "description": "Giúp chúng tôi khám phá Nhật Bản"
-        },
-        "theKnot": {
-            "title": "The Knot",
-            "description": "Các món đồ được chọn lọc khác"
-        }
+    "getDirections": "Chỉ đường"
+  },
+  "registry": {
+    "title": "Quà tặng",
+    "description": "Sự hiện diện của bạn là món quà lớn nhất đối với chúng tôi! Nhưng nếu bạn muốn đóng góp, chúng tôi đã đăng ký tại những nơi sau.",
+    "crateAndBarrel": {
+      "title": "Crate & Barrel",
+      "description": "Đồ dùng gia đình & đồ bếp"
     },
-    "rsvp": {
-        "title": "Bạn sẽ tham dự chứ?",
-        "description": "Vui lòng cho chúng tôi biết nếu bạn có thể tham dự trước ngày 1 tháng 8, 2024.",
-        "button": "Xác nhận tham dự (RSVP)"
+    "honeymoon": {
+      "title": "Quỹ trăng mật",
+      "description": "Giúp chúng tôi khám phá Nhật Bản"
     },
-    "footer": {
-        "title": "Sophie & Alexander",
-        "credit": "Được thiết kế bởi Wedfully"
-    },
-    "createInvitation": "Tạo Thiệp Mời"
+    "theKnot": {
+      "title": "The Knot",
+      "description": "Các món đồ được chọn lọc khác"
+    }
+  },
+  "rsvp": {
+    "title": "Bạn sẽ tham dự chứ?",
+    "description": "Vui lòng cho chúng tôi biết nếu bạn có thể tham dự trước ngày 1 tháng 8, 2024.",
+    "button": "Xác nhận tham dự (RSVP)"
+  },
+  "footer": {
+    "title": "Sophie & Alexander",
+    "credit": "Được thiết kế bởi Wedfully"
+  },
+  "createInvitation": "Tạo Thiệp Mời"
 }

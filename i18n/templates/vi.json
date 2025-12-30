@@ -1,0 +1,42 @@
+{
+  "header": {
+    "title": "Mẫu Thiệp Cưới",
+    "subtitle": "Chọn từ bộ sưu tập mẫu tuyệt đẹp của chúng tôi để bắt đầu hành trình của bạn",
+    "search_placeholder": "Tìm kiếm mẫu..."
+  },
+  "filters": {
+    "all": "Tất cả",
+    "modern": "Hiện đại",
+    "vintage": "Cổ điển",
+    "floral": "Hoa",
+    "minimalist": "Tối giản",
+    "luxury": "Sang trọng",
+    "boho": "Boho",
+    "artistic": "Nghệ thuật",
+    "colors": "Màu sắc"
+  },
+  "card": {
+    "customize": "Tùy chỉnh",
+    "preview": "Xem trước",
+    "new": "Mới",
+    "popular": "Phổ biến"
+  },
+  "pagination": {
+    "next": "Tiếp theo",
+    "prev": "Trước"
+  },
+  "empty": {
+    "title": "Không tìm thấy mẫu nào",
+    "subtitle": "Thử điều chỉnh tìm kiếm hoặc bộ lọc để tìm mẫu bạn mong muốn."
+  },
+  "items": {
+    "1": "Thanh Lịch Hiện Đại",
+    "2": "Vườn Thực Vật",
+    "3": "Trắng Cổ Điển",
+    "4": "Giờ Vàng",
+    "5": "Nét Mộc Mạc",
+    "6": "Giấc Mơ Màu Nước",
+    "7": "Ngôi Sao Đêm",
+    "8": "Ren Cổ Điển"
+  }
+}

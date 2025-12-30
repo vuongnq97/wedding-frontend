@@ -84,7 +84,7 @@ export function Header({ initialUser = null }: HeaderProps) {
           </BaseButton>
           <Link href={ROUTES.HOME} className="flex items-center gap-2">
             <Heart className="h-6 w-6" />
-            <span className="text-foreground font-serif text-xl font-bold tracking-tight md:text-2xl">
+            <span className="text-foreground hover:text-primary font-serif text-xl font-bold tracking-tight md:text-2xl">
               {t('brand')}
             </span>
           </Link>
@@ -106,24 +106,26 @@ export function Header({ initialUser = null }: HeaderProps) {
           {(initialUser ?? user) ? (
             <span className="text-muted-foreground text-sm font-medium">
               {user &&
-                typeof user === 'object' &&
-                'name' in user &&
-                typeof user.name === 'string'
-                ? user.name
-                : <Link href={ROUTES.INVITATION}>{t('my_invitation')}</Link>}
+              typeof user === 'object' &&
+              'name' in user &&
+              typeof user.name === 'string' ? (
+                user.name
+              ) : (
+                <Link href={ROUTES.INVITATION}>{t('my_invitation')}</Link>
+              )}
             </span>
           ) : (
             <Link href={ROUTES.LOGIN}>
               <BaseButton
-                variant="ghost"
-                className="cursor-pointer text-foreground hover:text-primary text-sm font-bold tracking-wider uppercase transition-colors"
+                variant="outline"
+                className="text-foreground hover:text-primary cursor-pointer font-bold tracking-wider uppercase transition-colors"
               >
                 {t('login')}
               </BaseButton>
             </Link>
           )}
           <BaseButton
-            className="shadow-primary/20 h-10 rounded-full px-5 shadow-md"
+            className="shadow-primary/20 -ml-4 h-10 rounded-full px-5 uppercase shadow-md"
             asChild
           >
             <Link href={ROUTES.SIGN_UP}>{t('signup')}</Link>
@@ -134,7 +136,7 @@ export function Header({ initialUser = null }: HeaderProps) {
             size="icon"
             aria-label="Toggle theme"
             onClick={toggleTheme}
-            className="rounded-full"
+            className="-ml-7 rounded-full"
             title={theme === 'dark' ? 'Switch to light' : 'Switch to dark'}
           >
             {theme === 'dark' ? (

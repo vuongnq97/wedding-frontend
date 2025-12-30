@@ -1,0 +1,42 @@
+{
+  "header": {
+    "title": "Wedding Invitation Templates",
+    "subtitle": "Choose from our beautiful collection of templates to start your journey",
+    "search_placeholder": "Search templates..."
+  },
+  "filters": {
+    "all": "All",
+    "modern": "Modern",
+    "vintage": "Vintage",
+    "floral": "Floral",
+    "minimalist": "Minimalist",
+    "luxury": "Luxury",
+    "boho": "Boho",
+    "artistic": "Artistic",
+    "colors": "Colors"
+  },
+  "card": {
+    "customize": "Customize",
+    "preview": "Preview",
+    "new": "New",
+    "popular": "Popular"
+  },
+  "pagination": {
+    "next": "Next",
+    "prev": "Previous"
+  },
+  "empty": {
+    "title": "No templates found",
+    "subtitle": "Try adjusting your search or filters to find what you're looking for."
+  },
+  "items": {
+    "1": "Modern Elegance",
+    "2": "Botanical Garden",
+    "3": "Classic White",
+    "4": "Golden Hour",
+    "5": "Rustic Charm",
+    "6": "Watercolor Dreams",
+    "7": "Midnight Star",
+    "8": "Vintage Lace"
+  }
+}

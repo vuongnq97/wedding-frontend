@@ -1,8 +1,15 @@
+'use client';
+
 import { BaseButton } from '@/components/ui/base-button';
 import { useTranslations } from 'next-intl';
+import { useAuthStore } from '@/stores/auth-store';
+import { ROUTES } from '@/constants/routes';
+import { useRouter } from '@/i18n/routing';
 
 export function HeroSection() {
   const t = useTranslations('home.hero');
+  const router = useRouter();
+  const { user } = useAuthStore();
   return (
     <section className="relative w-full overflow-hidden py-8 md:py-12">
       <div className="mx-auto max-w-[1280px] px-4 md:px-8">
@@ -27,7 +34,16 @@ export function HeroSection() {
             <p className="mx-auto mb-10 max-w-lg text-lg leading-relaxed font-light text-white/95 drop-shadow-md md:text-xl">
               {t('subtitle')}
             </p>
-            <BaseButton className="shadow-primary/40 h-14 px-10 text-lg transition-all hover:-translate-y-1 hover:scale-[1.02]">
+            <BaseButton
+              onClick={() => {
+                if (user) {
+                  router.push(ROUTES.INVITATION);
+                } else {
+                  router.push(ROUTES.LOGIN);
+                }
+              }}
+              className="shadow-primary/40 h-14 px-10 text-lg transition-all hover:-translate-y-1 hover:scale-[1.02]"
+            >
               {t('cta')}
             </BaseButton>
           </div>

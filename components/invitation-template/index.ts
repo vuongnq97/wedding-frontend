@@ -6,4 +6,3 @@ export * from './registry-section';
 export * from './rsvp-section';
 export * from './story-section';
 export * from './header';
-

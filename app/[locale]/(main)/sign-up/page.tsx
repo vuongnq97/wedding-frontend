@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  SignUpForm,
-  SignUpIllustration,
-  SocialLogin,
-} from '@/components/auth';
+import { SignUpForm, SignUpIllustration, SocialLogin } from '@/components/auth';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 
@@ -12,7 +8,7 @@ export default function SignUpPage() {
   const t = useTranslations('signUp');
 
   return (
-    <div className="bg-background relative flex min-h-screen flex-col font-sans text-foreground transition-colors duration-300">
+    <div className="bg-background text-foreground relative flex min-h-screen flex-col font-sans transition-colors duration-300">
       {/* Navbar (Minimal) */}
       <header className="absolute top-0 left-0 z-10 flex w-full items-center justify-between bg-transparent px-6 py-4 md:px-10 lg:px-40">
         <div className="flex items-center gap-3">
@@ -28,14 +24,17 @@ export default function SignUpPage() {
               />
             </svg>
           </div>
-          <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] text-foreground">
+          <h2 className="text-foreground text-lg leading-tight font-bold tracking-[-0.015em]">
             {t('title')}
           </h2>
         </div>
         <div className="hidden sm:block">
-          <p className="text-sm font-medium text-muted-foreground">
+          <p className="text-muted-foreground text-sm font-medium">
             {t('header.already_member')}{' '}
-            <Link className="text-primary font-bold hover:underline" href="/login">
+            <Link
+              className="text-primary font-bold hover:underline"
+              href="/login"
+            >
               {t('header.sign_in')}
             </Link>
           </p>
@@ -44,18 +43,18 @@ export default function SignUpPage() {
 
       {/* Main Layout */}
       <div className="flex flex-1 items-center justify-center p-4 pt-24 md:pt-4">
-        <div className="flex min-h-[640px] w-full max-w-[1024px] flex-col overflow-hidden rounded-2xl bg-surface shadow-xl md:flex-row">
+        <div className="bg-surface flex min-h-[640px] w-full max-w-[1024px] flex-col overflow-hidden rounded-2xl shadow-xl md:flex-row">
           {/* Left Side: Illustration */}
           <SignUpIllustration />
 
           {/* Right Side: Form */}
-          <div className="flex w-full flex-col justify-center bg-surface p-8 md:w-7/12 md:p-12 lg:p-16">
+          <div className="bg-surface flex w-full flex-col justify-center p-8 md:w-7/12 md:p-12 lg:p-16">
             <div className="mx-auto w-full max-w-[480px]">
               <div className="mb-8 text-center md:text-left">
-                <h1 className="mb-3 text-3xl font-bold leading-tight tracking-tight text-foreground">
+                <h1 className="text-foreground mb-3 text-3xl leading-tight font-bold tracking-tight">
                   {t('form_title')}
                 </h1>
-                <p className="text-base font-normal text-muted-foreground">
+                <p className="text-muted-foreground text-base font-normal">
                   {t('form_subtitle')}
                 </p>
               </div>
@@ -68,11 +67,11 @@ export default function SignUpPage() {
 
               {/* Divider */}
               <div className="relative mb-6 flex items-center py-2">
-                <div className="flex-grow border-t border-border" />
-                <span className="mx-4 flex-shrink-0 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                <div className="border-border flex-grow border-t" />
+                <span className="text-muted-foreground mx-4 flex-shrink-0 text-xs font-semibold tracking-wider uppercase">
                   {t('or_register')}
                 </span>
-                <div className="flex-grow border-t border-border" />
+                <div className="border-border flex-grow border-t" />
               </div>
 
               {/* Input Fields */}
@@ -80,16 +79,19 @@ export default function SignUpPage() {
 
               {/* Mobile Footer Link */}
               <div className="mt-8 text-center sm:hidden">
-                <p className="text-sm font-medium text-muted-foreground">
+                <p className="text-muted-foreground text-sm font-medium">
                   {t('header.already_member')}{' '}
-                  <Link className="text-primary font-bold hover:underline" href="/login">
+                  <Link
+                    className="text-primary font-bold hover:underline"
+                    href="/login"
+                  >
                     {t('header.sign_in')}
                   </Link>
                 </p>
               </div>
 
               {/* Terms Links */}
-              <div className="mt-8 flex justify-center gap-6 text-xs text-muted-foreground">
+              <div className="text-muted-foreground mt-8 flex justify-center gap-6 text-xs">
                 <Link className="hover:text-primary transition-colors" href="#">
                   Privacy Policy
                 </Link>
