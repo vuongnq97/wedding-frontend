@@ -31,7 +31,7 @@ export const BaseInput = React.forwardRef<HTMLInputElement, BaseInputProps>(
           ref={ref}
           type={type}
           className={cn(
-            'border-border text-foreground placeholder:text-muted-foreground flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+            'bg-muted focus:border-primary focus:bg-background border-border text-foreground placeholder:text-muted-foreground flex h-10 w-full rounded-md border border-transparent px-3 py-2 text-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
             error && 'border-destructive focus:ring-destructive',
             className
           )}

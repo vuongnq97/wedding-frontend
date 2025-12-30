@@ -43,7 +43,7 @@ export default function PublicInvitationPage() {
       <GiftSection data={data} />
       <GuestbookSection data={data} />
       <Footer data={data} />
-      <MusicPlayer data={data} />
+      {/* <MusicPlayer data={data} /> */}
     </div>
   );
 }

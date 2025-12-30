@@ -1,9 +1,21 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { WeddingData } from '@/types/invitation';
+import { useRsvp } from '@/hooks/use-rsvp';
 import { BaseButton } from '@/components/ui/base-button';
 import { BaseInput } from '@/components/ui/base-input';
-import { WeddingData } from '@/types/invitation';
 
 interface RsvpSectionProps {
   data: WeddingData;
@@ -12,6 +24,7 @@ interface RsvpSectionProps {
 export function RsvpSection({ data }: RsvpSectionProps) {
   const t = useTranslations('invitation.rsvp');
   const locale = useLocale();
+  const { form, isSubmitting, isSuccess, onSubmit } = useRsvp();
 
   const deadline = data.ceremony.date
     ? new Date(data.ceremony.date)
@@ -21,6 +34,39 @@ export function RsvpSection({ data }: RsvpSectionProps) {
     dateStyle: 'long',
   }).format(deadline);
 
+  if (isSuccess) {
+    return (
+      <section className="bg-background py-16 md:py-24" id="rsvp">
+        <div className="layout-container flex justify-center">
+          <div className="bg-surface border-border mx-4 w-full max-w-2xl rounded-2xl border p-8 text-center shadow-xl md:p-12">
+            <div className="mb-6 flex justify-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="h-8 w-8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-foreground mb-4 text-2xl font-bold">
+              {t('success.title')}
+            </h3>
+            <p className="text-muted-foreground">{t('success.message')}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="bg-background py-16 md:py-24" id="rsvp">
       <div className="layout-container flex justify-center">
@@ -29,110 +75,129 @@ export function RsvpSection({ data }: RsvpSectionProps) {
             <p className="text-primary mb-2 text-xs font-bold tracking-widest uppercase">
               {t('title')}
             </p>
-            <h2 className="text-foreground mb-2 text-3xl font-bold">
+            <h2 className="text-foreground mb-2 text-2xl font-bold">
               {t('subtitle', { date: formattedDate })}
             </h2>
           </div>
 
-          <form className="space-y-6">
-            {/* Name */}
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="flex flex-col gap-2">
-                <BaseInput
-                  label={t('firstName.label')}
-                  type="text"
-                  id="firstName"
-                  className="bg-muted border-border"
-                  placeholder={t('firstName.placeholder')}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <BaseInput
-                  label={t('lastName.label')}
-                  type="text"
-                  id="lastName"
-                  className="bg-muted border-border"
-                  placeholder={t('lastName.placeholder')}
-                />
-              </div>
-            </div>
-
-            {/* Email */}
-            <div className="flex flex-col gap-2">
-              <BaseInput
-                label={t('email.label')}
-                type="email"
-                id="email"
-                className="bg-muted border-border"
-                placeholder={t('email.placeholder')}
-              />
-            </div>
-
-            {/* Attendance w/ Custom Radio UI */}
-            <div className="flex flex-col gap-3">
-              <label className="text-foreground text-sm font-semibold">
-                {t('attendance.label')}
-              </label>
-              <div className="flex gap-4">
-                <label className="border-border has-[:checked]:border-primary has-[:checked]:bg-primary/5 hover:bg-muted flex flex-1 cursor-pointer items-center gap-2 rounded-lg border p-3 transition-all">
-                  <input
-                    type="radio"
-                    name="attendance"
-                    className="text-primary focus:ring-primary border-border bg-muted"
-                    defaultChecked
-                  />
-                  <span className="text-foreground text-sm font-medium">
-                    {t('attendance.accept')}
-                  </span>
-                </label>
-                <label className="border-border has-[:checked]:border-primary has-[:checked]:bg-primary/5 hover:bg-muted flex flex-1 cursor-pointer items-center gap-2 rounded-lg border p-3 transition-all">
-                  <input
-                    type="radio"
-                    name="attendance"
-                    className="text-primary focus:ring-primary border-border bg-muted"
-                  />
-                  <span className="text-foreground text-sm font-medium">
-                    {t('attendance.decline')}
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            {/* Guests */}
-            <div className="flex flex-col gap-2">
-              <BaseInput
-                label={t('guests')}
-                type="number"
-                id="guests"
-                min="1"
-                defaultValue="1"
-                className="bg-muted border-border"
-              />
-            </div>
-
-            {/* Message */}
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="message"
-                className="text-foreground text-sm font-semibold"
-              >
-                {t('message.label')}
-              </label>
-              <textarea
-                id="message"
-                rows={3}
-                className="border-border bg-muted text-foreground focus:ring-primary focus:border-primary resize-none rounded-lg px-4 py-3 transition-all outline-none"
-                placeholder={t('message.placeholder')}
-              />
-            </div>
-
-            <BaseButton
-              type="submit"
-              className="bg-primary hover:bg-primary/90 shadow-primary/20 h-auto w-full rounded-xl py-4 text-lg font-bold text-white shadow-lg transition-all active:scale-[0.99]"
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit, (errors) =>
+                console.log('Form Validation Errors:', errors)
+              )}
+              className="space-y-6"
             >
-              {t('submit')}
-            </BaseButton>
-          </form>
+              {/* Name */}
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('fullName.label')}</FormLabel>
+                    <FormControl>
+                      <BaseInput
+                        placeholder={t('fullName.placeholder')}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Attendance */}
+              <FormField
+                control={form.control}
+                name="attending"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>{t('attendance.label')}</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex gap-4"
+                      >
+                        <FormItem className="flex-1">
+                          <FormControl>
+                            <label className="border-border has-[:checked]:border-primary has-[:checked]:bg-primary/5 hover:bg-muted flex cursor-pointer items-center gap-2 rounded-lg border p-3 transition-all">
+                              <RadioGroupItem value="yes" />
+                              <span className="text-foreground text-sm font-medium">
+                                {t('attendance.accept')}
+                              </span>
+                            </label>
+                          </FormControl>
+                        </FormItem>
+                        <FormItem className="flex-1">
+                          <FormControl>
+                            <label className="border-border has-[:checked]:border-primary has-[:checked]:bg-primary/5 hover:bg-muted flex cursor-pointer items-center gap-2 rounded-lg border p-3 transition-all">
+                              <RadioGroupItem value="no" />
+                              <span className="text-foreground text-sm font-medium">
+                                {t('attendance.decline')}
+                              </span>
+                            </label>
+                          </FormControl>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Guests */}
+              <FormField
+                control={form.control}
+                name="guests"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('guests')}</FormLabel>
+                    <FormControl>
+                      <BaseInput
+                        type="number"
+                        min="1"
+                        max="10"
+                        className="bg-muted"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseInt(e.target.value))
+                        }
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Message */}
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('message.label')}</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder={t('message.placeholder')}
+                        className="bg-muted border-border resize-none"
+                        rows={3}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <BaseButton
+                type="submit"
+                disabled={isSubmitting || !form.formState.isValid}
+                className="bg-primary hover:bg-primary/90 shadow-primary/20 h-auto w-full rounded-xl py-4 text-lg font-bold text-white shadow-lg transition-all active:scale-[0.99]"
+              >
+                {isSubmitting ? t('submitting') : t('submit')}
+              </BaseButton>
+            </form>
+          </Form>
         </div>
       </div>
     </section>

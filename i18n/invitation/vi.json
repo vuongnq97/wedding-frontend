@@ -98,31 +98,32 @@
     "subtitle": "Một cái nhìn thoáng qua về cuộc sống của chúng tôi."
   },
   "rsvp": {
-    "title": "RSVP",
+    "title": "Xác nhận tham dự",
     "subtitle": "Vui lòng phản hồi trước ngày {date}",
-    "firstName": {
-      "label": "Tên",
-      "placeholder": "Nhập tên của bạn"
-    },
-    "lastName": {
-      "label": "Họ",
-      "placeholder": "Nhập họ của bạn"
+    "fullName": {
+      "label": "Họ và tên",
+      "placeholder": "Nhập họ tên của bạn"
     },
     "email": {
       "label": "Địa chỉ Email",
-      "placeholder": "ten@example.com"
+      "placeholder": "Nhập email của bạn"
     },
     "attendance": {
       "label": "Bạn sẽ tham dự chứ?",
       "accept": "Sẽ tham dự",
       "decline": "Rất tiếc không thể tham dự"
     },
-    "guests": "Số lượng khách",
+    "guests": "Số lượng khách tham dự",
     "message": {
-      "label": "Lời nhắn (Tùy chọn)",
+      "label": "Lời nhắn",
       "placeholder": "Viết lời nhắn gửi đến cặp đôi..."
     },
-    "submit": "Gửi xác nhận"
+    "submit": "Gửi xác nhận",
+    "submitting": "Đang gửi...",
+    "success": {
+      "title": "Cảm ơn bạn!",
+      "message": "Phản hồi của bạn đã được gửi thành công. Chúc bạn một ngày tốt lành!"
+    }
   },
   "gift": {
     "title": "Hộp mừng cưới",
@@ -153,10 +154,14 @@
         "name": "Thu Thùy",
         "rel": "Đồng nghiệp"
       }
+    },
+    "attending": {
+      "yes": "Sẽ tham dự",
+      "no": "Không tham dự"
     }
   },
   "footer": {
-    "copyright": "© 2024 Jane & John's Wedding. With love.",
+    "copyright": "© 2025 {name}'s Wedding. With love.",
     "links": {
       "instagram": "Instagram",
       "registry": "Quà cưới",

@@ -89,14 +89,12 @@ function PersonInput({
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <BaseInput
               label={t('fullName')}
-              className="bg-muted focus:border-primary focus:bg-background border-transparent"
               placeholder={placeholder}
               value={data[type].fullName}
               onChange={(e) => updateField([type, 'fullName'], e.target.value)}
             />
             <BaseInput
               label={t('birthOrder')}
-              className="bg-muted focus:border-primary focus:bg-background border-transparent"
               placeholder={birthOrderPlaceholder}
               value={data[type].birthOrder}
               onChange={(e) =>

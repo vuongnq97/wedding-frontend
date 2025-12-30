@@ -1,8 +1,13 @@
-'use client';
-
+import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Quote } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 import { WeddingData } from '@/types/invitation';
+import { useRsvp } from '@/hooks/use-rsvp';
 
 interface GuestbookSectionProps {
   data: WeddingData;
@@ -10,17 +15,15 @@ interface GuestbookSectionProps {
 
 export function GuestbookSection({ data }: GuestbookSectionProps) {
   const t = useTranslations('invitation.guestbook');
+  const { wishes, fetchData } = useRsvp();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   if (!data.guestbookEnabled) {
     return null;
   }
-
-  const wishes = ['wish1', 'wish2', 'wish3'].map((key) => ({
-    text: t(`wishes.${key}.text`),
-    initials: t(`wishes.${key}.initials`),
-    name: t(`wishes.${key}.name`),
-    rel: t(`wishes.${key}.rel`),
-  }));
 
   return (
     <section className="bg-background py-16" id="wishes">
@@ -32,30 +35,51 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
           <p className="text-muted-foreground mt-4">{t('subtitle')}</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          spaceBetween={24}
+          slidesPerView={1}
+          loop
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
+          className="pb-12"
+        >
           {wishes.map((wish, index) => (
-            <div
-              key={index}
-              className="bg-surface border-border relative rounded-xl border p-6 shadow-sm"
-            >
-              <Quote className="text-primary/20 absolute top-6 right-6 h-8 w-8 fill-current" />
-              <p className="text-foreground mb-6 leading-relaxed italic">
-                {wish.text}
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="bg-primary/20 text-primary flex h-10 w-10 items-center justify-center rounded-full font-bold">
-                  {wish.initials}
-                </div>
-                <div>
-                  <p className="text-foreground text-sm font-bold">
-                    {wish.name}
-                  </p>
-                  <p className="text-muted-foreground text-xs">{wish.rel}</p>
+            <SwiperSlide key={index} className="h-auto">
+              <div className="bg-surface border-border relative h-full rounded-xl border p-6 shadow-sm">
+                <Quote className="text-primary/20 absolute top-6 right-6 h-8 w-8 fill-current" />
+                <p className="text-foreground mb-6 leading-relaxed italic">
+                  {wish.message}
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="bg-primary/20 text-primary flex h-10 w-10 items-center justify-center rounded-full font-bold">
+                    {wish.fullName.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-foreground text-sm font-bold">
+                      {wish.fullName}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {wish.attending === 'yes'
+                        ? t('attending.yes')
+                        : t('attending.no')}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );

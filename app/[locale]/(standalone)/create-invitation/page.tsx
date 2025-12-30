@@ -59,7 +59,7 @@ export default function CreateInvitationPage() {
           <ThankYouSection data={data} updateField={updateField} />
           <GuestbookSection data={data} updateField={updateField} />
           <GiftSection data={data} updateField={updateField} />
-          <MusicSection data={data} updateField={updateField} />
+          {/* <MusicSection data={data} updateField={updateField} /> */}
           <AdsSection data={data} updateField={updateField} />
         </div>
       </main>

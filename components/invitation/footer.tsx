@@ -44,7 +44,11 @@ export function Footer({ data }: FooterProps) {
           </a>
         </div>
         <div className="h-[1px] w-16 bg-white/20"></div>
-        <p className="text-sm text-white/40">{t('copyright')}</p>
+        <p className="text-sm text-white/40">
+          {t('copyright', {
+            name: `${data.groom.informalName || 'John'} & ${data.bride.informalName || 'Jane'}`,
+          })}
+        </p>
       </div>
     </footer>
   );
