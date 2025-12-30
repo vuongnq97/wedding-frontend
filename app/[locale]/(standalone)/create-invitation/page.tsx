@@ -41,10 +41,10 @@ export default function CreateInvitationPage() {
 
             <main className="flex-1 w-full max-w-5xl mx-auto p-4 md:p-8">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                    <h1 className="text-3xl font-bold text-foreground mb-2">
                         {t('title')}
                     </h1>
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="text-muted-foreground">
                         {t('subtitle')}
                     </p>
                 </div>

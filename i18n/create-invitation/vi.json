@@ -67,7 +67,7 @@
             "address": "Địa Chỉ"
         },
         "map": {
-            "title": "Cấu Hình Bản Đồ",
+            "title": "Bản Đồ",
             "showSection": "Hiển Thị",
             "pasteLink": "Nhập địa điểm...",
             "instruction": "Tìm kiếm địa điểm tổ chức để tự động điền địa chỉ.",

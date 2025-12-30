@@ -46,7 +46,7 @@ export function SocialLogin() {
         variant="ghost"
         className="border-border bg-surface hover:bg-muted flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border transition-colors"
       >
-        <Facebook className="h-5 w-5 text-[#1877F2]" />
+        <Facebook className="h-5 w-5 text-blue-600" />
         <span className="text-foreground text-sm font-medium">
           {t('facebook')}
         </span>

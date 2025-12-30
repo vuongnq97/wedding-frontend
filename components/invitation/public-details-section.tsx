@@ -18,7 +18,7 @@ export function PublicDetailsSection({ data }: PublicDetailsSectionProps) {
     }
 
     return (
-        <section className="py-16 md:py-24 bg-background-light dark:bg-background-dark" id="details">
+        <section className="py-16 md:py-24 bg-background" id="details">
             <div className="layout-container max-w-[1100px] mx-auto px-4 sm:px-10">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="flex flex-col gap-8">
@@ -26,10 +26,10 @@ export function PublicDetailsSection({ data }: PublicDetailsSectionProps) {
                             <p className="text-primary font-bold uppercase tracking-widest text-xs mb-2">
                                 {t('subtitle')}
                             </p>
-                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
                                 {t('title')}
                             </h2>
-                            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+                            <p className="text-muted-foreground text-lg leading-relaxed">
                                 {t('desc')}
                             </p>
                         </div>
@@ -37,15 +37,15 @@ export function PublicDetailsSection({ data }: PublicDetailsSectionProps) {
                         <div className="space-y-6">
                             {/* Ceremony Date & Time */}
                             {data.ceremony.show && (
-                                <div className="flex gap-4 items-start p-4 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                                <div className="flex gap-4 items-start p-4 rounded-xl bg-card shadow-sm border border-border">
                                     <div className="bg-primary/10 text-primary p-3 rounded-lg">
                                         <Calendar className="w-6 h-6" />
                                     </div>
                                     <div>
-                                        <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                                        <h4 className="text-lg font-bold text-foreground">
                                             {t('time.date')}
                                         </h4>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm">
+                                        <p className="text-muted-foreground text-sm">
                                             {data.ceremony.date} {data.ceremony.time ? `- ${data.ceremony.time}` : ''}
                                         </p>
                                     </div>
@@ -54,15 +54,15 @@ export function PublicDetailsSection({ data }: PublicDetailsSectionProps) {
 
                             {/* Location */}
                             {data.map.show && (
-                                <div className="flex gap-4 items-start p-4 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                                <div className="flex gap-4 items-start p-4 rounded-xl bg-card shadow-sm border border-border">
                                     <div className="bg-primary/10 text-primary p-3 rounded-lg">
                                         <MapPin className="w-6 h-6" />
                                     </div>
                                     <div>
-                                        <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                                        <h4 className="text-lg font-bold text-foreground">
                                             {data.map.locationName || t('location.name')}
                                         </h4>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm">
+                                        <p className="text-muted-foreground text-sm">
                                             {data.map.locationAddress || t('location.address')}
                                         </p>
                                         {data.map.link && (
@@ -80,15 +80,15 @@ export function PublicDetailsSection({ data }: PublicDetailsSectionProps) {
                             )}
 
                             {/* Reception */}
-                            <div className="flex gap-4 items-start p-4 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                            <div className="flex gap-4 items-start p-4 rounded-xl bg-card shadow-sm border border-border">
                                 <div className="bg-primary/10 text-primary p-3 rounded-lg">
                                     <Wine className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                                    <h4 className="text-lg font-bold text-foreground">
                                         {t('reception.name')}
                                     </h4>
-                                    <p className="text-gray-500 dark:text-gray-400 text-sm">
+                                    <p className="text-muted-foreground text-sm">
                                         {data.reception.date} {data.reception.time ? `- ${data.reception.time}` : ''}
                                         <br />
                                         {data.reception.address}
@@ -111,11 +111,11 @@ export function PublicDetailsSection({ data }: PublicDetailsSectionProps) {
                             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
 
                             <div className="absolute bottom-6 left-6 right-6">
-                                <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur p-4 rounded-xl border border-white/20">
+                                <div className="bg-background/90 backdrop-blur p-4 rounded-xl border border-white/20">
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-xs font-bold text-primary uppercase">{t('venueLocation')}</p>
-                                            <p className="text-sm font-medium text-gray-900 dark:text-white">{data.map.locationName || t('location.name')}</p>
+                                            <p className="text-sm font-medium text-foreground">{data.map.locationName || t('location.name')}</p>
                                         </div>
                                         {data.map.link && (
                                             <BaseButton

@@ -7,7 +7,8 @@
             "details": "Chi tiết",
             "gallery": "Thư viện ảnh"
         },
-        "rsvp": "RSVP"
+        "rsvp": "RSVP",
+        "createInvitation": "Tạo Thiệp Mời"
     },
     "hero": {
         "tagline": "Chúng tôi sắp kết hôn",
@@ -97,6 +98,18 @@
     "rsvp": {
         "title": "RSVP",
         "subtitle": "Vui lòng phản hồi trước ngày 1 tháng 10 năm 2024",
+        "firstName": {
+            "label": "Tên",
+            "placeholder": "Nhập tên của bạn"
+        },
+        "lastName": {
+            "label": "Họ",
+            "placeholder": "Nhập họ của bạn"
+        },
+        "email": {
+            "label": "Địa chỉ Email",
+            "placeholder": "ten@example.com"
+        },
         "attendance": {
             "label": "Bạn sẽ tham dự chứ?",
             "accept": "Sẽ tham dự",

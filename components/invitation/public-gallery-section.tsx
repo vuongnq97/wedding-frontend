@@ -18,13 +18,13 @@ export function PublicGallerySection({ data }: PublicGallerySectionProps) {
     }
 
     return (
-        <section className="py-16 bg-white dark:bg-gray-900/50" id="gallery">
+        <section className="py-16 bg-surface" id="gallery">
             <div className="layout-container max-w-[1280px] mx-auto px-4 sm:px-10">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                         {t('title')}
                     </h2>
-                    <p className="mt-4 text-gray-600 dark:text-gray-400">
+                    <p className="mt-4 text-muted-foreground">
                         {t('subtitle')}
                     </p>
                 </div>

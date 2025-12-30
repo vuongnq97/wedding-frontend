@@ -83,8 +83,8 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<Map className="w-5 h-5" />}
-            iconBgColor="bg-indigo-50 dark:bg-indigo-900/20"
-            iconTextColor="text-indigo-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-primary"
             rightAction={
                 <Toggle
                     checked={data.map.show}
@@ -96,19 +96,19 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
             <div className="space-y-4 mb-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <label className="space-y-1.5">
-                        <span className="text-xs font-semibold text-gray-500">
+                        <span className="text-xs font-semibold text-muted-foreground">
                             {t('locationName')}
                         </span>
                         <input
                             type="text"
-                            className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5"
+                            className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5"
                             value={data.map.locationName}
                             onChange={(e) => updateField(['map', 'locationName'], e.target.value)}
                             placeholder="e.g. The Botanical Gardens"
                         />
                     </label>
                     <label className="space-y-1.5 relative">
-                        <span className="text-xs font-semibold text-gray-500">
+                        <span className="text-xs font-semibold text-muted-foreground">
                             {t('address')}
                         </span>
                         {false ? (
@@ -120,13 +120,13 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
                             <input
                                 type="text"
                                 disabled
-                                className="w-full bg-gray-100 dark:bg-gray-800 border border-transparent rounded-lg text-sm px-3 py-2.5 cursor-not-allowed"
+                                className="w-full bg-muted border border-transparent rounded-lg text-sm px-3 py-2.5 cursor-not-allowed"
                                 value="Loading Google Maps..."
                             />
                         )}
                         {/* Fallback/Correction input if needed, or display the current value */}
                         {data.map.locationAddress && (
-                            <p className="text-xs text-gray-500 mt-1 truncate">
+                            <p className="text-xs text-muted-foreground mt-1 truncate">
                                 Selected: {data.map.locationAddress}
                             </p>
                         )}
@@ -134,13 +134,13 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
                 </div>
 
                 {!process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (
-                    <div className="bg-yellow-50 dark:bg-yellow-900/10 p-3 rounded-lg border border-yellow-200 dark:border-yellow-900/30 text-xs text-yellow-700 dark:text-yellow-400">
+                    <div className="bg-muted p-3 rounded-lg border border-border text-xs text-muted-foreground">
                         ⚠ Google Maps API Key is missing. Please add <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to your environment variables.
                     </div>
                 )}
             </div>
 
-            <div className="bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden relative group h-64">
+            <div className="bg-muted rounded-lg border border-border overflow-hidden relative group h-64">
                 {isLoaded && data.map.coords ? (
                     <GoogleMap
                         mapContainerStyle={mapContainerStyle}
@@ -150,8 +150,8 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
                         <Marker position={data.map.coords} />
                     </GoogleMap>
                 ) : (
-                    <div className="flex h-full flex-col items-center justify-center text-gray-400 gap-2">
-                        <div className="size-12 bg-white dark:bg-white/10 rounded-full flex items-center justify-center shadow-sm">
+                    <div className="flex h-full flex-col items-center justify-center text-muted-foreground gap-2">
+                        <div className="size-12 bg-background rounded-full flex items-center justify-center shadow-sm">
                             <MapPin className="w-6 h-6" />
                         </div>
                         <div className="text-center px-4">

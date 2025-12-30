@@ -22,19 +22,19 @@ export function FamilySection({ data, updateField }: FamilySectionProps) {
             </h4>
             <div className="space-y-4">
                 <input
-                    className="w-full bg-gray-50 dark:bg-white/5 border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-4 py-3"
+                    className="w-full bg-muted border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-4 py-3"
                     placeholder={t('fatherName')}
                     value={data[type].fatherName}
                     onChange={(e) => updateField([type, 'fatherName'], e.target.value)}
                 />
                 <input
-                    className="w-full bg-gray-50 dark:bg-white/5 border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-4 py-3"
+                    className="w-full bg-muted border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-4 py-3"
                     placeholder={t('motherName')}
                     value={data[type].motherName}
                     onChange={(e) => updateField([type, 'motherName'], e.target.value)}
                 />
                 <textarea
-                    className="w-full bg-gray-50 dark:bg-white/5 border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-4 py-3 resize-none"
+                    className="w-full bg-muted border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-4 py-3 resize-none"
                     placeholder={t('address')}
                     rows={3}
                     value={data[type].address}
@@ -48,8 +48,8 @@ export function FamilySection({ data, updateField }: FamilySectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<Users className="w-5 h-5" />}
-            iconBgColor="bg-green-50 dark:bg-green-900/20"
-            iconTextColor="text-green-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-primary"
         >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {renderFamilyInputs('groom', t('groomFamily'))}

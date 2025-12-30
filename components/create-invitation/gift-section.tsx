@@ -49,18 +49,18 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
     const renderAccountList = (type: 'groom' | 'bride', title: string) => (
         <div className="space-y-3">
             <div className="flex items-center justify-between">
-                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                <h4 className="text-sm font-semibold text-foreground">
                     {title}
                 </h4>
             </div>
             {data.bankAccounts[type].map((account, index) => (
                 <div
                     key={account.id}
-                    className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-white/5 relative group"
+                    className="p-3 rounded-lg border border-border bg-muted relative group"
                 >
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <input
-                            className="bg-white dark:bg-black/20 border border-gray-200 dark:border-gray-700 rounded px-2 py-1.5 text-xs w-full"
+                            className="bg-surface border border-border rounded px-2 py-1.5 text-xs w-full"
                             placeholder={t('bankName')}
                             value={account.bankName}
                             onChange={(e) =>
@@ -68,7 +68,7 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
                             }
                         />
                         <input
-                            className="bg-white dark:bg-black/20 border border-gray-200 dark:border-gray-700 rounded px-2 py-1.5 text-xs w-full"
+                            className="bg-surface border border-border rounded px-2 py-1.5 text-xs w-full"
                             placeholder={t('accountNumber')}
                             value={account.accountNumber}
                             onChange={(e) =>
@@ -76,7 +76,7 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
                             }
                         />
                         <input
-                            className="bg-white dark:bg-black/20 border border-gray-200 dark:border-gray-700 rounded px-2 py-1.5 text-xs w-full"
+                            className="bg-surface border border-border rounded px-2 py-1.5 text-xs w-full"
                             placeholder={t('accountHolder')}
                             value={account.accountHolder}
                             onChange={(e) =>
@@ -93,13 +93,13 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
                 </div>
             ))}
             {data.bankAccounts[type].length === 0 && (
-                <div className="text-center py-4 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-lg text-xs text-gray-400">
+                <div className="text-center py-4 border-2 border-dashed border-border rounded-lg text-xs text-muted-foreground">
                     {t('noAccounts')}
                 </div>
             )}
             <button
                 onClick={() => addAccount(type)}
-                className="w-full h-12 border border-dashed border-gray-300 dark:border-gray-600 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-white/5 hover:border-primary transition-all text-sm font-medium text-gray-600 dark:text-gray-300"
+                className="w-full h-12 border border-dashed border-border rounded-lg flex items-center justify-center gap-2 hover:bg-muted hover:border-primary transition-all text-sm font-medium text-muted-foreground"
             >
                 <Plus className="w-5 h-5" /> {t('addBankAccount')}
             </button>
@@ -110,12 +110,12 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<Gift className="w-5 h-5" />}
-            iconBgColor="bg-green-50 dark:bg-green-900/20"
-            iconTextColor="text-green-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-primary"
         >
             <div className="space-y-6">
                 {renderAccountList('groom', t('groomFamily'))}
-                <div className="h-px bg-gray-100 dark:bg-gray-800"></div>
+                <div className="h-px bg-border"></div>
                 {renderAccountList('bride', t('brideFamily'))}
             </div>
         </SectionWrapper>

@@ -10,3 +10,4 @@ export * from './public-rsvp-section';
 export * from './public-gift-section';
 export * from './public-guestbook-section';
 export * from './public-footer';
+export * from './public-music-player';

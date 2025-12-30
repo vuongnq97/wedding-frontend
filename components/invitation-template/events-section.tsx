@@ -34,7 +34,7 @@ export function EventsSection() {
                                 </p>
                             </div>
                             <div className="absolute left-1/2 flex -translate-x-1/2 transform flex-col items-center">
-                                <div className="bg-primary/10 ring-background z-10 flex size-12 items-center justify-center rounded-full text-[#e8305e] ring-4">
+                                <div className="bg-primary/10 ring-background z-10 flex size-12 items-center justify-center rounded-full text-primary ring-4">
                                     <HeartIcon />
                                 </div>
                             </div>
@@ -45,7 +45,7 @@ export function EventsSection() {
                         <div className="relative flex items-center justify-between">
                             <div className="w-5/12 pr-8 text-right"></div>
                             <div className="absolute left-1/2 flex -translate-x-1/2 transform flex-col items-center">
-                                <div className="bg-primary/10 ring-background z-10 flex size-12 items-center justify-center rounded-full text-[#e8305e] ring-4">
+                                <div className="bg-primary/10 ring-background z-10 flex size-12 items-center justify-center rounded-full text-primary ring-4">
                                     <GlassWater className="h-6 w-6" />
                                 </div>
                             </div>
@@ -76,7 +76,7 @@ export function EventsSection() {
                                 </p>
                             </div>
                             <div className="absolute left-1/2 flex -translate-x-1/2 transform flex-col items-center">
-                                <div className="bg-primary/10 ring-background z-10 flex size-12 items-center justify-center rounded-full text-[#e8305e] ring-4">
+                                <div className="bg-primary/10 ring-background z-10 flex size-12 items-center justify-center rounded-full text-primary ring-4">
                                     <Music className="h-6 w-6" />
                                 </div>
                             </div>
