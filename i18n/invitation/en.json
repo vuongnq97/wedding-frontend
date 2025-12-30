@@ -97,6 +97,18 @@
     "rsvp": {
         "title": "RSVP",
         "subtitle": "Please respond by October 1st, 2024",
+        "firstName": {
+            "label": "First Name",
+            "placeholder": "Enter your first name"
+        },
+        "lastName": {
+            "label": "Last Name",
+            "placeholder": "Enter your last name"
+        },
+        "email": {
+            "label": "Email Address",
+            "placeholder": "name@example.com"
+        },
         "attendance": {
             "label": "Will you be joining us?",
             "accept": "Joyfully Accept",

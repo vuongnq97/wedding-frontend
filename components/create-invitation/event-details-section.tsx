@@ -25,8 +25,8 @@ export function EventDetailsSection({
             <SectionWrapper
                 title={t('ceremony')}
                 icon={<Calendar className="w-5 h-5" />}
-                iconBgColor="bg-orange-50 dark:bg-orange-900/20"
-                iconTextColor="text-orange-600"
+                iconBgColor="bg-muted"
+                iconTextColor="text-primary"
                 rightAction={
                     <Toggle
                         checked={data.ceremony.show}
@@ -37,11 +37,11 @@ export function EventDetailsSection({
             >
                 <div className="flex flex-col md:flex-row gap-4 mb-4">
                     <label className="flex flex-col w-full md:w-1/2">
-                        <span className="text-xs font-medium text-gray-500 mb-1.5">
+                        <span className="text-xs font-medium text-muted-foreground mb-1.5">
                             {t('date')}
                         </span>
                         <input
-                            className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
+                            className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
                             type="date"
                             value={data.ceremony.date}
                             onChange={(e) =>
@@ -50,11 +50,11 @@ export function EventDetailsSection({
                         />
                     </label>
                     <label className="flex flex-col w-full md:w-1/2">
-                        <span className="text-xs font-medium text-gray-500 mb-1.5">
+                        <span className="text-xs font-medium text-muted-foreground mb-1.5">
                             {t('time')}
                         </span>
                         <input
-                            className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
+                            className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
                             type="time"
                             value={data.ceremony.time}
                             onChange={(e) =>
@@ -76,16 +76,16 @@ export function EventDetailsSection({
             <SectionWrapper
                 title={t('reception')}
                 icon={<PartyPopper className="w-5 h-5" />}
-                iconBgColor="bg-pink-50 dark:bg-pink-900/20"
-                iconTextColor="text-pink-600"
+                iconBgColor="bg-muted"
+                iconTextColor="text-primary"
             >
                 <div className="flex flex-col md:flex-row gap-4 mb-4">
                     <label className="flex flex-col w-full md:w-1/2">
-                        <span className="text-xs font-medium text-gray-500 mb-1.5">
+                        <span className="text-xs font-medium text-muted-foreground mb-1.5">
                             {t('date')}
                         </span>
                         <input
-                            className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
+                            className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
                             type="date"
                             value={data.reception.date}
                             onChange={(e) =>
@@ -94,11 +94,11 @@ export function EventDetailsSection({
                         />
                     </label>
                     <label className="flex flex-col w-full md:w-1/2">
-                        <span className="text-xs font-medium text-gray-500 mb-1.5">
+                        <span className="text-xs font-medium text-muted-foreground mb-1.5">
                             {t('time')}
                         </span>
                         <input
-                            className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
+                            className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
                             type="time"
                             value={data.reception.time}
                             onChange={(e) =>
@@ -108,11 +108,11 @@ export function EventDetailsSection({
                     </label>
                 </div>
                 <label className="flex flex-col w-full">
-                    <span className="text-xs font-medium text-gray-500 mb-1.5">
+                    <span className="text-xs font-medium text-muted-foreground mb-1.5">
                         {t('address')}
                     </span>
                     <textarea
-                        className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 resize-none transition-all"
+                        className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 resize-none transition-all"
                         rows={2}
                         value={data.reception.address}
                         onChange={(e) =>

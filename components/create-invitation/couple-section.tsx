@@ -50,15 +50,15 @@ function PersonInput({ type, title, placeholder, birthOrderPlaceholder, data, up
     return (
         <div className="space-y-4">
             <div className="flex items-center gap-2 mb-2">
-                <h4 className="font-semibold text-gray-700 dark:text-gray-300">
+                <h4 className="font-semibold text-foreground">
                     {title}
                 </h4>
-                <div className="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div>
+                <div className="h-px flex-1 bg-border"></div>
             </div>
             <div className="flex gap-4">
                 <div
                     onClick={handleUploadClick}
-                    className="size-24 rounded-full bg-gray-100 dark:bg-white/5 flex-shrink-0 flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-600 cursor-pointer hover:border-primary hover:text-primary transition-colors overflow-hidden relative group"
+                    className="size-24 rounded-full bg-muted flex-shrink-0 flex items-center justify-center border-2 border-dashed border-border cursor-pointer hover:border-primary hover:text-primary transition-colors overflow-hidden relative group"
                 >
                     <input
                         type="file"
@@ -75,17 +75,17 @@ function PersonInput({ type, title, placeholder, birthOrderPlaceholder, data, up
                             className="w-full h-full object-cover"
                         />
                     ) : (
-                        <Upload className="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors" />
+                        <Upload className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
                     )}
                 </div>
                 <div className="flex-1 space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <label className="flex flex-col">
-                            <span className="text-xs font-medium text-gray-500 mb-1.5">
+                            <span className="text-xs font-medium text-muted-foreground mb-1.5">
                                 {t('fullName')}
                             </span>
                             <input
-                                className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
+                                className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
                                 placeholder={placeholder}
                                 value={data[type].fullName}
                                 onChange={(e) =>
@@ -94,11 +94,11 @@ function PersonInput({ type, title, placeholder, birthOrderPlaceholder, data, up
                             />
                         </label>
                         <label className="flex flex-col">
-                            <span className="text-xs font-medium text-gray-500 mb-1.5">
+                            <span className="text-xs font-medium text-muted-foreground mb-1.5">
                                 {t('birthOrder')}
                             </span>
                             <input
-                                className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
+                                className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 transition-all"
                                 placeholder={birthOrderPlaceholder}
                                 value={data[type].birthOrder}
                                 onChange={(e) =>
@@ -120,8 +120,8 @@ export function CoupleSection({ data, updateField }: CoupleSectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<Heart className="w-5 h-5" />}
-            iconBgColor="bg-rose-50 dark:bg-rose-900/20"
-            iconTextColor="text-rose-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-primary"
         >
             <div className="space-y-8">
                 <PersonInput

@@ -19,11 +19,11 @@ export function ThankYouSection({ data, updateField }: SectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<MessageCircle className="w-5 h-5" />}
-            iconBgColor="bg-teal-50 dark:bg-teal-900/20"
-            iconTextColor="text-teal-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-primary"
         >
             <textarea
-                className="w-full bg-gray-50 dark:bg-white/5 border border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 resize-none transition-all"
+                className="w-full bg-muted border border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 resize-none transition-all"
                 rows={3}
                 value={data.thankYouMessage}
                 onChange={(e) => updateField(['thankYouMessage'], e.target.value)}
@@ -38,8 +38,8 @@ export function GuestbookSection({ data, updateField }: SectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<BookOpen className="w-5 h-5" />}
-            iconBgColor="bg-orange-50 dark:bg-orange-900/20"
-            iconTextColor="text-orange-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-primary"
             rightAction={
                 <Toggle
                     checked={data.guestbookEnabled}
@@ -64,8 +64,8 @@ export function AdsSection({ data, updateField }: SectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<Megaphone className="w-5 h-5" />}
-            iconBgColor="bg-gray-100 dark:bg-gray-800"
-            iconTextColor="text-gray-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-muted-foreground"
             rightAction={
                 <span
                     className={`px-2 py-1 rounded ${data.showAds
@@ -78,7 +78,7 @@ export function AdsSection({ data, updateField }: SectionProps) {
             }
         >
             <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-muted-foreground">
                     {t('description')}
                 </p>
                 <button

@@ -48,14 +48,14 @@ function MilestoneItem({ milestone, index, updateMilestone, removeMilestone, t }
     return (
         <div className="relative">
             {/* Timeline Dot */}
-            <div className="absolute -left-[35px] top-6 size-7 rounded-full bg-white dark:bg-surface-dark border-4 border-pink-100 dark:border-pink-900/30 flex items-center justify-center">
+            <div className="absolute -left-[35px] top-6 size-7 rounded-full bg-surface border-4 border-primary/20 flex items-center justify-center">
                 <div className="size-2.5 rounded-full bg-pink-500"></div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-white/5 rounded-xl p-5 border border-gray-100 dark:border-gray-800 flex flex-col md:flex-row gap-6 relative group">
+            <div className="bg-muted rounded-xl p-5 border border-border flex flex-col md:flex-row gap-6 relative group">
                 <button
                     onClick={() => removeMilestone(index)}
-                    className="absolute top-2 right-2 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg opacity-0 group-hover:opacity-100 transition-all z-10"
+                    className="absolute top-2 right-2 p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all z-10"
                 >
                     <Trash2 className="w-4 h-4" />
                 </button>
@@ -64,7 +64,7 @@ function MilestoneItem({ milestone, index, updateMilestone, removeMilestone, t }
                 <div className="shrink-0">
                     <div
                         onClick={handleUploadClick}
-                        className="size-32 rounded-lg bg-white dark:bg-black/20 border-2 border-dashed border-gray-300 dark:border-gray-700 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:border-pink-500 hover:text-pink-500 transition-colors relative overflow-hidden"
+                        className="size-32 rounded-lg bg-surface border-2 border-dashed border-border flex flex-col items-center justify-center text-muted-foreground cursor-pointer hover:border-pink-500 hover:text-pink-500 transition-colors relative overflow-hidden"
                     >
                         <input
                             type="file"
@@ -93,25 +93,25 @@ function MilestoneItem({ milestone, index, updateMilestone, removeMilestone, t }
                 <div className="flex-1 space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <label className="space-y-1.5">
-                            <span className="text-xs font-semibold text-gray-500">
+                            <span className="text-xs font-semibold text-muted-foreground">
                                 {t('dateYear')}
                             </span>
                             <div className="relative">
                                 <input
                                     type="date"
-                                    className="w-full bg-white dark:bg-black/20 border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5"
+                                    className="w-full bg-surface border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5"
                                     value={milestone.date}
                                     onChange={(e) => updateMilestone(index, 'date', e.target.value)}
                                 />
                             </div>
                         </label>
                         <label className="space-y-1.5">
-                            <span className="text-xs font-semibold text-gray-500">
+                            <span className="text-xs font-semibold text-muted-foreground">
                                 {t('milestoneTitle')}
                             </span>
                             <input
                                 type="text"
-                                className="w-full bg-white dark:bg-black/20 border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5"
+                                className="w-full bg-surface border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5"
                                 placeholder={t('milestonePlaceholder')}
                                 value={milestone.title}
                                 onChange={(e) => updateMilestone(index, 'title', e.target.value)}
@@ -119,11 +119,11 @@ function MilestoneItem({ milestone, index, updateMilestone, removeMilestone, t }
                         </label>
                     </div>
                     <label className="space-y-1.5 block">
-                        <span className="text-xs font-semibold text-gray-500">
+                        <span className="text-xs font-semibold text-muted-foreground">
                             {t('storyDescription')}
                         </span>
                         <textarea
-                            className="w-full bg-white dark:bg-black/20 border-transparent focus:border-primary focus:bg-white dark:focus:bg-black focus:ring-0 rounded-lg text-sm px-3 py-2.5 resize-none"
+                            className="w-full bg-surface border-transparent focus:border-primary focus:bg-background focus:ring-0 rounded-lg text-sm px-3 py-2.5 resize-none"
                             rows={2}
                             placeholder={t('descriptionPlaceholder')}
                             value={milestone.description}
@@ -169,16 +169,16 @@ export function LoveStorySection({ data, updateField }: LoveStorySectionProps) {
         <SectionWrapper
             title={t('title')}
             icon={<History className="w-5 h-5" />}
-            iconBgColor="bg-pink-50 dark:bg-pink-900/20"
-            iconTextColor="text-pink-600"
+            iconBgColor="bg-muted"
+            iconTextColor="text-primary"
         >
             <div className="mb-6">
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-muted-foreground">
                     {t('subtitle')}
                 </p>
             </div>
 
-            <div className="relative pl-8 space-y-8 before:absolute before:left-3.5 before:top-4 before:bottom-4 before:w-px before:bg-pink-100 dark:before:bg-pink-900/30">
+            <div className="relative pl-8 space-y-8 before:absolute before:left-3.5 before:top-4 before:bottom-4 before:w-px before:bg-primary/20">
                 {data.milestones.map((milestone, index) => (
                     <MilestoneItem
                         key={milestone.id}
@@ -193,7 +193,7 @@ export function LoveStorySection({ data, updateField }: LoveStorySectionProps) {
 
             <button
                 onClick={addMilestone}
-                className="w-full mt-6 py-3 rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700 text-gray-500 font-medium hover:border-pink-500 hover:text-pink-500 hover:bg-pink-50 dark:hover:bg-pink-900/10 transition-all flex items-center justify-center gap-2"
+                className="w-full mt-6 py-3 rounded-xl border-2 border-dashed border-border text-muted-foreground font-medium hover:border-primary hover:text-primary hover:bg-muted transition-all flex items-center justify-center gap-2"
             >
                 <Plus className="w-5 h-5" /> {t('addEvent')}
             </button>

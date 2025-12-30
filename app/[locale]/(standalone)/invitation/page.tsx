@@ -13,6 +13,7 @@ import {
     PublicGiftSection,
     PublicGuestbookSection,
     PublicFooter,
+    PublicMusicPlayer,
 } from '@/components/invitation';
 import { useInvitation } from '@/hooks/use-invitation';
 
@@ -33,6 +34,7 @@ export default function PublicInvitationPage() {
             <PublicGiftSection data={data} />
             <PublicGuestbookSection data={data} />
             <PublicFooter data={data} />
+            <PublicMusicPlayer data={data} />
         </div>
     );
 }

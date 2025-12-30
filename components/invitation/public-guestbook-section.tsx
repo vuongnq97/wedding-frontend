@@ -22,22 +22,22 @@ export function PublicGuestbookSection({ data }: PublicGuestbookSectionProps) {
     ];
 
     return (
-        <section className="py-16 bg-background-light dark:bg-background-dark" id="wishes">
+        <section className="py-16 bg-background" id="wishes">
             <div className="layout-container max-w-[1280px] mx-auto px-4 sm:px-10">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                         {t('title')}
                     </h2>
-                    <p className="mt-4 text-gray-600 dark:text-gray-400">
+                    <p className="mt-4 text-muted-foreground">
                         {t('subtitle')}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {wishes.map((wish, index) => (
-                        <div key={index} className="p-6 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 relative shadow-sm">
+                        <div key={index} className="p-6 rounded-xl bg-surface border border-border relative shadow-sm">
                             <Quote className="absolute top-6 right-6 text-primary/20 w-8 h-8 fill-current" />
-                            <p className="text-gray-700 dark:text-gray-300 italic leading-relaxed mb-6">
+                            <p className="text-foreground italic leading-relaxed mb-6">
                                 {wish.text}
                             </p>
                             <div className="flex items-center gap-3">
@@ -45,10 +45,10 @@ export function PublicGuestbookSection({ data }: PublicGuestbookSectionProps) {
                                     {wish.initials}
                                 </div>
                                 <div>
-                                    <p className="text-sm font-bold text-gray-900 dark:text-white">
+                                    <p className="text-sm font-bold text-foreground">
                                         {wish.name}
                                     </p>
-                                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                                    <p className="text-xs text-muted-foreground">
                                         {wish.rel}
                                     </p>
                                 </div>
