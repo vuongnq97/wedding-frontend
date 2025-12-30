@@ -22,7 +22,5 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy
-        uses: vercel/vercel-action@v2
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel
+        run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
