@@ -8,6 +8,7 @@
     "signedIn": "Signed in",
     "my_invitation": "My Invitation",
     "switch_language": "Switch to {language}",
+    "logout": "Log out",
     "dashboard": "Dashboard"
   },
   "footer": {
@@ -24,7 +25,7 @@
     "legal": "Legal",
     "terms": "Terms",
     "privacy": "Privacy",
-    "copyright": "© {year} WeddingInvites Inc. All rights reserved."
+    "copyright": "© {year} WeddingInvites Inc."
   },
   "sidebar": {
     "home": "Home",

@@ -1,36 +1,46 @@
 import { createBaseService } from '@/services/base-service';
-import {
-  AuthService,
-  AuthServiceOptions,
-  LoginPayload,
-  TokenResponse,
-} from '@/types/auth';
+import { AuthService, AuthServiceOptions, TokenResponse } from '@/types/auth';
+import { ApiResponse } from '@/types/common';
 
-const LOGIN_PATH = '/login';
-const DEFAULT_REFRESH_PATH = '/refresh';
-const ENV_REFRESH_PATH = process.env.NEXT_PUBLIC_AUTH_REFRESH_PATH;
+const REQUEST_OTP_PATH = '/Auth/request-otp';
+const VERIFY_OTP_PATH = '/Auth/verify-otp';
+const REFRESH_PATH = '/Auth/refresh';
+const LOGOUT_PATH = '/Auth/logout';
 
 export function createAuthService({
   refreshPath,
   client,
   ...clientOptions
 }: AuthServiceOptions = {}): AuthService {
-  const baseService = createBaseService({
+  const authService = createBaseService({
     client,
     ...clientOptions,
   });
 
-  const resolvedRefreshPath =
-    refreshPath ?? ENV_REFRESH_PATH ?? DEFAULT_REFRESH_PATH;
+  const requestOtp = (email: string) =>
+    authService.post<void>(REQUEST_OTP_PATH, { email });
 
-  const login = (credentials: LoginPayload) =>
-    baseService.post<TokenResponse>(LOGIN_PATH, credentials);
+  const verifyOtp = async (email: string, code: string) => {
+    const response = await authService.post<ApiResponse<TokenResponse>>(
+      VERIFY_OTP_PATH,
+      { email, code }
+    );
+    return response;
+  };
 
-  const refresh = (refreshToken: string) =>
-    baseService.post<TokenResponse>(resolvedRefreshPath, { refreshToken });
+  const refresh = async () => {
+    const response = await authService.post<ApiResponse<TokenResponse>>(
+      refreshPath ?? REFRESH_PATH
+    );
+    return response;
+  };
+
+  const logout = () => authService.post<void>(LOGOUT_PATH);
 
   return {
-    login,
+    requestOtp,
+    verifyOtp,
     refresh,
+    logout,
   };
 }

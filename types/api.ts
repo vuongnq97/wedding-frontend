@@ -2,6 +2,11 @@ export type ApiClientOptions = {
   baseUrl?: string;
   defaultHeaders?: HeadersInit;
   fetchImpl?: typeof fetch;
+  onRequest?: (
+    path: string,
+    options: ApiRequestOptions
+  ) => Promise<ApiRequestOptions | void> | ApiRequestOptions | void;
+  onResponseError?: (response: Response) => Promise<void | boolean>;
 };
 
 export type ApiRequestOptions = {

@@ -1,19 +1,17 @@
 import { BaseServiceOptions } from '@/types/api';
+import { ApiResponse } from './common';
 
-export type UserInfo = Record<string, unknown>;
+export type UserInfo = {
+  email: string;
+  role: string;
+};
 
-export type TokenResponse = {
-  accessToken?: string;
-  refreshToken?: string;
-  expiresIn?: number;
-  expires_in?: number;
-  expiresAt?: number;
-  user?: UserInfo;
+export type TokenResponse = UserInfo & {
+  accessToken: string;
 };
 
 export type AuthTokens = {
   accessToken: string;
-  refreshToken: string;
   expiresAt: number;
 };
 
@@ -27,8 +25,13 @@ export type AuthServiceOptions = BaseServiceOptions & {
 };
 
 export type AuthService = {
-  login: (credentials: LoginPayload) => Promise<TokenResponse>;
-  refresh: (refreshToken: string) => Promise<TokenResponse>;
+  requestOtp: (email: string) => Promise<void>;
+  verifyOtp: (
+    email: string,
+    code: string
+  ) => Promise<ApiResponse<TokenResponse>>;
+  refresh: () => Promise<ApiResponse<TokenResponse>>;
+  logout: () => Promise<void>;
 };
 
 export type UseLoginOptions = BaseServiceOptions & {
@@ -38,11 +41,10 @@ export type UseLoginOptions = BaseServiceOptions & {
 };
 
 export type UseLoginReturn = {
-  login: (credentials: LoginPayload) => Promise<AuthTokens>;
+  requestOtp: (email: string) => Promise<void>;
+  verifyOtp: (email: string, code: string) => Promise<TokenResponse>;
   logout: () => void;
   refresh: () => Promise<AuthTokens>;
-  tokens: AuthTokens | null;
-  accessToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: Error | null;

@@ -4,6 +4,7 @@ import {
   Plus_Jakarta_Sans,
   Playfair_Display,
 } from 'next/font/google';
+import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
 const geistMono = Geist_Mono({
@@ -40,6 +41,7 @@ export default function RootLayout({
         className={`${jakarta.variable} ${playfair.variable} ${geistMono.variable} text-foreground min-h-screen antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

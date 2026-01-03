@@ -1,21 +1,27 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
-import { MenuIcon, Heart, Moon, Sun } from 'lucide-react';
+import { MenuIcon, Heart, Moon, Sun, LogOut } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
-import { LoginDialog } from '@/components/auth/login-dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { BaseButton } from '@/components/ui/base-button';
 
-import { useLogin } from '@/hooks/use-login';
 import { useLayoutStore } from '@/stores/layout-store';
-import { useAuthStore } from '@/stores/auth-store';
+import { useAuth } from '@/hooks/use-auth';
 import { ROUTES } from '@/constants/routes';
 import { HEADER_NAV_LINKS } from '@/constants/navigation';
 import { UserInfo } from '@/types/auth';
+import { Avatar } from '@/components/ui/avatar';
 
 type HeaderProps = {
   initialUser?: UserInfo | null;
@@ -27,18 +33,10 @@ export function Header({ initialUser = null }: HeaderProps) {
   const theme = useLayoutStore((state) => state.theme);
   const toggleTheme = useLayoutStore((state) => state.toggleTheme);
   const setTheme = useLayoutStore((state) => state.setTheme);
-  const { login, isLoading, error } = useLogin();
-  const user = useAuthStore((state) => state.user);
-  const [loginOpen, setLoginOpen] = useState(false);
-
-  const handleLoginSubmit = useCallback(
-    async (values: { username: string; password: string }) => {
-      await login(values);
-    },
-    [login]
+  const { user, logout } = useAuth();
+  const [currentUser, setCurrentUser] = useState<UserInfo | null>(
+    initialUser ?? user
   );
-
-  const effectiveOpen = loginOpen && !user;
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
@@ -70,6 +68,14 @@ export function Header({ initialUser = null }: HeaderProps) {
     }
   }, [theme]);
 
+  useEffect(() => {
+    if (!user) {
+      setCurrentUser(null);
+    } else {
+      setCurrentUser(user);
+    }
+  }, [user]);
+
   const pathname = usePathname();
 
   return (
@@ -95,7 +101,7 @@ export function Header({ initialUser = null }: HeaderProps) {
 
         <div className="hidden items-center gap-6 md:flex lg:gap-8">
           {HEADER_NAV_LINKS.filter((item) =>
-            item.authRequired ? !!(initialUser ?? user) : true
+            item.authRequired ? !!currentUser : true
           ).map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -111,36 +117,38 @@ export function Header({ initialUser = null }: HeaderProps) {
               </Link>
             );
           })}
-          {(initialUser ?? user) ? (
-            <span className="text-muted-foreground text-sm font-bold uppercase">
+          {currentUser ? (
+            <span className="text-muted-foreground space-x-2 text-sm font-bold uppercase">
               <Link href={ROUTES.INVITATION}>
-                <BaseButton>
-                  {t('my_invitation', {
-                    name:
-                      user &&
-                      typeof user === 'object' &&
-                      'name' in user &&
-                      typeof user.name === 'string'
-                        ? user.name
-                        : t('signedIn'),
-                  })}
-                </BaseButton>
+                <BaseButton>{t('my_invitation')}</BaseButton>
               </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="outline-none">
+                  <Avatar
+                    fallback={currentUser.email?.charAt(0)}
+                    className={cn(
+                      'bg-primary/10 hover:text-primary size-8 cursor-pointer font-bold uppercase md:size-10'
+                    )}
+                  />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="bg-muted border-border"
+                  align="center"
+                >
+                  <DropdownMenuItem
+                    onClick={() => logout()}
+                    className="cursor-pointer text-red-600 focus:text-red-600"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>{t('logout')}</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </span>
           ) : (
             <div className="flex items-center gap-2">
               <Link href={ROUTES.LOGIN}>
-                <BaseButton
-                  variant="outline"
-                  className="text-foreground hover:text-primary cursor-pointer font-bold tracking-wider uppercase transition-colors"
-                >
-                  {t('login')}
-                </BaseButton>
-              </Link>
-              <Link href={ROUTES.SIGN_UP}>
-                <BaseButton className="shadow-primary/20 h-10 rounded-full px-5 uppercase shadow-md">
-                  {t('signup')}
-                </BaseButton>
+                <BaseButton>{t('login')}</BaseButton>
               </Link>
             </div>
           )}
@@ -162,13 +170,6 @@ export function Header({ initialUser = null }: HeaderProps) {
           </BaseButton>
         </div>
       </div>
-      <LoginDialog
-        open={effectiveOpen}
-        onOpenChange={setLoginOpen}
-        onSubmit={handleLoginSubmit}
-        isSubmitting={isLoading}
-        errorMessage={error?.message ?? null}
-      />
     </header>
   );
 }

@@ -8,18 +8,29 @@
   "password_placeholder": "••••••••",
   "forgot_password": "Forgot Password?",
   "submit": "Log In",
+  "loading": "Loading...",
+  "login_success": "Logged in successfully",
+  "system_error": "An unexpected error occurred",
   "signing_in": "Logging in...",
+  "verifying": "Verifying...",
+  "verify_otp": "Verify OTP",
+  "resend_otp": "Resend OTP",
+  "otp_sent_to": "OTP sent to <bold>{email}</bold>",
+  "back_to_email": "Back to Email",
+  "no_password": "No password required",
+  "safe_login": "Secure login with OTP",
+  "free_login": "Completely free",
   "or_continue": "Or continue with",
   "google": "Google",
   "facebook": "Facebook",
   "no_account": "Don't have an account?",
   "sign_up": "Sign up",
   "illustration": {
-    "title": "Plan your perfect day",
-    "subtitle": "Join thousands of couples creating unforgettable memories with us."
+    "title": "Where love begins its forever journey",
+    "subtitle": "We help you capture your special moments in the most meaningful way."
   },
   "footer": {
-    "copyright": "© {year} Forever & Always. All rights reserved.",
+    "copyright": "© {year} Forever & Always.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
   }

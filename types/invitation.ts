@@ -51,7 +51,7 @@ export interface WeddingData {
   };
   map: {
     show: boolean;
-    link: string; // Keep for legacy or iframe fallback
+    link: string;
     locationName: string;
     locationAddress: string;
     coords?: {

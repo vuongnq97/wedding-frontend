@@ -6,8 +6,9 @@
     "login": "Đăng nhập",
     "signup": "Đăng ký",
     "signedIn": "Đã đăng nhập",
-    "my_invitation": "Thiệp mời",
+    "my_invitation": "Thiệp của tôi",
     "switch_language": "Chuyển sang tiếng {language}",
+    "logout": "Đăng xuất",
     "dashboard": "Tổng quan"
   },
   "footer": {
@@ -24,7 +25,7 @@
     "legal": "Pháp lý",
     "terms": "Điều khoản",
     "privacy": "Quyền riêng tư",
-    "copyright": "© {year} WeddingInvites Inc. Đã đăng ký bản quyền."
+    "copyright": "© {year} WeddingInvites Inc."
   },
   "sidebar": {
     "home": "Trang chủ",

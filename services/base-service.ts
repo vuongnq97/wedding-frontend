@@ -1,4 +1,5 @@
-import { ApiError, createApiClient } from '@/lib/api-client';
+import { ApiError } from '@/lib/api-client';
+import { apiClient as defaultApiClient } from '@/lib/http-client';
 import { ApiRequestOptions, BaseServiceOptions } from '@/types/api';
 
 export type BaseService = {
@@ -34,19 +35,16 @@ export function createBaseService(
   const {
     client: providedClient,
     baseUrl,
-    defaultHeaders,
-    fetchImpl,
+    defaultHeaders: _defaultHeaders,
+    fetchImpl: _fetchImpl,
   } = options;
 
-  const resolvedBaseUrl = baseUrl ?? process.env.NEXT_PUBLIC_API_BASE_URL;
+  console.log({ baseUrl: baseUrl ?? process.env.NEXT_PUBLIC_API_BASE_URL });
 
-  const apiClient =
-    providedClient ??
-    createApiClient({
-      baseUrl: resolvedBaseUrl,
-      defaultHeaders,
-      fetchImpl,
-    });
+  // Use the provided client or fall back to the default authenticated client
+  // Note: If options like baseUrl are provided, they won't affect the defaultApiClient
+  // which is pre-configured. If dynamic configuration is needed, one should pass a custom client.
+  const apiClient = providedClient ?? defaultApiClient;
 
   const request = async <T>(
     path: string,

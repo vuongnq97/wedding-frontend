@@ -6,7 +6,7 @@ export function LoginIllustration() {
   const t = useTranslations('login');
 
   return (
-    <div className="bg-primary-soft relative hidden flex-col justify-center overflow-hidden p-10 md:flex md:w-1/2 md:items-center">
+    <div className="bg-primary-soft relative hidden flex-col justify-center overflow-hidden p-8 md:flex md:w-1/2 md:items-center">
       <div
         className="absolute inset-0 h-full w-full bg-cover bg-center opacity-90"
         style={{
@@ -17,7 +17,7 @@ export function LoginIllustration() {
         <div className="from-primary/40 absolute inset-0 bg-gradient-to-t to-transparent mix-blend-multiply" />
       </div>
       <div className="relative z-10 rounded-xl border border-white/20 bg-black/20 p-6 text-center text-white backdrop-blur-sm">
-        <h3 className="mb-2 text-2xl font-bold">{t('illustration.title')}</h3>
+        <h3 className="mb-2 text-xl font-bold">{t('illustration.title')}</h3>
         <p className="text-sm text-white/90">{t('illustration.subtitle')}</p>
       </div>
     </div>

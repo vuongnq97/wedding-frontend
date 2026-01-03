@@ -17,11 +17,21 @@ export function createApiClient({
   baseUrl,
   defaultHeaders,
   fetchImpl = fetch,
+  onRequest,
+  onResponseError,
 }: ApiClientOptions = {}): ApiClient {
   return async function apiRequest<T>(
     path: string,
     options: ApiRequestOptions = {}
   ): Promise<T> {
+    let currentOptions = options;
+    if (onRequest) {
+      const result = await onRequest(path, currentOptions);
+      if (result) {
+        currentOptions = result;
+      }
+    }
+
     const {
       method = 'GET',
       headers,
@@ -29,8 +39,9 @@ export function createApiClient({
       body,
       parseJson = true,
       fetchOptions,
-    } = options;
+    } = currentOptions;
 
+    // console.log({ baseUrl, path, query });
     const url = buildUrl(baseUrl, path, query);
     const requestHeaders = mergeHeaders(defaultHeaders, headers);
 
@@ -58,10 +69,17 @@ export function createApiClient({
       method,
       headers: requestHeaders,
       body: requestBody,
+      credentials: 'include',
       ...fetchOptions,
     });
 
     if (!response.ok) {
+      if (onResponseError) {
+        const shouldRetry = await onResponseError(response);
+        if (shouldRetry) {
+          return apiRequest(path, options);
+        }
+      }
       const errorPayload = await tryParseJson(response);
       const message = deriveErrorMessage(response, errorPayload);
       throw new ApiError(message, response.status, errorPayload);
@@ -91,21 +109,14 @@ function buildUrl(
 ): string {
   const isAbsolute = /^https?:/i.test(path);
   const rawUrl = isAbsolute ? path : `${baseUrl ?? ''}${path}`;
-  const originFallback =
-    typeof window === 'undefined' ? 'http://localhost' : window.location.origin;
-  const url = new URL(rawUrl, originFallback);
+
+  const url = new URL(rawUrl);
 
   if (query) {
     for (const [key, value] of Object.entries(query)) {
-      if (value === undefined || value === null) {
-        continue;
-      }
+      if (value == null) continue;
       url.searchParams.set(key, String(value));
     }
-  }
-
-  if (!isAbsolute) {
-    return `${url.pathname}${url.search}`;
   }
 
   return url.toString();
