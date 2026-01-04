@@ -22,23 +22,26 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-const emailSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Invalid email address'),
-});
-
-const otpSchema = z.object({
-  code: z.string().min(6, 'OTP must be 6 characters'),
-});
-
-type EmailFormValues = z.infer<typeof emailSchema>;
-type OtpFormValues = z.infer<typeof otpSchema>;
+import { getLocalizedErrorMessage } from '@/utils/error-helper';
 
 export function LoginPageForm() {
   const t = useTranslations('login');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const { requestOtp, verifyOtp, isLoading } = useAuth();
   const [step, setStep] = useState<'email' | 'otp'>('otp');
   const [email, setEmail] = useState('');
+
+  const emailSchema = z.object({
+    email: z.string().min(1, tCommon('validation.email_required')).email(tCommon('validation.email_invalid')),
+  });
+
+  const otpSchema = z.object({
+    code: z.string().min(6, tCommon('validation.otp_length')),
+  });
+
+  type EmailFormValues = z.infer<typeof emailSchema>;
+  type OtpFormValues = z.infer<typeof otpSchema>;
 
   const emailForm = useForm<EmailFormValues>({
     resolver: zodResolver(emailSchema),
@@ -50,24 +53,24 @@ export function LoginPageForm() {
     defaultValues: { code: '' },
   });
 
-  const handleEmailSubmit = async (values: EmailFormValues) => {
+  const handleEmailSubmit = async (values: z.infer<typeof emailSchema>) => {
     try {
       await requestOtp(values.email);
       setEmail(values.email);
       setStep('otp');
     } catch (err) {
-      const message = err instanceof Error ? err.message : t('system_error');
+      const message = getLocalizedErrorMessage(err, tCommon);
       toast.error(message);
     }
   };
 
-  const handleOtpSubmit = async (values: OtpFormValues) => {
+  const handleOtpSubmit = async (values: z.infer<typeof otpSchema>) => {
     try {
       await verifyOtp(email, values.code);
       toast.success(t('login_success'));
       router.push(ROUTES.HOME);
     } catch (err) {
-      const message = err instanceof Error ? err.message : t('system_error');
+      const message = getLocalizedErrorMessage(err, tCommon);
       toast.error(message);
     }
   };
@@ -75,8 +78,16 @@ export function LoginPageForm() {
   const handleResendOtp = async () => {
     try {
       await requestOtp(email);
+      toast.success(t.rich('otp_sent_to', {
+        email,
+        bold: (chunks) => (
+          <span className="text-foreground font-semibold">
+            {chunks}
+          </span>
+        ),
+      }));
     } catch (err) {
-      const message = err instanceof Error ? err.message : t('system_error');
+      const message = getLocalizedErrorMessage(err, tCommon);
       toast.error(message);
     }
   };
@@ -114,7 +125,7 @@ export function LoginPageForm() {
             />
             <BaseButton
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !emailForm.formState.isValid}
               className="bg-primary shadow-primary/20 hover:bg-primary/90 mt-2 flex h-12 w-full cursor-pointer items-center justify-center rounded-lg text-sm font-bold tracking-wide text-white shadow-lg transition-colors"
             >
               {isLoading ? t('loading') : t('submit')}
@@ -177,7 +188,7 @@ export function LoginPageForm() {
             />
             <BaseButton
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !otpForm.formState.isValid}
               className="bg-primary shadow-primary/20 hover:bg-primary/90 mt-2 flex h-12 w-full cursor-pointer items-center justify-center rounded-lg text-sm font-bold tracking-wide text-white shadow-lg transition-colors"
             >
               {isLoading ? t('verifying') : t('verify_otp')}

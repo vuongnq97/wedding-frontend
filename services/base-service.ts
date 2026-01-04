@@ -34,12 +34,9 @@ export function createBaseService(
 ): BaseService {
   const {
     client: providedClient,
-    baseUrl,
     defaultHeaders: _defaultHeaders,
     fetchImpl: _fetchImpl,
   } = options;
-
-  console.log({ baseUrl: baseUrl ?? process.env.NEXT_PUBLIC_API_BASE_URL });
 
   // Use the provided client or fall back to the default authenticated client
   // Note: If options like baseUrl are provided, they won't affect the defaultApiClient
@@ -74,9 +71,7 @@ export function createBaseService(
 
 function normalizeApiError(error: unknown): Error {
   if (error instanceof ApiError) {
-    return new Error(
-      error.message || `Request failed with status ${error.status}`
-    );
+    return error;
   }
 
   if (error instanceof Error) {

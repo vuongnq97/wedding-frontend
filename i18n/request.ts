@@ -32,10 +32,13 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   const dashboardMessages = (await import(`./dashboard/${currentLocale}.json`))
     .default;
+  const commonMessages = (await import(`./common/${currentLocale}.json`))
+    .default;
 
   return {
     locale: currentLocale,
     messages: {
+      common: commonMessages,
       home: homeMessages,
       login: loginMessages,
       signUp: signUpMessages,

@@ -12,6 +12,18 @@ const nextConfig: NextConfig = {
       hostname: domain.trim(),
     })),
   },
+  async rewrites() {
+    const apiUrl = process.env.API_BASE_URL;
+    if (!apiUrl) {
+      return [];
+    }
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${apiUrl}/:path*`,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

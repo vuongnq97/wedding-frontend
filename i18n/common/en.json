@@ -1,0 +1,13 @@
+{
+    "validation": {
+        "email_required": "Email is required",
+        "email_invalid": "Invalid email address",
+        "otp_length": "OTP must be 6 characters"
+    },
+    "errors": {
+        "INVALID_OTP": "Invalid or expired OTP",
+        "TOO_MANY_REQUESTS": "Too many requests. Please try again later.",
+        "AccountNotFound": "Account not found",
+        "default": "An unexpected error occurred"
+    }
+}

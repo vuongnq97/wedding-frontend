@@ -2,10 +2,10 @@ import { createApiClient } from '@/lib/api-client';
 import { useAuthStore } from '@/stores/auth-store';
 import { TokenResponse } from '@/types/auth';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const BASE_URL = '/api';
 
 export const publicClient = createApiClient({
-  baseUrl: BASE_URL,
+    baseUrl: BASE_URL,
 });
 
 // Refresh Logic Management
@@ -13,57 +13,57 @@ let isRefreshing = false;
 let refreshSubscribers: ((success: boolean) => void)[] = [];
 
 const onRefreshed = (success: boolean) => {
-  refreshSubscribers.forEach((cb) => cb(success));
-  refreshSubscribers = [];
+    refreshSubscribers.forEach((cb) => cb(success));
+    refreshSubscribers = [];
 };
 
 const addRefreshSubscriber = (cb: (success: boolean) => void) => {
-  refreshSubscribers.push(cb);
+    refreshSubscribers.push(cb);
 };
 
 export const apiClient = createApiClient({
-  baseUrl: BASE_URL,
-  onRequest: async (path, options) => {
-    const token = useAuthStore.getState().accessToken;
-    if (token) {
-      options.headers = new Headers(options.headers);
-      options.headers.set('Authorization', `Bearer ${token}`);
-    }
-    return options;
-  },
-  onResponseError: async (response) => {
-    if (response.status === 401) {
-      if (isRefreshing) {
-        return new Promise<boolean>((resolve) => {
-          addRefreshSubscriber((success) => {
-            resolve(success);
-          });
-        });
-      }
-
-      isRefreshing = true;
-
-      try {
-        // Call Refresh API using public client
-        const res = await publicClient<TokenResponse>('/api/Auth/refresh', {
-          method: 'POST',
-        });
-
-        if (res?.accessToken) {
-          useAuthStore.getState().setAccessToken(res.accessToken);
-
-          onRefreshed(true);
-          return true; // Retry original request
+    baseUrl: BASE_URL,
+    onRequest: async (path, options) => {
+        const token = useAuthStore.getState().accessToken;
+        if (token) {
+            options.headers = new Headers(options.headers);
+            options.headers.set('Authorization', `Bearer ${token}`);
         }
-      } catch (err) {
-        console.error('Refresh failed', err);
-        useAuthStore.getState().clearAuth();
-        onRefreshed(false);
+        return options;
+    },
+    onResponseError: async (response) => {
+        if (response.status === 401) {
+            if (isRefreshing) {
+                return new Promise<boolean>((resolve) => {
+                    addRefreshSubscriber((success) => {
+                        resolve(success);
+                    });
+                });
+            }
+
+            isRefreshing = true;
+
+            try {
+                // Call Refresh API using public client
+                const res = await publicClient<TokenResponse>('/api/Auth/refresh', {
+                    method: 'POST',
+                });
+
+                if (res?.accessToken) {
+                    useAuthStore.getState().setAccessToken(res.accessToken);
+
+                    onRefreshed(true);
+                    return true; // Retry original request
+                }
+            } catch (err) {
+                console.error('Refresh failed', err);
+                useAuthStore.getState().clearAuth();
+                onRefreshed(false);
+                return false;
+            } finally {
+                isRefreshing = false;
+            }
+        }
         return false;
-      } finally {
-        isRefreshing = false;
-      }
-    }
-    return false;
-  },
+    },
 });

@@ -41,7 +41,6 @@ export function createApiClient({
       fetchOptions,
     } = currentOptions;
 
-    // console.log({ baseUrl, path, query });
     const url = buildUrl(baseUrl, path, query);
     const requestHeaders = mergeHeaders(defaultHeaders, headers);
 
@@ -108,18 +107,49 @@ function buildUrl(
   query?: ApiRequestOptions['query']
 ): string {
   const isAbsolute = /^https?:/i.test(path);
-  const rawUrl = isAbsolute ? path : `${baseUrl ?? ''}${path}`;
+  const base = baseUrl ?? '';
+  const isBaseAbsolute = /^https?:/i.test(base);
 
-  const url = new URL(rawUrl);
+  // If path is absolute, use it directly
+  if (isAbsolute) {
+    const url = new URL(path);
+    appendQuery(url, query);
+    return url.toString();
+  }
 
+  // If base is absolute, combine them
+  if (isBaseAbsolute) {
+    const url = new URL(path, base);
+    appendQuery(url, query);
+    return url.toString();
+  }
+
+  // Both are relative: Manual construction
+  // Ensure exactly one slash between base and path if needed.
+  // Note: if base is empty, we just use path.
+  let fullPath = path;
+  if (base) {
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    fullPath = `${cleanBase}${cleanPath}`;
+  }
+
+  // Use a dummy base to leverage URLSearchParams for query string generation
+  const DUMMY_BASE = 'http://dummy.com';
+  const urlObj = new URL(fullPath, DUMMY_BASE);
+  appendQuery(urlObj, query);
+
+  // Return pathname + search (relative URL)
+  return `${urlObj.pathname}${urlObj.search}`;
+}
+
+function appendQuery(url: URL, query?: ApiRequestOptions['query']) {
   if (query) {
     for (const [key, value] of Object.entries(query)) {
       if (value == null) continue;
       url.searchParams.set(key, String(value));
     }
   }
-
-  return url.toString();
 }
 
 function mergeHeaders(...entries: (HeadersInit | undefined)[]): Headers {
