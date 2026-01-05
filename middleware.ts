@@ -8,11 +8,12 @@ const intlMiddleware = createMiddleware({
   locales,
   defaultLocale,
   localePrefix,
+  localeDetection: false,
 });
 
 const protectedPages = [
   ROUTES.DASHBOARD,
-  ROUTES.CREATE_INVITATION,
+  ROUTES.MANAGE_INVITATION,
   ROUTES.INVITATION,
 ];
 

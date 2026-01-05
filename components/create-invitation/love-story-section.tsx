@@ -10,8 +10,9 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 interface LoveStorySectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
+  uploadImage: (file: File) => Promise<string | null>;
 }
 
 interface MilestoneItemProps {
@@ -23,6 +24,7 @@ interface MilestoneItemProps {
     value: string
   ) => void;
   removeMilestone: (index: number) => void;
+  uploadImage: (file: File) => Promise<string | null>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   t: any;
 }
@@ -32,11 +34,13 @@ function MilestoneItem({
   index,
   updateMilestone,
   removeMilestone,
+  uploadImage,
   t,
 }: MilestoneItemProps) {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = React.useState(false);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
@@ -44,13 +48,16 @@ function MilestoneItem({
         return;
       }
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        updateMilestone(index, 'photoUrl', base64String);
-      };
-      reader.readAsDataURL(file);
+      setIsUploading(true);
+      const url = await uploadImage(file);
+      setIsUploading(false);
+
+      if (url) {
+        updateMilestone(index, 'photoUrl', url);
+      }
     }
+    // Reset input
+    e.target.value = '';
   };
 
   const handleUploadClick = () => {
@@ -85,7 +92,11 @@ function MilestoneItem({
               accept="image/*"
               onChange={handleFileChange}
             />
-            {milestone.photoUrl ? (
+            {isUploading ? (
+              <div className="flex h-full w-full items-center justify-center bg-black/20">
+                <div className="border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent" />
+              </div>
+            ) : milestone.photoUrl ? (
               <Image
                 src={milestone.photoUrl}
                 alt={milestone.title}
@@ -140,8 +151,16 @@ function MilestoneItem({
   );
 }
 
-export function LoveStorySection({ data, updateField }: LoveStorySectionProps) {
-  const t = useTranslations('create-invitation.sections.story');
+export function LoveStorySection({
+  data,
+  updateField,
+  uploadImage,
+}: LoveStorySectionProps) {
+  const t = useTranslations('manage-invitation.sections.story');
+
+  // if (!data) return null; // Removed
+
+  const milestones = data?.milestones || [];
 
   const addMilestone = () => {
     const newMilestone: Milestone = {
@@ -151,7 +170,7 @@ export function LoveStorySection({ data, updateField }: LoveStorySectionProps) {
       description: '',
       photoUrl: '',
     };
-    updateField(['milestones'], [...data.milestones, newMilestone]);
+    updateField(['milestones'], [...milestones, newMilestone]);
   };
 
   const updateMilestone = (
@@ -159,13 +178,13 @@ export function LoveStorySection({ data, updateField }: LoveStorySectionProps) {
     field: keyof Milestone,
     value: string
   ) => {
-    const updatedMilestones = [...data.milestones];
+    const updatedMilestones = [...milestones];
     updatedMilestones[index] = { ...updatedMilestones[index], [field]: value };
     updateField(['milestones'], updatedMilestones);
   };
 
   const removeMilestone = (index: number) => {
-    const updatedMilestones = data.milestones.filter((_, i) => i !== index);
+    const updatedMilestones = milestones.filter((_, i) => i !== index);
     updateField(['milestones'], updatedMilestones);
   };
 
@@ -181,13 +200,14 @@ export function LoveStorySection({ data, updateField }: LoveStorySectionProps) {
       </div>
 
       <div className="before:bg-primary/20 relative space-y-8 pl-8 before:absolute before:top-4 before:bottom-4 before:left-3.5 before:w-px">
-        {data.milestones.map((milestone, index) => (
+        {milestones.map((milestone, index) => (
           <MilestoneItem
             key={milestone.id}
             milestone={milestone}
             index={index}
             updateMilestone={updateMilestone}
             removeMilestone={removeMilestone}
+            uploadImage={uploadImage}
             t={t}
           />
         ))}

@@ -35,7 +35,7 @@ export function StorySection({ data }: StorySectionProps) {
           {milestones.map((milestone: Milestone, index: number) => {
             const isEven = index % 2 === 0;
             return (
-              <div key={milestone.id} className="relative pl-8 md:pl-0">
+              <div key={milestone.date} className="relative pl-8 md:pl-0">
                 <div className="bg-primary border-background absolute top-0 -left-2 h-4 w-4 rounded-full border-4 shadow-md"></div>
                 <div
                   className={`md:flex ${isEven ? '' : 'md:flex-row-reverse'} group items-center justify-between gap-10`}

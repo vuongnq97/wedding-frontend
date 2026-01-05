@@ -14,14 +14,15 @@ import {
 import { WeddingData } from '@/types/invitation';
 
 interface SectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
 }
 
 import { useTranslations } from 'next-intl';
 
 export function ThankYouSection({ data, updateField }: SectionProps) {
-  const t = useTranslations('create-invitation.sections.thankYou');
+  const t = useTranslations('manage-invitation.sections.thankYou');
+  // if (!data) return null; // Removed
   return (
     <SectionWrapper
       title={t('title')}
@@ -32,7 +33,7 @@ export function ThankYouSection({ data, updateField }: SectionProps) {
       <textarea
         className="bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all focus:ring-0"
         rows={3}
-        value={data.thankYouMessage}
+        value={data?.thankYouMessage || ''}
         onChange={(e) => updateField(['thankYouMessage'], e.target.value)}
       />
     </SectionWrapper>
@@ -40,7 +41,8 @@ export function ThankYouSection({ data, updateField }: SectionProps) {
 }
 
 export function GuestbookSection({ data, updateField }: SectionProps) {
-  const t = useTranslations('create-invitation.sections.guestbook');
+  const t = useTranslations('manage-invitation.sections.guestbook');
+  // if (!data) return null; // Removed
   return (
     <SectionWrapper
       title={t('title')}
@@ -49,7 +51,7 @@ export function GuestbookSection({ data, updateField }: SectionProps) {
       iconTextColor="text-primary"
       rightAction={
         <Toggle
-          checked={data.guestbookEnabled}
+          checked={data?.guestbookEnabled ?? true}
           onChange={(val) => updateField(['guestbookEnabled'], val)}
           label={t('showSection')}
         />
@@ -64,7 +66,11 @@ export function GuestbookSection({ data, updateField }: SectionProps) {
 }
 
 export function AdsSection({ data, updateField }: SectionProps) {
-  const t = useTranslations('create-invitation.sections.ads');
+  const t = useTranslations('manage-invitation.sections.ads');
+  // if (!data) return null; // Removed
+
+  const showAds = data?.showAds ?? true;
+
   return (
     <SectionWrapper
       title={t('title')}
@@ -74,23 +80,21 @@ export function AdsSection({ data, updateField }: SectionProps) {
       rightAction={
         <span
           className={`rounded px-2 py-1 ${
-            data.showAds
-              ? 'bg-green-100 text-green-700'
-              : 'bg-red-100 text-red-700'
+            showAds ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
           } text-[10px] font-bold tracking-wide uppercase`}
         >
-          {data.showAds ? t('active') : t('disabled')}
+          {showAds ? t('active') : t('disabled')}
         </span>
       }
     >
       <div className="flex items-center justify-between">
         <p className="text-muted-foreground text-sm">{t('description')}</p>
         <BaseButton
-          onClick={() => updateField(['showAds'], !data.showAds)}
+          onClick={() => updateField(['showAds'], !showAds)}
           className="text-primary hover:text-primary/80 flex h-auto items-center gap-1 p-0 text-sm font-bold hover:underline"
           variant="ghost"
         >
-          {data.showAds ? t('removeAds') : t('enableAds')}{' '}
+          {showAds ? t('removeAds') : t('enableAds')}{' '}
           <ArrowRight className="h-4 w-4" />
         </BaseButton>
       </div>

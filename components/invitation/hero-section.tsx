@@ -15,15 +15,20 @@ export function HeroSection({ data }: HeroSectionProps) {
   const t = useTranslations('invitation.hero');
   const locale = useLocale();
 
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return t('date');
+  const formatDate = (dateInput?: Date | string) => {
+    if (!dateInput) return t('date');
+
+    // Fix: Handle Date objects directly
+    const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
+
     try {
-      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateInput?.toString() || t('date');
+
       return new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(
         date
       );
     } catch {
-      return dateString;
+      return dateInput?.toString();
     }
   };
 
@@ -51,8 +56,8 @@ export function HeroSection({ data }: HeroSectionProps) {
           {t('tagline')}
         </p>
         <h1 className="mb-6 font-serif text-6xl font-bold text-white drop-shadow-lg md:text-8xl lg:text-9xl">
-          {data.groom.informalName && data.bride.informalName
-            ? `${data.groom.informalName} & ${data.bride.informalName}`
+          {data.groom.fullName && data.bride.fullName
+            ? `${data.groom.fullName} & ${data.bride.fullName}`
             : t('title')}
         </h1>
         <div className="mt-4 flex flex-col items-center gap-2">
@@ -61,7 +66,7 @@ export function HeroSection({ data }: HeroSectionProps) {
           </span>
           <span className="bg-primary h-[2px] w-16"></span>
           <span className="text-sm tracking-widest text-white/80 uppercase">
-            {data.ceremony.show ? 'WEDDING CEREMONY' : 'SAVE THE DATE'}
+            {data.ceremony.show ? t('weddingCeremony') : t('saveTheDate')}
           </span>
         </div>
 

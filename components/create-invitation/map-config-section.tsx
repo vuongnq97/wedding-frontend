@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 interface MapConfigSectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
 }
 
@@ -34,8 +34,13 @@ declare global {
 }
 
 export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
-  const t = useTranslations('create-invitation.sections.map');
+  const t = useTranslations('manage-invitation.sections.map');
+
+  // if (!data) return null; // Removed
+
   const placeAutocompleteRef = useRef<HTMLElement>(null);
+
+  const mapData = data?.map;
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -65,7 +70,8 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
 
           updateField(['map', 'locationAddress'], address);
           updateField(['map', 'locationName'], displayName);
-          updateField(['map', 'coords'], { lat, lng });
+          updateField(['map', 'latitude'], lat);
+          updateField(['map', 'longitude'], lng);
 
           // Generate embed link
           const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=place_id:${place.id}`;
@@ -83,6 +89,14 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
     }
   }, [isLoaded, updateField]);
 
+  const mapCenter = {
+    lat: mapData?.latitude || 0,
+    lng: mapData?.longitude || 0,
+  };
+
+  const showMap =
+    isLoaded && (mapData?.latitude !== 0 || mapData?.longitude !== 0);
+
   return (
     <SectionWrapper
       title={t('title')}
@@ -91,7 +105,7 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
       iconTextColor="text-primary"
       rightAction={
         <Toggle
-          checked={data.map.show}
+          checked={mapData?.show ?? true}
           onChange={(val) => updateField(['map', 'show'], val)}
           label={t('showSection')}
         />
@@ -103,7 +117,7 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
             label={t('locationName')}
             type="text"
             className="bg-muted focus:border-primary focus:bg-background border-transparent"
-            value={data.map.locationName}
+            value={mapData?.locationName || ''}
             onChange={(e) =>
               updateField(['map', 'locationName'], e.target.value)
             }
@@ -113,7 +127,7 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
             <span className="text-muted-foreground text-xs font-semibold">
               {t('address')}
             </span>
-            {false ? (
+            {false ? ( // TODO: Fix loading state here, previously 'isLoaded' was not used correctly for this condition
               <div className="w-full">
                 {/* @ts-expect-error - Web Component */}
                 <gmp-place-autocomplete ref={placeAutocompleteRef} />
@@ -127,9 +141,9 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
               />
             )}
             {/* Fallback/Correction input if needed, or display the current value */}
-            {data.map.locationAddress && (
+            {mapData?.locationAddress && (
               <p className="text-muted-foreground mt-1 truncate text-xs">
-                Selected: {data.map.locationAddress}
+                Selected: {mapData.locationAddress}
               </p>
             )}
           </label>
@@ -145,13 +159,13 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
       </div>
 
       <div className="bg-muted border-border group relative h-64 overflow-hidden rounded-lg border">
-        {isLoaded && data.map.coords ? (
+        {showMap ? (
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            center={data.map.coords}
+            center={mapCenter}
             zoom={15}
           >
-            <Marker position={data.map.coords} />
+            <Marker position={mapCenter} />
           </GoogleMap>
         ) : (
           <div className="text-muted-foreground flex h-full flex-col items-center justify-center gap-2">

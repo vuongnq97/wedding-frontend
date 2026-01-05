@@ -7,14 +7,16 @@ import { Users } from 'lucide-react';
 import { WeddingData } from '@/types/invitation';
 
 interface FamilySectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
 }
 
 import { useTranslations } from 'next-intl';
 
 export function FamilySection({ data, updateField }: FamilySectionProps) {
-  const t = useTranslations('create-invitation.sections.family');
+  const t = useTranslations('manage-invitation.sections.family');
+
+  // if (!data) return null; // Removed
 
   const renderFamilyInputs = (type: 'groom' | 'bride', title: string) => (
     <div className="space-y-4">
@@ -25,20 +27,20 @@ export function FamilySection({ data, updateField }: FamilySectionProps) {
         <BaseInput
           className="bg-muted focus:border-primary focus:bg-background h-auto border-transparent py-3"
           placeholder={t('fatherName')}
-          value={data[type].fatherName}
+          value={data?.[type]?.fatherName || ''}
           onChange={(e) => updateField([type, 'fatherName'], e.target.value)}
         />
         <BaseInput
           className="bg-muted focus:border-primary focus:bg-background h-auto border-transparent py-3"
           placeholder={t('motherName')}
-          value={data[type].motherName}
+          value={data?.[type]?.motherName || ''}
           onChange={(e) => updateField([type, 'motherName'], e.target.value)}
         />
         <textarea
           className="bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border-transparent px-4 py-3 text-sm focus:ring-0"
           placeholder={t('address')}
           rows={3}
-          value={data[type].address}
+          value={data?.[type]?.address || ''}
           onChange={(e) => updateField([type, 'address'], e.target.value)}
         />
       </div>

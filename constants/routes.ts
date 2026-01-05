@@ -3,7 +3,7 @@ export const ROUTES = {
   LOGIN: '/login',
   SIGN_UP: '/sign-up',
   INVITATION: '/invitation',
-  CREATE_INVITATION: '/create-invitation',
+  MANAGE_INVITATION: '/manage-invitation',
   INVITATION_TEMPLATE: '/invitation-template',
   TEMPLATES: '/templates',
   DASHBOARD: '/dashboard',

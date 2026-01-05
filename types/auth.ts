@@ -2,6 +2,7 @@ import { BaseServiceOptions } from '@/types/api';
 import { ApiResponse } from './common';
 
 export type UserInfo = {
+  userId: string;
   email: string;
   role: string;
 };

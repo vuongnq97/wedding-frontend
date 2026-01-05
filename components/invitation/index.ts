@@ -10,4 +10,5 @@ export * from './rsvp-section';
 export * from './gift-section';
 export * from './guestbook-section';
 export * from './footer';
+export * from './invitation-content';
 export * from './music-player';

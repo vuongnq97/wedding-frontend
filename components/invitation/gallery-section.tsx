@@ -28,14 +28,14 @@ export function GallerySection({ data }: GallerySectionProps) {
         </div>
 
         <div className="grid auto-rows-[200px] grid-cols-1 gap-4 sm:grid-cols-2 md:auto-rows-[280px] md:grid-cols-3">
-          {images.map((src, index) => (
+          {images.map((photo, index) => (
             <div
               key={index}
               className={`group relative overflow-hidden rounded-xl ${index % 5 === 0 || index % 5 === 3 ? 'row-span-2' : ''}`}
             >
               <div className="relative h-full w-full">
                 <Image
-                  src={src}
+                  src={photo.url}
                   alt={`Gallery Image ${index + 1}`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"

@@ -29,11 +29,14 @@ export function LoginPageForm() {
   const tCommon = useTranslations('common');
   const router = useRouter();
   const { requestOtp, verifyOtp, isLoading } = useAuth();
-  const [step, setStep] = useState<'email' | 'otp'>('otp');
+  const [step, setStep] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
 
   const emailSchema = z.object({
-    email: z.string().min(1, tCommon('validation.email_required')).email(tCommon('validation.email_invalid')),
+    email: z
+      .string()
+      .min(1, tCommon('validation.email_required'))
+      .email(tCommon('validation.email_invalid')),
   });
 
   const otpSchema = z.object({
@@ -78,14 +81,14 @@ export function LoginPageForm() {
   const handleResendOtp = async () => {
     try {
       await requestOtp(email);
-      toast.success(t.rich('otp_sent_to', {
-        email,
-        bold: (chunks) => (
-          <span className="text-foreground font-semibold">
-            {chunks}
-          </span>
-        ),
-      }));
+      toast.success(
+        t.rich('otp_sent_to', {
+          email,
+          bold: (chunks) => (
+            <span className="text-foreground font-semibold">{chunks}</span>
+          ),
+        })
+      );
     } catch (err) {
       const message = getLocalizedErrorMessage(err, tCommon);
       toast.error(message);

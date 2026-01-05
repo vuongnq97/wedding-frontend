@@ -23,7 +23,7 @@ export function Header() {
       <div className="flex items-center gap-3">
         <BaseButton
           onClick={() => {
-            router.push(ROUTES.CREATE_INVITATION);
+            router.push(ROUTES.MANAGE_INVITATION);
           }}
           variant="default"
           size="sm"

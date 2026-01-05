@@ -1,13 +1,13 @@
 {
-    "validation": {
-        "email_required": "Vui lòng nhập Email",
-        "email_invalid": "Email không hợp lệ",
-        "otp_length": "Mã OTP phải có 6 ký tự"
-    },
-    "errors": {
-        "INVALID_OTP": "Mã OTP không hợp lệ hoặc đã hết hạn",
-        "TOO_MANY_REQUESTS": "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
-        "AccountNotFound": "Tài khoản không tồn tại",
-        "default": "Đã xảy ra lỗi hệ thống"
-    }
+  "validation": {
+    "email_required": "Vui lòng nhập Email",
+    "email_invalid": "Email không hợp lệ",
+    "otp_length": "Mã OTP phải có 6 ký tự"
+  },
+  "errors": {
+    "INVALID_OTP": "Mã OTP không hợp lệ hoặc đã hết hạn",
+    "TOO_MANY_REQUESTS": "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
+    "AccountNotFound": "Tài khoản không tồn tại",
+    "default": "Đã xảy ra lỗi hệ thống"
+  }
 }

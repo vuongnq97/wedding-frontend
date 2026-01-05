@@ -24,8 +24,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const invitationMessages = (
     await import(`./invitation/${currentLocale}.json`)
   ).default;
-  const createInvitationMessages = (
-    await import(`./create-invitation/${currentLocale}.json`)
+  const manageInvitationMessages = (
+    await import(`./manage-invitation/${currentLocale}.json`)
   ).default;
   const templatesMessages = (await import(`./templates/${currentLocale}.json`))
     .default;
@@ -45,7 +45,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       layout: layoutMessages,
       'invitation-template': invitationTemplateMessages,
       invitation: invitationMessages,
-      'create-invitation': createInvitationMessages,
+      'manage-invitation': manageInvitationMessages,
       templates: templatesMessages,
       dashboard: dashboardMessages,
     },

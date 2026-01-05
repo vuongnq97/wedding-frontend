@@ -7,22 +7,35 @@ import { Music, Music2 } from 'lucide-react';
 import { WeddingData } from '@/types/invitation';
 
 interface MusicSectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
+  uploadMusic: (file: File) => Promise<string | null>;
 }
 
 import { useTranslations } from 'next-intl';
 
-export function MusicSection({ data, updateField }: MusicSectionProps) {
-  const t = useTranslations('create-invitation.sections.music');
+export function MusicSection({
+  data,
+  updateField,
+  uploadMusic,
+}: MusicSectionProps) {
+  const t = useTranslations('manage-invitation.sections.music');
+
+  // if (!data) return null; // Removed
+  const [isUploading, setIsUploading] = React.useState(false);
 
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
+  const musicData = data?.music || { enabled: false, name: '', url: '' };
+
   const handleMusicUpload = () => {
+    if (isUploading) return;
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -32,17 +45,23 @@ export function MusicSection({ data, updateField }: MusicSectionProps) {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64String = reader.result as string;
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size exceeds 10MB limit.');
+      return;
+    }
+
+    setIsUploading(true);
+    const url = await uploadMusic(file);
+    setIsUploading(false);
+
+    if (url) {
       updateField(['music'], {
-        ...data.music,
+        ...musicData,
         enabled: true,
-        url: base64String,
+        url: url,
         name: file.name,
       });
-    };
-    reader.readAsDataURL(file);
+    }
 
     // Reset input
     event.target.value = '';
@@ -50,7 +69,7 @@ export function MusicSection({ data, updateField }: MusicSectionProps) {
 
   const handleRemoveMusic = () => {
     updateField(['music'], {
-      ...data.music,
+      ...musicData,
       enabled: false,
       url: '',
       name: '',
@@ -70,7 +89,7 @@ export function MusicSection({ data, updateField }: MusicSectionProps) {
       <div className="flex flex-col items-center gap-4">
         <div className="bg-muted flex w-full max-w-md items-center gap-4 rounded-lg border border-transparent p-3">
           <div className="bg-surface flex size-10 items-center justify-center rounded-full">
-            {data.music.enabled ? (
+            {musicData?.enabled ? (
               <Music2 className="text-primary h-5 w-5" />
             ) : (
               <Music className="h-5 w-5 text-gray-400" />
@@ -78,10 +97,10 @@ export function MusicSection({ data, updateField }: MusicSectionProps) {
           </div>
           <div className="flex-1">
             <p className="text-muted-foreground truncate text-sm font-medium">
-              {data.music.enabled ? data.music.name : t('noMusic')}
+              {musicData?.enabled ? musicData.name : t('noMusic')}
             </p>
           </div>
-          {data.music.enabled ? (
+          {musicData?.enabled ? (
             <BaseButton
               onClick={handleRemoveMusic}
               className="h-7 px-4 text-xs font-bold"
@@ -96,8 +115,13 @@ export function MusicSection({ data, updateField }: MusicSectionProps) {
               className="h-7 px-4 text-xs font-bold"
               variant="default"
               size="sm"
+              disabled={isUploading}
             >
-              {t('browse')}
+              {isUploading ? (
+                <div className="border-background h-3 w-3 animate-spin rounded-full border-2 border-t-transparent" />
+              ) : (
+                t('browse')
+              )}
             </BaseButton>
           )}
         </div>

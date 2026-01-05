@@ -1,21 +1,80 @@
-import { useState } from 'react';
+'use client';
+
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useInvitationStore } from '@/stores/invitation-store';
 import { ROUTES } from '@/constants/routes';
 import { useRouter } from '@/i18n/routing';
 import { WeddingData } from '@/types/invitation';
-import { useEffect } from 'react';
+import { createWeddingService } from '@/services/wedding-service';
 
-export const useInvitation = (initialData?: WeddingData) => {
+interface UseInvitationOptions {
+  initialData?: WeddingData;
+  enableFetch?: boolean;
+  slug?: string;
+  isEdit?: boolean;
+  userId?: string;
+}
+
+export const useInvitation = ({
+  initialData,
+  enableFetch = false,
+  slug,
+  isEdit = false,
+  userId,
+}: UseInvitationOptions = {}) => {
   const router = useRouter();
   const { data, updateField, reset, setData } = useInvitationStore();
+
   const [isSaving, setIsSaving] = useState(false);
   const [isPublishing, setIsPublishing] = useState(false);
+  const [loading, setLoading] = useState(enableFetch);
+  const [error, setError] = useState<string | null>(null);
+
+  const weddingService = useMemo(() => createWeddingService(), []);
+
+  const fetchData = useCallback(async () => {
+    if (!enableFetch) return;
+
+    if (!slug && !isEdit) {
+      return;
+    }
+
+    if (isEdit && !userId) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      let response;
+      if (isEdit && userId) {
+        response = await weddingService.getWeddingByUserId(userId);
+      } else if (slug) {
+        response = await weddingService.getWeddingBySlug(slug);
+      }
+
+      if (response?.data) {
+        setData(response.data);
+      } else if (slug || (isEdit && userId)) {
+        setError('Invitation not found');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Failed to load invitation');
+    } finally {
+      setLoading(false);
+    }
+  }, [enableFetch, slug, isEdit, userId, weddingService, setData]);
 
   useEffect(() => {
     if (initialData) {
       setData(initialData);
+      setLoading(false);
+    } else if (enableFetch) {
+      fetchData();
     }
-  }, [initialData, setData]);
+  }, [initialData, enableFetch, fetchData, setData]);
 
   const saveInvitation = async () => {
     setIsSaving(true);
@@ -38,12 +97,17 @@ export const useInvitation = (initialData?: WeddingData) => {
   const publishInvitation = async () => {
     setIsPublishing(true);
     try {
-      // Mock API call to publish
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log('Published invitation:', data);
+      if (!data) return false;
+      const response = data.id
+        ? await weddingService.updateWedding(data)
+        : await weddingService.createWedding(data);
 
       // Navigate to public page
-      router.push('/invitation');
+      if (response.data) {
+        setData({ ...data, slug: response.data.slug, id: response.data.id });
+        router.push(`/invitation/${response.data.slug}`);
+      }
+
       return true;
     } catch (error) {
       console.error('Failed to publish invitation:', error);
@@ -54,6 +118,8 @@ export const useInvitation = (initialData?: WeddingData) => {
   };
 
   const checkValidInvitation = () => {
+    if (!data) return false;
+
     // General
     if (!data.heroBannerUrl) return false;
 
@@ -107,10 +173,39 @@ export const useInvitation = (initialData?: WeddingData) => {
     return true;
   };
 
+  const uploadImage = async (file: File): Promise<string | null> => {
+    try {
+      const response = await weddingService.uploadPhoto(file, 'gallery');
+      console.log(response);
+      if (response.data) {
+        return response.data;
+      }
+      return null;
+    } catch (error) {
+      console.error('Failed to upload image:', error);
+      return null;
+    }
+  };
+
+  const uploadMusic = async (file: File): Promise<string | null> => {
+    try {
+      const response = await weddingService.uploadMusic(file);
+      if (response.data) {
+        return response.data;
+      }
+      return null;
+    } catch (error) {
+      console.error('Failed to upload music:', error);
+      return null;
+    }
+  };
+
   const isValid = checkValidInvitation();
 
   return {
     data,
+    loading,
+    error,
     updateField,
     reset,
     setData,
@@ -119,5 +214,8 @@ export const useInvitation = (initialData?: WeddingData) => {
     isSaving,
     isPublishing,
     isValid,
+    uploadImage,
+    uploadMusic,
+    refetch: fetchData,
   };
 };

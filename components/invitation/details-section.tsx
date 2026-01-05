@@ -13,6 +13,16 @@ interface DetailsSectionProps {
 export function DetailsSection({ data }: DetailsSectionProps) {
   const t = useTranslations('invitation.details');
 
+  const formatDate = (date: Date | string) => {
+    if (!date) return '';
+    try {
+      const d = date instanceof Date ? date : new Date(date);
+      return new Intl.DateTimeFormat('vi-VN', { dateStyle: 'long' }).format(d);
+    } catch {
+      return date.toString();
+    }
+  };
+
   if (!data.ceremony.show && !data.map.show) {
     return null;
   }
@@ -46,7 +56,7 @@ export function DetailsSection({ data }: DetailsSectionProps) {
                       {t('time.date')}
                     </h4>
                     <p className="text-muted-foreground text-sm">
-                      {data.ceremony.date}{' '}
+                      {formatDate(data.ceremony.date)}{' '}
                       {data.ceremony.time ? `- ${data.ceremony.time}` : ''}
                     </p>
                   </div>
@@ -90,7 +100,7 @@ export function DetailsSection({ data }: DetailsSectionProps) {
                     {t('reception.name')}
                   </h4>
                   <p className="text-muted-foreground text-sm">
-                    {data.reception.date}{' '}
+                    {formatDate(data.reception.date)}{' '}
                     {data.reception.time ? `- ${data.reception.time}` : ''}
                     <br />
                     {data.reception.address}

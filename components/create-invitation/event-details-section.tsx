@@ -8,7 +8,7 @@ import { Calendar, PartyPopper, Lightbulb, Clock } from 'lucide-react';
 import { WeddingData } from '@/types/invitation';
 
 interface EventDetailsSectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
 }
 
@@ -18,7 +18,9 @@ export function EventDetailsSection({
   data,
   updateField,
 }: EventDetailsSectionProps) {
-  const t = useTranslations('create-invitation.sections.events');
+  const t = useTranslations('manage-invitation.sections.events');
+
+  // if (!data) return null; // Removed
 
   return (
     <>
@@ -30,7 +32,7 @@ export function EventDetailsSection({
         iconTextColor="text-primary"
         rightAction={
           <Toggle
-            checked={data.ceremony.show}
+            checked={data?.ceremony?.show ?? true}
             onChange={(val) => updateField(['ceremony', 'show'], val)}
             label={t('showSection')}
           />
@@ -42,8 +44,14 @@ export function EventDetailsSection({
             label={t('date')}
             className="bg-muted focus:border-primary focus:bg-background border-transparent"
             type="date"
-            value={data.ceremony.date}
-            onChange={(e) => updateField(['ceremony', 'date'], e.target.value)}
+            value={
+              data?.ceremony?.date instanceof Date
+                ? data.ceremony.date.toISOString().split('T')[0]
+                : ''
+            }
+            onChange={(e) =>
+              updateField(['ceremony', 'date'], new Date(e.target.value))
+            }
             rightIcon={<Calendar className="h-4 w-4" />}
           />
           <BaseInput
@@ -51,7 +59,7 @@ export function EventDetailsSection({
             label={t('time')}
             className="bg-muted focus:border-primary focus:bg-background border-transparent"
             type="time"
-            value={data.ceremony.time}
+            value={data?.ceremony?.time || ''}
             onChange={(e) => updateField(['ceremony', 'time'], e.target.value)}
             rightIcon={<Clock className="h-4 w-4" />}
           />
@@ -77,8 +85,14 @@ export function EventDetailsSection({
             label={t('date')}
             className="bg-muted focus:border-primary focus:bg-background border-transparent"
             type="date"
-            value={data.reception.date}
-            onChange={(e) => updateField(['reception', 'date'], e.target.value)}
+            value={
+              data?.reception?.date instanceof Date
+                ? data.reception.date.toISOString().split('T')[0]
+                : ''
+            }
+            onChange={(e) =>
+              updateField(['reception', 'date'], new Date(e.target.value))
+            }
             rightIcon={<Calendar className="h-4 w-4" />}
           />
           <BaseInput
@@ -86,7 +100,7 @@ export function EventDetailsSection({
             label={t('time')}
             className="bg-muted focus:border-primary focus:bg-background border-transparent"
             type="time"
-            value={data.reception.time}
+            value={data?.reception?.time || ''}
             onChange={(e) => updateField(['reception', 'time'], e.target.value)}
             rightIcon={<Clock className="h-4 w-4" />}
           />
@@ -98,7 +112,7 @@ export function EventDetailsSection({
           <textarea
             className="bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all focus:ring-0"
             rows={2}
-            value={data.reception.address}
+            value={data?.reception?.address || ''}
             onChange={(e) =>
               updateField(['reception', 'address'], e.target.value)
             }

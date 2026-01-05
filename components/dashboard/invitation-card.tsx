@@ -15,6 +15,8 @@ export function InvitationCard() {
   const t = useTranslations('dashboard.invitation');
   const { data } = useInvitationStore();
 
+  if (!data) return null; // Or render loading state
+
   return (
     <div className="border-border/40 bg-surface overflow-hidden rounded-xl border shadow-sm">
       <div className="flex flex-col gap-6 p-6 md:p-8">

@@ -119,7 +119,9 @@ export function Header({ initialUser = null }: HeaderProps) {
           })}
           {currentUser ? (
             <span className="text-muted-foreground space-x-2 text-sm font-bold uppercase">
-              <Link href={ROUTES.INVITATION}>
+              <Link
+                href={`${ROUTES.INVITATION}/${currentUser.userId}?edit=true`}
+              >
                 <BaseButton>{t('my_invitation')}</BaseButton>
               </Link>
               <DropdownMenu>

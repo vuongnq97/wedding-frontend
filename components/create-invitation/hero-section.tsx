@@ -7,15 +7,23 @@ import { WeddingData } from '@/types/invitation';
 import { useTranslations } from 'next-intl';
 
 interface HeroSectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: (string | number)[], value: unknown) => void;
+  uploadImage: (file: File) => Promise<string | null>;
 }
 
-export function HeroSection({ data, updateField }: HeroSectionProps) {
-  const t = useTranslations('create-invitation.sections.hero');
+export function HeroSection({
+  data,
+  updateField,
+  uploadImage,
+}: HeroSectionProps) {
+  const t = useTranslations('manage-invitation.sections.hero');
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = React.useState(false);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // if (!data) return null;
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
@@ -23,13 +31,16 @@ export function HeroSection({ data, updateField }: HeroSectionProps) {
         return;
       }
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        updateField(['heroBannerUrl'], base64String);
-      };
-      reader.readAsDataURL(file);
+      setIsUploading(true);
+      const url = await uploadImage(file);
+      setIsUploading(false);
+
+      if (url) {
+        updateField(['heroBannerUrl'], url);
+      }
     }
+    // Reset input
+    e.target.value = '';
   };
 
   const handleUploadClick = () => {
@@ -55,15 +66,23 @@ export function HeroSection({ data, updateField }: HeroSectionProps) {
           onChange={handleFileChange}
         />
         <div className="bg-muted text-primary mb-3 flex size-12 items-center justify-center rounded-full transition-transform group-hover:scale-110">
-          <Upload className="h-6 w-6" />
+          {isUploading ? (
+            <div className="border-primary h-6 w-6 animate-spin rounded-full border-2 border-t-transparent" />
+          ) : (
+            <Upload className="h-6 w-6" />
+          )}
         </div>
         <p className="text-foreground text-sm font-medium">
-          {data.heroBannerUrl ? t('change') : t('upload')}
+          {isUploading
+            ? t('uploading')
+            : data?.heroBannerUrl
+              ? t('change')
+              : t('upload')}
         </p>
         <p className="text-muted-foreground mt-1 text-xs">
           {t('recommendedSize')}
         </p>
-        {data.heroBannerUrl && (
+        {data?.heroBannerUrl && (
           <div className="border-border relative mt-4 h-32 w-full overflow-hidden rounded-lg border">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

@@ -7,7 +7,7 @@ import { Megaphone } from 'lucide-react';
 import { WeddingData } from '@/types/invitation';
 
 interface NotificationSectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
 }
 
@@ -17,7 +17,9 @@ export function NotificationSection({
   data,
   updateField,
 }: NotificationSectionProps) {
-  const t = useTranslations('create-invitation.sections.notification');
+  const t = useTranslations('manage-invitation.sections.notification');
+
+  // if (!data) return null; // Removed
 
   return (
     <SectionWrapper
@@ -31,7 +33,7 @@ export function NotificationSection({
           label={t('line1')}
           className="bg-muted focus:border-primary focus:bg-background h-auto w-full border-transparent py-3"
           placeholder={t('line1Placeholder')}
-          value={data.notification.line1}
+          value={data?.notification?.line1 || ''}
           onChange={(e) =>
             updateField(['notification', 'line1'], e.target.value)
           }
@@ -40,7 +42,7 @@ export function NotificationSection({
           label={t('line2')}
           className="bg-muted focus:border-primary focus:bg-background h-auto w-full border-transparent py-3"
           placeholder={t('line2Placeholder')}
-          value={data.notification.line2}
+          value={data?.notification?.line2 || ''}
           onChange={(e) =>
             updateField(['notification', 'line2'], e.target.value)
           }

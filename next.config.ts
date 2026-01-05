@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     const apiUrl = process.env.API_BASE_URL;
+    console.log(`API URL: ${apiUrl}`);
     if (!apiUrl) {
       return [];
     }

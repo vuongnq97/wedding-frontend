@@ -52,9 +52,15 @@ export const invitationTemplatePageEn: WeddingData = {
     },
   ],
   albumPhotos: [
-    'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    'https://tuarts.net/wp-content/uploads/2021/04/323427669_1215565176029190_7406930290556536431_n.jpg',
+    {
+      url: 'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    },
+    {
+      url: 'https://tuarts.net/wp-content/uploads/2021/04/323427669_1215565176029190_7406930290556536431_n.jpg',
+    },
   ],
   notification: {
     line1: 'Together with their families',
@@ -62,11 +68,11 @@ export const invitationTemplatePageEn: WeddingData = {
   },
   ceremony: {
     show: true,
-    date: '2026-03-15',
+    date: new Date('2026-03-15'),
     time: '14:00',
   },
   reception: {
-    date: '2026-03-15',
+    date: new Date('2026-03-15'),
     time: '17:00',
     address: 'The Grand Ballroom, 789 Luxury Ln, Seattle, WA',
   },
@@ -75,31 +81,27 @@ export const invitationTemplatePageEn: WeddingData = {
     link: 'https://goo.gl/maps/example',
     locationName: 'The Grand Ballroom',
     locationAddress: '789 Luxury Ln, Seattle, WA',
-    coords: {
-      lat: 47.6062,
-      lng: -122.3321,
-    },
+    latitude: 47.6062,
+    longitude: -122.3321,
   },
   thankYouMessage: 'We are so excited to celebrate our special day with you!',
   guestbookEnabled: true,
-  bankAccounts: {
-    groom: [
-      {
-        id: '1',
-        bankName: 'Chase Bank',
-        accountNumber: '1234567890',
-        accountHolder: 'Alexander Smith',
-      },
-    ],
-    bride: [
-      {
-        id: '1',
-        bankName: 'Bank of America',
-        accountNumber: '0987654321',
-        accountHolder: 'Isabella Johnson',
-      },
-    ],
-  },
+  bankAccounts: [
+    {
+      id: '1',
+      bankName: 'Chase Bank',
+      accountNumber: '1234567890',
+      accountHolder: 'Alexander Smith',
+      owner: 0,
+    },
+    {
+      id: '1',
+      bankName: 'Bank of America',
+      accountNumber: '0987654321',
+      accountHolder: 'Isabella Johnson',
+      owner: 1,
+    },
+  ],
   music: {
     enabled: true,
     url: 'https://www.mfiles.co.uk/mp3-downloads/pachelbel-canon-in-d.mp3',
@@ -160,9 +162,15 @@ export const invitationTemplatePageVi: WeddingData = {
     },
   ],
   albumPhotos: [
-    'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/03/anh-cuoi-5.jpg',
-    'https://cdn-media.sforum.vn/storage/app/media/thanhhuyen/%E1%BA%A3nh%20c%C6%B0%E1%BB%9Bi/1/anh-cuoi-1.jpg',
-    'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    {
+      url: 'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/03/anh-cuoi-5.jpg',
+    },
+    {
+      url: 'https://cdn-media.sforum.vn/storage/app/media/thanhhuyen/%E1%BA%A3nh%20c%C6%B0%E1%BB%9Bi/1/anh-cuoi-1.jpg',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    },
   ],
   notification: {
     line1: 'Trân trọng kính mời quý khách',
@@ -170,11 +178,11 @@ export const invitationTemplatePageVi: WeddingData = {
   },
   ceremony: {
     show: true,
-    date: '2026-03-15',
+    date: new Date('2026-03-15'),
     time: '14:00',
   },
   reception: {
-    date: '2026-03-15',
+    date: new Date('2026-03-15'),
     time: '17:00',
     address: 'Trung tâm Tiệc cưới Hoàng Gia, 789 Đường Láng, Hà Nội',
   },
@@ -183,31 +191,27 @@ export const invitationTemplatePageVi: WeddingData = {
     link: 'https://goo.gl/maps/example',
     locationName: 'Trung tâm Tiệc cưới Hoàng Gia',
     locationAddress: '789 Đường Láng, Hà Nội',
-    coords: {
-      lat: 21.0285,
-      lng: 105.8542,
-    },
+    latitude: 21.0285,
+    longitude: 105.8542,
   },
   thankYouMessage: 'Rất hân hạnh được đón tiếp quý khách!',
   guestbookEnabled: true,
-  bankAccounts: {
-    groom: [
-      {
-        id: '1',
-        bankName: 'Vietcombank',
-        accountNumber: '1234567890',
-        accountHolder: 'Nguyễn Văn Nam',
-      },
-    ],
-    bride: [
-      {
-        id: '1',
-        bankName: 'Techcombank',
-        accountNumber: '0987654321',
-        accountHolder: 'Lê Thị Lan',
-      },
-    ],
-  },
+  bankAccounts: [
+    {
+      id: '1',
+      bankName: 'Vietcombank',
+      accountNumber: '1234567890',
+      accountHolder: 'Nguyễn Văn Nam',
+      owner: 0,
+    },
+    {
+      id: '1',
+      bankName: 'Techcombank',
+      accountNumber: '0987654321',
+      accountHolder: 'Lê Thị Lan',
+      owner: 1,
+    },
+  ],
   music: {
     enabled: true,
     url: 'https://www.mfiles.co.uk/mp3-downloads/pachelbel-canon-in-d.mp3',

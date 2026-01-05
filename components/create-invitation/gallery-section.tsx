@@ -8,37 +8,53 @@ import { WeddingData } from '@/types/invitation';
 import Image from 'next/image';
 
 interface GallerySectionProps {
-  data: WeddingData;
+  data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
+  uploadImage: (file: File) => Promise<string | null>;
 }
 
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
-export function GallerySection({ data, updateField }: GallerySectionProps) {
-  const t = useTranslations('create-invitation.sections.gallery');
+export function GallerySection({
+  data,
+  updateField,
+  uploadImage,
+}: GallerySectionProps) {
+  const t = useTranslations('manage-invitation.sections.gallery');
+
+  // if (!data) return null; // Removed
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const albumPhotos = data?.albumPhotos || [];
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64String = reader.result as string;
-      updateField(['albumPhotos'], [...data.albumPhotos, base64String]);
-    };
-    reader.readAsDataURL(file);
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size exceeds 5MB limit.');
+      return;
+    }
 
-    // Reset input so the same file can be selected again if needed
+    setIsUploading(true);
+    const url = await uploadImage(file);
+    setIsUploading(false);
+
+    if (url) {
+      updateField(['albumPhotos'], [...albumPhotos, { url }]);
+    }
+
     event.target.value = '';
   };
 
   const removePhoto = (index: number) => {
-    const updatedPhotos = data.albumPhotos.filter((_, i) => i !== index);
+    const updatedPhotos = albumPhotos.filter((_, i) => i !== index);
     updateField(['albumPhotos'], updatedPhotos);
   };
 
@@ -50,13 +66,13 @@ export function GallerySection({ data, updateField }: GallerySectionProps) {
       iconTextColor="text-primary"
     >
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {data.albumPhotos.map((photo, index) => (
+        {albumPhotos.map((photo, index) => (
           <div
             key={index}
             className="group bg-muted relative aspect-square overflow-hidden rounded-lg"
           >
             <Image
-              src={photo}
+              src={photo.url}
               alt={`Album photo ${index + 1}`}
               fill
               className="object-cover"
@@ -75,9 +91,19 @@ export function GallerySection({ data, updateField }: GallerySectionProps) {
           onClick={handleUploadClick}
           className="flex aspect-square h-auto flex-col items-center justify-center gap-2"
           variant="dashed"
+          disabled={isUploading}
         >
-          <Upload className="h-6 w-6" />
-          <span className="text-xs font-medium">{t('upload')}</span>
+          {isUploading ? (
+            <>
+              <div className="border-primary h-6 w-6 animate-spin rounded-full border-2 border-t-transparent" />
+              <span className="text-xs font-medium">{t('uploading')}</span>
+            </>
+          ) : (
+            <>
+              <Upload className="h-6 w-6" />
+              <span className="text-xs font-medium">{t('upload')}</span>
+            </>
+          )}
         </BaseButton>
         <input
           type="file"

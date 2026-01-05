@@ -18,9 +18,11 @@ export function CountdownSection({ data }: CountdownSectionProps) {
   ]);
 
   useEffect(() => {
-    const targetDate = data.ceremony.date
-      ? new Date(data.ceremony.date + ' ' + (data.ceremony.time || '00:00'))
-      : new Date();
+    const targetDate = new Date(data.ceremony.date);
+    if (data.ceremony.time) {
+      const [hours, minutes] = data.ceremony.time.split(':');
+      targetDate.setHours(parseInt(hours, 10), parseInt(minutes, 10));
+    }
 
     const interval = setInterval(() => {
       const now = new Date();

@@ -12,8 +12,8 @@ interface GiftSectionProps {
 export function GiftSection({ data }: GiftSectionProps) {
   const t = useTranslations('invitation.gift');
   const { bankAccounts } = data;
-  const groomAccounts = bankAccounts?.groom || [];
-  const brideAccounts = bankAccounts?.bride || [];
+  const groomAccounts = bankAccounts?.filter((acc) => acc.owner === 0) || [];
+  const brideAccounts = bankAccounts?.filter((acc) => acc.owner === 1) || [];
 
   if (groomAccounts.length === 0 && brideAccounts.length === 0) {
     return null;
@@ -33,7 +33,7 @@ export function GiftSection({ data }: GiftSectionProps) {
           {/* Groom Accounts */}
           {groomAccounts.map((account) => (
             <BankAccountCard
-              key={account.id}
+              key={account.accountNumber}
               account={account}
               label={t('groom')}
               icon={<Wallet className="h-6 w-6" />}
@@ -44,7 +44,7 @@ export function GiftSection({ data }: GiftSectionProps) {
           {/* Bride Accounts */}
           {brideAccounts.map((account) => (
             <BankAccountCard
-              key={account.id}
+              key={account.accountNumber}
               account={account}
               label={t('bride')}
               icon={<Banknote className="h-6 w-6" />}

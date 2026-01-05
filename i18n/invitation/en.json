@@ -17,7 +17,9 @@
     "title": "Jane & John",
     "date": "October 24, 2024",
     "location": "San Francisco, CA",
-    "cta": "RSVP Now"
+    "cta": "RSVP Now",
+    "weddingCeremony": "WEDDING CEREMONY",
+    "saveTheDate": "SAVE THE DATE"
   },
   "countdown": {
     "subtitle": "The Countdown",

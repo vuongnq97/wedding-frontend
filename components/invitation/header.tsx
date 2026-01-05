@@ -13,10 +13,18 @@ import { ROUTES } from '@/constants/routes';
 interface HeaderProps {
   data: WeddingData;
   isCreator?: boolean;
+  isPublic?: boolean;
+  isTemplate?: boolean;
   onPublish?: () => void;
 }
 
-export function Header({ data, isCreator, onPublish }: HeaderProps) {
+export function Header({
+  data,
+  isCreator,
+  isPublic,
+  isTemplate,
+  onPublish,
+}: HeaderProps) {
   const t = useTranslations('invitation.header');
   const tLayout = useTranslations('layout.header');
   const [activeHash, setActiveHash] = useState('');
@@ -48,14 +56,14 @@ export function Header({ data, isCreator, onPublish }: HeaderProps) {
                 onClick={() => setActiveHash('')}
               >
                 <Heart className="text-primary h-6 w-6 animate-ping fill-current" />
-                <h2 className="text-primary hidden text-xl font-bold tracking-tight md:block">
-                  {data.groom.informalName && data.bride.informalName
-                    ? `${data.groom.informalName} & ${data.bride.informalName}`
+                <h2 className="text-primary hidden text-xl font-bold tracking-tight uppercase md:block">
+                  {data.groom.fullName.slice(0, 1) &&
+                  data.bride.fullName.slice(0, 1)
+                    ? `${data.groom.fullName.slice(0, 1)} & ${data.bride.fullName.slice(0, 1)}`
                     : t('logo')}
                 </h2>
               </div>
             </div>
-
             <div className="hidden items-center gap-8 md:flex">
               {links.map((link) => (
                 <Link
@@ -73,22 +81,38 @@ export function Header({ data, isCreator, onPublish }: HeaderProps) {
                 </Link>
               ))}
             </div>
-            <div className="flex items-center gap-2">
-              <BaseButton
-                onClick={() => {
-                  router.push(ROUTES.CREATE_INVITATION);
-                }}
-                variant={isCreator ? 'default' : 'outline'}
-                size="sm"
-              >
-                {isCreator ? t('createInvitation') : t('editInvitation')}
-              </BaseButton>
-              {!isCreator && (
-                <BaseButton onClick={onPublish} variant="default" size="sm">
-                  {t('publish')}
+
+            {!isPublic && (
+              <div className="flex items-center gap-2">
+                <BaseButton
+                  onClick={() => {
+                    console.log(isTemplate);
+                    if (isTemplate) {
+                      router.push(`${ROUTES.MANAGE_INVITATION}?create=true`);
+                    } else {
+                      router.push(
+                        `${ROUTES.MANAGE_INVITATION}?edit=true&weddingId=${data.id}`
+                      );
+                    }
+                  }}
+                  variant={
+                    isTemplate ? 'default' : isCreator ? 'default' : 'outline'
+                  }
+                  size="sm"
+                >
+                  {isTemplate
+                    ? t('createInvitation')
+                    : isCreator
+                      ? t('editInvitation')
+                      : t('createInvitation')}
                 </BaseButton>
-              )}
-            </div>
+                {!isCreator && !isTemplate && (
+                  <BaseButton onClick={onPublish} variant="default" size="sm">
+                    {t('publish')}
+                  </BaseButton>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
