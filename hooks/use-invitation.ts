@@ -185,7 +185,6 @@ export const useInvitation = ({
   const uploadImage = async (file: File): Promise<string | null> => {
     try {
       const response = await weddingService.uploadPhoto(file, 'gallery');
-      console.log(response);
       if (response.data) {
         return response.data;
       }

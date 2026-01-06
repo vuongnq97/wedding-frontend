@@ -30,7 +30,6 @@ export function GiftSection({ data }: GiftSectionProps) {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {/* Groom Accounts */}
           {groomAccounts.map((account) => (
             <BankAccountCard
               key={account.accountNumber}
@@ -41,7 +40,6 @@ export function GiftSection({ data }: GiftSectionProps) {
             />
           ))}
 
-          {/* Bride Accounts */}
           {brideAccounts.map((account) => (
             <BankAccountCard
               key={account.accountNumber}

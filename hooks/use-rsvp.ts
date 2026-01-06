@@ -23,9 +23,8 @@ export const useRsvp = () => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = async (data: RsvpFormValues) => {
-    console.log('RSVP Data:', data);
-
     setIsSubmitting(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));

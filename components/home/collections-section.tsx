@@ -19,7 +19,7 @@ export function CollectionsSection() {
     },
     ...TEMPLATES,
   ];
-  console.log({ defaultTemplates });
+
   return (
     <section className="bg-background w-full py-10 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 md:px-10">

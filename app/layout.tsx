@@ -26,8 +26,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Wedding Invitation',
-  description: 'Multi-language blog experience',
+  title: 'Trăm Năm',
+  description:
+    'Nền tảng tạo thiệp mời đám cưới trực tuyến, cá nhân hóa nội dung, thiết kế tinh tế và chia sẻ dễ dàng.',
 };
 
 export default function RootLayout({
@@ -38,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="theme-light">
       <body
+        suppressHydrationWarning
         className={`${jakarta.variable} ${playfair.variable} ${geistMono.variable} text-foreground min-h-screen antialiased`}
       >
         {children}

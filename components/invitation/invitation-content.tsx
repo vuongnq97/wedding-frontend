@@ -28,8 +28,6 @@ export function InvitationContent({
   mode = 'public',
   onPublish,
 }: InvitationContentProps) {
-  console.log({ mode });
-
   if (!data) {
     return (
       <div className="bg-background flex min-h-screen w-full items-center justify-center">
