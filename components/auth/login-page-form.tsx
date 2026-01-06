@@ -34,6 +34,7 @@ export function LoginPageForm() {
   const { checkUserHasWedding } = useInvitation();
   const [step, setStep] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
+  const { setHasWedding } = useAuthStore();
 
   const emailSchema = z.object({
     email: z
@@ -76,8 +77,9 @@ export function LoginPageForm() {
 
       // Check if user has wedding data
       if (authResponse && authResponse.userId) {
-        const hasWedding = await checkUserHasWedding(authResponse.userId);
-        useAuthStore.getState().setHasWedding(hasWedding);
+        checkUserHasWedding(authResponse.userId).then((hasWedding) => {
+          setHasWedding(hasWedding);
+        });
       }
 
       toast.success(t('login_success'));

@@ -45,7 +45,7 @@ export const apiClient = createApiClient({
 
       try {
         // Call Refresh API using public client
-        const res = await publicClient<TokenResponse>('/api/Auth/refresh', {
+        const res = await publicClient<TokenResponse>('/Auth/refresh', {
           method: 'POST',
         });
 

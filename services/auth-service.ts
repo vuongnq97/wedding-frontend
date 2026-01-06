@@ -8,7 +8,6 @@ const REFRESH_PATH = '/Auth/refresh';
 const LOGOUT_PATH = '/Auth/logout';
 
 export function createAuthService({
-  refreshPath,
   client,
   ...clientOptions
 }: AuthServiceOptions = {}): AuthService {
@@ -29,9 +28,7 @@ export function createAuthService({
   };
 
   const refresh = async () => {
-    const response = await authService.post<ApiResponse<TokenResponse>>(
-      refreshPath ?? REFRESH_PATH
-    );
+    const response = await authService.post<ApiResponse<TokenResponse>>(REFRESH_PATH);
     return response;
   };
 
