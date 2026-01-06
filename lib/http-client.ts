@@ -26,8 +26,9 @@ export const apiClient = createApiClient({
   onRequest: async (path, options) => {
     const token = useAuthStore.getState().accessToken;
     if (token) {
-      options.headers = new Headers(options.headers);
-      options.headers.set('Authorization', `Bearer ${token}`);
+      const headers = new Headers(options.headers);
+      headers.set('Authorization', `Bearer ${token}`);
+      return { ...options, headers };
     }
     return options;
   },
