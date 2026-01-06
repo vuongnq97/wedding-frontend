@@ -87,7 +87,7 @@ export function MusicSection({
       iconTextColor="text-primary"
     >
       <div className="flex flex-col items-center gap-4">
-        <div className="w-full bg-muted flex items-center gap-4 rounded-lg border border-transparent p-3">
+        <div className="bg-muted flex w-full items-center gap-4 rounded-lg border border-transparent p-3">
           <div className="bg-surface flex size-10 items-center justify-center rounded-full">
             {musicData?.enabled ? (
               <Music2 className="text-primary h-5 w-5" />

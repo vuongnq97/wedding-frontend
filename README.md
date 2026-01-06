@@ -1,166 +1,94 @@
-# Wedding Invitation Web Platform
+# Trăm Năm - Wedding Invitation Platform
 
-Design a modern wedding invitation web platform.
+**Trăm Năm** is a modern, elegant web platform that allows couples to create, customize, and share their digital wedding invitations. Built with performance and user experience in mind, it features a responsive design, real-time preview editing, and multilingual support.
 
-## Global Style
+## 🚀 Tech Stack
 
-- **Vibe**: Romantic, elegant, minimal
-- **Colors**: Soft pastel colors (beige, blush pink, ivory, light gray)
-- **Layout**: Clean layout, lots of white space
-- **Typography**: Serif font for titles, sans-serif for body
-- **Responsive design**: Desktop, Tablet, Mobile
-- **Interactions**: Smooth scrolling and gentle animations
-- **Imagery**: Emotional, wedding-focused imagery
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, Turbopack)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Internationalization**: [next-intl](https://next-intl-docs.vercel.app/)
+- **Forms**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) primitives
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-## Target Users
+## 📂 Project Structure
 
-- Young couples creating wedding invitations
-- Wedding guests viewing invitations on any device
+```bash
+├── app/                  # Next.js App Router
+│   ├── [locale]/         # Internationalized routes
+│   │   ├── (main)/       # Main layout (Landing, Login, Dashboard)
+│   │   └── (standalone)/ # Standalone layout (Editor, Public Invitation)
+├── components/           # Reusable UI components
+│   ├── ui/               # Base UI elements (Button, Input, etc.)
+│   ├── invitation/       # Invitation-specific components
+│   └── ...
+├── hooks/                # Custom React hooks
+├── i18n/                 # Localization files (en, vi)
+├── lib/                  # Utility libraries
+├── services/             # API service layer
+├── stores/               # Zustand state stores (Auth, Invitation)
+├── types/                # TypeScript type definitions
+└── utils/                # Helper functions
+```
 
-## Features & Sections
+## 🛠️ Getting Started
 
-### Wedding Invitation Landing Page
+### Prerequisites
 
-**Sections:**
+- Node.js (Latest LTS recommended)
+- Yarn or NPM
 
-- **Hero section**:
-  - Large romantic wedding image
-  - Couple names overlay
-  - Headline: "Create Your Wedding Invitation"
-  - Primary CTA button: "Create Invitation"
-  - Responsive layout: image scales, text adjusts on desktop, tablet, mobile
-- **Template showcase**:
-  - Grid of invitation templates
-  - Each card shows thumbnail and template name
-  - Hover preview effect
-  - Grid adapts to screen size
-- **How it works**:
-  - Step 1: Choose template
-  - Step 2: Fill wedding details
-  - Step 3: Share invitation
-  - Display: Horizontal on desktop, vertical on mobile
-- **Call to action**:
-  - Button: "Start Now"
-  - Centered and accessible on all devices
+### Installation
 
-**Style**:
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd wedding-frontend
+   ```
 
-- Elegant typography
-- Soft gradients
-- Fully responsive layout
+2. **Install dependencies:**
+   ```bash
+   yarn install
+   # or
+   npm install
+   ```
 
-### Full-page Wedding Invitation Preview
+3. **Environment Setup:**
+   Create a `.env` file in the root directory (refer to `.env.example` if available) and configure your API endpoints.
+   ```env
+   NEXT_PUBLIC_API_BASE_URL=https://your-api-url.com/api
+   ```
 
-**Content**:
+4. **Run the development server:**
+   ```bash
+   yarn dev
+   # or
+   npm run dev
+   ```
 
-- Full scrollable invitation preview
-- Realistic wedding content placeholders
-- Sticky bottom action bar with buttons: "Use This Template", "Back to Gallery"
+   Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-**Style**:
+## 📜 Key Features
 
-- No distractions
-- Full-width content
-- Mobile-first scrolling experience
+- **Multilingual Support**: Seamless switching between English and Vietnamese.
+- **Authentication**: Secure OTP-based login and registration.
+- **Interactive Editor**: Real-time previews while customizing invitation details.
+- **Responsive Design**: Optimized for Desktop, Tablet, and Mobile.
+- **Asset Management**: Image and music uploads for personalization.
+- **Guest Management**: RSVP tracking and guestbook functionality.
+- **Template System**: Choose from various beautiful templates.
+- **And more...**
 
-### Login and Register Pages
+## 📦 Scripts
 
-**UI**:
+- `yarn dev`: Start the development server.
+- `yarn build`: Build the application for production.
+- `yarn start`: Start the production server.
+- `yarn lint`: Run ESLint checks.
+- `yarn format`: Format code with Prettier.
 
-- Simple form with email and password
-- Optional couple illustration
-- Soft romantic background
-- Buttons: Login, Register
-- Responsive: form centered
+## 📄 License
 
-**Style**:
-
-- Minimal, elegant
-- Wedding-themed colors
-
-### Wedding Invitation Dashboard
-
-**Components**:
-
-- **Invitation card**: template thumbnail, couple names, public invitation link
-- **Stats**: total views, RSVP responses
-- **Actions**: edit invitation, share invitation, view statistics
-- Responsive: cards adjust width, stacked on mobile/tablet
-
-**Style**:
-
-- Card-based layout
-- Clean admin feel with wedding theme
-
-### Wedding Invitation Editor Page
-
-**Layout**:
-
-- Split-screen: Left = Form input, Right = Live preview
-- Responsive: side-by-side on desktop, stacked vertically on tablet/mobile
-
-**Form Fields**:
-
-- Bride name, Groom name
-- Wedding date, Wedding time
-- Location name, Google map link
-- Love story (textarea)
-- Image gallery upload (drag & drop)
-
-**Preview**:
-
-- Updates in real time
-- Scrollable invitation preview
-
-**Style**:
-
-- Professional editor feel
-- Simple and intuitive
-
-### Public Wedding Invitation Webpage
-
-**Sections**:
-
-- **Hero**: couple names, wedding date, elegant typography
-- **Countdown timer**: days until wedding
-- **Event details**: time, location, address
-- **Map section**: embedded map preview
-- **Photo gallery**: grid or carousel
-- **Love story**: elegant text layout
-- **RSVP section**: form (Name, Attend, Message)
-- **Guest messages**: list or card-style
-
-**Responsive**:
-
-- Desktop: multi-column sections
-- Tablet: simplified layout
-- Mobile: single column, large readable text, sticky RSVP button
-
-**Style**:
-
-- Romantic, emotional
-- Smooth scrolling
-
-### Sharing Page, RSVP Form, and Statistics
-
-**Sharing Page Components**:
-
-- Public invitation URL
-- QR code display
-- Button: Copy link
-- Social share buttons (Facebook, Zalo)
-
-**RSVP Confirmation Form**:
-
-- Guest name
-- Attendance option (Yes / No)
-- Message to couple
-
-**Statistics Page**:
-
-- Metrics: total views, RSVP attending/not attending
-- Charts: pie or bar chart
-
-**Style**:
-
-- Clean, friendly, easy to read on all platform
+This project is licensed under the MIT License.

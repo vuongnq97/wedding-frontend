@@ -28,7 +28,8 @@ export function createAuthService({
   };
 
   const refresh = async () => {
-    const response = await authService.post<ApiResponse<TokenResponse>>(REFRESH_PATH);
+    const response =
+      await authService.post<ApiResponse<TokenResponse>>(REFRESH_PATH);
     return response;
   };
 

@@ -37,7 +37,7 @@ export function HeroSection() {
             <BaseButton
               onClick={() => {
                 if (user) {
-                  router.push(ROUTES.INVITATION);
+                  router.push(`${ROUTES.MANAGE_INVITATION}?create=true`);
                 } else {
                   router.push(ROUTES.LOGIN);
                 }
