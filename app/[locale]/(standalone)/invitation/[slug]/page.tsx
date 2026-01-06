@@ -42,8 +42,7 @@ export default function DynamicInvitationPage() {
   return (
     <InvitationContent
       data={data}
-      isPublic={!isEdit}
-      isCreator={isEdit}
+      mode={isEdit ? 'preview' : 'public'}
       onPublish={() => {}}
     />
   );

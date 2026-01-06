@@ -9,4 +9,3 @@ export * from './gallery-section';
 export * from './gift-section';
 export * from './config-section';
 export * from './music-section';
-export * from './create-invitation-header';

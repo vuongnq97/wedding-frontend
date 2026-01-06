@@ -6,7 +6,8 @@
   "editSubtitle": "Cập nhật thông tin đám cưới và cài đặt.",
   "actions": {
     "discard": "Hủy Thay Đổi",
-    "save": "Lưu & Xem Trước",
+    "save": "Lưu",
+    "saveAndPreview": "Lưu & Xem Trước",
     "saving": "Đang Lưu...",
     "publish": "Xuất Bản",
     "create-template": "Tạo thiệp cưới"
@@ -85,7 +86,8 @@
     },
     "gallery": {
       "title": "Album Ảnh",
-      "upload": "Tải Lên"
+      "upload": "Tải Lên",
+      "uploading": "Đang tải..."
     },
     "gift": {
       "title": "Hộp Mừng Cưới",

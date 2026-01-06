@@ -202,7 +202,7 @@ export function LoveStorySection({
       <div className="before:bg-primary/20 relative space-y-8 pl-8 before:absolute before:top-4 before:bottom-4 before:left-3.5 before:w-px">
         {milestones.map((milestone, index) => (
           <MilestoneItem
-            key={milestone.id}
+            key={milestone.date}
             milestone={milestone}
             index={index}
             updateMilestone={updateMilestone}

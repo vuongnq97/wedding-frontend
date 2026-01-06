@@ -63,7 +63,7 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
         </div>
         {accounts.map((account) => (
           <div
-            key={account.id}
+            key={account.accountNumber}
             className="border-border bg-muted group relative rounded-lg border p-3"
           >
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">

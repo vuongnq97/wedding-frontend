@@ -10,7 +10,7 @@ export default function PublicInvitationPage() {
     <InvitationContent
       data={data}
       onPublish={publishInvitation}
-      isCreator={false}
+      mode="preview"
     />
   );
 }

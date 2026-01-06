@@ -22,6 +22,7 @@ import { ROUTES } from '@/constants/routes';
 import { HEADER_NAV_LINKS } from '@/constants/navigation';
 import { UserInfo } from '@/types/auth';
 import { Avatar } from '@/components/ui/avatar';
+import { useAuthStore } from '@/stores/auth-store';
 
 type HeaderProps = {
   initialUser?: UserInfo | null;
@@ -29,10 +30,8 @@ type HeaderProps = {
 
 export function Header({ initialUser = null }: HeaderProps) {
   const t = useTranslations('layout.header');
-  const toggleSidebar = useLayoutStore((state) => state.toggleSidebar);
-  const theme = useLayoutStore((state) => state.theme);
-  const toggleTheme = useLayoutStore((state) => state.toggleTheme);
-  const setTheme = useLayoutStore((state) => state.setTheme);
+  const { toggleSidebar, toggleTheme, setTheme, theme } = useLayoutStore();
+  const { hasWedding } = useAuthStore();
   const { user, logout } = useAuth();
   const [currentUser, setCurrentUser] = useState<UserInfo | null>(
     initialUser ?? user
@@ -119,11 +118,13 @@ export function Header({ initialUser = null }: HeaderProps) {
           })}
           {currentUser ? (
             <span className="text-muted-foreground space-x-2 text-sm font-bold uppercase">
-              <Link
-                href={`${ROUTES.INVITATION}/${currentUser.userId}?edit=true`}
-              >
-                <BaseButton>{t('my_invitation')}</BaseButton>
-              </Link>
+              {hasWedding && (
+                <Link
+                  href={`${ROUTES.INVITATION}/${currentUser.userId}?edit=true`}
+                >
+                  <BaseButton>{t('my_invitation')}</BaseButton>
+                </Link>
+              )}
               <DropdownMenu>
                 <DropdownMenuTrigger className="outline-none">
                   <Avatar

@@ -13,6 +13,7 @@ import { BaseButton } from '@/components/ui/base-button';
 import { BaseInput } from '@/components/ui/base-input';
 import { useAuth } from '@/hooks/use-auth';
 import { ROUTES } from '@/constants/routes';
+import { useAuthStore } from '@/stores/auth-store';
 import {
   Form,
   FormControl,
@@ -23,12 +24,14 @@ import {
 } from '@/components/ui/form';
 
 import { getLocalizedErrorMessage } from '@/utils/error-helper';
+import { useInvitation } from '@/hooks/use-invitation';
 
 export function LoginPageForm() {
   const t = useTranslations('login');
   const tCommon = useTranslations('common');
   const router = useRouter();
   const { requestOtp, verifyOtp, isLoading } = useAuth();
+  const { checkUserHasWedding } = useInvitation();
   const [step, setStep] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
 
@@ -69,7 +72,14 @@ export function LoginPageForm() {
 
   const handleOtpSubmit = async (values: z.infer<typeof otpSchema>) => {
     try {
-      await verifyOtp(email, values.code);
+      const authResponse = await verifyOtp(email, values.code);
+
+      // Check if user has wedding data
+      if (authResponse && authResponse.userId) {
+        const hasWedding = await checkUserHasWedding(authResponse.userId);
+        useAuthStore.getState().setHasWedding(hasWedding);
+      }
+
       toast.success(t('login_success'));
       router.push(ROUTES.HOME);
     } catch (err) {

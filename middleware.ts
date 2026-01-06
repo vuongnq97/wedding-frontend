@@ -11,11 +11,7 @@ const intlMiddleware = createMiddleware({
   localeDetection: false,
 });
 
-const protectedPages = [
-  ROUTES.DASHBOARD,
-  ROUTES.MANAGE_INVITATION,
-  ROUTES.INVITATION,
-];
+const protectedPages = [ROUTES.DASHBOARD, ROUTES.MANAGE_INVITATION];
 
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;

@@ -32,16 +32,18 @@ export function BankAccountCard({
         <p className="text-muted-foreground mb-1 text-xs font-bold tracking-widest uppercase">
           {label}
         </p>
+        <div className="bg-primary/20 my-1 h-[2px] w-12"></div>
         <h4 className="text-foreground text-lg font-bold">
           {account.bankName}
         </h4>
       </div>
-      <div className="bg-primary/20 my-1 h-[2px] w-12"></div>
       <div className="space-y-1">
         <p className="text-foreground font-mono text-xl tracking-wide sm:text-2xl">
           {account.accountNumber}
         </p>
-        <p className="text-muted-foreground text-sm">{account.accountHolder}</p>
+        <p className="text-muted-foreground text-xl uppercase">
+          {account.accountHolder}
+        </p>
       </div>
 
       <ButtonCopy
@@ -52,7 +54,6 @@ export function BankAccountCard({
         {copyLabel}
       </ButtonCopy>
 
-      {/* Direct QR display */}
       {qrUrl && (
         <div className="border-border relative mt-4 h-40 w-40 overflow-hidden rounded-lg border bg-white">
           <Image
