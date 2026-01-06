@@ -2,13 +2,11 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useInvitationStore } from '@/stores/invitation-store';
-import { ROUTES } from '@/constants/routes';
 import { useRouter } from '@/i18n/routing';
-import { WeddingData } from '@/types/invitation';
 import { createWeddingService } from '@/services/wedding-service';
+import { useAuthStore } from '@/stores/auth-store';
 
 interface UseInvitationOptions {
-  initialData?: WeddingData;
   enableFetch?: boolean;
   slug?: string;
   isEdit?: boolean;
@@ -16,7 +14,6 @@ interface UseInvitationOptions {
 }
 
 export const useInvitation = ({
-  initialData,
   enableFetch = false,
   slug,
   isEdit = false,
@@ -29,6 +26,7 @@ export const useInvitation = ({
   const [isPublishing, setIsPublishing] = useState(false);
   const [loading, setLoading] = useState(enableFetch);
   const [error, setError] = useState<string | null>(null);
+  const { setHasWedding } = useAuthStore();
 
   const weddingService = useMemo(() => createWeddingService(), []);
 
@@ -68,23 +66,23 @@ export const useInvitation = ({
   }, [enableFetch, slug, isEdit, userId, weddingService, setData]);
 
   useEffect(() => {
-    if (initialData) {
-      setData(initialData);
-      setLoading(false);
-    } else if (enableFetch) {
+    if (enableFetch) {
       fetchData();
     }
-  }, [initialData, enableFetch, fetchData, setData]);
+  }, [enableFetch, fetchData]);
 
   const saveInvitation = async () => {
     setIsSaving(true);
     try {
-      // Mock API call to save data
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Saved invitation data:', data);
+      if (!data) return false;
+      const response = data.id
+        ? await weddingService.updateWedding(data)
+        : await weddingService.createWedding(data);
 
-      // Navigate to preview or show success message
-      router.push(ROUTES.INVITATION);
+      if (response.data) {
+        setData(response.data);
+      }
+
       return true;
     } catch (error) {
       console.error('Failed to save invitation:', error);
@@ -98,12 +96,14 @@ export const useInvitation = ({
     setIsPublishing(true);
     try {
       if (!data) return false;
+      data.templateCode = 'template-01';
       const response = data.id
         ? await weddingService.updateWedding(data)
         : await weddingService.createWedding(data);
 
       // Navigate to public page
       if (response.data) {
+        setHasWedding(true);
         setData({ ...data, slug: response.data.slug, id: response.data.id });
         router.push(`/invitation/${response.data.slug}`);
       }
@@ -125,29 +125,33 @@ export const useInvitation = ({
 
     // Groom
     if (
-      !data.groom.fullName ||
-      !data.groom.birthOrder ||
-      !data.groom.fatherName ||
-      !data.groom.motherName ||
-      !data.groom.address
+      !data.groom?.fullName ||
+      !data.groom?.birthOrder ||
+      !data.groom?.fatherName ||
+      !data.groom?.motherName ||
+      !data.groom?.address
     )
       return false;
 
     // Bride
     if (
-      !data.bride.fullName ||
-      !data.bride.birthOrder ||
-      !data.bride.fatherName ||
-      !data.bride.motherName ||
-      !data.bride.address
+      !data.bride?.fullName ||
+      !data.bride?.birthOrder ||
+      !data.bride?.fatherName ||
+      !data.bride?.motherName ||
+      !data.bride?.address
     )
       return false;
 
     // Notification
-    if (!data.notification.line1 || !data.notification.line2) return false;
+    if (!data.notification?.line1 || !data.notification?.line2) return false;
 
     // Reception
-    if (!data.reception.date || !data.reception.time || !data.reception.address)
+    if (
+      !data.reception?.date ||
+      !data.reception?.time ||
+      !data.reception?.address
+    )
       return false;
 
     // Ceremony (Optional)
@@ -155,19 +159,24 @@ export const useInvitation = ({
       if (!data.ceremony.date || !data.ceremony.time) return false;
     }
 
-    // Map (Optional)
-    // if (data.map.show) {
-    //     if (!data.map.locationName || !data.map.locationAddress) return false;
-    // }
+    // // Map
+    // if (
+    //   !data.map?.locationName ||
+    //   !data.map?.locationAddress ||
+    //   !data.map?.latitude ||
+    //   !data.map?.longitude
+    // )
+    //   return false;
+
     // Milestones
-    if (!data.milestones || data.milestones.length === 0) return false;
+    if (!data.milestones || data.milestones?.length === 0) return false;
 
     // Album Photos
-    if (!data.albumPhotos || data.albumPhotos.length === 0) return false;
+    if (!data.albumPhotos || data.albumPhotos?.length === 0) return false;
 
     // Music (Optional)
-    if (data.music.enabled) {
-      if (!data.music.url || !data.music.name) return false;
+    if (data.music?.enabled) {
+      if (!data.music?.url || !data.music?.name) return false;
     }
 
     return true;
@@ -200,22 +209,40 @@ export const useInvitation = ({
     }
   };
 
-  const isValid = checkValidInvitation();
+  const checkUserHasWedding = async (userId: string) => {
+    try {
+      const response = await weddingService.getWeddingByUserId(userId);
+      const hasWedding = !!response.data;
+      return hasWedding;
+    } catch (error: unknown) {
+      if (
+        (error as { response?: { status: number } })?.response?.status ===
+          404 ||
+        (error as { status?: number })?.status === 404
+      ) {
+        return false;
+      }
+      console.error('Failed to check wedding status:', error);
+      return false;
+    }
+  };
 
   return {
     data,
     loading,
     error,
-    updateField,
-    reset,
-    setData,
-    saveInvitation,
-    publishInvitation,
+    isLoading: !data && enableFetch,
     isSaving,
     isPublishing,
-    isValid,
+    isValid: useMemo(checkValidInvitation, [data]),
+    updateField,
+    saveInvitation,
+    publishInvitation,
     uploadImage,
     uploadMusic,
+    reset,
+    setData,
     refetch: fetchData,
+    checkUserHasWedding,
   };
 };

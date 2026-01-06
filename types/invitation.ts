@@ -78,3 +78,10 @@ export type Wedding = {
 
 // Alias for backward compatibility if needed during refactor, strictly we should use Wedding
 export type WeddingData = Wedding;
+
+export type InvitationMode =
+  | 'create'
+  | 'edit'
+  | 'public'
+  | 'template'
+  | 'preview';

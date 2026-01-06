@@ -6,7 +6,8 @@
   "editSubtitle": "Update your wedding details and settings.",
   "actions": {
     "discard": "Discard Changes",
-    "save": "Save & Preview Invitation",
+    "save": "Save",
+    "saveAndPreview": "Save & Preview",
     "saving": "Saving...",
     "publish": "Publish Invitation",
     "createInvitation": "Create Invitation"
@@ -85,7 +86,8 @@
     },
     "gallery": {
       "title": "Photo Album",
-      "upload": "Upload"
+      "upload": "Upload",
+      "uploading": "Uploading..."
     },
     "gift": {
       "title": "Gift Registry",

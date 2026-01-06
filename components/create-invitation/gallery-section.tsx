@@ -65,7 +65,7 @@ export function GallerySection({
       iconBgColor="bg-muted"
       iconTextColor="text-primary"
     >
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 items-center justify-center gap-4 md:grid-cols-4">
         {albumPhotos.map((photo, index) => (
           <div
             key={index}
@@ -89,7 +89,7 @@ export function GallerySection({
         ))}
         <BaseButton
           onClick={handleUploadClick}
-          className="flex aspect-square h-auto flex-col items-center justify-center gap-2"
+          className="flex aspect-square size-30 h-auto flex-col items-center justify-center gap-2"
           variant="dashed"
           disabled={isUploading}
         >

@@ -79,9 +79,10 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
                 className="bg-surface border-border h-8 w-full rounded px-2 text-xs"
                 placeholder={t('accountNumber')}
                 value={account.accountNumber}
-                onChange={(e) =>
-                  updateAccount(account.id, 'accountNumber', e.target.value)
-                }
+                onChange={(e) => {
+                  const value = e.target.value.replace(/[^0-9]/g, '');
+                  updateAccount(account.id, 'accountNumber', value);
+                }}
               />
               <BaseInput
                 className="bg-surface border-border h-8 w-full rounded px-2 text-xs"

@@ -15,7 +15,7 @@ export default function PublicInvitationPage() {
 
   return (
     <div className="text-foreground bg-background flex w-full flex-col font-sans">
-      <InvitationContent data={templateData} isTemplate={true} />
+      <InvitationContent data={templateData} mode="template" />
     </div>
   );
 }

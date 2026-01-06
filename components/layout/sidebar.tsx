@@ -17,7 +17,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const t = useTranslations('layout.header');
   const { sidebarOpen, closeSidebar, toggleTheme, theme } = useLayoutStore();
-  const user = useAuthStore((state) => state.user);
+  const { user, hasWedding } = useAuthStore();
 
   useEffect(() => {
     closeSidebar();
@@ -89,18 +89,10 @@ export function Sidebar() {
           </div>
 
           <div className="mt-auto flex flex-col gap-4">
-            {user ? (
-              <div className="flex flex-col gap-2 px-2">
-                <span className="text-muted-foreground text-sm font-medium">
-                  {typeof user === 'object' &&
-                  'name' in user &&
-                  typeof user.name === 'string' ? (
-                    user.name
-                  ) : (
-                    <Link href={ROUTES.INVITATION}>{t('my_invitation')}</Link>
-                  )}
-                </span>
-              </div>
+            {user && hasWedding ? (
+              <Link href={`${ROUTES.INVITATION}/${user.userId}?edit=true`}>
+                <BaseButton>{t('my_invitation')}</BaseButton>
+              </Link>
             ) : (
               <div className="flex flex-col gap-2">
                 <Link href={ROUTES.LOGIN}>

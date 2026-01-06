@@ -15,23 +15,21 @@ import {
   Footer,
   MusicPlayer,
 } from '@/components/invitation';
-import { WeddingData } from '@/types/invitation';
+import { WeddingData, InvitationMode } from '@/types/invitation';
 
 interface InvitationContentProps {
   data: WeddingData | null;
-  isCreator?: boolean;
-  isPublic?: boolean;
-  isTemplate?: boolean;
+  mode?: InvitationMode;
   onPublish?: () => void;
 }
 
 export function InvitationContent({
   data,
-  isCreator = false,
-  isPublic = false,
-  isTemplate = false,
+  mode = 'public',
   onPublish,
 }: InvitationContentProps) {
+  console.log({ mode });
+
   if (!data) {
     return (
       <div className="bg-background flex min-h-screen w-full items-center justify-center">
@@ -42,13 +40,7 @@ export function InvitationContent({
 
   return (
     <div className="bg-background text-foreground flex w-full flex-col font-sans">
-      <Header
-        data={data}
-        onPublish={onPublish}
-        isPublic={isPublic}
-        isCreator={isCreator}
-        isTemplate={isTemplate}
-      />
+      <Header data={data} onPublish={onPublish} mode={mode} />
       <HeroSection data={data} />
       <CountdownSection data={data} />
       <CoupleSection data={data} />
@@ -58,7 +50,7 @@ export function InvitationContent({
       <GallerySection data={data} />
       <RsvpSection data={data} />
       <GiftSection data={data} />
-      <GuestbookSection data={data} />
+      {mode === 'public' && <GuestbookSection data={data} />}
       <Footer data={data} />
       <MusicPlayer data={data} />
     </div>

@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Link } from '@/i18n/routing';
 import { ROUTES } from '@/constants/routes';
+import { useAuthStore } from '@/stores/auth-store';
 
 interface TemplateCardProps {
   id: string;
@@ -34,7 +35,12 @@ export function TemplateCard({
   const displayTitle = titleOverride || t(`items.${id}`);
   const displaySubtitle = subtitleOverride || t(`filters.${category}`);
   const badgeStyle = isComingSoon ? 'text-gray' : 'text-primary';
-  const href = !isComingSoon ? ROUTES.INVITATION_TEMPLATE : '#';
+  const { hasWedding, user } = useAuthStore();
+  const href = !isComingSoon
+    ? hasWedding
+      ? `${ROUTES.INVITATION}/${user?.userId}?edit=true`
+      : ROUTES.INVITATION_TEMPLATE
+    : '#';
 
   return (
     <Link href={href} className={cn('block', isComingSoon && 'cursor-default')}>
@@ -53,7 +59,11 @@ export function TemplateCard({
                 badgeStyle
               )}
             >
-              {isComingSoon ? tHome('coming_soon') : tHome('preview')}
+              {isComingSoon
+                ? tHome('coming_soon')
+                : hasWedding
+                  ? tHome('myInvitation')
+                  : tHome('preview')}
             </span>
           </div>
 
