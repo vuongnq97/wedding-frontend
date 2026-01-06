@@ -55,6 +55,7 @@
     },
     "story": {
       "title": "Our Love Story",
+      "showSection": "Show Section",
       "subtitle": "Create a timeline of your relationship. Add key milestones like when you met, your first date, or the proposal.",
       "addEvent": "Add Another Milestone",
       "dateYear": "Date / Year",
@@ -82,7 +83,8 @@
       "preview": "Preview",
       "locationName": "Location Name",
       "address": "Address",
-      "invalidLink": "Invalid link. Please use the 'Embed a map' HTML code."
+      "invalidLink": "Invalid link. Please use the 'Embed a map' HTML code.",
+      "locationNamePlaceholder": "e.g. The Botanical Gardens"
     },
     "gallery": {
       "title": "Photo Album",
@@ -110,9 +112,13 @@
     },
     "music": {
       "title": "Background Music",
+      "showSection": "Show Section",
       "noMusic": "No music selected",
       "browse": "Browse",
-      "remove": "Remove"
+      "remove": "Remove",
+      "or": "Or",
+      "uploadFromDevice": "Upload from device",
+      "invalidFileType": "Invalid file type"
     },
     "ads": {
       "title": "Advertisement",

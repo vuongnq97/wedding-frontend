@@ -146,6 +146,11 @@ export const useInvitation = ({
     // Notification
     if (!data.notification?.line1 || !data.notification?.line2) return false;
 
+    //Love Story
+    if (data.showLoveStory) {
+      if (!data.milestones?.length) return false;
+    }
+
     // Reception
     if (
       !data.reception?.date ||
@@ -167,9 +172,6 @@ export const useInvitation = ({
     //   !data.map?.longitude
     // )
     //   return false;
-
-    // Milestones
-    if (!data.milestones || data.milestones?.length === 0) return false;
 
     // Album Photos
     if (!data.albumPhotos || data.albumPhotos?.length === 0) return false;

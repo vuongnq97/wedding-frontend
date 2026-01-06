@@ -43,12 +43,14 @@
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone <repository-url>
    cd wedding-frontend
    ```
 
 2. **Install dependencies:**
+
    ```bash
    yarn install
    # or
@@ -57,11 +59,13 @@
 
 3. **Environment Setup:**
    Create a `.env` file in the root directory (refer to `.env.example` if available) and configure your API endpoints.
+
    ```env
    NEXT_PUBLIC_API_BASE_URL=https://your-api-url.com/api
    ```
 
 4. **Run the development server:**
+
    ```bash
    yarn dev
    # or

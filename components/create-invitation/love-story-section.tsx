@@ -8,6 +8,7 @@ import { Plus, Trash2, Camera, History, Calendar } from 'lucide-react';
 import { WeddingData, Milestone } from '@/types/invitation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import Toggle from '@/components/ui/toggle';
 
 interface LoveStorySectionProps {
   data: WeddingData | null;
@@ -158,9 +159,8 @@ export function LoveStorySection({
 }: LoveStorySectionProps) {
   const t = useTranslations('manage-invitation.sections.story');
 
-  // if (!data) return null; // Removed
-
   const milestones = data?.milestones || [];
+  const showLoveStory = data?.showLoveStory ?? true;
 
   const addMilestone = () => {
     const newMilestone: Milestone = {
@@ -188,38 +188,53 @@ export function LoveStorySection({
     updateField(['milestones'], updatedMilestones);
   };
 
+  const handleToggle = (checked: boolean) => {
+    updateField(['showLoveStory'], checked);
+  };
+
   return (
     <SectionWrapper
       title={t('title')}
       icon={<History className="h-5 w-5" />}
       iconBgColor="bg-muted"
       iconTextColor="text-primary"
+      rightAction={
+        <Toggle
+          label={t('showSection')}
+          checked={showLoveStory}
+          onChange={handleToggle}
+        />
+      }
     >
-      <div className="mb-6">
-        <p className="text-muted-foreground text-sm">{t('subtitle')}</p>
-      </div>
+      {showLoveStory && (
+        <>
+          <div className="mb-6">
+            <p className="text-muted-foreground text-sm">{t('subtitle')}</p>
+          </div>
 
-      <div className="before:bg-primary/20 relative space-y-8 pl-8 before:absolute before:top-4 before:bottom-4 before:left-3.5 before:w-px">
-        {milestones.map((milestone, index) => (
-          <MilestoneItem
-            key={milestone.date}
-            milestone={milestone}
-            index={index}
-            updateMilestone={updateMilestone}
-            removeMilestone={removeMilestone}
-            uploadImage={uploadImage}
-            t={t}
-          />
-        ))}
-      </div>
+          <div className="before:bg-primary/20 relative space-y-8 pl-8 before:absolute before:top-4 before:bottom-4 before:left-3.5 before:w-px">
+            {milestones.map((milestone, index) => (
+              <MilestoneItem
+                key={milestone.date}
+                milestone={milestone}
+                index={index}
+                updateMilestone={updateMilestone}
+                removeMilestone={removeMilestone}
+                uploadImage={uploadImage}
+                t={t}
+              />
+            ))}
+          </div>
 
-      <BaseButton
-        onClick={addMilestone}
-        className="mt-6 h-auto w-full py-3"
-        variant="dashed"
-      >
-        <Plus className="h-5 w-5" /> {t('addEvent')}
-      </BaseButton>
+          <BaseButton
+            onClick={addMilestone}
+            className="mt-6 h-auto w-full py-3"
+            variant="dashed"
+          >
+            <Plus className="h-5 w-5" /> {t('addEvent')}
+          </BaseButton>
+        </>
+      )}
     </SectionWrapper>
   );
 }

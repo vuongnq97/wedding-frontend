@@ -73,6 +73,7 @@ export type Wedding = {
     name: string;
   };
   showAds: boolean;
+  showLoveStory: boolean;
   createdAt?: string;
 };
 

@@ -3,8 +3,11 @@
 import React from 'react';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import { BaseButton } from '@/components/ui/base-button';
-import { Music, Music2 } from 'lucide-react';
+import { Music, Music2, Check, Upload } from 'lucide-react';
 import { WeddingData } from '@/types/invitation';
+import { useTranslations } from 'next-intl';
+import { cn } from '@/lib/utils';
+import Toggle from '@/components/ui/toggle';
 
 interface MusicSectionProps {
   data: WeddingData | null;
@@ -12,7 +15,28 @@ interface MusicSectionProps {
   uploadMusic: (file: File) => Promise<string | null>;
 }
 
-import { useTranslations } from 'next-intl';
+const DEFAULT_SONGS = [
+  {
+    name: 'Beautiful in White',
+    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/beautiful-in-white.mp3',
+  },
+  {
+    name: 'Marry You',
+    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/marry-you.mp3',
+  },
+  {
+    name: 'A Thousand Years',
+    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/a-thousand-years.mp3',
+  },
+  {
+    name: 'Perfect',
+    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/perfect.mp3',
+  },
+  {
+    name: 'Sugar',
+    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/sugar.mp3',
+  },
+];
 
 export function MusicSection({
   data,
@@ -21,7 +45,6 @@ export function MusicSection({
 }: MusicSectionProps) {
   const t = useTranslations('manage-invitation.sections.music');
 
-  // if (!data) return null; // Removed
   const [isUploading, setIsUploading] = React.useState(false);
 
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -41,7 +64,7 @@ export function MusicSection({
 
     // Check if file is audio
     if (!file.type.startsWith('audio/')) {
-      alert(t('invalidFileType')); // Or use a toast if available, but staying simple for now
+      alert(t('invalidFileType'));
       return;
     }
 
@@ -70,7 +93,7 @@ export function MusicSection({
   const handleRemoveMusic = () => {
     updateField(['music'], {
       ...musicData,
-      enabled: false,
+      enabled: true, // Keep enabled, just remove selection
       url: '',
       name: '',
     });
@@ -79,60 +102,143 @@ export function MusicSection({
     }
   };
 
+  const handleSelectDefault = (song: { name: string; url: string }) => {
+    updateField(['music'], {
+      ...musicData,
+      enabled: true,
+      name: song.name,
+      url: song.url,
+    });
+  };
+
+  const handleToggle = (checked: boolean) => {
+    updateField(['music', 'enabled'], checked);
+  };
+
   return (
     <SectionWrapper
       title={t('title')}
       icon={<Music className="h-5 w-5" />}
       iconBgColor="bg-muted"
       iconTextColor="text-primary"
+      rightAction={
+        <Toggle
+          label={t('showSection')}
+          checked={musicData.enabled}
+          onChange={handleToggle}
+        />
+      }
     >
-      <div className="flex flex-col items-center gap-4">
-        <div className="bg-muted flex w-full items-center gap-4 rounded-lg border border-transparent p-3">
-          <div className="bg-surface flex size-10 items-center justify-center rounded-full">
-            {musicData?.enabled ? (
-              <Music2 className="text-primary h-5 w-5" />
+      {musicData.enabled && (
+        <div className="flex flex-col gap-4">
+          {/* Default Songs Selection */}
+          <div className="grid grid-cols-1 gap-2">
+            {DEFAULT_SONGS.map((song) => {
+              const isSelected = musicData.url === song.url;
+              return (
+                <div
+                  key={song.name}
+                  onClick={() => handleSelectDefault(song)}
+                  className={cn(
+                    'cursor-pointer rounded-lg border p-3 transition-all',
+                    isSelected
+                      ? 'border-primary bg-primary/5 ring-primary ring-1'
+                      : 'border-border hover:bg-muted bg-surface'
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={cn(
+                        'flex h-8 w-8 items-center justify-center rounded-full',
+                        isSelected
+                          ? 'bg-primary/10 text-primary'
+                          : 'bg-muted text-muted-foreground'
+                      )}
+                    >
+                      {isSelected ? (
+                        <Music2 className="h-4 w-4" />
+                      ) : (
+                        <Music className="h-4 w-4" />
+                      )}
+                    </div>
+                    <span
+                      className={cn(
+                        'text-sm font-medium',
+                        isSelected ? 'text-primary' : 'text-foreground'
+                      )}
+                    >
+                      {song.name}
+                    </span>
+                    {isSelected && (
+                      <Check className="text-primary ml-auto h-4 w-4" />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="relative my-2">
+            <div className="absolute inset-0 flex items-center">
+              <span className="border-border w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background text-muted-foreground px-2">
+                {t('or')}
+              </span>
+            </div>
+          </div>
+
+          {/* Custom Upload */}
+          <div className="bg-muted flex w-full items-center gap-4 rounded-lg border border-transparent p-3">
+            <div className="bg-surface flex size-10 items-center justify-center rounded-full">
+              <Upload className="text-muted-foreground h-5 w-5" />
+            </div>
+            <div className="flex-1">
+              <p className="text-foreground text-sm font-medium">
+                {musicData.enabled &&
+                !DEFAULT_SONGS.some((s) => s.url === musicData.url) &&
+                musicData.name
+                  ? musicData.name
+                  : t('uploadFromDevice')}
+              </p>
+            </div>
+            {!DEFAULT_SONGS.some((s) => s.url === musicData.url) &&
+            musicData.name ? (
+              <BaseButton
+                onClick={handleRemoveMusic}
+                className="h-7 px-4 text-xs font-bold"
+                variant="danger"
+                size="sm"
+              >
+                {t('remove')}
+              </BaseButton>
             ) : (
-              <Music className="h-5 w-5 text-gray-400" />
+              <BaseButton
+                onClick={handleMusicUpload}
+                className="h-7 px-4 text-xs font-bold"
+                variant="default"
+                size="sm"
+                disabled={isUploading}
+              >
+                {isUploading ? (
+                  <div className="border-background h-3 w-3 animate-spin rounded-full border-2 border-t-transparent" />
+                ) : (
+                  t('browse')
+                )}
+              </BaseButton>
             )}
           </div>
-          <div className="flex-1">
-            <p className="text-muted-foreground truncate text-sm font-medium">
-              {musicData?.enabled ? musicData.name : t('noMusic')}
-            </p>
-          </div>
-          {musicData?.enabled ? (
-            <BaseButton
-              onClick={handleRemoveMusic}
-              className="h-7 px-4 text-xs font-bold"
-              variant="danger"
-              size="sm"
-            >
-              {t('remove')}
-            </BaseButton>
-          ) : (
-            <BaseButton
-              onClick={handleMusicUpload}
-              className="h-7 px-4 text-xs font-bold"
-              variant="default"
-              size="sm"
-              disabled={isUploading}
-            >
-              {isUploading ? (
-                <div className="border-background h-3 w-3 animate-spin rounded-full border-2 border-t-transparent" />
-              ) : (
-                t('browse')
-              )}
-            </BaseButton>
-          )}
+
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            accept="audio/*"
+            onChange={handleFileChange}
+          />
         </div>
-        <input
-          type="file"
-          ref={fileInputRef}
-          className="hidden"
-          accept="audio/*"
-          onChange={handleFileChange}
-        />
-      </div>
+      )}
     </SectionWrapper>
   );
 }

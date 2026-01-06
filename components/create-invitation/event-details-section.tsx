@@ -20,8 +20,6 @@ export function EventDetailsSection({
 }: EventDetailsSectionProps) {
   const t = useTranslations('manage-invitation.sections.events');
 
-  // if (!data) return null; // Removed
-
   return (
     <>
       {/* Ceremony */}
@@ -38,38 +36,44 @@ export function EventDetailsSection({
           />
         }
       >
-        <div className="mb-4 flex flex-col gap-4 md:flex-row">
-          <BaseInput
-            containerClassName="w-full md:w-1/2"
-            label={t('date')}
-            className="bg-muted focus:border-primary focus:bg-background border-transparent"
-            type="date"
-            value={
-              data?.ceremony?.date instanceof Date
-                ? data.ceremony.date.toISOString().split('T')[0]
-                : ''
-            }
-            onChange={(e) =>
-              updateField(['ceremony', 'date'], new Date(e.target.value))
-            }
-            rightIcon={<Calendar className="h-4 w-4" />}
-          />
-          <BaseInput
-            containerClassName="w-full md:w-1/2"
-            label={t('time')}
-            className="bg-muted focus:border-primary focus:bg-background border-transparent"
-            type="time"
-            value={data?.ceremony?.time || ''}
-            onChange={(e) => updateField(['ceremony', 'time'], e.target.value)}
-            rightIcon={<Clock className="h-4 w-4" />}
-          />
-        </div>
-        <div className="bg-primary/5 flex items-start gap-2 rounded-lg p-3">
-          <Lightbulb className="text-primary mt-0.5 h-4 w-4" />
-          <p className="text-primary/80 text-xs leading-relaxed">
-            {t('separateCeremonyHint')}
-          </p>
-        </div>
+        {(data?.ceremony?.show ?? true) && (
+          <>
+            <div className="mb-4 flex flex-col gap-4 md:flex-row">
+              <BaseInput
+                containerClassName="w-full md:w-1/2"
+                label={t('date')}
+                className="bg-muted focus:border-primary focus:bg-background border-transparent"
+                type="date"
+                value={
+                  data?.ceremony?.date instanceof Date
+                    ? data.ceremony.date.toISOString().split('T')[0]
+                    : ''
+                }
+                onChange={(e) =>
+                  updateField(['ceremony', 'date'], new Date(e.target.value))
+                }
+                rightIcon={<Calendar className="h-4 w-4" />}
+              />
+              <BaseInput
+                containerClassName="w-full md:w-1/2"
+                label={t('time')}
+                className="bg-muted focus:border-primary focus:bg-background border-transparent"
+                type="time"
+                value={data?.ceremony?.time || ''}
+                onChange={(e) =>
+                  updateField(['ceremony', 'time'], e.target.value)
+                }
+                rightIcon={<Clock className="h-4 w-4" />}
+              />
+            </div>
+            <div className="bg-primary/5 flex items-start gap-2 rounded-lg p-3">
+              <Lightbulb className="text-primary mt-0.5 h-4 w-4" />
+              <p className="text-primary/80 text-xs leading-relaxed">
+                {t('separateCeremonyHint')}
+              </p>
+            </div>
+          </>
+        )}
       </SectionWrapper>
 
       {/* Reception */}

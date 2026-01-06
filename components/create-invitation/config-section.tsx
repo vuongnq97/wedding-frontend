@@ -57,10 +57,12 @@ export function GuestbookSection({ data, updateField }: SectionProps) {
         />
       }
     >
-      <div className="bg-primary/5 flex items-center gap-3 rounded-lg p-4">
-        <Lightbulb className="text-primary h-5 w-5" />
-        <p className="text-primary/80 text-sm">{t('description')}</p>
-      </div>
+      {(data?.guestbookEnabled ?? true) ? (
+        <div className="bg-primary/5 flex items-center gap-3 rounded-lg p-4">
+          <Lightbulb className="text-primary h-5 w-5" />
+          <p className="text-primary/80 text-sm">{t('description')}</p>
+        </div>
+      ) : null}
     </SectionWrapper>
   );
 }
