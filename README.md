@@ -74,17 +74,6 @@
 
    Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## 📜 Key Features
-
-- **Multilingual Support**: Seamless switching between English and Vietnamese.
-- **Authentication**: Secure OTP-based login and registration.
-- **Interactive Editor**: Real-time previews while customizing invitation details.
-- **Responsive Design**: Optimized for Desktop, Tablet, and Mobile.
-- **Asset Management**: Image and music uploads for personalization.
-- **Guest Management**: RSVP tracking and guestbook functionality.
-- **Template System**: Choose from various beautiful templates.
-- **And more...**
-
 ## 📦 Scripts
 
 - `yarn dev`: Start the development server.
@@ -93,6 +82,37 @@
 - `yarn lint`: Run ESLint checks.
 - `yarn format`: Format code with Prettier.
 
-## 📄 License
+## 📜 Project Feature Status
+### Authentication & User
+- ✅ **OTP Login Flow**
 
-This project is licensed under the MIT License.
+### Invitation Templates
+- ✅ **Template Gallery**: Browse and select invitation templates.
+- ✅ **Template Preview**: Real-time preview of selected template.
+- ⬜ **Design new templates**: Create additional invitation templates.
+
+### Invitation Builder Features
+- ✅ **Hero Section**: Couple names, wedding date, location with countdown timer.
+- ✅ **Event Details**: Ceremony and reception information.
+- ✅ **Guestbook**: Comments from guests.
+- ✅ **Photo Gallery**: Image grid layout.
+- ✅ **Music Section:**: Background music player.
+- ✅ **Gift Section**: Bank account details with copy-to-clipboard.
+- ⬜ **Location Map**: Embedded Google Map.
+- ⬜ **Love Story:**: Timeline of couple's story.
+- ⬜ **RSVP Section**: Guest response form with validation.
+
+### Sharing & distribution
+- ✅ **Share Modal**: Support Copy Link.
+- ⬜ **Social Media**: Integrated Facebook and Zalo sharing.
+- ⬜ **QR Code**: Generated for invitations.
+- ⬜ **Custom Link**: Send invitations via email.
+
+### Dashboard & Management
+- ⬜ **Reporting Dashboard**: Overview of invitation statistics.
+- ⬜ **Invitation List**: View all created invitations.
+
+### Static Pages & Routing
+- ✅ **404 Not Found Page**
+- ✅ **500 Error Page**
+- ✅ **Maintenance Page**

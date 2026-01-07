@@ -175,7 +175,7 @@ export function RsvpSection({ data }: RsvpSectionProps) {
                     <FormControl>
                       <Textarea
                         placeholder={t('message.placeholder')}
-                        className="bg-muted border-border resize-none"
+                        className="focus:outline-none bg-muted border-border resize-none"
                         rows={3}
                         {...field}
                       />

@@ -37,7 +37,7 @@ export function FamilySection({ data, updateField }: FamilySectionProps) {
           onChange={(e) => updateField([type, 'motherName'], e.target.value)}
         />
         <textarea
-          className="bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border-transparent px-4 py-3 text-sm focus:ring-0"
+          className="focus:outline-none bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border-transparent px-4 py-3 text-sm focus:ring-0"
           placeholder={t('address')}
           rows={3}
           value={data?.[type]?.address || ''}
