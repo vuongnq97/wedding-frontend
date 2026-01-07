@@ -17,7 +17,7 @@ export const MusicPlayer = ({ data }: MusicPlayerProps) => {
   const { music } = data;
 
   useEffect(() => {
-    if (music.enabled && music.url && audioRef.current) {
+    if (music?.enabled && music?.url && audioRef.current) {
       const playAudio = async () => {
         try {
           await audioRef.current?.play();
@@ -49,7 +49,7 @@ export const MusicPlayer = ({ data }: MusicPlayerProps) => {
         document.removeEventListener('touchstart', handleInteraction);
       };
     }
-  }, [music.enabled, music.url, hasInteracted]);
+  }, [music?.enabled, music?.url, hasInteracted]);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -62,7 +62,7 @@ export const MusicPlayer = ({ data }: MusicPlayerProps) => {
     }
   };
 
-  if (!music.enabled || !music.url) return null;
+  if (!music?.enabled || !music?.url) return null;
 
   return (
     <div className="fixed bottom-4 left-4 z-50 flex items-center gap-2">

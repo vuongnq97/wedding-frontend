@@ -55,28 +55,19 @@ function ManageInvitationContent() {
     }
   }, [isCreateFromTemplate, reset]);
 
-  // Handle Save (API)
   const handleSave = async () => {
     if (isValid) {
       const success = await saveInvitation();
-      // If we saved an *existing* invitation (isEdit), we want to preview it.
-      // If success returns true, data should be updated in store.
-      // We check data.slug from store (it should be set if save was successful).
       if (success && data?.slug) {
         router.push(`/invitation/${data.slug}?edit=true`);
       } else if (success) {
-        // Fallback if no slug yet? (should not happen for published/saved wedding)
-        // Maybe go to generic preview
         router.push('/invitation?edit=true');
       }
     }
   };
 
-  // Handle Save and Preview (Store only)
   const handleSaveAndPreview = () => {
     if (isValid) {
-      // Store is already up to date via updateField.
-      // Just navigate to generic preview which reads from store.
       router.push('/invitation?edit=true');
     }
   };

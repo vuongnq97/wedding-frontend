@@ -18,23 +18,23 @@ interface MusicSectionProps {
 const DEFAULT_SONGS = [
   {
     name: 'Beautiful in White',
-    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/beautiful-in-white.mp3',
+    url: 'https://weddingstg.blob.core.windows.net/wedding-assets/Default/Beautiful%20In%20White.mp3',
   },
   {
     name: 'Marry You',
-    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/marry-you.mp3',
+    url: 'https://weddingstg.blob.core.windows.net/wedding-assets/Default/You%20Mary%20You.mp3',
   },
   {
     name: 'A Thousand Years',
-    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/a-thousand-years.mp3',
+    url: 'https://weddingstg.blob.core.windows.net/wedding-assets/Default/A%20Thousand%20Years.mp3',
   },
   {
     name: 'Perfect',
-    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/perfect.mp3',
+    url: 'https://weddingstg.blob.core.windows.net/wedding-assets/Default/Perfect.mp3',
   },
   {
     name: 'Sugar',
-    url: 'https://wedding-assets.s3.ap-southeast-1.amazonaws.com/music/sugar.mp3',
+    url: 'https://weddingstg.blob.core.windows.net/wedding-assets/Default/Sugar.mp3',
   },
 ];
 

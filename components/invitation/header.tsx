@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Heart } from 'lucide-react';
+import { Heart, Share } from 'lucide-react';
 import Link from 'next/link';
 import { WeddingData, InvitationMode } from '@/types/invitation';
 import { cn } from '@/lib/utils';
@@ -11,6 +11,7 @@ import { BaseButton } from '@/components/ui/base-button';
 import { useRouter } from '@/i18n/routing';
 import { ROUTES } from '@/constants/routes';
 import { useAuthStore } from '@/stores/auth-store';
+import { ShareModal } from '@/components/invitation/share-modal';
 
 interface HeaderProps {
   data?: WeddingData | null;
@@ -34,6 +35,7 @@ export function Header({
   const tLayout = useTranslations('layout.header');
   const { hasWedding } = useAuthStore();
   const [activeHash, setActiveHash] = useState('');
+  const [shareModalOpen, setShareModalOpen] = useState(false);
   const router = useRouter();
   const links = [
     { href: '#couple', label: t('nav.couple') },
@@ -143,14 +145,16 @@ export function Header({
                     {t('continueEdit')}
                   </BaseButton>
 
-                  <BaseButton
-                    onClick={onPublish}
-                    disabled={isSaving}
-                    variant="default"
-                    size="sm"
-                  >
-                    {tManage('actions.publish')}
-                  </BaseButton>
+                  {onPublish && (
+                    <BaseButton
+                      onClick={onPublish}
+                      disabled={isSaving}
+                      variant="default"
+                      size="sm"
+                    >
+                      {tManage('actions.publish')}
+                    </BaseButton>
+                  )}
                 </>
               )}
               {mode === 'edit' && (
@@ -164,6 +168,26 @@ export function Header({
                     ? tManage('actions.saving')
                     : tManage('actions.save')}
                 </BaseButton>
+              )}
+              {mode === 'public' && hasWedding && (
+                <>
+                  <BaseButton
+                    disabled={isSaving}
+                    variant="default"
+                    size="sm"
+                    onClick={() => setShareModalOpen(true)}
+                  >
+                    <Share className="h-4 w-4" />
+                    {tManage('actions.share')}
+                  </BaseButton>
+                  <ShareModal
+                    open={shareModalOpen}
+                    onOpenChange={setShareModalOpen}
+                    url={
+                      typeof window !== 'undefined' ? window.location.href : ''
+                    }
+                  />
+                </>
               )}
             </div>
           </div>

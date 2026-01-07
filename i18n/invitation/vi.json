@@ -170,5 +170,11 @@
       "registry": "Quà cưới",
       "contact": "Liên hệ"
     }
+  },
+  "share": {
+    "title": "Chia sẻ thiệp mời",
+    "description": "Chia sẻ thiệp cưới của bạn với bạn bè và người thân",
+    "copy_link": "Sao chép liên kết",
+    "link_copied": "Đã sao chép liên kết!"
   }
 }

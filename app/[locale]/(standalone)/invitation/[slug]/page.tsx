@@ -39,11 +39,5 @@ export default function DynamicInvitationPage() {
     );
   }
 
-  return (
-    <InvitationContent
-      data={data}
-      mode={isEdit ? 'preview' : 'public'}
-      onPublish={() => {}}
-    />
-  );
+  return <InvitationContent data={data} mode={isEdit ? 'preview' : 'public'} />;
 }

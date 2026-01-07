@@ -10,7 +10,8 @@
     "saveAndPreview": "Lưu & Xem Trước",
     "saving": "Đang Lưu...",
     "publish": "Xuất Bản",
-    "create-template": "Tạo thiệp cưới"
+    "createInvitation": "Tạo thiệp cưới",
+    "share": "Chia sẻ"
   },
   "sections": {
     "hero": {

@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { ExternalLink, Edit } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { BaseButton } from '@/components/ui/base-button';
@@ -10,10 +9,12 @@ import { MOCK_INVITATION } from '@/constants/dashboard';
 import { Link } from '@/i18n/routing';
 import { ROUTES } from '@/constants/routes';
 import { useInvitationStore } from '@/stores/invitation-store';
+import { useTranslations, useLocale } from 'next-intl';
 
 export function InvitationCard() {
   const t = useTranslations('dashboard.invitation');
   const { data } = useInvitationStore();
+  const locale = useLocale();
 
   if (!data) return null; // Or render loading state
 
@@ -48,13 +49,13 @@ export function InvitationCard() {
           </label>
           <div className="flex w-full items-stretch overflow-hidden rounded-lg border border-dashed shadow-sm">
             <BaseInput
-              value={MOCK_INVITATION.link}
+              value={`https://tramnam.online/${locale}/invitation/${data.slug}`}
               readOnly
               disabled
               className="rounded-r-none bg-transparent focus:ring-0"
             />
             <ButtonCopy
-              value={MOCK_INVITATION.link}
+              value={`https://tramnam.online/${locale}/invitation/${data.slug}`}
               className="rounded-none border-none"
             />
           </div>

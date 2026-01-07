@@ -170,5 +170,11 @@
       "registry": "Registry",
       "contact": "Contact"
     }
+  },
+  "share": {
+    "title": "Share Invitation",
+    "description": "Share your wedding invitation with friends and family",
+    "copy_link": "Copy Link",
+    "link_copied": "Link copied to clipboard!"
   }
 }

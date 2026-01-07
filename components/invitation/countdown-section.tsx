@@ -51,13 +51,7 @@ export function CountdownSection({ data }: CountdownSectionProps) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [
-    data.ceremony.date,
-    data.ceremony.time,
-    data.reception.date,
-    data.reception.time,
-    t,
-  ]);
+  }, [data.reception.date, data.reception.time, t]);
 
   return (
     <section className="bg-background relative py-10 md:py-24">

@@ -10,7 +10,8 @@
     "saveAndPreview": "Save & Preview",
     "saving": "Saving...",
     "publish": "Publish Invitation",
-    "createInvitation": "Create Invitation"
+    "createInvitation": "Create Invitation",
+    "share": "Share"
   },
   "sections": {
     "hero": {
