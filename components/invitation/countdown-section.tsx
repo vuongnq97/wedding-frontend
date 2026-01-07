@@ -18,9 +18,9 @@ export function CountdownSection({ data }: CountdownSectionProps) {
   ]);
 
   useEffect(() => {
-    const targetDate = new Date(data.ceremony.date);
-    if (data.ceremony.time) {
-      const [hours, minutes] = data.ceremony.time.split(':');
+    const targetDate = new Date(data.reception.date);
+    if (data.reception.time) {
+      const [hours, minutes] = data.reception.time.split(':');
       targetDate.setHours(parseInt(hours, 10), parseInt(minutes, 10));
     }
 
@@ -51,7 +51,13 @@ export function CountdownSection({ data }: CountdownSectionProps) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [data.ceremony.date, data.ceremony.time, t]);
+  }, [
+    data.ceremony.date,
+    data.ceremony.time,
+    data.reception.date,
+    data.reception.time,
+    t,
+  ]);
 
   return (
     <section className="bg-background relative py-10 md:py-24">

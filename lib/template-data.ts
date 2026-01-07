@@ -107,6 +107,7 @@ export const invitationTemplatePageEn: WeddingData = {
     url: 'https://www.mfiles.co.uk/mp3-downloads/pachelbel-canon-in-d.mp3',
     name: 'Canon in D',
   },
+  showLoveStory: true,
   showAds: true,
 };
 
@@ -217,5 +218,6 @@ export const invitationTemplatePageVi: WeddingData = {
     url: 'https://www.mfiles.co.uk/mp3-downloads/pachelbel-canon-in-d.mp3',
     name: 'Canon in D',
   },
+  showLoveStory: true,
   showAds: true,
 };

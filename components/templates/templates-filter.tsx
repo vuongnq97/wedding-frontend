@@ -27,14 +27,14 @@ export function TemplatesFilter({
   }));
 
   const colorMap = [
-    { id: 'white', class: 'bg-white' },
-    { id: 'black', class: 'bg-black' },
-    { id: 'red', class: 'bg-red-500' },
-    { id: 'blue', class: 'bg-blue-500' },
-    { id: 'green', class: 'bg-green-500' },
-    { id: 'yellow', class: 'bg-yellow-500' },
-    { id: 'purple', class: 'bg-purple-500' },
-    { id: 'pink', class: 'bg-pink-500' },
+    { id: 'white', class: 'bg-white hover:bg-white' },
+    { id: 'black', class: 'bg-black hover:bg-black' },
+    { id: 'red', class: 'bg-red-500 hover:bg-red-500' },
+    { id: 'blue', class: 'bg-blue-500 hover:bg-blue-500' },
+    { id: 'green', class: 'bg-green-500 hover:bg-green-500' },
+    { id: 'yellow', class: 'bg-yellow-500 hover:bg-yellow-500' },
+    { id: 'purple', class: 'bg-purple-500 hover:bg-purple-500' },
+    { id: 'pink', class: 'bg-pink-500 hover:bg-pink-500' },
   ];
 
   return (

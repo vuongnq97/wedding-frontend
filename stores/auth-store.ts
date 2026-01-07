@@ -22,8 +22,12 @@ export const useAuthStore = create<AuthState>()(
       setUser: (user) => set({ user }),
       setAccessToken: (accessToken) => set({ accessToken }),
       setHasWedding: (hasWedding) => set({ hasWedding }),
-      clearAuth: () =>
-        set({ user: null, accessToken: null, hasWedding: false }),
+      clearAuth: () => {
+        set({ user: null, accessToken: null, hasWedding: false });
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('auth-user');
+        }
+      },
     }),
     {
       name: 'auth-user',

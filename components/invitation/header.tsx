@@ -58,14 +58,14 @@ export function Header({
                 <div className="bg-muted flex size-8 items-center justify-center rounded-full">
                   <Heart className="text-primary fill-primary h-5 w-5" />
                 </div>
-                <span className="text-foreground hover:text-primary font-serif text-xl font-bold tracking-tight md:text-2xl">
+                <span className="text-foreground hover:text-primary text-md font-serif font-bold tracking-tight md:text-2xl">
                   {isEditor ? tManage('brand') : tLayout('brand')}
                 </span>
               </Link>
 
               {!isEditor && data && (
                 <div
-                  className="group flex cursor-pointer items-center gap-2"
+                  className="group flex cursor-pointer items-center gap-2 max-md:hidden"
                   onClick={() => setActiveHash('')}
                 >
                   <Heart className="text-primary h-6 w-6 animate-ping fill-current" />

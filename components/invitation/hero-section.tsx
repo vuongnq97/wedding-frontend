@@ -6,6 +6,7 @@ import { BaseButton } from '@/components/ui/base-button';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { WeddingData } from '@/types/invitation';
+import { getFirstName } from '@/utils/string';
 
 interface HeroSectionProps {
   data: WeddingData;
@@ -57,12 +58,12 @@ export function HeroSection({ data }: HeroSectionProps) {
         </p>
         <h1 className="mb-6 font-serif text-6xl font-bold text-white drop-shadow-lg md:text-8xl lg:text-9xl">
           {data.groom.fullName && data.bride.fullName
-            ? `${data.groom.fullName} & ${data.bride.fullName}`
+            ? `${getFirstName(data.groom.fullName)} & ${getFirstName(data.bride.fullName)}`
             : t('title')}
         </h1>
         <div className="mt-4 flex flex-col items-center gap-2">
           <span className="text-xl font-medium tracking-wide text-white">
-            {formatDate(data.ceremony.date)}
+            {formatDate(data.reception.date)}
           </span>
           <span className="bg-primary h-[2px] w-16"></span>
           <span className="text-sm tracking-widest text-white/80 uppercase">

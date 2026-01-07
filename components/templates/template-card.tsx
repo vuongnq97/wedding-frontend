@@ -69,15 +69,23 @@ export function TemplateCard({
 
           {/* Corner Badges */}
           <div className="absolute top-3 left-3 flex gap-2">
-            {isNew && (
-              <span className="rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-bold text-white uppercase shadow-sm">
-                {t('card.new')}
+            {isComingSoon ? (
+              <span className="rounded-full bg-gray-500 px-2 py-0.5 text-[10px] font-bold text-white uppercase shadow-sm">
+                {tHome('coming_soon')}
               </span>
-            )}
-            {isPopular && (
-              <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white uppercase shadow-sm">
-                {t('card.popular')}
-              </span>
+            ) : (
+              <>
+                {isNew && (
+                  <span className="rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-bold text-white uppercase shadow-sm">
+                    {t('card.new')}
+                  </span>
+                )}
+                {isPopular && (
+                  <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white uppercase shadow-sm">
+                    {t('card.popular')}
+                  </span>
+                )}
+              </>
             )}
           </div>
         </div>

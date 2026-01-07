@@ -67,12 +67,6 @@ export function Footer({ className, year }: FooterProps) {
               >
                 {t('contact')}
               </Link>
-              <Link
-                className="text-muted-foreground hover:text-primary text-sm transition-colors"
-                href="#"
-              >
-                {t('blog')}
-              </Link>
             </div>
             <div className="flex flex-col gap-4 text-center md:text-left">
               <h4 className="text-foreground font-serif text-lg font-bold">

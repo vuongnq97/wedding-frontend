@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Check, Lock, Mail } from 'lucide-react';
+import { Check, Mail } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -22,6 +22,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from '@/components/ui/input-otp';
 
 import { getLocalizedErrorMessage } from '@/utils/error-helper';
 import { useInvitation } from '@/hooks/use-invitation';
@@ -181,33 +186,41 @@ export function LoginPageForm() {
               control={otpForm.control}
               name="code"
               render={({ field }) => (
-                <FormItem className="flex flex-col gap-2">
-                  <FormLabel className="text-foreground text-sm font-semibold">
-                    OTP
-                  </FormLabel>
-                  <div className="relative">
-                    <Lock className="text-muted-foreground absolute top-1/2 left-4 -translate-y-1/2 text-[20px]" />
-                    <FormControl>
-                      <BaseInput
-                        id="code"
-                        type="text"
-                        placeholder="Enter 6-digit OTP"
-                        maxLength={6}
-                        {...field}
-                      />
-                    </FormControl>
-                  </div>
-                  <FormMessage />
+                <FormItem className="flex flex-col items-center gap-2">
+                  <FormControl>
+                    <InputOTP
+                      maxLength={6}
+                      {...field}
+                      onComplete={() => otpForm.handleSubmit(handleOtpSubmit)()}
+                    >
+                      <InputOTPGroup>
+                        <InputOTPSlot index={0} />
+                      </InputOTPGroup>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={1} />
+                      </InputOTPGroup>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={2} />
+                      </InputOTPGroup>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={3} />
+                      </InputOTPGroup>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={4} />
+                      </InputOTPGroup>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                    </InputOTP>
+                  </FormControl>
                 </FormItem>
               )}
             />
-            <BaseButton
-              type="submit"
-              disabled={isLoading || !otpForm.formState.isValid}
-              className="bg-primary shadow-primary/20 hover:bg-primary/90 mt-2 flex h-12 w-full cursor-pointer items-center justify-center rounded-lg text-sm font-bold tracking-wide text-white shadow-lg transition-colors"
-            >
-              {isLoading ? t('verifying') : t('verify_otp')}
-            </BaseButton>
+            {isLoading && (
+              <div className="text-muted-foreground flex justify-center text-sm">
+                Verifying...
+              </div>
+            )}
             <button
               type="button"
               onClick={handleResendOtp}
@@ -218,7 +231,10 @@ export function LoginPageForm() {
             </button>
             <button
               type="button"
-              onClick={() => setStep('email')}
+              onClick={() => {
+                setStep('email');
+                otpForm.reset();
+              }}
               className="text-muted-foreground hover:text-foreground mx-auto text-sm underline-offset-4 hover:cursor-pointer hover:underline"
             >
               {t('back_to_email')}

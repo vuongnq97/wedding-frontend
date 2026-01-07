@@ -6,6 +6,15 @@ import { Gift } from 'lucide-react';
 import { WeddingData, BankAccount } from '@/types/invitation';
 import { BaseInput } from '@/components/ui/base-input';
 import { useTranslations } from 'next-intl';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { VIET_QR_BANKS } from '@/utils/vietqr';
+import Image from 'next/image';
 
 interface GiftSectionProps {
   data: WeddingData | null;
@@ -65,12 +74,63 @@ export function GiftSection({ data, updateField }: GiftSectionProps) {
         <h4 className="text-foreground text-sm font-semibold">{title}</h4>
         <div className="border-border bg-muted rounded-lg border p-3">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-            <BaseInput
-              className="bg-surface border-border h-8 w-full rounded px-2 text-xs"
-              placeholder={t('bankName')}
+            <Select
               value={account.bankName}
-              onChange={(e) => handleUpdate(type, 'bankName', e.target.value)}
-            />
+              onValueChange={(value) => handleUpdate(type, 'bankName', value)}
+            >
+              <SelectTrigger className="bg-surface border-border h-8 w-full rounded px-2 text-xs">
+                <SelectValue placeholder={t('bankName')}>
+                  {account.bankName &&
+                  VIET_QR_BANKS.find((b) => b.code === account.bankName) ? (
+                    <div className="flex items-center gap-2">
+                      <div className="relative h-4 w-8">
+                        <Image
+                          src={
+                            VIET_QR_BANKS.find(
+                              (b) => b.code === account.bankName
+                            )?.logo || ''
+                          }
+                          alt={account.bankName}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <span className="truncate">
+                        {
+                          VIET_QR_BANKS.find((b) => b.code === account.bankName)
+                            ?.name
+                        }
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="text-muted-foreground">
+                      {t('bankName')}
+                    </span>
+                  )}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent className="bg-surface h-[200px] overflow-y-scroll">
+                {VIET_QR_BANKS.map((bank) => (
+                  <SelectItem
+                    key={bank.code}
+                    value={bank.code}
+                    className="text-xs"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="relative h-4 w-8">
+                        <Image
+                          src={bank.logo}
+                          alt={bank.name}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <span>{bank.name}</span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <BaseInput
               className="bg-surface border-border h-8 w-full rounded px-2 text-xs"
               placeholder={t('accountNumber')}

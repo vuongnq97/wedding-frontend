@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Heart, Moon, Sun, X } from 'lucide-react';
+import { Heart, LogOut, Moon, Sun, X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { useLayoutStore } from '@/stores/layout-store';
@@ -12,22 +12,30 @@ import { BaseButton } from '@/components/ui/base-button';
 import { useAuthStore } from '@/stores/auth-store';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { ROUTES } from '@/constants/routes';
+import { useAuth } from '@/hooks/use-auth';
 
 export function Sidebar() {
   const pathname = usePathname();
   const t = useTranslations('layout.header');
   const { sidebarOpen, closeSidebar, toggleTheme, theme } = useLayoutStore();
   const { user, hasWedding } = useAuthStore();
-
+  const { logout } = useAuth();
   useEffect(() => {
     closeSidebar();
   }, [pathname, closeSidebar]);
 
   return (
     <>
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/50 md:hidden"
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
+      )}
       <aside
         className={cn(
-          'border-border/60 bg-background/95 md:bg-background fixed inset-y-0 left-0 z-40 w-64 -translate-x-full border-r p-6 shadow-lg transition-transform duration-200 ease-in-out md:hidden',
+          'border-border/60 bg-background md:bg-background fixed inset-y-0 left-0 z-40 w-64 -translate-x-full border-r p-6 shadow-lg transition-transform duration-200 ease-in-out md:hidden',
           sidebarOpen && 'translate-x-0'
         )}
         aria-label="Primary"
@@ -87,25 +95,30 @@ export function Sidebar() {
               )}
             </BaseButton>
           </div>
+          {hasWedding && (
+            <Link href={`${ROUTES.INVITATION}/${user?.userId}?edit=true`}>
+              <BaseButton>{t('my_invitation')}</BaseButton>
+            </Link>
+          )}
 
           <div className="mt-auto flex flex-col gap-4">
-            {user && hasWedding ? (
-              <Link href={`${ROUTES.INVITATION}/${user.userId}?edit=true`}>
-                <BaseButton>{t('my_invitation')}</BaseButton>
-              </Link>
-            ) : (
+            {!user ? (
               <div className="flex flex-col gap-2">
                 <Link href={ROUTES.LOGIN}>
-                  <BaseButton variant="outline" className="w-full">
+                  <BaseButton variant="default" className="w-full">
                     {t('login')}
                   </BaseButton>
                 </Link>
-                <Link href={ROUTES.SIGN_UP}>
-                  <BaseButton variant="default" className="w-full">
-                    {t('signup')}
-                  </BaseButton>
-                </Link>
               </div>
+            ) : (
+              <BaseButton
+                variant="outline"
+                onClick={() => logout()}
+                className="cursor-pointer text-red-600 focus:text-red-600"
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>{t('logout')}</span>
+              </BaseButton>
             )}
           </div>
         </div>

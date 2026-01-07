@@ -101,8 +101,11 @@ export function Header({ initialUser = null }: HeaderProps) {
         <div className="hidden items-center gap-6 md:flex lg:gap-8">
           {HEADER_NAV_LINKS.filter((item) =>
             item.authRequired ? !!currentUser : true
-          ).map((item) => {
+          ).map((item, index) => {
             const isActive = pathname === item.href;
+            if (index === 2 && !hasWedding) {
+              return null;
+            }
             return (
               <Link
                 key={item.href}

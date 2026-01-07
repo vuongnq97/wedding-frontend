@@ -25,7 +25,7 @@ export default function LoginPage() {
           </h2>
         </div>
 
-        <div className="border-border bg-surface flex h-[50vh] w-full max-w-[1000px] flex-col overflow-hidden rounded-xl border shadow-xl md:flex-row">
+        <div className="border-border bg-surface flex h-auto w-full max-w-[1000px] flex-col overflow-hidden rounded-xl border shadow-xl md:flex-row lg:h-[50vh]">
           <LoginIllustration />
 
           <div className="flex w-full flex-col justify-center p-8 sm:p-12 md:w-1/2">

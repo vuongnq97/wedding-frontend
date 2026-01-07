@@ -9,5 +9,25 @@
     "TOO_MANY_REQUESTS": "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
     "AccountNotFound": "Tài khoản không tồn tại",
     "default": "Đã xảy ra lỗi hệ thống"
+  },
+  "pages": {
+    "notFound": {
+      "title": "404",
+      "subtitle": "Trang không tìm thấy",
+      "description": "Xin lỗi, chúng tôi không tìm thấy trang bạn đang tìm kiếm. Có thể trang đã bị xóa, đổi tên hoặc không tồn tại.",
+      "goHome": "Về trang chủ"
+    },
+    "error": {
+      "title": "Đã xảy ra lỗi!",
+      "description": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.",
+      "criticalDescription": "Đã xảy ra lỗi nghiêm trọng.",
+      "tryAgain": "Thử lại",
+      "goHome": "Về trang chủ"
+    },
+    "maintenance": {
+      "title": "Đang bảo trì",
+      "subtitle": "Chúng tôi sẽ trở lại sớm!",
+      "description": "Chúng tôi đang nâng cấp hệ thống để mang lại trải nghiệm tốt hơn. Vui lòng quay lại sau."
+    }
   }
 }
