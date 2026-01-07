@@ -17,7 +17,6 @@ export const useInvitationStore = create<InvitationState>((set) => ({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let current: any = newData;
       for (let i = 0; i < path.length - 1; i++) {
-        // Create nested object if it doesn't exist (though strictly mostly should)
         if (!current[path[i]]) current[path[i]] = {};
         current = current[path[i]];
       }

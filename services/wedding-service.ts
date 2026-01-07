@@ -7,8 +7,6 @@ const UPLOAD_PHOTO_PATH = '/Upload/photo';
 const UPLOAD_MUSIC_PATH = '/Upload/music';
 const WEDDING_PATH = '/Wedding';
 
-// Local type removed
-
 export type WeddingService = {
   uploadPhoto: (file: File, imageType: string) => Promise<ApiResponse<string>>;
   uploadMusic: (file: File) => Promise<ApiResponse<string>>;
@@ -50,7 +48,6 @@ export function createWeddingService({
       throw new Error('Failed to get upload URL');
     }
 
-    // 2. Upload to Blob Storage directly
     const uploadResponse = await fetch(sasData.uploadUrl, {
       method: 'PUT',
       headers: {
@@ -64,8 +61,6 @@ export function createWeddingService({
       throw new Error(`Upload failed with status ${uploadResponse.status}`);
     }
 
-    // 3. Return a response structure compatible with existing consumers
-    // reusing the initial success response but replacing data with the blobUrl
     return {
       code: 200,
       message: 'Success',

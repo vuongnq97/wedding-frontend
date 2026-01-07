@@ -110,7 +110,6 @@ function buildUrl(
   const base = baseUrl ?? '';
   const isBaseAbsolute = /^https?:/i.test(base);
 
-  // If path is absolute, use it directly
   if (isAbsolute) {
     const url = new URL(path);
     appendQuery(url, query);
@@ -124,9 +123,6 @@ function buildUrl(
     return url.toString();
   }
 
-  // Both are relative: Manual construction
-  // Ensure exactly one slash between base and path if needed.
-  // Note: if base is empty, we just use path.
   let fullPath = path;
   if (base) {
     const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
@@ -139,7 +135,6 @@ function buildUrl(
   const urlObj = new URL(fullPath, DUMMY_BASE);
   appendQuery(urlObj, query);
 
-  // Return pathname + search (relative URL)
   return `${urlObj.pathname}${urlObj.search}`;
 }
 

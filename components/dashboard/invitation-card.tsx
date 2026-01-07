@@ -16,7 +16,7 @@ export function InvitationCard() {
   const { data } = useInvitationStore();
   const locale = useLocale();
 
-  if (!data) return null; // Or render loading state
+  if (!data) return null;
 
   return (
     <div className="border-border/40 bg-surface overflow-hidden rounded-xl border shadow-sm">

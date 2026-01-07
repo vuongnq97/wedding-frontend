@@ -19,6 +19,7 @@ interface HeaderProps {
   onPublish?: () => void;
   onSave?: () => void;
   isSaving?: boolean;
+  isPublishing?: boolean;
   isValid?: boolean;
 }
 
@@ -28,6 +29,7 @@ export function Header({
   onPublish,
   onSave,
   isSaving,
+  isPublishing,
   isValid,
 }: HeaderProps) {
   const t = useTranslations('invitation.header');
@@ -116,6 +118,7 @@ export function Header({
                 <>
                   <BaseButton
                     onClick={onSave}
+                    loading={isSaving}
                     disabled={isSaving || !isValid}
                     variant="outline"
                     size="sm"
@@ -126,7 +129,8 @@ export function Header({
                   </BaseButton>
                   <BaseButton
                     onClick={onPublish}
-                    disabled={isSaving || !isValid}
+                    loading={isPublishing}
+                    disabled={isPublishing || !isValid}
                     variant="default"
                     size="sm"
                   >
@@ -147,8 +151,9 @@ export function Header({
 
                   {onPublish && (
                     <BaseButton
+                      loading={isPublishing}
                       onClick={onPublish}
-                      disabled={isSaving}
+                      disabled={isPublishing}
                       variant="default"
                       size="sm"
                     >
@@ -161,6 +166,7 @@ export function Header({
                 <BaseButton
                   onClick={onSave}
                   disabled={isSaving || !isValid}
+                  loading={isSaving}
                   variant="default"
                   size="sm"
                 >

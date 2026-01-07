@@ -28,10 +28,8 @@ export const MusicPlayer = ({ data }: MusicPlayerProps) => {
         }
       };
 
-      // Attempt autoplay
       playAudio();
 
-      // Add interaction listener to start playing if blocked
       const handleInteraction = () => {
         if (!hasInteracted && audioRef.current?.paused) {
           playAudio();

@@ -19,7 +19,6 @@ export function HeroSection({ data }: HeroSectionProps) {
   const formatDate = (dateInput?: Date | string) => {
     if (!dateInput) return t('date');
 
-    // Fix: Handle Date objects directly
     const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
 
     try {

@@ -16,8 +16,6 @@ import { useTranslations } from 'next-intl';
 export function FamilySection({ data, updateField }: FamilySectionProps) {
   const t = useTranslations('manage-invitation.sections.family');
 
-  // if (!data) return null; // Removed
-
   const renderFamilyInputs = (type: 'groom' | 'bride', title: string) => (
     <div className="space-y-4">
       <h4 className="text-primary mb-2 text-xs font-bold tracking-wider uppercase">
@@ -37,7 +35,7 @@ export function FamilySection({ data, updateField }: FamilySectionProps) {
           onChange={(e) => updateField([type, 'motherName'], e.target.value)}
         />
         <textarea
-          className="focus:outline-none bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border-transparent px-4 py-3 text-sm focus:ring-0"
+          className="bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border-transparent px-4 py-3 text-sm focus:ring-0 focus:outline-none"
           placeholder={t('address')}
           rows={3}
           value={data?.[type]?.address || ''}

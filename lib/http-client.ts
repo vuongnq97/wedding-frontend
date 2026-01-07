@@ -8,7 +8,6 @@ export const publicClient = createApiClient({
   baseUrl: BASE_URL,
 });
 
-// Refresh Logic Management
 let isRefreshing = false;
 let refreshSubscribers: ((success: boolean) => void)[] = [];
 
@@ -45,7 +44,6 @@ export const apiClient = createApiClient({
       isRefreshing = true;
 
       try {
-        // Call Refresh API using public client
         const res = await publicClient<TokenResponse>('/Auth/refresh', {
           method: 'POST',
         });
@@ -54,7 +52,7 @@ export const apiClient = createApiClient({
           useAuthStore.getState().setAccessToken(res.accessToken);
 
           onRefreshed(true);
-          return true; // Retry original request
+          return true;
         }
       } catch (err) {
         console.error('Refresh failed', err);

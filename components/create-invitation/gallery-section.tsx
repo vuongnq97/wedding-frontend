@@ -23,7 +23,6 @@ export function GallerySection({
 }: GallerySectionProps) {
   const t = useTranslations('manage-invitation.sections.gallery');
 
-  // if (!data) return null; // Removed
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
 

@@ -38,6 +38,7 @@ function ManageInvitationContent() {
     updateField,
     saveInvitation,
     publishInvitation,
+    isPublishing,
     isSaving,
     isValid,
     uploadImage,
@@ -78,6 +79,7 @@ function ManageInvitationContent() {
         mode={isEdit ? 'edit' : 'create'}
         onSave={isEdit ? handleSave : handleSaveAndPreview}
         onPublish={publishInvitation}
+        isPublishing={isPublishing}
         isSaving={isSaving}
         isValid={isValid}
       />

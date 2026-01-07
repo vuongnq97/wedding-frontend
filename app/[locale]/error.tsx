@@ -16,7 +16,6 @@ export default function Error({
   const t = useTranslations('common.pages.error');
 
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error);
   }, [error]);
 

@@ -101,7 +101,6 @@ export const useInvitation = ({
         ? await weddingService.updateWedding(data)
         : await weddingService.createWedding(data);
 
-      // Navigate to public page
       if (response.data) {
         setHasWedding(true);
         setData({ ...data, slug: response.data.slug, id: response.data.id });
@@ -120,7 +119,6 @@ export const useInvitation = ({
   const checkValidInvitation = () => {
     if (!data) return false;
 
-    // General
     if (!data.heroBannerUrl) return false;
 
     // Groom

@@ -38,9 +38,6 @@ export function createBaseService(
     fetchImpl: _fetchImpl,
   } = options;
 
-  // Use the provided client or fall back to the default authenticated client
-  // Note: If options like baseUrl are provided, they won't affect the defaultApiClient
-  // which is pre-configured. If dynamic configuration is needed, one should pass a custom client.
   const apiClient = providedClient ?? defaultApiClient;
 
   const request = async <T>(

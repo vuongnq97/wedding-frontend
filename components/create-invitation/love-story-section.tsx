@@ -57,7 +57,6 @@ function MilestoneItem({
         updateMilestone(index, 'photoUrl', url);
       }
     }
-    // Reset input
     e.target.value = '';
   };
 

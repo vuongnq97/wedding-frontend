@@ -114,7 +114,7 @@ export function EventDetailsSection({
             {t('address')}
           </span>
           <textarea
-            className="bg-muted focus:outline-none focus:border-primary focus:bg-background w-full resize-none rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all focus:ring-0"
+            className="bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all focus:ring-0 focus:outline-none"
             rows={2}
             value={data?.reception?.address || ''}
             onChange={(e) =>

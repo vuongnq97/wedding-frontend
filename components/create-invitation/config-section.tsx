@@ -22,7 +22,6 @@ import { useTranslations } from 'next-intl';
 
 export function ThankYouSection({ data, updateField }: SectionProps) {
   const t = useTranslations('manage-invitation.sections.thankYou');
-  // if (!data) return null; // Removed
   return (
     <SectionWrapper
       title={t('title')}
@@ -31,7 +30,7 @@ export function ThankYouSection({ data, updateField }: SectionProps) {
       iconTextColor="text-primary"
     >
       <textarea
-        className="focus:outline-none bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all focus:ring-0"
+        className="bg-muted focus:border-primary focus:bg-background w-full resize-none rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all focus:ring-0 focus:outline-none"
         rows={3}
         value={data?.thankYouMessage || ''}
         onChange={(e) => updateField(['thankYouMessage'], e.target.value)}
@@ -42,7 +41,6 @@ export function ThankYouSection({ data, updateField }: SectionProps) {
 
 export function GuestbookSection({ data, updateField }: SectionProps) {
   const t = useTranslations('manage-invitation.sections.guestbook');
-  // if (!data) return null; // Removed
   return (
     <SectionWrapper
       title={t('title')}
@@ -69,7 +67,6 @@ export function GuestbookSection({ data, updateField }: SectionProps) {
 
 export function AdsSection({ data, updateField }: SectionProps) {
   const t = useTranslations('manage-invitation.sections.ads');
-  // if (!data) return null; // Removed
 
   const showAds = data?.showAds ?? true;
 
@@ -81,8 +78,9 @@ export function AdsSection({ data, updateField }: SectionProps) {
       iconTextColor="text-muted-foreground"
       rightAction={
         <span
-          className={`rounded px-2 py-1 ${showAds ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-            } text-[10px] font-bold tracking-wide uppercase`}
+          className={`rounded px-2 py-1 ${
+            showAds ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          } text-[10px] font-bold tracking-wide uppercase`}
         >
           {showAds ? t('active') : t('disabled')}
         </span>

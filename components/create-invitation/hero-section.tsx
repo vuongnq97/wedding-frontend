@@ -21,8 +21,6 @@ export function HeroSection({
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = React.useState(false);
 
-  // if (!data) return null;
-
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -39,7 +37,6 @@ export function HeroSection({
         updateField(['heroBannerUrl'], url);
       }
     }
-    // Reset input
     e.target.value = '';
   };
 

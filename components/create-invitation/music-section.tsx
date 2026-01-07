@@ -86,7 +86,6 @@ export function MusicSection({
       });
     }
 
-    // Reset input
     event.target.value = '';
   };
 

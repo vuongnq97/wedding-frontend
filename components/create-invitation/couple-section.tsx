@@ -128,8 +128,6 @@ export function CoupleSection({
 }: CoupleSectionProps) {
   const t = useTranslations('manage-invitation.sections.couple');
 
-  // if (!data) return null; // Removed
-
   return (
     <SectionWrapper
       title={t('title')}

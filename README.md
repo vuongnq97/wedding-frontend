@@ -83,15 +83,19 @@
 - `yarn format`: Format code with Prettier.
 
 ## 📜 Project Feature Status
+
 ### Authentication & User
+
 - ✅ **OTP Login Flow**
 
 ### Invitation Templates
+
 - ✅ **Template Gallery**: Browse and select invitation templates.
 - ✅ **Template Preview**: Real-time preview of selected template.
 - ⬜ **Design new templates**: Create additional invitation templates.
 
 ### Invitation Builder Features
+
 - ✅ **Hero Section**: Couple names, wedding date, location with countdown timer.
 - ✅ **Event Details**: Ceremony and reception information.
 - ✅ **Guestbook**: Comments from guests.
@@ -103,16 +107,19 @@
 - ⬜ **RSVP Section**: Guest response form with validation.
 
 ### Sharing & distribution
+
 - ✅ **Share Modal**: Support Copy Link.
 - ⬜ **Social Media**: Integrated Facebook and Zalo sharing.
 - ⬜ **QR Code**: Generated for invitations.
 - ⬜ **Custom Link**: Send invitations via email.
 
 ### Dashboard & Management
+
 - ⬜ **Reporting Dashboard**: Overview of invitation statistics.
 - ⬜ **Invitation List**: View all created invitations.
 
 ### Static Pages & Routing
+
 - ✅ **404 Not Found Page**
 - ✅ **500 Error Page**
 - ✅ **Maintenance Page**

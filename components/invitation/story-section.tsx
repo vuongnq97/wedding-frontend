@@ -11,8 +11,6 @@ interface StorySectionProps {
 export function StorySection({ data }: StorySectionProps) {
   const t = useTranslations('invitation.story');
 
-  // Sort milestones by date (assuming ISO string or YYYY-MM-DD) or just use order
-  // For now we use the order in array.
   const milestones = data.milestones || [];
 
   if (!milestones || milestones.length === 0) {

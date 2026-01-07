@@ -396,10 +396,8 @@ export const getVietQrUrl = (
   accountNumber: string,
   accountHolder?: string
 ) => {
-  // Normalize bank name
   const normalizedName = bankName.toLowerCase().replace(/\s/g, '');
 
-  // Find bank code
   const bank = VIET_QR_BANKS.find(
     (b) =>
       b.name.toLowerCase().replace(/\s/g, '') === normalizedName ||
@@ -409,10 +407,8 @@ export const getVietQrUrl = (
 
   if (!bank) return null;
 
-  // Use compact 2 template
   const url = `https://img.vietqr.io/image/${bank.code}-${accountNumber}-compact2.jpg`;
 
-  // Add params
   const params = new URLSearchParams();
   if (accountHolder) params.set('accountName', accountHolder);
   params.set('amount', '0');

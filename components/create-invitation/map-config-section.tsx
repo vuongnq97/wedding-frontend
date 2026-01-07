@@ -20,7 +20,6 @@ const mapContainerStyle = {
   height: '100%',
 };
 
-// Declare the web component to satisfy TypeScript
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {

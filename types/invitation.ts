@@ -77,7 +77,6 @@ export type Wedding = {
   createdAt?: string;
 };
 
-// Alias for backward compatibility if needed during refactor, strictly we should use Wedding
 export type WeddingData = Wedding;
 
 export type InvitationMode =

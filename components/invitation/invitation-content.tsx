@@ -21,12 +21,14 @@ interface InvitationContentProps {
   data: WeddingData | null;
   mode?: InvitationMode;
   onPublish?: () => void;
+  isPublishing?: boolean;
 }
 
 export function InvitationContent({
   data,
   mode = 'public',
   onPublish,
+  isPublishing,
 }: InvitationContentProps) {
   if (!data) {
     return (
@@ -38,7 +40,12 @@ export function InvitationContent({
 
   return (
     <div className="bg-background text-foreground flex w-full flex-col font-sans">
-      <Header data={data} onPublish={onPublish} mode={mode} />
+      <Header
+        data={data}
+        onPublish={onPublish}
+        isPublishing={isPublishing}
+        mode={mode}
+      />
       <HeroSection data={data} />
       <CountdownSection data={data} />
       <CoupleSection data={data} />
