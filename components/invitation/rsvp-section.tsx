@@ -24,7 +24,9 @@ interface RsvpSectionProps {
 export function RsvpSection({ data }: RsvpSectionProps) {
   const t = useTranslations('invitation.rsvp');
   const locale = useLocale();
-  const { form, isSubmitting, isSuccess, onSubmit } = useRsvp();
+  const { form, isSubmitting, isSuccess, onSubmit } = useRsvp({
+    slug: data.slug,
+  });
 
   const deadline = data.ceremony.date
     ? new Date(data.ceremony.date)
@@ -155,9 +157,10 @@ export function RsvpSection({ data }: RsvpSectionProps) {
                         max="10"
                         className="bg-muted"
                         {...field}
-                        onChange={(e) =>
-                          field.onChange(parseInt(e.target.value))
-                        }
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value);
+                          field.onChange(isNaN(val) ? 0 : val);
+                        }}
                       />
                     </FormControl>
                     <FormMessage />

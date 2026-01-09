@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Quote } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -9,6 +9,8 @@ import 'swiper/css/pagination';
 import { WeddingData } from '@/types/invitation';
 import { useRsvp } from '@/hooks/use-rsvp';
 
+import { useRsvpStore } from '@/stores/rsvp-store';
+
 interface GuestbookSectionProps {
   data: WeddingData;
 }
@@ -16,16 +18,15 @@ interface GuestbookSectionProps {
 export function GuestbookSection({ data }: GuestbookSectionProps) {
   const t = useTranslations('invitation.guestbook');
   const { wishes, fetchData } = useRsvp();
-
-  const locale = useLocale();
+  const { shouldFetch } = useRsvpStore();
 
   useEffect(() => {
-    fetchData(locale);
-  }, [fetchData, locale]);
+    if (data.id) fetchData(data.id);
+  }, [data.id, shouldFetch, fetchData]);
 
-  if (!data.guestbookEnabled) {
-    return null;
-  }
+  // if (!data.guestbookEnabled) {
+  //   return null;
+  // }
 
   return (
     <section className="bg-background py-16" id="wishes">
@@ -70,11 +71,6 @@ export function GuestbookSection({ data }: GuestbookSectionProps) {
                   <div>
                     <p className="text-foreground text-sm font-bold">
                       {wish.fullName}
-                    </p>
-                    <p className="text-muted-foreground text-xs">
-                      {wish.attending === 'yes'
-                        ? t('attending.yes')
-                        : t('attending.no')}
                     </p>
                   </div>
                 </div>

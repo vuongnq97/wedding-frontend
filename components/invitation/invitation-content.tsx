@@ -38,6 +38,7 @@ export function InvitationContent({
     );
   }
 
+  console.log(mode);
   return (
     <div className="bg-background text-foreground flex w-full flex-col font-sans">
       <Header

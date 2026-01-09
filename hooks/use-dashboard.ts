@@ -1,26 +1,28 @@
 'use client';
 
 import { useMemo, useEffect } from 'react';
-import { useLocale } from 'next-intl';
 import { AttendingStatus } from '@/types/rsvp';
 import { DashboardStat } from '@/types/dashboard';
 import { useRsvp } from '@/hooks/use-rsvp';
+import { useInvitationStore } from '@/stores/invitation-store';
 
 export const useDashboard = () => {
-  const locale = useLocale();
   const { wishes, fetchData } = useRsvp();
-
+  const { data } = useInvitationStore();
   useEffect(() => {
-    fetchData(locale);
-  }, [locale, fetchData]);
+    if (data?.id) {
+      void fetchData(data.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.id]);
 
   const stats: DashboardStat[] = useMemo(() => {
     const approvedWishes = wishes.filter(
-      (w) => w.attending === AttendingStatus.YES
+      (w) => w.attending.toLocaleLowerCase() === AttendingStatus.YES
     );
     const agreedCount = approvedWishes.length;
     const declinedCount = wishes.filter(
-      (w) => w.attending === AttendingStatus.NO
+      (w) => w.attending.toLocaleLowerCase() === AttendingStatus.NO
     ).length;
     const totalGuestsNum = approvedWishes.reduce((sum, w) => sum + w.guests, 0);
 

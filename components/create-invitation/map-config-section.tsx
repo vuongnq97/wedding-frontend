@@ -118,7 +118,8 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
     zoom: 15,
   };
 
-  const hasValidCoordinates = mapData?.latitude !== 0 || mapData?.longitude !== 0;
+  const hasValidCoordinates =
+    mapData?.latitude !== 0 || mapData?.longitude !== 0;
 
   return (
     <SectionWrapper
@@ -138,7 +139,7 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
         <>
           <div className="mb-4 space-y-4">
             {!trackAsiaKey && (
-              <div className="bg-destructive/10 text-destructive rounded-lg border border-destructive/20 p-3 text-xs">
+              <div className="bg-destructive/10 text-destructive border-destructive/20 rounded-lg border p-3 text-xs">
                 ⚠ Track Asia API Key is missing. Please add{' '}
                 <code>NEXT_PUBLIC_TRACK_ASIA_KEY</code> to your environment
                 variables.
@@ -172,7 +173,7 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
                     }}
                     placeholder="Search address..."
                   />
-                  <div className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground">
+                  <div className="text-muted-foreground absolute top-1/2 right-2 -translate-y-1/2">
                     {isSearching ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
@@ -202,18 +203,19 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
                   </div>
                 )}
 
-                {mapData?.locationAddress && mapData.locationAddress !== query && (
-                  <p className="text-muted-foreground mt-1 truncate text-xs">
-                    Current: {mapData.locationAddress}
-                    <button
-                      className="ml-2 text-primary hover:underline"
-                      onClick={() => setQuery(mapData.locationAddress || '')}
-                      type="button"
-                    >
-                      (Edit)
-                    </button>
-                  </p>
-                )}
+                {mapData?.locationAddress &&
+                  mapData.locationAddress !== query && (
+                    <p className="text-muted-foreground mt-1 truncate text-xs">
+                      Current: {mapData.locationAddress}
+                      <button
+                        className="text-primary ml-2 hover:underline"
+                        onClick={() => setQuery(mapData.locationAddress || '')}
+                        type="button"
+                      >
+                        (Edit)
+                      </button>
+                    </p>
+                  )}
               </div>
             </div>
           </div>
@@ -246,7 +248,7 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
               </div>
             )}
 
-            <div className="pointer-events-none absolute bottom-1 right-1 px-1 py-0.5 text-[10px] text-gray-500 bg-white/50 rounded">
+            <div className="pointer-events-none absolute right-1 bottom-1 rounded bg-white/50 px-1 py-0.5 text-[10px] text-gray-500">
               © Track Asia
             </div>
           </div>

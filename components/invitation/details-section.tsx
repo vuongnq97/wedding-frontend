@@ -115,12 +115,12 @@ export function DetailsSection({ data }: DetailsSectionProps) {
 
           {/* Map Image or Iframe */}
           {data.map.show && (
-            <div className="group relative h-full min-h-[400px] w-full overflow-hidden rounded-2xl shadow-xl border border-border bg-muted">
+            <div className="group border-border bg-muted relative h-full min-h-[400px] w-full overflow-hidden rounded-2xl border shadow-xl">
               <Map
                 initialViewState={{
                   latitude: data.map.latitude || 10.762622,
                   longitude: data.map.longitude || 106.660172,
-                  zoom: 15
+                  zoom: 15,
                 }}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle={`https://maps.track-asia.com/styles/v2/streets.json?key=${process.env.NEXT_PUBLIC_TRACK_ASIA_KEY}`}
@@ -135,8 +135,8 @@ export function DetailsSection({ data }: DetailsSectionProps) {
               </Map>
 
               {/* Overlay card for location details */}
-              <div className="absolute right-6 bottom-6 left-6 pointer-events-none">
-                <div className="bg-background/90 rounded-xl border border-white/20 p-4 backdrop-blur pointer-events-auto">
+              <div className="pointer-events-none absolute right-6 bottom-6 left-6">
+                <div className="bg-background/90 pointer-events-auto rounded-xl border border-white/20 p-4 backdrop-blur">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-primary text-xs font-bold uppercase">
@@ -164,7 +164,7 @@ export function DetailsSection({ data }: DetailsSectionProps) {
                 </div>
               </div>
               {/* Attribution for Track Asia */}
-              <div className="pointer-events-none absolute bottom-1 right-1 px-1 py-0.5 text-[10px] text-gray-500 bg-white/50 rounded">
+              <div className="pointer-events-none absolute right-1 bottom-1 rounded bg-white/50 px-1 py-0.5 text-[10px] text-gray-500">
                 © Track Asia
               </div>
             </div>

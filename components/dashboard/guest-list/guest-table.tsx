@@ -21,7 +21,7 @@ export function GuestTable({ guests }: GuestTableProps) {
   const t = useTranslations('dashboard.guestList');
 
   const getStatusIcon = (status: AttendingStatus) => {
-    switch (status) {
+    switch (status.toLocaleLowerCase()) {
       case AttendingStatus.YES:
         return CheckCircle2;
       case AttendingStatus.PENDING:
@@ -34,7 +34,7 @@ export function GuestTable({ guests }: GuestTableProps) {
   };
 
   const getStatusColor = (status: AttendingStatus) => {
-    switch (status) {
+    switch (status.toLocaleLowerCase()) {
       case AttendingStatus.YES:
         return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border-green-200 dark:border-green-800/50';
       case AttendingStatus.PENDING:
@@ -70,9 +70,9 @@ export function GuestTable({ guests }: GuestTableProps) {
             {guests.map((guest) => {
               const StatusIcon = getStatusIcon(guest.attending);
               const statusKey =
-                guest.attending === AttendingStatus.YES
+                guest.attending.toLocaleLowerCase() === AttendingStatus.YES
                   ? 'statusAttending'
-                  : guest.attending === AttendingStatus.NO
+                  : guest.attending.toLocaleLowerCase() === AttendingStatus.NO
                     ? 'statusDeclined'
                     : 'statusPending';
               const statusLabel = t(statusKey);

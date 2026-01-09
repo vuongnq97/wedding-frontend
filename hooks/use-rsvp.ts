@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -7,10 +7,13 @@ import {
   RsvpData,
   AttendingStatus,
 } from '@/types/rsvp';
+import { createRsvpService } from '@/services/rsvp-service';
+import { useRsvpStore } from '@/stores/rsvp-store';
 
-export const useRsvp = () => {
+export const useRsvp = (props?: { slug?: string }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const { triggerFetch } = useRsvpStore();
 
   const form = useForm<RsvpFormValues>({
     resolver: zodResolver(rsvpSchema),
@@ -23,12 +26,29 @@ export const useRsvp = () => {
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const rsvpService = useMemo(() => createRsvpService(), []);
+
+  useEffect(() => {
+    if (props?.slug) {
+      const isSubmitted = localStorage.getItem(`rsvp-success-${props.slug}`);
+      if (isSubmitted) {
+        setIsSuccess(true);
+      }
+    }
+  }, [props?.slug]);
+
   const onSubmit = async (data: RsvpFormValues) => {
+    if (!props?.slug) {
+      console.error('Wedding slug is missing');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await rsvpService.submitRsvp({ ...data, slug: props.slug });
+      localStorage.setItem(`rsvp-success-${props.slug}`, 'true');
       setIsSuccess(true);
+      triggerFetch();
       form.reset();
     } catch (error) {
       console.error('Error submitting RSVP:', error);
@@ -39,101 +59,19 @@ export const useRsvp = () => {
 
   const [wishes, setWishes] = useState<RsvpData[]>([]);
 
-  const fetchData = async (locale: string) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      const generateMockData = (count: number, isVi: boolean): RsvpData[] => {
-        const items: RsvpData[] = [];
-        const statuses = [
-          AttendingStatus.YES,
-          AttendingStatus.NO,
-          AttendingStatus.PENDING,
-        ];
-        const firstNames = isVi
-          ? [
-              'Nguyễn',
-              'Trần',
-              'Lê',
-              'Phạm',
-              'Hoàng',
-              'Phan',
-              'Vũ',
-              'Đặng',
-              'Bùi',
-              'Đỗ',
-            ]
-          : [
-              'Michael',
-              'Sarah',
-              'Emma',
-              'David',
-              'Amanda',
-              'James',
-              'Maria',
-              'Robert',
-              'Linda',
-              'William',
-            ];
-        const lastNames = isVi
-          ? [
-              'Văn A',
-              'Thị B',
-              'Văn C',
-              'Thị D',
-              'Văn E',
-              'Thị F',
-              'Văn G',
-              'Thị H',
-              'Văn I',
-              'Thị K',
-            ]
-          : [
-              'Chen',
-              'Wilson',
-              'Roberts',
-              'Kim',
-              'Lewis',
-              'Smith',
-              'Garcia',
-              'Johnson',
-              'Williams',
-              'Brown',
-            ];
-
-        for (let i = 1; i <= count; i++) {
-          const statusIndex = i % 3;
-          const status = statuses[statusIndex];
-          let guests = 0;
-          if (status === AttendingStatus.YES) {
-            guests = (i % 4) + 1;
-          }
-
-          items.push({
-            id: i.toString(),
-            invitationId: 'demo',
-            createdAt: new Date(Date.now() - i * 3600000).toISOString(),
-            fullName: isVi
-              ? `${firstNames[i % 10]} ${lastNames[i % 10]}`
-              : `${firstNames[i % 10]} ${lastNames[(i + 5) % 10]}`,
-            attending: status,
-            guests,
-            message:
-              i % 7 === 0
-                ? isVi
-                  ? 'Chúc mừng hạnh phúc hai bạn!'
-                  : 'Wishing you both a lifetime of love and happiness!'
-                : undefined,
-          });
+  const fetchData = useCallback(
+    async (weddingId: string) => {
+      try {
+        const response = await rsvpService.getRsvpsByWeddingId(weddingId);
+        if (response.data) {
+          setWishes(response.data);
         }
-        return items;
-      };
-
-      setWishes(generateMockData(100, locale === 'vi'));
-    } catch (error) {
-      console.error('Error fetching wishes:', error);
-    }
-  };
+      } catch (error) {
+        console.error('Error fetching wishes:', error);
+      }
+    },
+    [rsvpService]
+  );
 
   return {
     form,
