@@ -1,8 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+
 import { Calendar, MapPin, Wine, Navigation } from 'lucide-react';
+import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre';
+import maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { BaseButton } from '@/components/ui/base-button';
 import { WeddingData } from '@/types/invitation';
 
@@ -112,18 +115,28 @@ export function DetailsSection({ data }: DetailsSectionProps) {
 
           {/* Map Image or Iframe */}
           {data.map.show && (
-            <div className="group relative h-full min-h-[400px] w-full overflow-hidden rounded-2xl shadow-xl">
-              {/* We could use an iframe if link is embeddable, but simple image + link is safer for now if we don't parse embed URL */}
-              <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuA4p9xRijQhvY4uX5AiwosdszKwoRzVC8aGTrLic5oRIp3uHGd4oxybjQUnOSNeqrRspjAiPLdXfAhYEjRJUlYW-nFVc14XhMIxUeo4zr_Mwv6xb92oqWM3WakQb9P4y3aK26Smz5VRYDQuIRDtkGd7PBNwgzNdf0FCevrjKRBzlJmshkhSJlsj3EJdLLkUbY_vuhttno1SdHHqlQpZklDwiUKkOCLvogzm7xVegCQyMc8BcskskTDFaCxpuENHsN3edq2XVmCnY"
-                alt="Map View"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/10"></div>
+            <div className="group relative h-full min-h-[400px] w-full overflow-hidden rounded-2xl shadow-xl border border-border bg-muted">
+              <Map
+                initialViewState={{
+                  latitude: data.map.latitude || 10.762622,
+                  longitude: data.map.longitude || 106.660172,
+                  zoom: 15
+                }}
+                style={{ width: '100%', height: '100%' }}
+                mapStyle={`https://maps.track-asia.com/styles/v2/streets.json?key=${process.env.NEXT_PUBLIC_TRACK_ASIA_KEY}`}
+                mapLib={maplibregl}
+              >
+                <Marker
+                  longitude={data.map.longitude || 0}
+                  latitude={data.map.latitude || 0}
+                  color="red"
+                />
+                <NavigationControl position="top-right" />
+              </Map>
 
-              <div className="absolute right-6 bottom-6 left-6">
-                <div className="bg-background/90 rounded-xl border border-white/20 p-4 backdrop-blur">
+              {/* Overlay card for location details */}
+              <div className="absolute right-6 bottom-6 left-6 pointer-events-none">
+                <div className="bg-background/90 rounded-xl border border-white/20 p-4 backdrop-blur pointer-events-auto">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-primary text-xs font-bold uppercase">
@@ -149,6 +162,10 @@ export function DetailsSection({ data }: DetailsSectionProps) {
                     )}
                   </div>
                 </div>
+              </div>
+              {/* Attribution for Track Asia */}
+              <div className="pointer-events-none absolute bottom-1 right-1 px-1 py-0.5 text-[10px] text-gray-500 bg-white/50 rounded">
+                © Track Asia
               </div>
             </div>
           )}

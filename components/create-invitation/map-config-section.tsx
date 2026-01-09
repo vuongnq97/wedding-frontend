@@ -1,102 +1,129 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import Toggle from '@/components/ui/toggle';
 import { BaseInput } from '@/components/ui/base-input';
-import { Map, MapPin } from 'lucide-react';
+import { Map as MapIcon, MapPin, Loader2, Search } from 'lucide-react';
 import { WeddingData } from '@/types/invitation';
 import { useTranslations } from 'next-intl';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre';
+import maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
+
+import { toast } from 'sonner';
 
 interface MapConfigSectionProps {
   data: WeddingData | null;
   updateField: (path: string[], value: unknown) => void;
 }
 
-const libraries: 'places'[] = ['places'];
-const mapContainerStyle = {
-  width: '100%',
-  height: '100%',
-};
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      'gmp-place-autocomplete': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>,
-        HTMLElement
-      >;
-    }
-  }
+interface Suggestion {
+  description: string;
+  structured_formatting: {
+    main_text: string;
+    secondary_text: string;
+  };
 }
 
 export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
   const t = useTranslations('manage-invitation.sections.map');
-
-  const placeAutocompleteRef = useRef<HTMLElement>(null);
-
   const mapData = data?.map;
+  const trackAsiaKey = process.env.NEXT_PUBLIC_TRACK_ASIA_KEY || '';
 
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-    libraries,
-  });
+  const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isLoaded && placeAutocompleteRef.current) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const listener = async (event: any) => {
-        const place = event.place;
-        if (!place) return;
-
-        // Fetch fields we need
-        await place.fetchFields({
-          fields: ['displayName', 'formattedAddress', 'location', 'id'],
-        });
-
-        const displayName = place.displayName || '';
-        const address = place.formattedAddress || '';
-        const location = place.location;
-
-        if (location) {
-          const lat = location.lat();
-          const lng = location.lng();
-
-          updateField(['map', 'locationAddress'], address);
-          updateField(['map', 'locationName'], displayName);
-          updateField(['map', 'latitude'], lat);
-          updateField(['map', 'longitude'], lng);
-
-          const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=place_id:${place.id}`;
-          updateField(['map', 'link'], embedUrl);
-        }
-      };
-
-      const element = placeAutocompleteRef.current;
-      const eventListener = listener as EventListener; // Type assertion to satisfy addEventListener
-      element.addEventListener('gmp-placeselect', eventListener);
-
-      return () => {
-        element.removeEventListener('gmp-placeselect', eventListener);
-      };
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
     }
-  }, [isLoaded, updateField]);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
-  const mapCenter = {
-    lat: mapData?.latitude || 0,
-    lng: mapData?.longitude || 0,
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (!query || query.length < 2) {
+        setSuggestions([]);
+        return;
+      }
+
+      if (query === mapData?.locationAddress) {
+        return;
+      }
+
+      setIsSearching(true);
+      try {
+        const response = await fetch(
+          `https://maps.track-asia.com/api/v2/place/autocomplete/json?input=${encodeURIComponent(
+            query
+          )}&key=${trackAsiaKey}`
+        );
+        const data = await response.json();
+        if (data.predictions) {
+          setSuggestions(data.predictions);
+          setShowSuggestions(true);
+        }
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      } finally {
+        setIsSearching(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [query, trackAsiaKey, mapData?.locationAddress]);
+
+  const handleSelectPlace = async (place: Suggestion) => {
+    setQuery(place.description);
+    setShowSuggestions(false);
+    updateField(['map', 'locationAddress'], place.description);
+
+    updateField(['map', 'locationName'], place.structured_formatting.main_text);
+
+    try {
+      const response = await fetch(
+        `https://maps.track-asia.com/api/v2/place/textsearch/json?query=${encodeURIComponent(
+          place.description
+        )}&key=${trackAsiaKey}`
+      );
+      const data = await response.json();
+
+      if (data.results && data.results.length > 0) {
+        const location = data.results[0].geometry.location;
+        updateField(['map', 'latitude'], location.lat);
+        updateField(['map', 'longitude'], location.lng);
+
+        const embedUrl = `https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}`;
+        updateField(['map', 'link'], embedUrl);
+      }
+    } catch (error) {
+      console.error('Error fetching place details:', error);
+      toast.error('Failed to fetch place details');
+    }
   };
 
-  const showMap =
-    isLoaded && (mapData?.latitude !== 0 || mapData?.longitude !== 0);
+  const mapCenter = {
+    latitude: mapData?.latitude || 10.762622, // Default to HCM City if 0
+    longitude: mapData?.longitude || 106.660172,
+    zoom: 15,
+  };
+
+  const hasValidCoordinates = mapData?.latitude !== 0 || mapData?.longitude !== 0;
 
   return (
     <SectionWrapper
       title={t('title')}
-      icon={<Map className="h-5 w-5" />}
+      icon={<MapIcon className="h-5 w-5" />}
       iconBgColor="bg-muted"
       iconTextColor="text-primary"
       rightAction={
@@ -110,6 +137,14 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
       {(mapData?.show ?? true) && (
         <>
           <div className="mb-4 space-y-4">
+            {!trackAsiaKey && (
+              <div className="bg-destructive/10 text-destructive rounded-lg border border-destructive/20 p-3 text-xs">
+                ⚠ Track Asia API Key is missing. Please add{' '}
+                <code>NEXT_PUBLIC_TRACK_ASIA_KEY</code> to your environment
+                variables.
+              </div>
+            )}
+
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <BaseInput
                 label={t('locationName')}
@@ -121,50 +156,84 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
                 }
                 placeholder={t('locationNamePlaceholder')}
               />
-              <label className="relative space-y-1.5">
+
+              <div className="relative space-y-1.5" ref={searchContainerRef}>
                 <span className="text-muted-foreground text-xs font-semibold">
                   {t('address')}
                 </span>
-                {false ? (
-                  <div className="w-full">
-                    {/* @ts-expect-error - Web Component */}
-                    <gmp-place-autocomplete ref={placeAutocompleteRef} />
-                  </div>
-                ) : (
+                <div className="relative">
                   <BaseInput
                     type="text"
-                    disabled
-                    className="bg-muted cursor-not-allowed rounded-lg border-transparent"
-                    value="Loading Google Maps..."
+                    className="bg-muted focus:border-primary focus:bg-background border-transparent pr-8"
+                    value={query}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      setShowSuggestions(true);
+                    }}
+                    placeholder="Search address..."
                   />
+                  <div className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground">
+                    {isSearching ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Search className="h-4 w-4" />
+                    )}
+                  </div>
+                </div>
+
+                {showSuggestions && suggestions.length > 0 && (
+                  <div className="bg-muted text-popover-foreground absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border shadow-md">
+                    <ul className="p-1">
+                      {suggestions.map((place, index) => (
+                        <li
+                          key={index}
+                          className="hover:bg-accent hover:text-accent-foreground flex cursor-pointer flex-col gap-0.5 rounded-sm px-2 py-1.5 text-sm transition-colors"
+                          onClick={() => handleSelectPlace(place)}
+                        >
+                          <span className="font-medium">
+                            {place.structured_formatting.main_text}
+                          </span>
+                          <span className="text-muted-foreground text-xs">
+                            {place.structured_formatting.secondary_text}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
-                {/* Fallback/Correction input if needed, or display the current value */}
-                {mapData?.locationAddress && (
+
+                {mapData?.locationAddress && mapData.locationAddress !== query && (
                   <p className="text-muted-foreground mt-1 truncate text-xs">
-                    Selected: {mapData.locationAddress}
+                    Current: {mapData.locationAddress}
+                    <button
+                      className="ml-2 text-primary hover:underline"
+                      onClick={() => setQuery(mapData.locationAddress || '')}
+                      type="button"
+                    >
+                      (Edit)
+                    </button>
                   </p>
                 )}
-              </label>
-            </div>
-
-            {!process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY && (
-              <div className="bg-muted border-border text-muted-foreground rounded-lg border p-3 text-xs">
-                ⚠ Google Maps API Key is missing. Please add{' '}
-                <code>NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to your environment
-                variables.
               </div>
-            )}
+            </div>
           </div>
 
           <div className="bg-muted border-border group relative h-64 overflow-hidden rounded-lg border">
-            {showMap ? (
-              <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                center={mapCenter}
-                zoom={15}
+            {hasValidCoordinates ? (
+              <Map
+                initialViewState={mapCenter}
+                key={`${mapData?.latitude}-${mapData?.longitude}`}
+                style={{ width: '100%', height: '100%' }}
+                mapStyle={`https://maps.track-asia.com/styles/v2/streets.json?key=${trackAsiaKey}`}
+                mapLib={maplibregl}
               >
-                <Marker position={mapCenter} />
-              </GoogleMap>
+                <Marker
+                  longitude={mapData?.longitude || 0}
+                  latitude={mapData?.latitude || 0}
+                  color="red"
+                />
+                <NavigationControl position="top-right" />
+              </Map>
             ) : (
               <div className="text-muted-foreground flex h-full flex-col items-center justify-center gap-2">
                 <div className="bg-background flex size-12 items-center justify-center rounded-full shadow-sm">
@@ -176,6 +245,10 @@ export function MapConfigSection({ data, updateField }: MapConfigSectionProps) {
                 </div>
               </div>
             )}
+
+            <div className="pointer-events-none absolute bottom-1 right-1 px-1 py-0.5 text-[10px] text-gray-500 bg-white/50 rounded">
+              © Track Asia
+            </div>
           </div>
         </>
       )}
