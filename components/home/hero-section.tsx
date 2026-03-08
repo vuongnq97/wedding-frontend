@@ -16,7 +16,7 @@ export function HeroSection() {
       <div className="mx-auto max-w-[1280px] px-4 md:px-8">
         <div className="relative flex min-h-[600px] w-full items-center justify-center overflow-hidden rounded-3xl bg-gray-200 shadow-2xl">
           <Image
-            src="https://weddingstg.blob.core.windows.net/wedding-assets/Default/chup-anh-cuoi-da-lat-1024x684.jpg"
+            src="https://nemxdyzricahljljahim.supabase.co/storage/v1/object/public/wedding-assets/cover.jpg"
             alt=""
             fill
             className="object-cover"

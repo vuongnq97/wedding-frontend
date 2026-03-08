@@ -1,6 +1,3 @@
-import { BaseServiceOptions } from '@/types/api';
-import { ApiResponse } from './common';
-
 export type UserInfo = {
   userId: string;
   email: string;
@@ -14,31 +11,6 @@ export type TokenResponse = UserInfo & {
 export type AuthTokens = {
   accessToken: string;
   expiresAt: number;
-};
-
-export type LoginPayload = {
-  username: string;
-  password: string;
-};
-
-export type AuthServiceOptions = BaseServiceOptions & {
-  refreshPath?: string;
-};
-
-export type AuthService = {
-  requestOtp: (email: string) => Promise<void>;
-  verifyOtp: (
-    email: string,
-    code: string
-  ) => Promise<ApiResponse<TokenResponse>>;
-  refresh: () => Promise<ApiResponse<TokenResponse>>;
-  logout: () => Promise<void>;
-};
-
-export type UseLoginOptions = BaseServiceOptions & {
-  refreshPath?: string;
-  storageKey?: string;
-  refreshOffsetMs?: number;
 };
 
 export type UseLoginReturn = {

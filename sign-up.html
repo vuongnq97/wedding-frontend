@@ -1,154 +1,307 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Register - Blog Platform</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              colors: {
-                "primary": "#137fec",
-                "background-light": "#f6f7f8",
-                "background-dark": "#111a22",
-                "surface-dark": "#192633",
-                "border-dark": "#324d67",
-                "text-secondary": "#92adc9"
-              },
-              fontFamily: {
-                "display": ["Inter", "sans-serif"]
-              },
-              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Register - Blog Platform</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#137fec',
+              'background-light': '#f6f7f8',
+              'background-dark': '#111a22',
+              'surface-dark': '#192633',
+              'border-dark': '#324d67',
+              'text-secondary': '#92adc9',
+            },
+            fontFamily: {
+              display: ['Inter', 'sans-serif'],
+            },
+            borderRadius: {
+              DEFAULT: '0.25rem',
+              lg: '0.5rem',
+              xl: '0.75rem',
+              full: '9999px',
             },
           },
-        }
+        },
+      };
     </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
     </style>
-</head>
-<style type="text/tailwindcss">
-  @layer components {
-    .container { @apply mx-auto w-full max-w-[1280px] px-4 md:px-10; }
+  </head>
+  <style type="text/tailwindcss">
+    @layer components {
+      .container {
+        @apply mx-auto w-full max-w-[1280px] px-4 md:px-10;
+      }
 
-    .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-60 disabled:pointer-events-none; }
-    .btn-sm { @apply h-9 px-3 text-sm; }
-    .btn-md { @apply h-10 px-4 text-sm; }
-    .btn-lg { @apply h-12 px-6 text-base; }
-    .btn-primary { @apply bg-primary text-white hover:bg-blue-600 shadow-lg shadow-primary/20; }
-    .btn-outline { @apply border border-slate-300 dark:border-border-dark bg-transparent hover:bg-slate-100 dark:hover:bg-white/5; }
-    .btn-ghost { @apply hover:bg-slate-100 dark:hover:bg-white/5; }
-    .btn-link { @apply text-primary hover:underline p-0 h-auto; }
+      .btn {
+        @apply focus:ring-primary/50 inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors focus:ring-2 focus:outline-none disabled:pointer-events-none disabled:opacity-60;
+      }
+      .btn-sm {
+        @apply h-9 px-3 text-sm;
+      }
+      .btn-md {
+        @apply h-10 px-4 text-sm;
+      }
+      .btn-lg {
+        @apply h-12 px-6 text-base;
+      }
+      .btn-primary {
+        @apply bg-primary shadow-primary/20 text-white shadow-lg hover:bg-blue-600;
+      }
+      .btn-outline {
+        @apply dark:border-border-dark border border-slate-300 bg-transparent hover:bg-slate-100 dark:hover:bg-white/5;
+      }
+      .btn-ghost {
+        @apply hover:bg-slate-100 dark:hover:bg-white/5;
+      }
+      .btn-link {
+        @apply text-primary h-auto p-0 hover:underline;
+      }
 
-    .input { @apply w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-border-dark bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all; }
-    .textarea { @apply w-full rounded-lg border border-slate-300 dark:border-border-dark bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all p-4 min-h-[120px]; }
-    .select { @apply w-full h-12 px-4 rounded-lg border border-slate-300 dark:border-border-dark bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all; }
+      .input {
+        @apply dark:border-border-dark dark:placeholder:text-text-secondary focus:ring-primary h-12 w-full rounded-lg border border-slate-300 bg-transparent px-4 text-slate-900 transition-all outline-none placeholder:text-slate-400 focus:border-transparent focus:ring-2 dark:text-white;
+      }
+      .textarea {
+        @apply dark:border-border-dark dark:placeholder:text-text-secondary focus:ring-primary min-h-[120px] w-full rounded-lg border border-slate-300 bg-transparent p-4 text-slate-900 transition-all outline-none placeholder:text-slate-400 focus:border-transparent focus:ring-2 dark:text-white;
+      }
+      .select {
+        @apply dark:border-border-dark focus:ring-primary h-12 w-full rounded-lg border border-slate-300 bg-transparent px-4 text-slate-900 transition-all outline-none focus:border-transparent focus:ring-2 dark:text-white;
+      }
 
-    .card { @apply rounded-xl border border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark; }
-    .card-body { @apply p-6; }
-    .card-hover { @apply hover:border-primary/50 transition-colors; }
+      .card {
+        @apply dark:border-border-dark dark:bg-surface-dark rounded-xl border border-slate-200 bg-white;
+      }
+      .card-body {
+        @apply p-6;
+      }
+      .card-hover {
+        @apply hover:border-primary/50 transition-colors;
+      }
 
-    .badge { @apply inline-flex items-center rounded-full border border-slate-200 dark:border-border-dark px-2.5 py-1 text-xs font-medium; }
-    .badge-primary { @apply bg-primary/10 text-primary border-transparent; }
-  }
-</style>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
-<div class="relative flex min-h-screen w-full flex-col overflow-hidden">
-<!-- Navigation -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#233648] px-6 py-4 md:px-10">
-<div class="flex items-center gap-3 text-slate-900 dark:text-white">
-<div class="size-6 text-primary">
-<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill-rule="evenodd"></path>
-</svg>
-</div>
-<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Blog Platform</h2>
-</div>
-<div class="flex items-center gap-4">
-<span class="hidden md:block text-sm font-medium text-slate-500 dark:text-text-secondary">Already have an account?</span>
-<button class="btn btn-outline btn-md min-w-[84px]"><span class="truncate">Log In</span></button>
-</div>
-</header>
-<!-- Main Content -->
-<main class="flex flex-1 flex-col items-center justify-center px-4 py-10 sm:px-6 lg:px-8 relative">
-<!-- Background Decoration -->
-<div class="absolute inset-0 overflow-hidden pointer-events-none">
-<div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px]"></div>
-<div class="absolute bottom-[10%] right-[10%] w-[30%] h-[30%] rounded-full bg-purple-500/10 blur-[100px]"></div>
-</div>
-<div class="w-full max-w-[480px] relative z-10">
-<!-- Header Text -->
-<div class="text-center mb-8">
-<h1 class="text-slate-900 dark:text-white tracking-tight text-3xl md:text-4xl font-bold leading-tight mb-2">Join the Community</h1>
-<p class="text-slate-500 dark:text-text-secondary text-base font-normal leading-normal">Start sharing your stories with the world today.</p>
-</div>
-<!-- Form Container -->
-<div class="bg-white dark:bg-surface-dark rounded-xl shadow-xl border border-slate-200 dark:border-border-dark p-6 sm:p-8">
-<!-- Social Login -->
-<div class="grid grid-cols-2 gap-3 mb-6">
-<button class="flex items-center justify-center gap-2 h-12 rounded-lg border border-slate-200 dark:border-border-dark bg-transparent hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
-<img alt="Google" class="w-5 h-5" data-alt="Google logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1THCBEikfxVVMozACUW_JluePdnB4aWznaLo7ywJqaz2CIQmZWYGivCrlmDjoiCqA3svxKCh7iCMlDC8Xg5_bmyCycStGU-Mwi-UhpQP8LoiDhVVzUbVDCrYtoH07373fsypU8lPSc2qsGzM3fT_X9zsaw8Qgg6sObGVCk-wgCP6W04cua4tLDWJXz32OWJYObThZWUJf8uGCTMAqZ9kSwoMieiCC5skZZ9MReaCYbQeM78W32CkQybUueQUXJ2d2ig8DiBo--k0"/>
-<span class="text-sm font-medium">Google</span>
-</button>
-<button class="flex items-center justify-center gap-2 h-12 rounded-lg border border-slate-200 dark:border-border-dark bg-transparent hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
-<img alt="GitHub" class="w-5 h-5 invert dark:invert-0" data-alt="GitHub logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX8pClz6d1W-U9DYYOTRz-Ce5GaS4dL4gBPH8oWxuVbh4wcsU_szy5C8t5tpSXDZw6YwQKhpTMdnp65hTy10oIPzizDZ9xnha00vWkSzSMAnpdYksxaMDXIQa7JvMU4a1wsLxgvJ1yaG_gf6BSrHcCrAzC_qj8wLwiSRKCWPS6jtzwO_bZYGMByP0VZEUr5u_f8Je-obhuR_ZzzVUg6GTco_bv1mAWZf2ZYOXVol8nbsXEYNB33fjLjoSGDRsVfrdts_BYV2IIiUU"/>
-<span class="text-sm font-medium">GitHub</span>
-</button>
-</div>
-<div class="relative flex items-center gap-2 mb-6">
-<div class="h-px flex-1 bg-slate-200 dark:bg-border-dark"></div>
-<span class="text-xs font-medium text-slate-400 uppercase">Or continue with</span>
-<div class="h-px flex-1 bg-slate-200 dark:bg-border-dark"></div>
-</div>
-<!-- Email Input -->
-<div class="mb-4">
-<label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Email Address</label>
-<input class="input" placeholder="name@example.com" type="email"/>
-</div>
-<!-- Password Input -->
-<div class="mb-6">
-<label class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Password</label>
-<div class="relative">
-<input class="input pr-12" placeholder="Create a password" type="password"/>
-<button class="absolute right-0 top-0 h-full w-12 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</div>
-<p class="mt-2 text-xs text-slate-500 dark:text-text-secondary">Must be at least 8 characters long.</p>
-</div>
-<!-- Submit Button -->
-<button class="btn btn-primary btn-lg w-full">
-<span>Create Account</span>
-<span class="material-symbols-outlined text-lg">arrow_forward</span>
-</button>
-<!-- Terms -->
-<p class="mt-6 text-center text-xs text-slate-500 dark:text-text-secondary">
-                        By registering, you agree to our 
-                        <a class="text-primary hover:text-blue-400 hover:underline" href="#">Terms of Service</a> and 
-                        <a class="text-primary hover:text-blue-400 hover:underline" href="#">Privacy Policy</a>.
-                    </p>
-</div>
-</div>
-</main>
-<!-- Footer -->
-<footer class="w-full border-t border-slate-200 dark:border-[#233648] bg-white dark:bg-background-dark py-10 px-4 md:px-10">
-  <div class="container flex flex-col md:flex-row justify-between gap-8">
-    <div class="flex items-center gap-2">
-      <div class="size-6 text-primary">
-        <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="h-full w-full"><path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z"/></svg>
-      </div>
-      <span class="text-lg font-bold dark:text-white text-slate-900">Blog Platform</span>
+      .badge {
+        @apply dark:border-border-dark inline-flex items-center rounded-full border border-slate-200 px-2.5 py-1 text-xs font-medium;
+      }
+      .badge-primary {
+        @apply bg-primary/10 text-primary border-transparent;
+      }
+    }
+  </style>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 transition-colors duration-200 dark:text-white"
+  >
+    <div class="relative flex min-h-screen w-full flex-col overflow-hidden">
+      <!-- Navigation -->
+      <header
+        class="flex items-center justify-between border-b border-solid border-slate-200 px-6 py-4 whitespace-nowrap md:px-10 dark:border-[#233648]"
+      >
+        <div class="flex items-center gap-3 text-slate-900 dark:text-white">
+          <div class="text-primary size-6">
+            <svg
+              fill="currentColor"
+              viewbox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="text-lg leading-tight font-bold tracking-[-0.015em]">
+            Blog Platform
+          </h2>
+        </div>
+        <div class="flex items-center gap-4">
+          <span
+            class="dark:text-text-secondary hidden text-sm font-medium text-slate-500 md:block"
+            >Already have an account?</span
+          >
+          <button class="btn btn-outline btn-md min-w-[84px]">
+            <span class="truncate">Log In</span>
+          </button>
+        </div>
+      </header>
+      <!-- Main Content -->
+      <main
+        class="relative flex flex-1 flex-col items-center justify-center px-4 py-10 sm:px-6 lg:px-8"
+      >
+        <!-- Background Decoration -->
+        <div class="pointer-events-none absolute inset-0 overflow-hidden">
+          <div
+            class="bg-primary/10 absolute -top-[20%] -left-[10%] h-[50%] w-[50%] rounded-full blur-[120px]"
+          ></div>
+          <div
+            class="absolute right-[10%] bottom-[10%] h-[30%] w-[30%] rounded-full bg-purple-500/10 blur-[100px]"
+          ></div>
+        </div>
+        <div class="relative z-10 w-full max-w-[480px]">
+          <!-- Header Text -->
+          <div class="mb-8 text-center">
+            <h1
+              class="mb-2 text-3xl leading-tight font-bold tracking-tight text-slate-900 md:text-4xl dark:text-white"
+            >
+              Join the Community
+            </h1>
+            <p
+              class="dark:text-text-secondary text-base leading-normal font-normal text-slate-500"
+            >
+              Start sharing your stories with the world today.
+            </p>
+          </div>
+          <!-- Form Container -->
+          <div
+            class="dark:bg-surface-dark dark:border-border-dark rounded-xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8"
+          >
+            <!-- Social Login -->
+            <div class="mb-6 grid grid-cols-2 gap-3">
+              <button
+                class="dark:border-border-dark flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-transparent transition-colors hover:bg-slate-50 dark:hover:bg-white/5"
+              >
+                <img
+                  alt="Google"
+                  class="h-5 w-5"
+                  data-alt="Google logo"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1THCBEikfxVVMozACUW_JluePdnB4aWznaLo7ywJqaz2CIQmZWYGivCrlmDjoiCqA3svxKCh7iCMlDC8Xg5_bmyCycStGU-Mwi-UhpQP8LoiDhVVzUbVDCrYtoH07373fsypU8lPSc2qsGzM3fT_X9zsaw8Qgg6sObGVCk-wgCP6W04cua4tLDWJXz32OWJYObThZWUJf8uGCTMAqZ9kSwoMieiCC5skZZ9MReaCYbQeM78W32CkQybUueQUXJ2d2ig8DiBo--k0"
+                />
+                <span class="text-sm font-medium">Google</span>
+              </button>
+              <button
+                class="dark:border-border-dark flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-transparent transition-colors hover:bg-slate-50 dark:hover:bg-white/5"
+              >
+                <img
+                  alt="GitHub"
+                  class="h-5 w-5 invert dark:invert-0"
+                  data-alt="GitHub logo"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX8pClz6d1W-U9DYYOTRz-Ce5GaS4dL4gBPH8oWxuVbh4wcsU_szy5C8t5tpSXDZw6YwQKhpTMdnp65hTy10oIPzizDZ9xnha00vWkSzSMAnpdYksxaMDXIQa7JvMU4a1wsLxgvJ1yaG_gf6BSrHcCrAzC_qj8wLwiSRKCWPS6jtzwO_bZYGMByP0VZEUr5u_f8Je-obhuR_ZzzVUg6GTco_bv1mAWZf2ZYOXVol8nbsXEYNB33fjLjoSGDRsVfrdts_BYV2IIiUU"
+                />
+                <span class="text-sm font-medium">GitHub</span>
+              </button>
+            </div>
+            <div class="relative mb-6 flex items-center gap-2">
+              <div class="dark:bg-border-dark h-px flex-1 bg-slate-200"></div>
+              <span class="text-xs font-medium text-slate-400 uppercase"
+                >Or continue with</span
+              >
+              <div class="dark:bg-border-dark h-px flex-1 bg-slate-200"></div>
+            </div>
+            <!-- Email Input -->
+            <div class="mb-4">
+              <label
+                class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-200"
+                >Email Address</label
+              >
+              <input
+                class="input"
+                placeholder="name@example.com"
+                type="email"
+              />
+            </div>
+            <!-- Password Input -->
+            <div class="mb-6">
+              <label
+                class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-200"
+                >Password</label
+              >
+              <div class="relative">
+                <input
+                  class="input pr-12"
+                  placeholder="Create a password"
+                  type="password"
+                />
+                <button
+                  class="absolute top-0 right-0 flex h-full w-12 items-center justify-center text-slate-400 transition-colors hover:text-slate-600 dark:hover:text-slate-300"
+                >
+                  <span class="material-symbols-outlined text-xl"
+                    >visibility</span
+                  >
+                </button>
+              </div>
+              <p class="dark:text-text-secondary mt-2 text-xs text-slate-500">
+                Must be at least 8 characters long.
+              </p>
+            </div>
+            <!-- Submit Button -->
+            <button class="btn btn-primary btn-lg w-full">
+              <span>Create Account</span>
+              <span class="material-symbols-outlined text-lg"
+                >arrow_forward</span
+              >
+            </button>
+            <!-- Terms -->
+            <p
+              class="dark:text-text-secondary mt-6 text-center text-xs text-slate-500"
+            >
+              By registering, you agree to our
+              <a
+                class="text-primary hover:text-blue-400 hover:underline"
+                href="#"
+                >Terms of Service</a
+              >
+              and
+              <a
+                class="text-primary hover:text-blue-400 hover:underline"
+                href="#"
+                >Privacy Policy</a
+              >.
+            </p>
+          </div>
+        </div>
+      </main>
+      <!-- Footer -->
+      <footer
+        class="dark:bg-background-dark w-full border-t border-slate-200 bg-white px-4 py-10 md:px-10 dark:border-[#233648]"
+      >
+        <div class="container flex flex-col justify-between gap-8 md:flex-row">
+          <div class="flex items-center gap-2">
+            <div class="text-primary size-6">
+              <svg
+                fill="currentColor"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-full w-full"
+              >
+                <path
+                  d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z"
+                />
+              </svg>
+            </div>
+            <span class="text-lg font-bold text-slate-900 dark:text-white"
+              >Blog Platform</span
+            >
+          </div>
+          <p class="dark:text-text-secondary text-sm text-slate-500">
+            © 2024 Blog Platform. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
-    <p class="text-sm text-slate-500 dark:text-text-secondary">© 2024 Blog Platform. All rights reserved.</p>
-  </div>
-</footer>
-</div>
-</body></html>
+  </body>
+</html>

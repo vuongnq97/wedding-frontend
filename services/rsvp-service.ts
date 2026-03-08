@@ -3,7 +3,7 @@ import { BaseServiceOptions } from '@/types/api';
 import { ApiResponse } from '@/types/common';
 import { RsvpData, CreateRsvpRequest } from '@/types/rsvp';
 
-const RSVP_PATH = '/Rsvp';
+const RSVP_PATH = '/rsvp';
 
 export type RsvpService = {
   submitRsvp: (data: CreateRsvpRequest) => Promise<ApiResponse<unknown>>;

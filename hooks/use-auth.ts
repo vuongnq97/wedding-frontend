@@ -1,192 +1,147 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { User } from '@supabase/supabase-js';
 
-import {
-  REFRESH_OFFSET_MS,
-  USER_COOKIE_MAX_AGE,
-  USER_COOKIE_NAME,
-} from '@/constants/auth';
-import { createAuthService } from '@/services/auth-service';
+import { USER_COOKIE_MAX_AGE, USER_COOKIE_NAME } from '@/constants/auth';
+import { supabase } from '@/lib/supabase';
 import { useAuthStore } from '@/stores/auth-store';
-import {
-  AuthTokens,
-  TokenResponse,
-  UseLoginReturn,
-  UserInfo,
-} from '@/types/auth';
+import { UserInfo, UseLoginReturn } from '@/types/auth';
 
 export function useAuth(): UseLoginReturn {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const { user, setUser, accessToken, setAccessToken, clearAuth } =
-    useAuthStore();
+  const { user, setUser, clearAuth, setHasWedding } = useAuthStore();
 
-  const refreshTimeout = useRef<number | null>(null);
-  const authService = useMemo(() => createAuthService(), []);
-
-  const clearRefreshTimeout = useCallback(() => {
-    if (refreshTimeout.current !== null) {
-      window.clearTimeout(refreshTimeout.current);
-      refreshTimeout.current = null;
-    }
-  }, []);
-
-  const setUserCookie = useCallback((nextUser: UserInfo | null) => {
-    if (typeof document === 'undefined') return;
-
-    const secureSuffix =
-      window.location.protocol === 'https:' ? '; Secure' : '';
-
-    if (nextUser) {
-      const serialized = encodeURIComponent(JSON.stringify(nextUser));
-      document.cookie = `${USER_COOKIE_NAME}=${serialized}; path=/; max-age=${USER_COOKIE_MAX_AGE}; sameSite=Lax${secureSuffix}`;
-    } else {
-      document.cookie = `${USER_COOKIE_NAME}=; path=/; max-age=0; sameSite=Lax${secureSuffix}`;
-    }
-  }, []);
-
-  const parseTokens = useCallback((data: TokenResponse): AuthTokens => {
-    const accessToken = data.accessToken;
-
-    if (!accessToken) {
-      throw new Error('Login response must include accessToken');
-    }
-
-    const payload = decodeJwt(accessToken);
-    const expiresAt = payload?.exp ? payload.exp * 1000 : 0;
-
-    return {
-      accessToken,
-      expiresAt,
-    };
-  }, []);
-
-  // Handle successful auth (Updates store/cookies, returns tokens)
-  const handleAuthSuccess = useCallback(
-    (response: TokenResponse) => {
-      const nextTokens = parseTokens(response);
-
-      // Extract UserInfo from response (excluding sensitive/token fields)
-      const { accessToken: _accessToken, ...user } = response;
-
-      // 1. Update Store
-      setAccessToken(nextTokens.accessToken);
-      setUser(user);
-
-      // 2. Set Cookies (Only User Cookie, Refresh is HttpOnly handled by BE)
-      setUserCookie(user);
-
-      return nextTokens;
-    },
-    [parseTokens, setAccessToken, setUser, setUserCookie]
-  );
-
-  // Forward declaration/ref for scheduleRefresh to avoid circular dependency
-  const scheduleRefreshRef = useRef<(tokens: AuthTokens) => void>(() => {});
-
-  // Refresh Logic
-  const performRefresh = useCallback(async () => {
-    try {
-      const response = await authService.refresh();
-      const tokens = handleAuthSuccess(response.data);
-      scheduleRefreshRef.current(tokens);
-      return tokens;
-    } catch (err) {
-      console.error('Refresh failed', err);
-      clearAuth();
-      setUserCookie(null);
-      throw err;
-    }
-  }, [authService, handleAuthSuccess, clearAuth, setUserCookie]);
-
-  const performRefreshRef = useRef(performRefresh);
+  // Listen for auth state changes
   useEffect(() => {
-    performRefreshRef.current = performRefresh;
-  }, [performRefresh]);
-
-  const scheduleRefresh = useCallback(
-    (tokens: AuthTokens) => {
-      clearRefreshTimeout();
-
-      if (!tokens.expiresAt || tokens.expiresAt < Date.now()) return;
-
-      const timeUntilExpiry = tokens.expiresAt - Date.now();
-      const refreshDelay = Math.max(0, timeUntilExpiry - REFRESH_OFFSET_MS);
-
-      refreshTimeout.current = window.setTimeout(() => {
-        void performRefreshRef.current().catch(() => {});
-      }, refreshDelay);
-    },
-    [clearRefreshTimeout]
-  );
-
-  useEffect(() => {
-    scheduleRefreshRef.current = scheduleRefresh;
-  }, [scheduleRefresh]);
-
-  const requestOtp = useCallback(
-    async (email: string) => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        await authService.requestOtp(email);
-      } catch (err) {
-        setError(normalizeError(err, 'Failed to request OTP'));
-        throw err;
-      } finally {
-        setIsLoading(false);
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        const userInfo = mapSupabaseUser(session.user);
+        setUser(userInfo);
+        setUserCookie(userInfo);
+      } else {
+        setUser(null);
+        setUserCookie(null);
       }
-    },
-    [authService]
-  );
+    });
+
+    return () => subscription.unsubscribe();
+  }, [setUser]);
+
+  const requestOtp = useCallback(async (email: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: true,
+        },
+      });
+      if (error) throw error;
+    } catch (err) {
+      const normalized = normalizeError(err, 'Failed to request OTP');
+      setError(normalized);
+      throw normalized;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   const verifyOtp = useCallback(
     async (email: string, code: string) => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await authService.verifyOtp(email, code);
-        const tokens = handleAuthSuccess(response.data);
-        scheduleRefresh(tokens);
-        return response.data;
+        const { data, error } = await supabase.auth.verifyOtp({
+          email,
+          token: code,
+          type: 'email',
+        });
+
+        if (error) throw error;
+        if (!data.session || !data.user) {
+          throw new Error('Verification failed — no session returned');
+        }
+
+        const userInfo = mapSupabaseUser(data.user);
+        setUser(userInfo);
+        setUserCookie(userInfo);
+
+        return {
+          userId: userInfo.userId,
+          email: userInfo.email,
+          role: userInfo.role,
+          accessToken: data.session.access_token,
+        };
       } catch (err) {
-        setError(normalizeError(err, 'Verification failed'));
+        const normalized = normalizeError(err, 'Verification failed');
+        setError(normalized);
         clearAuth();
-        throw err;
+        throw normalized;
       } finally {
         setIsLoading(false);
       }
     },
-    [authService, handleAuthSuccess, scheduleRefresh, clearAuth]
+    [setUser, clearAuth]
   );
 
   const logout = useCallback(async () => {
     try {
-      await authService.logout();
+      await supabase.auth.signOut();
     } catch (err) {
       console.warn('Logout API failed', err);
     } finally {
       clearAuth();
       setUserCookie(null);
-      clearRefreshTimeout();
     }
-  }, [authService, clearAuth, setUserCookie, clearRefreshTimeout]);
+  }, [clearAuth]);
+
+  const isAuthenticated = !!user;
 
   return {
     requestOtp,
     verifyOtp,
     logout,
     refresh: async () => {
-      const t = await performRefresh();
-      return t;
+      const { data } = await supabase.auth.refreshSession();
+      if (!data.session) throw new Error('Refresh failed');
+      return {
+        accessToken: data.session.access_token,
+        expiresAt: new Date(data.session.expires_at! * 1000).getTime(),
+      };
     },
-    isAuthenticated: !!accessToken,
+    isAuthenticated,
     isLoading,
     error,
     user,
   };
+}
+
+function mapSupabaseUser(user: User): UserInfo {
+  return {
+    userId: user.id,
+    email: user.email ?? '',
+    role: user.role ?? 'authenticated',
+  };
+}
+
+function setUserCookie(nextUser: UserInfo | null) {
+  if (typeof document === 'undefined') return;
+
+  const secureSuffix =
+    window.location.protocol === 'https:' ? '; Secure' : '';
+
+  if (nextUser) {
+    const serialized = encodeURIComponent(JSON.stringify(nextUser));
+    document.cookie = `${USER_COOKIE_NAME}=${serialized}; path=/; max-age=${USER_COOKIE_MAX_AGE}; sameSite=Lax${secureSuffix}`;
+  } else {
+    document.cookie = `${USER_COOKIE_NAME}=; path=/; max-age=0; sameSite=Lax${secureSuffix}`;
+  }
 }
 
 function normalizeError(error: unknown, fallbackMessage: string): Error {
@@ -200,20 +155,4 @@ function normalizeError(error: unknown, fallbackMessage: string): Error {
   }
 
   return new Error(fallbackMessage);
-}
-
-function decodeJwt(token: string): { exp?: number } | null {
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
-    );
-    return JSON.parse(jsonPayload);
-  } catch {
-    return null;
-  }
 }

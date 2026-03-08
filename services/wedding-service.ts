@@ -5,7 +5,7 @@ import { Wedding } from '@/types/invitation';
 
 const UPLOAD_PHOTO_PATH = '/Upload/photo';
 const UPLOAD_MUSIC_PATH = '/Upload/music';
-const WEDDING_PATH = '/Wedding';
+const WEDDING_PATH = '/wedding';
 
 export type WeddingService = {
   uploadPhoto: (file: File, imageType: string) => Promise<ApiResponse<string>>;
@@ -35,7 +35,7 @@ export function createWeddingService({
     file: File,
     metadata?: Record<string, string>
   ) => {
-    // 1. Get SAS URL
+    // 1. Get signed upload URL from backend
     const { data: sasData } = await baseService.post<
       ApiResponse<UploadSasResponse>
     >(path, {
@@ -48,10 +48,10 @@ export function createWeddingService({
       throw new Error('Failed to get upload URL');
     }
 
+    // 2. Upload directly to Supabase Storage
     const uploadResponse = await fetch(sasData.uploadUrl, {
       method: 'PUT',
       headers: {
-        'x-ms-blob-type': 'BlockBlob',
         'Content-Type': file.type,
       },
       body: file,
